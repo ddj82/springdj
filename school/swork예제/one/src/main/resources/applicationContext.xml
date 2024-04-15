@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- 
+<bean id="객체명" class="패키지경로포함.클래스명까지" />
+명명규칙 : 영어소문자, 공백x, 카멜기법, 특수문자 _ $
+<bean name="객체명" class="패키지경로포함.클래스명까지"></bean>
+명명규칙 : 공백만 제외하고 다 가능
+
+java코드 => 패키지경로포함.클래스명까지 객체명 = new 기본생성자호출문();
+Samsung stv = new Samsung();
+<bean id="stv" class="com.kr.co.Samsung" />
+
+scope 속성 : singleton(디폴트값), prototype(new)
+로딩방식 속성 (lazy-init값 : true, false(디폴트값)) => 객체 생성 시점
+즉시로딩 (pre-loading) : lazy-init="false" 인 경우(기술안함)
+=> 스프링 컨테이너가 구동될때 객체 생성을 한다.(미리 객체 준비)
+
+게이른로딩=지연로딩 (lazy-loading) : lazy-init="true" 인 경우 
+=> getBean()메소드로 객체를 얻을 때 생성된다.
+ -->
+<bean name="http://stv" class="com.kr.co.Samsung" init-method="initSamsung" destroy-method="destroySamsung"/>
+<bean id="ltv" class="com.kr.co.Lg" scope="prototype" lazy-init="true" />
+</beans>

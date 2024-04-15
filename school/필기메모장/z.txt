@@ -1,0 +1,13 @@
+요청 파라미터 이름 : filename1
+실제 파일 이름 : before.png
+저장 파일 이름 : before.png
+파일 콘텐츠 타입 : image/png
+
+		String name = (String) files.nextElement();
+		String original = multi.getOriginalFileName(name);
+		String filename = multi.getFilesystemName(name);
+		String type = multi.getContentType(name);
+
+
+
+파일 크기 : 203824

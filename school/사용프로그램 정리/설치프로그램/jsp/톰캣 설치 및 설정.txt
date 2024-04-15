@@ -1,0 +1,36 @@
+C드라이브에 압축파일 붙여넣기 
+C드라이브에서 반디집이나 압축해제 프로그램이용하여 압축풀기
+(예: 반디집 이용시 => "알아서 풀기" 선택하여 압축해제하기)
+C:\apache-tomcat-9.0.86\conf\server.xml 파일을 메모장으로 열기
+=> <Service name="Catalina">태그안에 있는 Connection태그들 중 주석처리되어있지 않은 태그를 찾아서 port속성의 값을 8090으로 변경한 후 저장할 것
+
+=> 제대로 실행되는지 확인하기 : C:\apache-tomcat-9.0.86\bin\startup.bat실행 
+=> 실행되면 브라우저 아무거나 실행하여 http://localhost:8090 또는 http://127.0.0.1 입력 후 실행해서 톰캣화면 나오면 정상
+=>만약 안되면 환경변수 설정확인할 것(CATALINA_HOME, JRE_HOME 오류에 따라 다름)
+
+**CATALINA_HOME 설정하기
+[내PC] 메뉴에서 마우스우버튼 메뉴 중 [속성]선택 => [고급]탭 선택 후 [환경변수(N)...]버튼 클릭=> 시스템변수(S)부분에서 [새로만들기(W)...]버튼 클릭 => 새 시스템 변수 창에서 아래와 같이 설정하기 
+변수이름(N) : CATALINA_HOME
+변수 값(V) : C:\apache-tomcat-9.0.86 (변수값은 "디렉터리 찾아보기" 버튼을 눌러서 추가할 것)
+
+
+
+**JRE_HOME 설정하기
+[내PC] 메뉴에서 마우스우버튼 메뉴 중 [속성]선택 => [고급]탭 선택 후 [환경변수(N)...]버튼 클릭=> 시스템변수(S)부분에서 [새로만들기(W)...]버튼 클릭 => 새 시스템 변수 창에서 아래와 같이 설정하기 
+변수이름(N) : JRE_HOME
+변수 값(V) : C:\Program Files\Java\jdk-11 (변수값은 "디렉터리 찾아보기" 버튼을 눌러서 추가할 것)
+
+
+
+=======================================================================================
+
+
+이클립스 설정
+Window => Preferences => Server => Runtime Environments => Add... => Apache => Apache Tomcat v9.0 선택 후, 하단의 [v]Create a new local server체크 => Next => 
+----------------------------------------
+Name: Apache Tomcat v9.0 
+Tomcat Installation directory : C:\apache-tomcat-9.0.86 (Browse..버튼 이용하여 경로 찾기)
+JRE : jdk-11 
+----------------------------------------
+위의 값 설정 후 finish
+=> Apply and Close

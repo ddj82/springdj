@@ -1,0 +1,1008 @@
+기본형식
+<!doctype html>
+<html>
+<head>
+</head>
+<body>
+</body>
+</html>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>테스트</title>
+<meta charset="UTP-8">
+</head>
+<body>
+<h1>김동팔</h1>
+	안녕, html5 ~~!!! <br>
+	만나서 반갑다 인마~
+</body>
+</html>
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>단락 태그들</title>
+</head>
+<body>
+<h1>제목1의 크기입니다.</h1>
+<p>
+첫 째줄 입니다.<br>
+둘 째줄 입니다.<br><br><br>
+
+
+셋 째줄 입니다.
+</p>
+<p>
+첫 째줄 입니다.<br>
+둘 째줄 입니다.<br><br><br>
+
+
+셋 째줄 입니다.
+</p>
+</body>
+</hrml>
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>단락 태그들</title>
+</head>
+<body>
+가<br>
+이<br>
+금<br>
+<pre>
+첫번째 줄입니다.
+두번째 줄입니다.
+
+
+세번째 줄입니다.
+</pre>
+<p>
+첫번째 줄입니다.
+두번째 줄입니다.
+
+
+세번째 줄입니다.
+</p>
+</body>
+</html>
+
+
+<!doctype html>
+<html>
+<head><title>단락 태그들</title></head>
+<body>
+<p>첫 번째 단락입니다.</p>
+<hr>
+<p>두 번째 단락입니다.</p>
+<hr>
+<p>세 번째 단락입니다.</p>
+1 단락입니다.
+<hr>
+2 단락입니다.
+<hr>
+3 단락입니다.
+</body>
+</html>
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>HTML Entities</title>
+</head>
+<body>
+<h1>HTML 엔티티</h1>
+
+<p>less than(<)과 greater than(>) 엔티티사용</p>
+<p>&lt;p&gt;태그는 단락을 나타내는 태그입니다.</p>
+
+<p>한 칸 공백 엔티티사용</p>
+<p>
+& n b s p ; 태그는&nbsp;한&nbsp;칸&nbsp;공백을 
+		나타내는&nbsp;태그&nbsp;&nbsp;&nbsp;&nbsp;입니다.
+</p>
+
+<p>&문자 엔티티사용</p>
+<p>&amp;는 &문자를 나타내는 엔티티입니다.</p>
+
+<p>큰 따옴표, 작은 따옴표 엔티티사용</p>
+<p>
+방백은 &quot;큰 따옴표&quot;로 처리를 독백은
+		&apos;작은 따옴표&apos;로 처리합니다
+</p>
+</body>
+</html>
+
+
+
+
+
+<!doctype html>
+<html lang="ko">
+<head></head>
+<body>
+<p>(센트) 엔티티사용 : &#162; </p>
+<p>(파운드화) 엔티티사용 : &pound; </p>
+<p>(엔화) 엔티티사용 : &#165; </p>
+<p>(유로화) 엔티티사용 : &#euro </p>
+<p>(저작권) 엔티티사용 : &#169; </p>
+<p>(등록상표) 엔티티사용 : &#174; </p>
+<p>(곱셈) 엔티티사용 : &#times; </p>
+<p>(나눗셈) 엔티티사용 : &#divide; </p>
+</body>
+</html>
+
+
+
+
+
+<!doctype html>
+<html>
+<head><title>b태그와 strong태그</title></head>
+<body>
+<p>This text is nornal.</p>
+<p>This text is <b>bold.</b></p>
+
+<p>This text is nornal.</p>
+<p><strong>This text is important!</strong>strong</p>
+
+<p>This text is normal.</p>
+<p><i>This text is italic.</i></p>
+
+<p>This text is normal.</p>
+<p><em>This text is emphasized.</em></p>
+
+</body>
+</html>
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>취소선과 밑줄선 태그</title>
+</head>
+<body>
+
+<h1>del태그를 이용한 삭제 효과, 또는 대체 효과</h1>
+<p>오늘 하루만 파격 세일<br>
+코트: <del>79,000원</del> 39,900원
+</p>
+
+<h1>s태그를 이용한 취소 효과</h1>
+<p><s>문서버전: 1.0</s><br>문서버전: 2.0</p>
+
+<h1>ins태그를 이용한 삽입 효과</h1>
+<p>기존 컬럼: 번호, 아이디, 비번<br>
+변경 컬럼: 번호, 아이디, 비번, <ins>이름</ins>
+</p>
+
+<h1>u태그를 이용한 밑줄 효과</h1>
+<p>아래의 내용에서 <u>바르지 못한</u> 것은?</p>
+
+<h1>sup태그와 sub태그를 이용한 첨자</h1>
+<p>sup태그: X<sup>2</sup> + Y<sup>3</sup> = Z</p>
+<p>sub태그: 물을 나타내는 화학식은 H<sub>2</sub>O 입니다.</p>
+</body>
+</html>
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>small태그</title>
+</head>
+<h1>small태그</h1>
+
+small태그가 없는 기본 글씨 크기입니다.<br>
+<small>small태그가 있는 글씨 크기입니다.</small>
+
+가격 : 5,000원
+<small>(부가세 별도)</small>
+<p>Do not forget to buy <mark>milk</mark> today.</p>
+
+<body>
+</body>
+</html>
+
+
+
+
+
+
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>제주 관광 안내</title>
+</head>
+<body>
+<h1>관광 안내 전화</h1>
+<p>한국관광공사에서는 전국의 관광안내소와 공동으로 여러분의 여행편의를 위해 관광안내전화 1330 서비스를 연중무휴 실시하고 있습니다.</p>
+<p>1330에는 해당 지역의 지도와 관광 가이드북, 관광안내소를 대신할 수 있을 정도의 다양한 정보가 있습니다. 원하는 관광지는 물론이며 숙박, 교통, 음식점 등의 자세한 정보를 한국어를 비롯한 영어, 중국어, 일어의 3개 국어로도 이용 가능합니다.</p>
+<ul>
+<li>일반 전화 : (국번없이) 1330</li>
+<li>휴대 전화 : 064-1330</li>
+</ul>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+<h1>기기 작동 순서</h1>
+<ol>
+<li>우측상단의 전원버튼을 켭니다.</li>
+<li>격자무늬 메뉴버튼을 누릅니다.</li>
+<li>종료합니다.</li>
+</ol>
+<h1>1박 2일 가족 여행 코스</h1>
+<ul>
+<li>1일차
+<ol type="A">
+<li>해녀박물관</li>
+<li>낚시체험</li>
+</ol>
+</li>
+<li>2일차
+<ol type="a" start="3">
+<li>용눈이오름</li>
+<li>만장굴</li>
+<li>카약체험</li>
+</ol>
+</il>
+</ul>
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>제주 올레</title>
+</head>
+<body>
+<h1>제주 올레 </h1>
+<dl>
+<dt>올레 1코스</dt>
+<dd>코스 : 시흥 초등학교 옆 ~ 광치기 해변</dd>
+<dd>거리 : 14.6km(4~5시간)</dd>
+<dd>난이도 : 중</dd>
+
+<dt>올레 2코스</dt>
+<dd>코스 : 광치기 해변 ~ 온평 포구</dd>
+<dd>거리 : 14.5km(4~5시간)</dd>
+<dd>난이도 : 중</dd>
+</dl>
+</body>
+</html>
+
+
+
+
+
+
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>HTML Lists</title>
+</head>
+<body>
+<h1>순서가 없는 리스트</h1>
+<p>검정색 작은 원 모양 (기본설정)</p>
+<ul>
+<li>사과</li>
+<li>멜론</li>
+<li>바나나</li>
+</ul>
+<p>테두리가 있는 흰색 작은 원 모양</p>
+<ul type="circle">
+<li>수박</li>
+<li>참외</li>
+<li>옥수수</li>
+</ul>
+<ul style="list-style-type: circle;">
+<li>수박</li>
+<li>참외</li>
+<li>옥수수</li>
+</ul>
+<p>검정색 사각형 모양</p>
+<ul type="square">
+<li>감자</li>
+<li>상추</li>
+<li>고구마</li>
+</ul>
+<ul style="list-style-type: square;">
+<li>감자</li>
+<li>상추</li>
+<li>고구마</li>
+</ul>
+</body>
+</html>
+
+
+
+
+
+
+<!doctype html>
+<html lang=ko">
+<head>
+<meta charset="utf-8">
+<title>HTML List</title>
+</head>
+<body>
+<h1>순서가 있는 리스트</h1>
+
+<p>숫자 (기본설정)</p>
+<ol>
+<li>사과</li><li>멜론</li><li>바나나</li>
+</ol>
+<ol start="4">
+<li>사과</li><li>멜론</li><li>바나나</li>
+</ol>
+
+<p>영어 대문자</p>
+<ol style="list-style-type: upper-alpha">
+<!-- <ol type="A"> -->
+<li>수박</li><li>참외</li><li>옥수수</li>
+</ol>
+<ol style="list-style-type: upper-alpha" start="4">
+<li>수박</li><li>참외</li><li>옥수수</li>
+</ol>
+
+<p>영어 소문자</p>
+<ol style="list-style-type: lower-alpha">
+<li>감자</li><li>상추</li><li>고구마</li>
+</ol>
+
+<p>로마자 대문자</p>
+<!-- <ol style="list-style-type: upper-roman"> -->
+<ol type="I">
+<li>오이</li><li>배추</li><li>시금치</li>
+</ol>
+<ol style="list-style-type: upper-roman" start="4">
+<li>오이</li><li>배추</li><li>시금치</li>
+</ol>
+
+<p>로마자 대문자</p>
+<ol style="list-style-type: lower-roman">
+<li>오이</li><li>배추</li><li>시금치</li>
+</ol>
+
+</body>
+</html>
+
+
+
+
+<table>
+<tr><th>제목</th><th>제목</th><th>제목</th></tr>
+<tr><td>내용</td><td>내용</td><td>내용</td></tr>
+<tr><td>내용</td><td>내용</td><td>내용</td></tr>
+</table>
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>표1</title>
+</head>
+<body>
+<table width = "100%">
+<tr><th>제목</th><th>제목</th><th>제목</th></tr>
+<tr><td>내용</td><td>내용</td><td>내용</td></tr>
+<tr><td>내용</td><td>내용</td><td>내용</td></tr>
+</table>
+<table>
+<tr><th>제목</th><th>제목</th><th>제목</th></tr>
+<tr><td>내용</td><td>내용</td><td>내용</td></tr>
+<tr><td>내용</td><td>내용</td><td>내용</td></tr>
+</table>
+</body>
+</html>
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>table Element</title>
+<style>
+table{
+/*겹침선 한 줄 표시*/
+border-collapse: collapse;
+}
+table, th, td {
+/*테두리(선) 스타일 설정*/
+border: 1px solid black;
+}
+/*셀 안의 여백 설정*/
+th, td {
+padding: 15px;
+}
+</style>
+</head>
+<body>
+<h2>Table With Border</h2>
+<p>Use the CSS border property to add a border to the table.</p>
+<!-- <table> -->
+<table style = "width: 100%; margin: 50px 0;">
+<th>Firstname</th><th>Lastname</th><th>Age</th>
+<tr><td>Jill</td><td>Smith</td><td>50</td></tr>
+<tr><td>Eve</td><td>Jackson</td><td>94</td></tr>
+<tr><td>John</td><td>Doe</td><td>80</td></tr>
+</table>
+</body>
+</html>
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>table Element</title>
+<style>
+table, th, td {border : 1px solid black; padding : 5px;}
+table {border-spacing : 15px;}
+td, th {height : 200px;}
+</style>
+</head>
+<body>
+<h2>Border Spacing</h2>
+<p>Border spacing은 셀 사이의 공간(간격)을 의미한다.</p>
+<table style = "width : 100%;">
+<tr><th>Firstname</th><th>Lastname</th><th>Age</th></tr>
+<tr><td>Jill</td><th>Smith</td><td>50</td></tr>
+<tr><td>Eve</td><th>Jackson</td><td>94</td></tr>
+<tr><td>John</td><th>Doe</td><td>80</td></tr>
+</table>
+<p><strong>Tip:</strong> border-spacing속성을 5px로 변경해보세요.</p>
+</body>
+</html>
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<meta charset = "utf-8">
+<title>Table Element</title>
+<style>
+table {width: 100%; border-collapse: collapse; margin: 0 auto;}
+td, th {border: 1px solid black;}
+body {text-align: center;}
+</style>
+</head>
+<body>
+<h2>컬럼 두 개 합치기</h2>
+<p>한 개 이상의 컬럼을 합치는 속성은 colspan이다.</p>
+<p style = "width: 30%; margin: 0 auto;">테스트 텍스트</p>
+<table>
+<tr><th>Name</th><th colspan = "2">Telephone</th></tr>
+<tr><td>Bill Gates</td><td>55577854</td><td>55577854</td></tr>
+</table>
+<br><br>
+<table>
+<tr><th>제목1</th><th colspan = "2">제목2</th><th>제목3</th>	</tr>
+<tr><td rowspan="2">내용1</td><td>내용2</td><td>내용3</td>	<td>내용4</td></tr>
+<tr><td>내용2</td><td>내용3</td><td>내용4</td></tr>
+</table>
+</body>
+</html>
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<meta charset = "utf-8">
+<title>Table Element</title>
+<style>
+table {border-collapse: collapse; width: 100%;}
+p, table {border: 1px solid black;}
+th, td {border: 1px solid red;}
+th {width: 20%; text-align: right; color: white; background-color: gray;}
+</style>
+</head>
+<body>
+<h2>두 줄 병합하기</h2>
+<p>한 줄 이상을 병합 할 때는 rowspan속성을 사용한다.</p>
+<p style = "width: 30%;">테스트 텍스트</p>
+<table>
+<tr><th>Name:</th><td>Bill Gates</td></tr>
+<tr><th rowspan="2">Telephone:</th><td>55577854</td></tr>
+<tr><td>010-5557-7855</td></tr>
+</table>
+</body>
+</html>
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>Table Element</title>
+<meta charset = "utf-8">
+<style>
+table {width : 100%; border-collapse: collapse;}
+table, th, td {border: 1px solid black;}
+thead {color: white; background-color: gray;}
+th, td {height: 100px;}
+</style>
+</head>
+<body>
+<h2>Table Caption</h2>
+<p>To add a caption to a table, use the caption tag.</p>
+<!-- table태그의 자식으로 존재 할 수 있는 태그 종류: thead, tbody, caption, tr -->
+<table>
+<caption>Month Savings</caption>
+<thead>
+<tr><th>Month</th><th>Savings</th></tr>
+</thead>
+<tbody>
+<tr><td>January</td><td>$100</td></tr>
+<tr><td>February</td><td>$50</td></tr>
+</tbody>
+</table>
+</body>
+</html>
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>table Element</title>
+<meta charset = "UTF-8">
+<style>
+table, th, td {border: 1px solid black;}
+th, td {padding : 10px;}
+</style>
+</head>
+<body>
+<figure>
+<table>
+<tr><th>브라우저</th><th>제조업체</th><th>다운로드</th></tr>
+<tr>
+<td style = "text-align : center;"><b>크롬(Chrome)</b></td>
+<td>Google</td>
+<td>https://www.google.com/chrome/</td>
+</tr>
+<tr>
+<td style = "text-align : center;"><b>파이어폭스(Firefox)</b></td>
+<td>Mozilla</td>
+<td>https://www.mozilla.org/ko/firefox/</td>
+</tr>
+<tr>
+<td style = "text-align : center;"><b>엣지(Edge)</b></td>
+<td>Microsoft</td>
+<td>https://www.microsoft.com/ko-kr/window/microsoft-edge/</td>
+</tr>
+</table>
+</figure>
+<figcaption>국내에서 자주 사용하는 <b>모던 브라우저</b></figcaprion>
+</body>
+</html>
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>table Element</title>
+<meta charset = "UTF-8">
+<style>
+/*
+
+*/
+
+</style>
+</head>
+<body>
+<h1>HTML Table</h1>
+<table>
+<tr><th>Company</th><th>Contact</th><th>Country</th></tr>
+<tr><td>Alfreds Futterkiste</td><td>Maria Anders</td><td>Germany</td></tr>
+<tr><td>Centro comercial Moctezuma</td><td>Francisco Chang</td><td>Mexico</td></tr>
+<tr><td>Centro comercial Moctezuma</td><td>Francisco Chang</td><td>Austria</td></tr>
+<tr><td>Centro comercial Moctezuma</td><td>Francisco Chang</td><td>UK</td></tr>
+<tr><td>Centro comercial Moctezuma</td><td>Francisco Chang</td><td>Canada</td></tr>
+<tr><td>Centro comercial Moctezuma</td><td>Francisco Chang</td><td>Italy</td></tr>
+</table>
+</body>
+</html>
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<title>a Tag</title>
+</head>
+<body>
+<p>아래의 글씨를 클릭하면 네이버로 이동됩니다.</p>
+<!--
+target 속성값 : 
+_self (디폴트) : 현재 창에서 새로운 페이지를 보여주세요.
+_blank : 새창에서 새로운 페이지를 보여주세요.
+_parent : 나(자식팝업창)의 부모창에서 새로운 페이지를 보여주세요.
+_top : 나(자식팝업창)의 최고 조상창에서 새로운 페이지를 보여주세요.
+-->
+<!-- <a href = "https://www.naver.com/">
+<h1>네이버 Links</h1>
+</a>
+<h1><a href = "https://www.naver.com/" target = "_blank">네이버 Links</a></h1>
+-->
+<h1>a태그의 target 속성값</h1>
+<h2><a href = "../01/02pTag.html" target = "_blank">blank</a></h2>
+<h2><a href = "https://www.daum.net/" target = "_self">self</a></h2>
+<h2><a href = "https://www.naver.com/" target = "_parent">parent</a></h2>
+<h2><a href = "https://www.naver.com/" target = "_top">top</a></h2>
+</body>
+</html>
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<meta charset = "UTF-8">
+<title>HTML Links</title>
+</head>
+<body>
+
+<h1>페이지 책갈피</h1>
+<a href = "#bookmark"><p>제목 15로 갑시다!!!</p></a>
+
+<!-- 
+a태그인 경우만 #이라는 기호로 id속성과 name속성을 부를 수 있다.
+a태그가 아닌 경우는 id속성만 부를 수 있다.
+-->
+
+<h2>제목 1</h2>
+<p>첫 번째 단락</p>
+
+<h2>제목 2</h2>
+<p>두 번째 단락</p>
+
+<h2>제목 3</h2>
+<p>세 번째 단락</p>
+
+<h2>제목 4</h2>
+<p>네 번째 단락</p>
+
+<h2>제목 5</h2>
+<p>다섯 번째 단락</p>
+
+<h2>제목 6</h2>
+<p>여섯 번째 단락</p>
+
+<h2>제목 7</h2>
+<p>일곱 번째 단락</p>
+
+<h2>제목 8</h2>
+<p>여덟 번째 단락</p>
+
+<h2>제목 9</h2>
+<p>아홉 번째 단락</p>
+
+<h2>제목 10</h2>
+<p>열 번째 단락</p>
+
+<h2>제목 11</h2>
+<p>열한 번째 단락</p>
+
+<h2>제목 12</h2>
+<p>열두 번째 단락</p>
+
+<h2>제목 13</h2>
+<p>열세 번째 단락</p>
+
+<h2>제목 14</h2>
+<p>열네 번째 단락</p>
+
+<h2>제목 15</h2>
+<p>열다섯 번째 단락</p>
+
+<h2>제목 16</h2>
+<p>열여섯 번째 단락</p>
+
+<h2>제목 17</h2>
+<p>열일곱 번째 단락</p>
+
+<h2>제목 18</h2>
+<p>열여덟 번째 단락</p>
+
+<h2>제목 19</h2>
+<p>열아홉 번째 단락</p>
+
+<h2>제목 20</h2>
+<p>스무 번째 단락</p>
+
+<h2>제목 21</h2>
+<p>스물한 번째 단락</p>
+
+<h2>제목 22</h2>
+<p>스물둘 번째 단락</p>
+
+<h2><a name = "bookmark">제목 23</a></h2>
+<p>스물세 번째 단락</p>
+
+<h2>제목 24</h2>
+<p>스물네 번째 단락</p>
+
+<h2>제목 25</h2>
+<p>스물다섯 번째 단락</p>
+
+</body>
+</html>
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<meta charset = "UTF-8">
+<title>링크 만들기</title>
+</head>
+<body id = "top">
+<h1>앵커 만들기</h1>
+<p>
+웹 문서가 너무 길 경우 필요한 곳마다 문서 안에 이름을 붙여놓고 그 위치로 한번에 이동하는 링크를 ㅁ나들 수 있는데, 이 기능을 앵커(anchor)라고 합니다.
+</p>
+<ul id = "menu">
+<li><a href = "#content1">메뉴1</a></li>
+<li><a href = "#content2">메뉴2</a></li>
+<li><a href = "#content3">메뉴3</a></li>
+</ul>
+<h2 id = "content1">내용1</h2>
+<p>
+웹 문서가 너무 길 경우 필요한 곳마다 문서 안에 이름을 붙여놓고 그 위치로 한번에 이동하는 링크를 ㅁ나들 수 있는데, 이 기능을 앵커(anchor)라고 합니다.
+</p>
+<p>
+웹 문서가 너무 길 경우 필요한 곳마다 문서 안에 이름을 붙여놓고 그 위치로 한번에 이동하는 링크를 ㅁ나들 수 있는데, 이 기능을 앵커(anchor)라고 합니다.
+</p>
+<p>
+웹 문서가 너무 길 경우 필요한 곳마다 문서 안에 이름을 붙여놓고 그 위치로 한번에 이동하는 링크를 ㅁ나들 수 있는데, 이 기능을 앵커(anchor)라고 합니다.
+</p>
+<p><a href = "#menu">[메뉴로]</a></p>
+<h2 id = "content2">내용2</h2>
+<p>
+웹 문서가 너무 길 경우 필요한 곳마다 문서 안에 이름을 붙여놓고 그 위치로 한번에 이동하는 링크를 ㅁ나들 수 있는데, 이 기능을 앵커(anchor)라고 합니다.
+</p>
+<p>
+웹 문서가 너무 길 경우 필요한 곳마다 문서 안에 이름을 붙여놓고 그 위치로 한번에 이동하는 링크를 ㅁ나들 수 있는데, 이 기능을 앵커(anchor)라고 합니다.
+</p>
+<p>
+웹 문서가 너무 길 경우 필요한 곳마다 문서 안에 이름을 붙여놓고 그 위치로 한번에 이동하는 링크를 ㅁ나들 수 있는데, 이 기능을 앵커(anchor)라고 합니다.
+</p>
+<p><a href = "#menu">[메뉴로]</a></p>
+<h2 id = "content3">내용3</h2>
+<p>
+웹 문서가 너무 길 경우 필요한 곳마다 문서 안에 이름을 붙여놓고 그 위치로 한번에 이동하는 링크를 ㅁ나들 수 있는데, 이 기능을 앵커(anchor)라고 합니다.
+</p>
+<p>
+웹 문서가 너무 길 경우 필요한 곳마다 문서 안에 이름을 붙여놓고 그 위치로 한번에 이동하는 링크를 ㅁ나들 수 있는데, 이 기능을 앵커(anchor)라고 합니다.
+</p>
+<p>
+웹 문서가 너무 길 경우 필요한 곳마다 문서 안에 이름을 붙여놓고 그 위치로 한번에 이동하는 링크를 ㅁ나들 수 있는데, 이 기능을 앵커(anchor)라고 합니다.
+</p>
+<p><a href = "#menu">[메뉴로]</a></p>
+<p><a href = "#top">맨위로</a></p>
+</body>
+</html>
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<meta charset = "UTF-8">
+<title>이미지</title>
+<style>
+/*
+img {width : 500px; height : 500px;}
+*/
+</style>
+</head>
+<body>
+<h2>HTML Image</h2>
+<!-- <img src = "./img/pic_trulli.jpg" alt = "Trulli 이미지파일"> -->
+
+<img src = "../img/pic_trulli.jpg" alt = "Trulli" title = "남부 이탈리아의 원추형 석조건물인 Trulli" width = "300" height = "222">
+<img src = "../img/img_girl.jpg" alt = "Girl in a jacket" width = "300" height = "222">
+<img src = "../img/img_chania.jpg" alt = "Girl in a jacket" width = "100" height = "100">
+<br><br>
+
+<h1>이미지에 링크 설정</h1>
+<a href = "#">가가가</a>
+<a href = "#">나나나</a>
+<a href = "#">다다다</a>
+<br>
+<a href = "https://m.dongascience.com/news.php?idx=54418">
+<img src = "../img/cute_dog.jpg" alt = "Girl in a jacket" style = "width : 300px; height : 222px;">
+</a>
+
+체포·구속·압수 또는 수색을 할 때에는 적법한 절차에 따라 검사의 신청에 의하여 법관이 발부한 영장을 제시하여야 한다. 다만, 현행범인인 경우와 장기 3년 이상의 형에 해당하는 죄를 범하고 도피 또는 증거인멸의 염려가 있을 때에는 사후에 영장을 청구할 수 있다.<br>
+
+이 헌법시행 당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된 것으로 본다. 정부는 회계연도마다 예산안을 편성하여 회계연도 개시 90일전까지 국회에 제출하고, 국회는 회계연도 개시 30일전까지 이를 의결하여야 한다.<br>
+
+모든 국민은 능력에 따라 균등하게 교육을 받을 권리를 가진다. 대통령은 내란 또는 외환의 죄를 범한 경우를 제외하고는 재직중 형사상의 소추를 받지 아니한다.<br>
+
+국채를 모집하거나 예산외에 국가의 부담이 될 계약을 체결하려 할 때에는 정부는 미리 국회의 의결을 얻어야 한다. 재판의 심리와 판결은 공개한다. 다만, 심리는 국가의 안전보장 또는 안녕질서를 방해하거나 선량한 풍속을 해할 염려가 있을 때에는 법원의 결정으로 공개하지 아니할 수 있다.
+
+</body>
+</html>
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<meta charset = "UTF-8">
+<title>커피 사진</title>
+</head>
+<body>
+<h1>Coffee</h1>
+<img src = "../img/coffeehouse2.jpg" style = "width : 600px;">
+<p>Wikipedia says:</p>
+<i>Coffee is a brewed drink prepared from roasted coffee beans, which are the seeds of berries from the Coffee plant.</i>
+<p><a href = "14computer.html">14computer.html페이지로 이동</a></p>
+<p><a href = "../img/mac.jpg" target = "_blank">computer이미지 보기</a></p>
+</body>
+</html>
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<meta charset = "UTF-8">
+<title>컴퓨터 사진</title>
+</head>
+<body>
+<h1>Computer</h1>
+<img src = "../img/mac.jpg" style = "width : 600px;">
+<p>Wikipedia says:</p>
+<i>A computer is a device that can be instructed to carry out arbitrary sequences of arithmetic or logical operations automatically</i>
+</body>
+</html>
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<meta charset = "UTF-8">
+<title>Insert SVG</title>
+</head>
+<body>
+<h1>SVG 이미지 삽입하기</h1>
+<img src = "../img/muffin.svg">
+<img src = "../img/muffin.png">
+</body>
+</html>
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+<meta charset = "UTF-8">
+<title>이미지 삽입하기</title>
+<style>
+img {border : 1px solid #ccc;}
+</style>
+</head>
+<body>
+<h1>제품 선택</h1>
+<figure>
+<img src = "../img/prod.jpg" alt = "예멘 모카 마타리">
+<figcaption>예멘 모카 마타리(Yemen Mocha Mattari)</figcaption>
+</figure>
+<figure>
+<img src = "../img/prod.jpg" alt = "예멘 모카 마타리">
+<figcaption>예멘 모카 마타리(Yemen Mocha Mattari)</figcaption>
+</figure>
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,77 @@
+오라클11g 다운로드
+https://www.oracle.com/database/technologies/xe-prior-release-downloads.html
+
+Oracle Database XE Prior Release Archive
+Oracle Database Express Edition (XE) Release 11.2.0.2.0 (11gR2).
+Oracle Database 11gR2 Express Edition for Windows x64 이름옆의 Download클릭
+----------------------------------------------------------------------
+You must accept the Oracle License Agreement to download this software.
+
+
+[v]I reviewed and accept the Oracle License Agreement   ============>이 부분 체크 후
+You will be redirected to the login screen in order to download the file.
+[Download OracleXE112_Win64.zip] =============>버튼 클릭
+----------------------------------------------------------------------
+
+오라클 로그인하면 자동으로 다운로드 됨
+
+다운로드 된 파일명: OracleXE112_Win64.zip / 용량 : 324,145KB
+
+OracleXE112_Win64.zip 압축해제하기 [반디집 -> 알아서 풀기]
+-> DISK1 -> setup.exe클릭하여 설치 실행
+-> 액세스 허용여부 창뜨면 [예] 클릭
+-> Next -> [v]I accept the terms in the license agreement 체크 후 [Next]
+-> C:\oraclexe\경로 및 설정된 것 모두 그대로 유지하고 [Next]
+-> Enter Password : 1111 입력/ Confirm Password : 1111 입력 후  [Next]
+-> 아래의 정보뜨면 하단의 [Install]클릭
+---------------------------------------------------------------------
+Destination Folder: C:\oraclexe\
+Oracle Home: C:\oraclexe\app\oracle\product\11.2.0\server\
+Oracle Base:C:\oraclexe\
+Port for 'Oracle Database Listener': 1521
+Port for 'Oracle Services for Microsoft Transaction Server': 2030
+Port for 'Oracle HTTP Listener': 8080
+---------------------------------------------------------------------
+**설치가 모두 완료되면 Finish버튼이 뜨므로 그때까지 반드시 기다릴 것.(조금 오래 걸림)
+**PC의 사용자명이 한글로 되어 있으면 오라클 인식이 잘 안될 수 있으니 
+  반드시 사용자계정을 영어로 기재할 것
+
+-> [Finish]
+
+잘 설치되었는지 확인하기
+1. 환경변수 설정되었는지 체크
+내PC선택 후 마우스 우버튼 메뉴의 [속성]선택 -> [고급시스템 설정] 클릭
+-> 시스템속성창의 [고급]탭에서 하단의 [환경 변수(N)...] 클릭
+-> 환경변수 창에서 하단부의 시스템변수(S) 목록에서 Path선택 후 [편집(I)...]클릭
+-> 환경변수편집 창에서 [C:\oraclexe\app\oracle\product\11.2.0\server\bin]목록이 있으면 정상처리된 것임
+
+-------------------------------------------------------------------------
+
+오라클 sqlplus 사용하기
+커맨드창 열기 : [윈도우키 + r ] -> cmd 입력 후 엔터
+
+명령어입력 : sqlplus / as sysdba 또는 sqlplus "/as sysdba"
+C:\Users\사용자계정명> sqlplus / as sysdba
+아래처럼 오라클 버전이 뜨고 편집위치가 [ C:\Users\사용자계정명> ] 사용자계정디렉토리에서 
+[SQL>] sqlplus편집창으로 바뀌면 됨.
+-------------------------------------------------------------------------
+
+SQL*Plus: Release 11.2.0.2.0 Production on 수 1월 10 04:57:19 2024
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+SQL>
+-------------------------------------------------------------------------
+
+
+SCOTT계정의 테이블데이터 가져오기
+
+C:\oraclexe\app\oracle\product\11.2.0\server\rdbms\admin\scott.sql파일 복사해서 다운로드로 붙여넣기
+커맨드창 열기 : [윈도우키 + r ] -> cmd 입력 후 엔터
+C:\Users\사용자계정명>cd Downloads 입력 후 엔터
+C:\Users\사용자계정명\Downloads>sqlplus / as sysdba
+...
+SQL>@scott.sql 입력 후 엔터

@@ -1,0 +1,375 @@
+index.jsp 시작. a태그 2개 게시판글쓰기, 글목록보기 출력
+
+현재 url => http://localhost:8090/servletproject/index.jsp
+
+게시판글쓰기 a태그 클릭 => 데이터 전송방식 get방식, 페이지 이동방식 redirect방식(url바뀜, 데이터 안보냄), href속성값-"boardWriteForm"인데 앞에 (./)생략 나와 같은 위치라는 의미
+
+현재 url => http://localhost:8090/servletproject/boardWriteForm.bo
+
+이때 서블릿(class BoardFrontController) 실행됨(url패턴이 "*.bo"이라 어떤 url이든 뒤에 .bo가 있으면 실행됨) a태그의 데이터전송 방식이 get이라 서블릿의 doGet메소드가 실행됨(doGet, doPost메소드 둘다 doProcess메소드 실행이라 상관x)
+
+doProcess메소드 실행
+
+34번 get방식으로 실행됐기 때문에 인코딩 딱히 상관없음
+
+35번줄 String RequestURI=request.getRequestURI(); 에서 원래 uri는 http://localhost:8090/servletproject/boardWriteForm.bo 이지만
+해당 메소드는 사실상 urn을 리턴함
+request.getRequestURI()=> 
+String RequestURI= /servletproject/boardWriteForm.bo
+
+36번줄 String contextPath=request.getContextPath(); 에서 
+String contextPath = /servletproject
+
+37번줄 String command=RequestURI.substring(contextPath.length()); 에서
+contextPath.length()-15, /servletproject/boardWriteForm.bo의 15번 인덱스부터 끝까지
+String command = /boardWriteForm.bo
+
+41번 if문 탐 조건-command.equals("/boardWriteForm.bo"), 현재 command = /boardWriteForm.bo
+39번에 null로 초기화 해둔 ActionForward forward를 new ActionForward();로 인스턴스 생성(&10번지) (자바는 원본사용x 멤버필드와 메소드를 사용하기 위함)
+forward의 setPath메소드 실행, 매개변수로 "/board/qna_board_write.jsp" 보냄
+10번지객체 forward의 맴버필드 path = "/board/qna_board_write.jsp"
+
+다음으로 182번 forward가 현재 (&10)이라 null이 아니므로 if문 탐
+(&10)의 멤버필드 isRedirect는 설정한게 없어서 그대로 false리턴 182번 if문 안의 else문 탐
+RequestDispatcher dispatcher에 forward.getPath()-["/board/qna_board_write.jsp"]를 매개변수로 request객체를 담음
+dispatcher로 페이지이동, 이동방법은 forward(url안바뀜, 데이터보냄), 이동 페이지-/board/qna_board_write.jsp, RequestDispatcher로 설정한 url에 /는 앞에 contextPath가 있다는 뜻, 
+http://localhost:8090/servletproject//board/qna_board_write.jsp로 forward방식으로 페이지 이동.
+현재 보이는 url은 http://localhost:8090/servletproject/boardWriteForm.bo
+doProcess메소드가 종료되면서 지역변수, 지역객체들 다 없어짐.
+하지만 forward방식으로 이동되므로 매개변수인 request객체, response객체 살아있음
+
+form태그의 action-boardWritePro.bo 메소드-post 
+예로 input요소의
+name="BOARD_NAME" 에는 "김동준"
+name="BOARD_PASS" 에는 "1111"
+name="BOARD_SUBJECT" 에는 테스트
+name="BOARD_CONTENT" 에는 테스트
+name="BOARD_FILE" 에는 before.png파일
+을 입력하고 submit하면 form의 액션(boardWritePro.bo)실행
+
+이때 url http://localhost:8090/servletproject/boardWritePro.bo 되고 서블릿 실행
+
+doPost실행, doProcess실행, 이때 담겨지는 request객체에 url, 여러가지, 내가 입력한 input요소의 Parameter들이 담겨있음
+
+34번줄 utf-8인코딩, post로 보내는 데이터는 받는곳에서 인코딩설정 필수
+
+35번줄 String RequestURI=request.getRequestURI(); 에서 원래 uri는 http://localhost:8090/servletproject/boardWritePro.bo 이지만
+해당 메소드는 사실상 urn을 리턴함
+request.getRequestURI()=> 
+String RequestURI= /servletproject/boardWritePro.bo
+
+36번줄 String contextPath=request.getContextPath(); 에서 
+String contextPath = /servletproject
+
+37번줄 String command=RequestURI.substring(contextPath.length()); 에서
+contextPath.length()-15, /servletproject/boardWritePro.bo의 15번 인덱스부터 끝까지
+String command = /boardWritePro.bo
+
+46번줄 조건이 command.equals("/boardWritePro.bo")인 else if문 탐
+null로 초기화 되어있던 Action action 인터페이스에 Action를 상속받은 자식 클래스 BoardWriteProAction로 객체 생성 (&20)
+인터페이스는 객체생성이 안되기때문에 상속받는 자식클래스로 생성해줘야함.
+49번줄 null이였던 forward에 위 (&20)객체의 execute메소드 실행, (&20)객체의 자료형은 Action이지만 부모인터페이스의 execute메소드가 아닌
+자식(BoardWriteProAction)의 동일한 execute메소드가 실행되는거임
+보내는 매개변수 중 request객체에는 url, 여러가지, 내가 입력한 input요소의 Parameter들이 담겨있음
+ActionForward forward = null;
+BoardBean boardBean = null;
+String realFolder = "";
+String saveFolder = "/boardUpload";
+int fileSize = 5 * 1024 * 1024;
+realFolder = "C:/jspwork/servletproject/src/main/webapp/"+saveFolder; 가 있음
+realFolder는 "C:/jspwork/servletproject/src/main/webapp/boardUpload"가 됨
+
+28번줄 파일객체 생성, 매개변수로 저장경로 설정하는것(realFolder)
+
+29번줄 해당경로에 폴더가 있니? 없으면 if문 타고 해당 경로로 폴더생성, 있으면 안탐
+
+31번줄 MultipartRequest객체 multi생성, 파일업로드 할 수 있는 객체, 일반파라미터도 담김
+매개변수로 (request, realFolder, fileSize, "UTF-8",new DefaultFileRenamePolicy()) 담음
+request에는 Parameter,등등, 위 변수들, 같은이름의 파일은 뒤에 1,2,3,.. 표시해주는객체
+
+33번줄 BoardBean객체 boardBean생성(&40), 테이블 구조의 클래스
+
+34,35,36,37,38번줄로 (&40)객체 멤버필드 설정, 
+input요소의 Parameter들
+34번줄 "김동준"
+35번줄 "1111"
+36번줄 "테스트"
+37번줄 "테스트"
+38번줄 "before.png"
+
+39번줄 BoardWriteProService 객체 boardWriteProService생성(&50)
+40번줄 isWriteSuccess에 (&50)객체의 registArticle메소드 실행해서 줌, 매개변수로 (&40)객체
+
+(&50)객체의 registArticle메소드로 인해 
+13번줄 커넥션객체 생성, import static db.JdbcUtil.*;로 인해 스테틱메소드 getConnection실행
+
+BoardDAO객체 boardDAO생성하는데 싱글톤패턴으로 생성(&60)
+
+(&50)에서 열어준 커넥션객체를 (&60)객체의 setConnection메소드호출,매개변수로 보냄
+
+16번줄 int insertCount에 (&60)객체의 insertArticle메소드 실행해서 줌, 매개변수로 (&40)객체
+
+잠시 (&60)객체의 insertArticle메소드에서
+sql명령문 담는 객체 PreparedStatement pstmt, 한줄데이터 담는 객체 ResultSet rs null로 생성, 이유는 finally에서 닫아줄라고 try밖에 기술.
+pstmt=con.prepareStatement(sql) sql명령문 담는객체 생성, 생성과 동시에 sql문 담음, PreparedStatement는 바인드변수사용 하기 위해 생성할때 담음, 해당 sql문 => SELECT MAX(BOARD_NUM) FROM BOARD
+변수는
+int num =0;
+String sql="";
+int insertCount=0; 있음
+
+해당 sql문은 해당 컬럼 BOARD_NUM의 가장 큰수를 가져오는 select문임.
+해당 한줄데이터를 rs에 담음
+
+rs.next() rs에 데이터가 있으면 if문 없으면 else문, 데이터가 하나도 없으면 null을 select하기때문에 next()처리 안됨
+지금은 있으니 if문타고 
+num =rs.getInt(1)+1; 인데 현재 select로 가져온 데이터 => 1이라
+num = 2;
+
+sql 재설정 insert문으로 바인드변수를 10개 설정
+8,9,10 3개는 0으로 setInt함
+나머지는 매개변수로 받은 (&40)객체의 멤버필드 getter메소드로 설정해줌(input요소 Parameter들로 초기화한 필드들임)
+executeUpdate로 실행, 처리된 행수를 int형으로 반환
+insert가 처리됐으면 1을 반환할거고 안됐으면 0을 반환할것
+해당 변수 insertCount를 리턴, 나를 호출한 (&50)객체의 16번줄 변수에 1 설정
+
+18번줄 조건이(insertCount > 0)인 if문 탐, 해당 변수가 0보다 크면 insert가 잘 된것이기때문에 commit스테틱메소드 호출, 처리했던 커넥션객체를 매개변수로 줌, 내(&50) 변수 isWriteSuccess를 true로 바꾸고 해당 불리언변수 리턴, 
+나를 불러준 (&20)객체 40번줄에 리턴임
+
+(&20)객체 40번줄 isWriteSuccess가 true를 받음
+
+42번줄 조건이(!isWriteSuccess)인 if문은 못타니까 else문 탐
+
+(&20)객체의 ActionForward forward에 ActionForward객체 생성후(&70) 대입
+(&70)의 setRedirect메소드 실행, 매개변수로 true줌
+(&70)의 멤버필드 isRedirect를 true로 초기화
+(&70)의 멤버필드 path를 "boardList.bo"로 초기화하고
+
+나를 불러준 서블릿한테 (&70)객체를 리턴
+
+서블릿의 49번줄 forward가 (&70)객체를 받음, 해당 객체의 맴버필드 isRedirect는 true, path는 "boardList.bo"
+
+183번줄 조건이 (forward != null)인 if문 탄다
+183번줄 if문 안에 조건이 (forward.isRedirect())인 if문도 탄다, 해당 forward의 멤버필드isRedirect를 부르는 메소드이기 때문에 현재true
+response.sendRedirect(forward.getPath()); 를 실행하는데
+샌드리다이렉트로 인해 url바뀌고 데이터 안보내고 request객체 삭제함,
+현재 url http://localhost:8090/servletproject/boardWritePro.bo 에서
+바뀔 url http://localhost:8090/servletproject/boardList.bo 인데, 이때 페이지이동 전에 서블릿 먼저 실행
+
+doGet->doProcess실행
+
+request.setCharacterEncoding("UTF-8");
+String RequestURI=request.getRequestURI(); 는
+=> /servletproject/boardList.bo
+
+String contextPath=request.getContextPath(); 는
+=> /servletproject
+
+String command=RequestURI.substring(contextPath.length()); 는
+=> /boardList.bo
+
+ActionForward forward=null;
+Action action=null;
+이므로
+
+54번줄 (command.equals("/boardList.bo")) if문실행
+action = new BoardListAction(); 객체생성, (&80)
+forward=action.execute(request, response); (&80)객체 execute메소드 실행, 매개변수로 request, response보냄 뭐 없음
+
+ArrayList<BoardBean> articleList=new ArrayList<BoardBean>();
+int page=1;
+int limit=10;
+
+19번줄 조건이(request.getParameter("page")==null || request.getParameter("page").equals("")) if문 탐, 네임이 page인 파라미터 없으니까
+page = 1;
+
+22번줄 BoardListService boardListService = new BoardListService(); 객체 생성 (&90)
+
+23번줄 int listCount=boardListService.getListCount(); (&90)의 getListCount메소드 호출
+int listCount = 0;
+Connection con = getConnection();
+=> 커넥션객체 생성
+
+BoardDAO boardDAO = BoardDAO.getInstance();
+=> 싱글톤패턴으로 (&60)객체 받음
+
+boardDAO.setConnection(con);
+=> 새로운 커넥션객체 세팅
+
+listCount = boardDAO.selectListCount();
+=> selectListCount메소드 실행
+콘솔에 System.out.println("getConnection"); 찍고
+prepareStatement로 명령문담는 객체 생성, SELECT COUNT(*) FROM BOARD 담음
+해당 sql문으로 1이 select될것임
+executeQuery로 해당 한줄 데이터 rs에 담음
+if문 타고 listCount=rs.getInt(1);
+한줄 데이터중 첫번째 컬럼값 가져와서 listCount에 대입, 해당 select문은 BOARD의 줄수를 가져옴, 현재 1
+rs, ps, con 닫고 나를 호출한 (&80)객체의 23번 줄에 listCount=1 리턴
+
+24번줄 articleList = boardListService.getArticleList(page,limit); (&90)의 getArticleList메소드 호출, 매개변수로 (page,limit) => (1, 10)
+(&90)의 getArticleList메소드
+ArrayList<BoardBean> articleList = null;
+Connection con = getConnection();
+=> 커넥션객체 생성
+
+BoardDAO boardDAO = BoardDAO.getInstance();
+=> 싱글톤패턴으로 (&60)객체 받음
+
+boardDAO.setConnection(con);
+=> 새로운 커넥션객체 세팅
+
+articleList = boardDAO.selectArticleList(page,limit); 
+=> (&60)의 selectArticleList메소드 호출, (1, 10)
+담을 sql문
+=> "select * from (select rownum rnum, A.* from (select * from board order by BOARD_NUM desc ) A ) where rnum between ? and ?"
+2중 서브쿼리이니까 하나씩 
+가장 안쪽 쿼리문 SELECT * FROM BOARD ORDER BY BOARD_NUM DESC;
+는 BOARD 모든 컬럼을 BOARD_NUM로 내림차순, 해당 서브쿼리를 A로 별칭주고
+그 다음 서브쿼리문 SELECT ROWNUM RNUM, A.* FROM (SELECT * FROM BOARD ORDER BY BOARD_NUM DESC ) A;
+는 가장안쪽 서브쿼리와 가장 앞에 컬럼 하나 추가, 컬럼명은 RNUM로 하고 저장된 행 순서대로 자동으로 순번을 부여하는 슈도컬럼임
+최종적으로 위 데이터 중 where rnum between ? and ? 인걸 가져와야함
+
+int startrow=(page-1)*10+1;
+int endrow=(page-1)*10+10; 
+에서 page는 가져온 매개변수이고 값은 1이다
+해서 startrow = 1, endrow = 10
+
+pstmt = con.prepareStatement(board_list_sql);
+pstmt.setInt(1, startrow); => 1
+pstmt.setInt(2, endrow); => 10
+바인드변수 세팅하고 명령문 담는 객체생성
+=> "select * from (select rownum rnum, A.* from (select * from board order by BOARD_NUM desc ) A ) where rnum between 1 and 10"
+rs = pstmt.executeQuery(); 실행
+
+while(rs.next())로 다음 한줄데이터가 있으면 반복반복인데 현재는 1줄 뿐 일단 한줄 있으니 while문 실행
+BoardBean board = new BoardBean(); 객체 생성 (&100)
+
+board.setBOARD_NUM(rs.getInt("BOARD_NUM")); => 1
+board.setBOARD_NAME(rs.getString("BOARD_NAME")); => "김동준"
+board.setBOARD_SUBJECT(rs.getString("BOARD_SUBJECT")); => "테스트"
+board.setBOARD_CONTENT(rs.getString("BOARD_CONTENT"));  => "테스트"
+board.setBOARD_FILE(rs.getString("BOARD_FILE")); => "before.png"
+board.setBOARD_RE_REF(rs.getInt("BOARD_RE_REF")); => 1
+board.setBOARD_RE_LEV(rs.getInt("BOARD_RE_LEV")); => 0
+board.setBOARD_RE_SEQ(rs.getInt("BOARD_RE_SEQ")); => 0
+board.setBOARD_READCOUNT(rs.getInt("BOARD_READCOUNT")); => 0
+board.setBOARD_DATE(rs.getDate("BOARD_DATE")); => 24/03/26
+설정해줌
+articleList리스트에 해당 (&100)객체를 add하고 역순으로 닫아준뒤
+나를 부른 (&90)객체에 &100을 담은 리스트 articleList를 리턴
+
+(&90)객체 30번 줄에서 변수 설정
+
+나를 부른 (&80)객체에 리턴받은 &100을 담은 리스트 articleList를 담은 articleList 리턴
+
+(&80)객체 24번줄에서 &100을 담은 리스트 articleList를 (&80)의 articleList에 설정
+
+현재(&80)의 변수들은 
+listCount=1, articleList=(&100)객체 담은 List 임, limit=10, page=1
+
+int maxPage=(int)((double)listCount/limit+0.95);
+=> maxPage = 1이 됨
+int startPage = (((int) ((double)page / 10 + 0.9)) - 1) * 10 + 1;
+=> startPage = 1이 됨
+int endPage = startPage+10-1;
+=> endPage = 10이 됨
+
+32번줄에 조건이 (endPage> maxPage)인 if문 탐
+endPage= maxPage;
+=> endPage = 1
+
+34번줄 PageInfo pageInfo = new PageInfo(); 객체생성 (&150)
+(&150)객체의 멤버필드 설정
+pageInfo.setEndPage(endPage); => 1
+pageInfo.setListCount(listCount); => 1
+pageInfo.setMaxPage(maxPage); => 1
+pageInfo.setPage(page); => 1
+pageInfo.setStartPage(startPage); => 1
+
+41, 42번 줄에서 request객체의 Attribute 설정
+request.setAttribute("pageInfo", pageInfo);
+=> 네임이 pageInfo, 값이 (&150)객체
+request.setAttribute("articleList", articleList);
+=> 네임이 articleList, 값이 (&100)객체 담은 List
+
+44번줄 ActionForward forward= new ActionForward(); 객체생성 (&200)
+(&200)객체의 setPath메소드 호출, 매개변수로 "/board/qna_board_list.jsp" 던짐
+(&200)객체의 멤버필드 path = "/board/qna_board_list.jsp"
+해당 (&200)을 나를 부른 서블릿 57번줄에 리턴 후 서블릿의 forward에 대입
+
+서블릿의 183번줄 조건이 (forward != null) if문 탐
+
+183번줄 if문 안의 조건이 (forward.isRedirect()) if문 안탐 현재 forward는 (&200)이고 여기는 path만 바껴있음, isRedirect는 false
+해서 else문 탐
+
+RequestDispatcher dispatcher= request.getRequestDispatcher(forward.getPath());
+=> (&200)번지의 path가져옴
+=> /board/qna_board_list.jsp
+dispatcher.forward(request, response);
+=> RequestDispatcher로 설정하는 url패턴형식으로 /board/qna_board_list.jsp의 맨 앞 /는 앞에 contextPath있다는말
+=> 페이지이동 포워딩으로 url은 http://localhost:8090/servletproject/boardList.bo 그대로, 데이터는 보냄, 보이는 페이지는 http://localhost:8090/servletproject/board/qna_board_list.jsp 이다.
+
+qna_board_list.jsp파일의
+
+ArrayList<BoardBean> articleList=(ArrayList<BoardBean>)request.getAttribute("articleList");
+=> request.setAttribute("articleList", articleList); 네임이 articleList, 값이 (&100)객체 담은 List
+
+PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+=> request.setAttribute("pageInfo", pageInfo); 네임이 pageInfo, 값이 (&150)객체
+
+int listCount=pageInfo.getListCount();
+int nowPage=pageInfo.getPage();
+int maxPage=pageInfo.getMaxPage();
+int startPage=pageInfo.getStartPage();
+int endPage=pageInfo.getEndPage();
+=> 1
+=> 1
+=> 1
+=> 1
+=> 1
+로 설정됨 
+
+<body>에서
+
+66번줄 <% if(articleList != null && listCount > 0){ %>
+articleList가 널도 아니고 listCount은 1 이니까 탐
+
+테이블 추가인데
+74~89번줄 for문은 articleList.size()만큼 반복, 1칸임
+
+td에는 articleList.get(i).getBOARD_NUM() => 1
+
+조건이 (articleList.get(i).getBOARD_RE_LEV()!=0)인 if문 0이라서 else문 탐
+
+<a href="boardDetail.bo?board_num=<%=articleList.get(i).getBOARD_NUM()%>&page=<%=nowPage%>">
+해당 a태그의 컨텐츠는 <%=articleList.get(i).getBOARD_SUBJECT()%> => "테스트"
+해당 a태그 href는 boardDetail.bo?board_num=1&page=1
+이 됨
+
+밑에 td3개
+<td><%=articleList.get(i).getBOARD_NAME() %></td> => "김동준'
+<td><%=articleList.get(i).getBOARD_DATE() %></td> => 24/03/26
+<td><%=articleList.get(i).getBOARD_READCOUNT() %></td> 0
+
+까지 설정 후 table닫고
+
+섹션태그 추가
+
+94번줄 조건이 (nowPage<=1)인 if문 탐 nowPage=1이라서
+"[이전]<" 라는 텍스트 추가
+
+100번줄 for(int a=startPage;a<=endPage;a++)
+a는 1부터 a는 1보다 같거나 작을때까지 반복
+for문안에 조건이 (a==nowPage)인 if문 탐
+"[1]"  라는 텍스트 추가
+
+108번줄 조건이 (nowPage>=maxPage)인 if문 1>=1 이므로 탐
+"[다음]" 라는 텍스트 추가
+
+섹션닫고
+
+끝
+
+
+
+
+

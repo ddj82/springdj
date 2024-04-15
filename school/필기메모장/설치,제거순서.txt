@@ -1,0 +1,74 @@
+
+설치순서
+
+1. jdk설치 및 설정 (*스프링에 필요)
+(2. WAS 웹서버 Apache Tomcat-9.0.86) (*스프링에 필요)
+>>환경변수 설정
+CATALINA_HOME : C:\apache-tomcat-9.0.86
+JRE_HOME : C:\Program Files\Java\jdk-11
+
+3. 이클립스 설치 및 설정
+4. 데이터베이스 프로그램 설치 및 설정 (*스프링에 필요)
+(오라클 : C:\oraclexe\app\oracle\product\11.2.0\server\bin)
+
+
+
+삭제순서 (설치의 역순)
+- 제어판 권장
+
+제어판에서 오라클 제거
+
+이클립스 폴더 제거
+사용자/.eclipse폴더 이클립스 찌꺼기 제거
+사용자/.m2폴더 이클립스 찌꺼기 제거
+사용자/.p2폴더 이클립스 찌꺼기 제거
+C:\Users\사용자\AppData\Local 안에 이클립스 관련 제거
+C:\Users\사용자\AppData\Roaming 안에 이클립스 관련 제거
+
+
+환경패스에서 
+(오라클 : C:\oraclexe\app\oracle\product\11.2.0\server\bin) 제거
+C:\Users\사용자\오라클폴더(오직 오라클만 관련된) 제거 
+sqldeveloper 폴더 제거
+C:\Users\사용자\AppData\Roaming 안에 sqldeveloper 찌꺼기 제거
+
+
+톰캣폴더 제거
+(만약 설치 프로그램으로 설치했다면 언인스톨 찾아서 제거해야함)
+환경패스 CATALINA_HOME : C:\apache-tomcat-9.0.86 제거
+
+
+제어판에서 java제거
+C:\Users\hi\AppData\Roaming 자바 찌꺼기 java폴더 제거
+환경패스에서
+JAVA_HOME 제거
+%JAVA_HOME%\bin 제거
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,188 @@
+<img src = "이미지파일 경로" width = "100%" height = "100%">
+
+<img src = "이미지파일 경로" style = "css영역- 속성명 : 값;속성명 : 값;">
+
+<style>
+/*css영역
+css형식 : 선택자 {속성명 : 값; 속성명 : 값; ....}
+*/
+img {속성명:값;속성명:값;}
+img {width : 100%; height : 100%:}
+
+</style>
+
+
+form태그의 입력요소들에 입력한 데이터를 전송하기 위한 조건
+1. 반드시 입력요소들이 form태그 안에 들어가 있어야 한다.
+2. 입력요소 안에 name속성이 존재해야 한다.
+3. form태그 안에 submit이 존재해야 한다.
+
+form태그의 시작엔리먼트에 기술 할 수 있는 속성
+1. action 속성 : 폼 안에 입력한 데이터를 전송하기 위한 경로를 기술하는 속성
+2. metohd 속성 : 데이터를 전송하는 방식을 기술하는 속성
+*get방식 : url뒤에 쿼리스트링 방식으로 값을 name과 value의 쌍으로 전송하는 방식
+	대용량 전송 불가 (문자길이 제한이 있다.)
+	예시: http://www.a.b/index.jsp?id=admin&pw=1234
+*post방식 속성 : 데이터를 body안에(header영역) 숨겨서 전송하는 방식
+	name과 value의 쌍으로 전송
+	데이터 용량 제한 없음
+3. target 속성 : 데이터를 전송 받을 페이지를 보여줄 때 창을 구분하는 방식을 기술
+*_self : 기본값(default), 현재 창에서 보여주기
+*_blank : 새창(새탭)에서 보여주기
+4. autocomplete 속성 : 기존에 입력한 데이터의 이력이 존재하면 동일한 name을 가진 속성에 데이터를 입력할때 아래에 도움말 기능처럼 제공해주는 기능
+		기본값 : on
+5. <label>태그 : 인라인레벨요소의 머리말이나 꼬리말을 담당하는 태그
+	선택하는 영역이 작은 인라인레벨요소를 위한 클릭 영역을 넓혀주는 역할도 있다.
+
+
+<form>
+<input name = "test">
+기본타입: text가 숨어있다. type = "text"
+
+<input type = "submit">
+기본값 : "제출"값이 숨어있다.
+
+<button>버튼</button>
+기본타입 : type = "submit"이 숨어있다.
+
+<button type = "submit">버튼</button>
+
+</form>
+<button>버튼</button>
+기본타입 : type = "button"이 숨어있다.
+
+<input type="text" name = "a">
+
+<input type="password" name = "b">
+
+<input type="email" name = "c"> 
+앞에 글자가 존재@뒤에글자하나라도 존재
+
+<input type="url" name = "d">
+http://글자하나라도 존재
+https://글자하나라도 존재
+
+<input type="tel" name = "e">
+
+<input type="color" name="color" value="#00ff00">
+
+<input type="radio" name = "f">
+단일 선택이 가능한 입력요소
+그룹으로 지정하고자 할 경우에는 반드시 name속성의 이름을 동일하게 지정해줘야함
+radio버튼에서 name속성이 그룹으로 묶어주는 기능의 역할을 한다.
+반드시 value속성이 존재해야 한다. 
+(value속성을 기재하지 않을 경우 체크한 값은 모두 "on"값으로 전송되므로 어떤 값을 선택했는지 구분 할 수가 없음)
+사용자가 선택할 때 어떤 값인지 구분하기 위한 라벨이나 텍스트가 존재해야 한다.
+한번 선택하면 해제 불가
+
+<input type="checkbox" name = "g">
+다중 선택이 가능한 입력요소
+반드시 value속성이 존재해야 한다. 
+(value속성을 기재하지 않을 경우 체크한 값은 모두 "on"값으로 전송되므로 어떤 값을 선택했는지 구분 할 수가 없음)
+사용자가 선택할 때 어떤 값인지 구분하기 위한 라벨이나 텍스트가 존재해야 한다.
+선택해도 해제 가능
+
+<input type="date" id = "start" name="start" min="1950-01-01" max="2002-08-08">
+date는 yyyy-mm-dd형식으로 년,월,일이 표시됨.
+
+<input type="time" value="09:00" name="start1">
+<input type="time" value="18:00" name="end1">
+time은 오전/오후 시간으로 나뉘어 설정 가능. 값은 24시간제로 표시됨.
+
+<input type="datetime-local" min="2000-01-01T00:00" max="2050-12-31T23:59" value="2016-03-02 09:00" name="start2">
+datetime yyyy-mm-dd형식 다음에 시간을 의미하는 T(TimeZone)값이 자동으로 붙음. 뒤에 24시간제로 시간 표시됨.
+
+<input type="number" name = "h"> 
+정수값을 입력 할 수 있는 타입
+
+<input type="hidden"  name = "i">
+브라우저상에서 안보임, 서버로 value값이 전송됨
+
+<button type = "reset"> - 처음상태로 되돌려라, 초기값으로 되돌려라
+
+autofocus속성 - 자동으로 해당 요소가 선택되게 하는 기능, 첫 실행 후 새로고침을 한번 해야 활성화
+readonly속성 - 읽기전용
+required속성 - 이 붙은 입력요소에는 반드시 값을 입력해야함
+placeholder속성 - 도움말 기능, 값을 입력하면 사라짐
+disabled속성 - 비활성화 기능. 브라우저상에서 보임. 서버로 값이 전송되지 않음.
+
+
+size -> 영어 대문자 기준으로 글자가 깨지지않고 칸에 딱 들어가는 크기
+
+
+
+
+            pattern 속성 : 
+            pattern 속성은 input 요소에 입력된 값을 검사하기 위한 정규 표현식(regular expression)을 설정 할 수 있다.
+            정규 표현식이란 문자열에서 특정한 규칙을 가지는 문자열의 집합을 찾아내기 위한 검색 패턴을 말한다.
+            (유효성검사)
+
+            정규 표현식 사용가능 범위 : 
+            input요소의 type속성값이 text, password, email, tel, url인 경우 사용가능
+
+            사파리, 익스플로러 9이하 버전은 지원 안됨.
+            1. [a-zA-Z0-9] : 영어소문자, 영어대문자, 숫자 중 개수에 상관없이 사용가능.
+            2. [@] : '@' 문자만이 나와야 함.
+            3. [.] : '.' 문자만이 나와야 함.
+            4. [.]* : '.' 문자가 나와도 되고 나오지 않아도 됨.
+            5. [a-zA-Z0-9]* : 영어소문자, 영어대문자, 숫자 중 어느 것이라도 개수에 상관없이 나와도 되고 나오지 않아도 됨.
+            6. [0-3]{3} : 숫자는 0~3까지 사용가능하며 3자리 숫자까지만 사용가능.
+            자바스크립트의 정규표현식에서 따온 것.
+            7. [ㄱ-ㅎ] : ㄱ~ㅎ까지의 자음만.
+            8. [ㄱ-ㅎ가-힣] ㄱ~ㅎ까지의 자음포함, 가~힣까지의 한글포함.
+            [정규표현식] => 해당 정규표현식으로 1개
+            [정규표현식]{숫자} => 해당 정규표현식으로 해당 숫자개
+            [정규표현식]+ => 해당 정규표현식으로 여러개
+            [정규표현식]* => 해당 정규표현식으로 써도되고 안써도되고
+
+
+
+fieldset -> 블록레벨요소, 폼태그 안의 입력요소들을 그룹으로 묶을 때 사용
+
+legend -> 특수블럭레벨, 임대영역-100%, 실제영역-컨텐츠크기만큼이라 text-align:으로도 옮길 수 있다.
+
+
+
+
+<textarea name="content" id="content" cols="30" rows="10"></textarea>
+- cols => (영어대문자 기준)입력창의 가로 한줄에 입력 가능한 칸 크기
+- rows => (영어대문자 기준)입력창의 세로줄 개수
+
+
+border-radius => 테두리 라운드 주는 태그
+
+
+        input type="image" : submit버튼과 동일한 역할
+        버튼을 이미지로 설정 가능
+        불필요한 마우스의 클릭 지점의 x,y축 좌표값을 같이 붙여 보낸다
+        input요소에서 width, height의 독립 속성은 image 유형에서만 가능하다
+
+
+datalist 엘리먼트는 입력양식 옵션을 미리 정의하여 보여주는 태그입니다.
+<form>
+    <input list = "browsers" name = "browsers">
+    <datalist id = "browsers">
+        <option>Internet Explorer</option>
+        <option value="Firefox">
+        <option value="Chrome">
+        <option value="Opera">
+        <option value="Safari">
+    </datalist>
+    <input type="submit">
+</form>
+참고:
+datalist 태그는 Safari 12.1. 전 버전에서는 지원이 되지 않습니다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

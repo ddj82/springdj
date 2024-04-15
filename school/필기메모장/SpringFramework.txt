@@ -1,0 +1,58 @@
+Spring Framework는 Java 애플리케이션을 구축하기 위한 포괄적인 프레임워크입니다. 개발자가 강력하고 확장 가능하며 유지 관리 가능한 애플리케이션을 만드는 데 도움이 되는 다양한 특징과 기능을 제공합니다. 아래에서는 초보자가 알아야 할 Spring Framework의 주요 개념과 구성 요소 중 일부를 설명하겠습니다.
+
+1. 종속성 주입 (Dependency Injection)(DI): 
+종속성 주입은 Spring Framework의 핵심 개념입니다. 클래스가 종속성을 자체적으로 생성하도록 하는 대신 클래스에 종속 개체를 주입하여 개체 간의 종속성을 관리할 수 있습니다. 이렇게 하면 클래스 간의 느슨한 결합이 촉진되고 코드를 더 쉽게 유지 관리하고 테스트할 수 있습니다.
+
+2. 제어 반전 (Inversion of Control)(IoC): 
+제어 역전은 종속성 주입과 밀접한 관련이 있습니다. 이는 객체 생성 및 라이프사이클 관리 제어가 애플리케이션 코드에서 외부 프레임워크(이 경우 Spring)로 전환되는 설계 원칙입니다. Spring의 IoC 컨테이너는 애플리케이션 객체의 인스턴스화와 연결을 관리합니다.
+
+3. 스프링 IoC 컨테이너 (Spring IoC Container): 
+Spring IoC 컨테이너는 Spring 애플리케이션의 빈(객체) 관리를 담당합니다. 애플리케이션 컨텍스트에 정의된 Bean을 인스턴스화, 구성 및 어셈블합니다. Spring 컨테이너에는 BeanFactory와 ApplicationContext라는 두 가지 유형이 있습니다. ApplicationContext는 AOP, 이벤트 전파 및 국제화와 같은 추가 기능을 제공하므로 대부분의 애플리케이션에 선호됩니다.
+
+4. 콩 (Beans): 
+Spring에서 Bean은 Spring IoC 컨테이너에 의해 관리되는 Java 객체입니다. Bean은 애플리케이션 컨텍스트 XML 파일에 정의되거나 주석을 사용하여 정의됩니다. Spring은 빈의 라이프사이클과 그 의존성을 관리합니다.
+
+5. 빈 범위 (Bean Scopes): 
+Spring은 빈의 라이프사이클을 정의하는 다양한 빈 범위를 지원합니다. 일반적인 범위에는 싱글톤(Spring IoC 컨테이너당 하나의 인스턴스), 프로토타입(요청할 때마다 새 인스턴스), 요청(HTTP 요청당 하나의 인스턴스), 세션(HTTP 세션당 하나의 인스턴스) 등이 포함됩니다.
+
+6. 주석 (Annotations): 
+Spring은 빈의 구성과 애플리케이션의 다양한 다른 측면을 단순화하는 주석을 제공합니다. @Component, @Service, @Repository 및 @Autowired와 같은 주석은 일반적으로 Bean을 선언하고 종속성을 주입하는 데 사용됩니다.
+
+7. 관점 지향 프로그래밍 (Aspect-Oriented Programming)(AOP): 
+AOP는 핵심 비즈니스 로직에서 교차 관심사(예: 로깅, 트랜잭션 관리, 보안)를 모듈화할 수 있는 프로그래밍 패러다임입니다. Spring AOP를 사용하면 이러한 문제를 캡슐화하는 측면을 정의하고 XML이나 주석을 사용하여 애플리케이션에 선언적으로 적용할 수 있습니다.
+
+8. 스프링 MVC (Spring MVC): 
+Spring MVC는 Spring Framework를 기반으로 구축된 웹 프레임워크입니다. 웹 애플리케이션 개발을 위한 모델-뷰-컨트롤러 아키텍처를 제공합니다. 컨트롤러는 들어오는 요청을 처리하고 적절한 응답을 반환합니다. Spring MVC는 RESTful 웹 서비스 개발도 지원합니다.
+
+9. 데이터 액세스/통합 (Data Access/Integration): 
+Spring은 DAO(Data Access Object) 지원을 통해 JDBC, JPA, Hibernate 및 NoSQL 데이터베이스와 같은 다양한 데이터 액세스 기술을 지원합니다. 또한 JMS(Java Message Service), JMX(Java Management Extensions) 등과 같은 다른 기술 및 프레임워크와의 통합도 제공합니다.
+
+10. 스프링 보안 (Spring Security): 
+Spring Security는 Java 애플리케이션을 위한 강력하고 사용자 정의 가능한 인증 및 액세스 제어 프레임워크입니다. 인증, 권한 부여, 세션 관리, CSRF 보호 등 포괄적인 보안 기능을 제공합니다.
+
+
+
+
+
+
+
+
+1. Dependency Injection (DI): Dependency Injection is a core concept in the Spring Framework. It allows you to manage the dependencies between objects by injecting the dependent objects into the class rather than having the class create the dependencies itself. This promotes loose coupling between classes and makes your code easier to maintain and test.
+
+2. Inversion of Control (IoC): Inversion of Control is closely related to Dependency Injection. It's a design principle where the control of object creation and lifecycle management is inverted from the application code to an external framework (in this case, Spring). Spring's IoC container manages the instantiation and wiring of application objects.
+
+3. Spring IoC Container: The Spring IoC container is responsible for managing the beans (objects) in a Spring application. It instantiates, configures, and assembles the beans defined in the application context. There are two types of Spring containers: BeanFactory and ApplicationContext. ApplicationContext is preferred for most applications as it provides additional features like AOP, event propagation, and internationalization.
+
+4. Beans: In Spring, a bean is a Java object that is managed by the Spring IoC container. Beans are defined in the application context XML file or using annotations. Spring manages the lifecycle of beans and their dependencies.
+
+5. Bean Scopes: Spring supports different bean scopes, which define the lifecycle of a bean. Common scopes include singleton (one instance per Spring IoC container), prototype (a new instance whenever requested), request (one instance per HTTP request), session (one instance per HTTP session), etc.
+
+6. Annotations: Spring provides annotations that simplify the configuration of beans and various other aspects of the application. Annotations such as @Component, @Service, @Repository, and @Autowired are commonly used to declare beans and inject dependencies.
+
+7. Aspect-Oriented Programming (AOP): AOP is a programming paradigm that allows you to modularize cross-cutting concerns (such as logging, transaction management, security) from the core business logic. Spring AOP enables you to define aspects that encapsulate these concerns and apply them declaratively to your application using either XML or annotations.
+
+8. Spring MVC: Spring MVC is a web framework built on top of the Spring Framework. It provides a model-view-controller architecture for developing web applications. Controllers handle incoming requests, process them, and return an appropriate response. Spring MVC supports the development of RESTful web services as well.
+ 
+9. Data Access/Integration: Spring provides support for various data access technologies such as JDBC, JPA, Hibernate, and NoSQL databases through its DAO (Data Access Object) support. It also offers integration with other technologies and frameworks like JMS (Java Message Service), JMX (Java Management Extensions), and more.
+
+10. Spring Security: Spring Security is a powerful and customizable authentication and access control framework for Java applications. It provides comprehensive security features such as authentication, authorization, session management, and CSRF protection.

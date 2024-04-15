@@ -1,0 +1,81 @@
+
+**통합 개발 환경(Integrated Development Environment, IDE)
+코딩, 디버그, 컴파일, 배포 등 프로그램 개발에 관련된 모든 작업을 하나의 프로그램 안에서 처리하는 환경을 제공하는 소프트웨어를 의미함.
+예: 이클립스, 비주얼 스튜디오 코드, 인텔리제이, 쥬피터노트북 등등
+
+**애플리케이션 배포
+소프트웨어 배포라고도 하는 애플리케이션 배포는 서버의 특정 URL을 지원하는 것과 같이 소프트웨어 시스템을 사용할 수 있도록 하는 하나의 애플리케이션 또는 애플리케이션 제품군을 설치, 구성, 업데이트 및 활성화하는 프로세스를 말함.
+
+
+
+이클립스 다운로드하기
+사이트: https://www.eclipse.org/downloads/ 
+**구글에서 [이클립스 다운로드]로 검색하여 들어가도 됨
+1. 화면에서 [Install your favorite desktop IDE packages] 부분의 [Download Packages] 글씨 클릭
+2. 우측 메뉴 중 [MORE DOWNLOADS] 메뉴에서 [Eclipse 2022-09 (4.25)] 클릭
+3. Eclipse IDE 2022-09 R Packages의 [Eclipse IDE for Enterprise Java and Web Developers] 메뉴에 있는 [Windows x86_64] 글씨 클릭
+**zip파일 다운로드 됨.
+파일명: eclipse-jee-2022-09-R-win32-x86_64.zip
+파일크기: 514,187 KB
+
+
+이클립스 프로그램 설치하기
+eclipse-jee-2022-09-R-win32-x86_64.zip파일 복사해서 C드라이브 안에 붙여넣기
+반디집으로 [알아서 압축풀기]로 압축해제하기
+압축해제되면 C드라이브 안에 [eclipse]폴더가 생성됨.
+그 후에 [ eclipse-jee-2022-09-R-win32-x86_64.zip ] 복사한 파일은 삭제하고 원본은 다른 곳에 보관해 둘 것
+
+
+이클립스 실행 및 환경설정 하기
+1. c:\eclipse폴더 안의 eclipse.exe파일 클릭하여 실행하기
+2. Workspace경로는 [Browse...]버튼 클릭하여 c:\jwork 폴더 찾아서 설정한 후 [ Launch ] 클릭
+3. welcome탭 닫기
+4. 맨 상단의 Window메뉴 클릭 > Preferences 클릭
+5. Preferences 창의 좌측 메뉴에서 Java 메뉴 확장하기 
+   > Installed JREs 확장하지말고 그냥 클릭
+   > 기존의 jre선택 후 우측 [Remove]클릭하여 삭제 후  [Add...]클릭
+   > Standard VM 선택 후 [Next] 클릭
+   > JRE home : C:\Program Files\Java\jdk-11 까지 선택하면 [JRE name, JRE system libraries] 자동으로 내용 생성됨.
+   > JRE name : jdk-11
+   > JRE system libraries : C:\Program Files\Java\jdk-11\lib\jrt-fs.jar
+   > [Finish] 클릭하면 창 닫기고 [Preferences] 창에 추가한 내용이 들어가 있는 것이 확인되면 [Apply and Close] 클릭
+6. 맨 상단의 Window메뉴 클릭 > Preferences 클릭
+7. Preferences 창의 좌측 메뉴에서 General메뉴 확장하기
+   > Workspace 메뉴 확장하지 말고 그냥 클릭 
+   > Text file encoding 부분의 Other선택하면 활성화되는 선택창에서 [UTF-8]선택 후 [Apply] 클릭
+8. Preferences 창의 좌측 메뉴에서 General메뉴 확장하기
+   > Web Browser 메뉴 클릭 
+   > [v]Use external web browser선택
+   > External web browsers에서 [Chrome]선택 후 [Apply] 클릭
+9. Preferences 창의 좌측 메뉴에서 Web메뉴 확장하기
+   > 뒤에 Files가 붙은 메뉴[CSS Files, HTML Files, JSP Files]만 확장하지 말고 그냥 클릭
+   > Encoding 부분을 UTF-8로 변경 후 [Apply]
+10. [Apply and Close] 클릭하여 Preferences창 닫기
+
+
+Java Project생성하기
+1. 이클립스 우측상단 아이콘에서 표모양 아이콘(Open Perspective) 클릭
+2. Java 클릭 후 [Open]
+3. 우측의 Outline탭 닫기
+4. 맨 상단의 File메뉴 클릭 > New > Other... > Java 메뉴 확장 > Java Project 선택 후 [ Next ] 
+5. Create a Java Project 설정하기 
+Project name : first
+[v]Use default location 체크
+
+-----------------------------------------------
+JRE
+[v] Use an execution environment JRE : Javase-11
+-----------------------------------------------
+Project layout
+[v] Create separate folders for sources and class files
+-----------------------------------------------
+Working sets
+[] Add project to working sets
+-----------------------------------------------
+Module 
+[] Create module-info.java file
+-----------------------------------------------
+[Next] > [ Finish ] 버튼 클릭
+
+
+

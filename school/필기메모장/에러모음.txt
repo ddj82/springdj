@@ -1,0 +1,780 @@
+<<오라클>>
+
+명령의 86 행에서 시작하는 중 오류 발생 -
+ALTER TABLE EMP01
+MODIFY TEST VARCHAR2(20)
+오류 보고 -
+ORA-01439: column to be modified must be empty to change datatype
+01439. 00000 -  "column to be modified must be empty to change datatype"
+*Cause:    
+*Action:
+
+=> 테이블에서 컬럼의 자료형을 변경(MODIFY)할 때, 
+기존 자료형과 다른 자료형으로 바꿀때 데이터를 비워줘야한다는 오류
+
+
+
+명령의 125 행에서 시작하는 중 오류 발생 -
+ALTER TABLE EMP01
+MODIFY TEST NUMBER(2)
+오류 보고 -
+ORA-01440: column to be modified must be empty to decrease precision or scale
+01440. 00000 -  "column to be modified must be empty to decrease precision or scale"
+*Cause:    
+*Action:
+
+=> 테이블에서 컬럼의 자료형을 변경(MODIFY)할 때, 
+NUMBER자료형의 사이즈를 줄일 때 발생하는 오류
+
+
+
+
+명령의 93 행에서 시작하는 중 오류 발생 -
+INSERT INTO EMP02
+VALUES (NULL, NULL, 'SALESMAN', 10)
+오류 발생 명령행: 94 열: 9
+오류 보고 -
+SQL 오류: ORA-01400: cannot insert NULL into ("TEST"."EMP02"."EMPNO")
+01400. 00000 -  "cannot insert NULL into (%s)"
+*Cause:    An attempt was made to insert NULL into previously listed objects.
+*Action:   These objects cannot accept NULL values.
+
+=> 컬럼의 제약조건으로 NOT NULL이 있는데 컬럼의 값으로 NULL값을 넣었을때 오류
+
+
+
+
+
+명령의 113 행에서 시작하는 중 오류 발생 -
+INSERT INTO EMP03
+VALUES ('emp02', 7499, 'JONES', 'MANAGER', 20)
+오류 보고 -
+ORA-00001: unique constraint (TEST.SYS_C007033) violated
+
+=> 컬럼의 제약조건으로 UNIQUE가 있는데 컬럼의 값으로 중복값(다른 컬럼에 이미 있는 값)을 넣었을때 오류
+
+
+
+명령의 121 행에서 시작하는 중 오류 발생 -
+INSERT INTO EMP06
+VALUES ('emp05', NULL, 'JONES', 'SALESMAN', 10)
+오류 발생 명령행: 121 열: 13
+오류 보고 -
+SQL 오류: ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+
+=> 존재하지 않는 테이블명으로 쿼리문을 작성하면 나는 오류
+
+
+
+
+
+ORA-00904: "EEE": invalid identifier
+00904. 00000 -  "%s: invalid identifier"
+*Cause:    
+*Action:
+124행, 8열에서 오류 발생
+
+=> 테이블에 존재하지 않는 컬럼으로 쿼리문을 작성하면 나는 오류
+
+
+
+
+명령의 132 행에서 시작하는 중 오류 발생 -
+CREATE TABLE EMP03(
+EMPNO NUMBER(4) PRIMARY KEY,
+ENAME VARCHAR2(10) NOT NULL,
+JOB VARCHAR2(9),
+DEPTNO NUMBER(4)
+)
+오류 보고 -
+ORA-00955: name is already used by an existing object
+00955. 00000 -  "name is already used by an existing object"
+*Cause:    
+*Action:
+
+=> 이미 존재하는 테이블명으로 테이블을 생성할 때 나는 오류
+
+
+
+
+
+명령의 26 행에서 시작하는 중 오류 발생 -
+INSERT INTO EMP05 VALUES (7588, 'TOMS', 'A')
+오류 보고 -
+ORA-02290: check constraint (TEST.SYS_C007044) violated
+
+=> 컬럼의 제약조건으로 CHECK가 있는데 컬럼의 값으로 CHECK의 지정 범위 값이 아닌 값을 넣었을 때 나는 오류
+
+
+
+
+
+명령의 40 행에서 시작하는 중 오류 발생 -
+INSERT INTO EMP07 VALUES ('TOMS', 'TOMS', 'M', 1500)
+오류 발생 명령행: 40 열: 27
+오류 보고 -
+SQL 오류: ORA-01722: invalid number
+01722. 00000 -  "invalid number"
+*Cause:    The specified number was invalid.
+*Action:   Specify a valid number.
+
+=> 컬럼에 값을 넣을 때, 해당 컬럼의 자료형이 아닌 다른 자료형 값을 넣었을 때 나는 오류
+
+
+
+
+
+명령의 63 행에서 시작하는 중 오류 발생 -
+INSERT INTO EMP06 VALUES (7889, 'JERRY', 'CEO', 50)
+오류 보고 -
+ORA-02291: integrity constraint (TEST.SYS_C007053) violated - parent key not found
+
+=> 컬럼의 제약조건으로 Foreign_Key가 있는데 컬럼의 값으로 Foreign_Key의 범위 값이 아닌 값을 넣었을 때 나는 오류
+*Foreign_Key의 범위 값은 주인테이블의 기본키 값들과 NULL 뿐이다. 
+
+
+
+
+
+
+명령의 3 행에서 시작하는 중 오류 발생 -
+CREATE TABLE EMP07 (
+EMPNO NUMBER(4) PRIMARY KEY,
+ENAME VARCHAR2(10) NOT NULL,
+JOB VARCHAR2(9),
+DEPTNO NUMBER(4),
+CONSTRAINT EMP07_DEPTNO_FK FOREIGN KEY(DEPTNO) REFERENCES DEPT02(DEPTNO)
+)
+오류 보고 -
+ORA-02270: no matching unique or primary key for this column-list
+02270. 00000 -  "no matching unique or primary key for this column-list"
+*Cause:    A REFERENCES clause in a CREATE/ALTER TABLE statement
+           gives a column-list for which there is no matching unique or primary
+           key constraint in the referenced table.
+*Action:   Find the correct column names using the ALL_CONS_COLUMNS
+           catalog view
+
+=> 테이블레벨에서 Foreign_Key를 지정하는 컬럼이 있을 때, 
+주인테이블의 기본키 컬럼명을 잘못 입력했을 때 나는 오류
+
+
+
+
+
+명령의 11 행에서 시작하는 중 오류 발생 -
+CREATE TABLE EMP07 (
+EMPNO NUMBER(4) PRIMARY KEY,
+ENAME VARCHAR2(10) NOT NULL,
+JOB VARCHAR2(9),
+DNO NUMBER(4),
+DNA VARCHAR2(10),
+CONSTRAINT EMP07_DEPTNO_FK FOREIGN KEY(DNO, DNA) REFERENCES DEPT02(DEPTNO, DNAME),
+CONSTRAINT EMP07_DEPTNO_FK FOREIGN KEY(DNO) REFERENCES DEPT01(DEPTNO)
+)
+오류 보고 -
+ORA-02264: name already used by an existing constraint
+02264. 00000 -  "name already used by an existing constraint"
+*Cause:    The specified constraint name has to be unique.
+*Action:   Specify a unique constraint name for the constraint.
+
+=> 테이블레벨에서 컬럼에 제약조건을 넣을 때, 
+해당 제약조건명칭과 똑같은 이름이 존재할 때 나는 오류
+
+
+
+
+
+
+명령의 21 행에서 시작하는 중 오류 발생 -
+DROP TABLE DEPT01 PURGE
+오류 보고 -
+ORA-02449: unique/primary keys in table referenced by foreign keys
+02449. 00000 -  "unique/primary keys in table referenced by foreign keys"
+*Cause:    An attempt was made to drop a table with unique or
+           primary keys referenced by foreign keys in another table.
+*Action:   Before performing the above operations the table, drop the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+=> 주종관계가 존재하는 테이블을 제거할 때, 
+해당 테이블의 노예테이블이 남아있을 때 나는 오류
+
+
+
+
+명령의 67 행에서 시작하는 중 오류 발생 -
+ROLLBACK TO C1
+오류 보고 -
+ORA-01086: savepoint 'C1' never established in this session or is invalid
+01086. 00000 -  "savepoint '%s' never established in this session or is invalid"
+*Cause:    An attempt was made to roll back to a savepoint that was never
+           established in this session, or was invalid.
+*Action:   Try rolling back to the savepoint from the session where it is established.
+
+=> 없는 SAVEPOINT의 이름으로  ROLLBACK TO 할때 나는 오류
+
+
+
+
+
+ORA-00918: column ambiguously defined
+00918. 00000 -  "column ambiguously defined"
+*Cause:    
+*Action:
+2행, 22열에서 오류 발생
+
+=> 조인으로 SELECT절에 이름이 같은 컬럼을 가져올 때 별칭을 안해주면 나는 오류
+
+
+
+
+명령의 24 행에서 시작하는 중 오류 발생 -
+INSERT INTO TEST2 VALUES(4, '건달')
+오류 보고 -
+ORA-02291: integrity constraint (SAMP.TEST2_ID_PK) violated - parent key not found
+
+=> FOREIGN KEY로 주종관계이고 노예테이블에 값을 넣을 때,
+주인테이블에 없는 값을 입력하면 나는 오류
+
+
+
+
+
+
+
+
+명령의 52 행에서 시작하는 중 오류 발생 -
+DELETE FROM VIEW_EMP_DEPT WHERE DNAME = 'ACCOUNTING'
+오류 발생 명령행: 52 열: 13
+오류 보고 -
+SQL 오류: ORA-01752: cannot delete from view without exactly one key-preserved table
+01752. 00000 -  "cannot delete from view without exactly one key-preserved table"
+*Cause:    The deleted table had
+           - no key-preserved tables,
+           - more than one key-preserved table, or
+           - the key-preserved table was an unmerged view.
+*Action:   Redefine the view or delete it from the underlying base tables.
+
+=> 복합뷰의 데이터를 변경하는 문(DML)이 불가능해서 나는 오류
+
+
+
+
+명령의 63 행에서 시작하는 중 오류 발생 -
+CREATE VIEW VIEW_EMP_DEPT AS 
+SELECT ENAME, DEPT.DEPTNO, DNAME FROM EMP, DEPT 
+WHERE EMP.DEPTNO = DEPT.DEPTNO
+오류 보고 -
+ORA-00955: name is already used by an existing object
+00955. 00000 -  "name is already used by an existing object"
+*Cause:    
+*Action:
+
+명령의 67 행에서 시작하는 중 오류 발생 -
+CREATE TABLE VIEW_EMP_DEPT AS SELECT * FROM EMP
+오류 보고 -
+ORA-00955: name is already used by an existing object
+00955. 00000 -  "name is already used by an existing object"
+*Cause:    
+*Action:
+
+=> 이미 존재하는(생성되어 있는) 이름으로 객체를 생성하려고 할 때 나는 오류
+
+
+
+
+
+명령의 110 행에서 시작하는 중 오류 발생 -
+ALTER TABLE CUST
+ADD CONSTRAINT CUST_GENDER_PK PRIMARY KEY(CUST_GENDER)
+오류 보고 -
+ORA-02437: cannot validate (TEST.CUST_GENDER_PK) - primary key violated
+02437. 00000 -  "cannot validate (%s.%s) - primary key violated"
+*Cause:    attempted to validate a primary key with duplicate values or null
+           values.
+*Action:   remove the duplicates and null values before enabling a primary
+           key.
+
+=> 컬럼에 PRIMARY KEY를 지정할 때 조건(중복값안됨, 널안됨)에 맞지 않을 때 나는 오류
+
+
+
+
+
+
+명령의 120 행에서 시작하는 중 오류 발생 -
+CREATE UNIQUE INDEX CUST_CITY_IDX ON CUST (CUST_CITY)
+오류 보고 -
+ORA-01452: cannot CREATE UNIQUE INDEX; duplicate keys found
+01452. 00000 -  "cannot CREATE UNIQUE INDEX; duplicate keys found"
+*Cause:    
+*Action:
+
+=> 컬럼에 UNIQUE INDEX를 생성할 때 해당 컬럼 값에 중복값이 존재할때 나는 오류
+
+
+
+
+
+
+명령의 71 행에서 시작하는 중 오류 발생 -
+INSERT INTO BOARD VALUES(SEQ_NO.NEXTVAL, 'java3', 수업, SYSDATE)
+오류 발생 명령행: 71 열: 51
+오류 보고 -
+SQL 오류: ORA-00984: column not allowed here
+00984. 00000 -  "column not allowed here"
+*Cause:    
+*Action:
+
+=> 컬럼에 값을 넣을 때, 해당 컬럼의 자료형이 아닌 다른 자료형 값을 넣었을 때 나는 오류
+
+
+
+
+
+ORA-08002: sequence SEQ_NO.CURRVAL is not yet defined in this session
+08002. 00000 -  "sequence %s.CURRVAL is not yet defined in this session"
+*Cause:    sequence CURRVAL has been selected before sequence NEXTVAL
+*Action:   select NEXTVAL from the sequence before selecting CURRVAL
+
+=> 시퀀스명.NEXTVAL이 선행되지 않은 상태로 시퀀스명.CURRVAL를 실행하면 나는 오류
+
+
+
+
+명령의 127 행에서 시작하는 중 오류 발생 -
+CREATE SEQUENCE SEQ_NO
+--STRAT WIRH 1
+INCREMENT BY 2
+MAXVALUE 5
+--MINVALUE 1
+CYCLE CACHE 3
+오류 보고 -
+ORA-04013: number to CACHE must be less than one cycle
+04013. 00000 -  "number to CACHE must be less than one cycle"
+*Cause:    number to CACHE given is larger than values in a cycle
+*Action:   enlarge the cycle, or cache fewer values
+
+=> CACHE는 한 사이클의 주기 - 1이 되어야 하는데 CACHE 수치를 잘못 설정했다는 오류
+
+
+
+
+
+
+명령의 41 행에서 시작하는 중 오류 발생 -
+INSERT INTO DEPT01 VALUES (DEPT_SEQ.NEXTVAL, 'PRODUCT', 'TAIWAN')
+오류 발생 명령행: 41 열: 28
+오류 보고 -
+SQL 오류: ORA-08004: sequence DEPT_SEQ.NEXTVAL exceeds MAXVALUE and cannot be instantiated
+08004. 00000 -  "sequence %s.NEXTVAL %s %sVALUE and cannot be instantiated"
+*Cause:    instantiating NEXTVAL would violate one of MAX/MINVALUE
+*Action:   alter the sequence so that a new value can be requested
+
+=> 시퀀스의 CYCLE을 설정하지 않고 MAXVALUE까지 도달하고 NEXTVAL를 했을 때 나는 오류
+
+
+
+
+
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+=> 권한부여가 되어있지 않을 때 나는 오류
+
+
+
+
+
+ORA-01789: query block has incorrect number of result columns
+01789. 00000 -  "query block has incorrect number of result columns"
+*Cause:    
+*Action:
+
+=> 집합연산자인 UNION을 사용할 때 컬럼의 개수를 맞춰주지 않으면 나는 오류
+
+
+
+
+
+ORA-00933: SQL command not properly ended
+00933. 00000 -  "SQL command not properly ended"
+*Cause:    
+*Action:
+55행, 1열에서 오류 발생
+
+=> 집합연산자를 사용할 때 ORDER BY절을 마지막 테이블에 사용하지 않으면 나는 오류
+SQL문에 맞지 않는다는 오류 내용
+
+
+
+
+오류 보고 -
+ORA-06550: line 3, column 1:
+PLS-00363: expression 'N' cannot be used as an assignment target
+ORA-06550: line 3, column 1:
+PL/SQL: Statement ignored
+06550. 00000 -  "line %s, column %s:\n%s"
+*Cause:    Usually a PL/SQL compilation error.
+*Action:
+
+=> FOR LOOP문의 조건으로 기술하는 인덱스의 값을 직접 변경 할 때 나는 오류
+FOR LOOP문의 조건으로 기술하는 인덱스는 값을 변경 할 수 없다.
+
+
+
+
+
+
+명령의 1 행에서 시작하는 중 오류 발생 -
+BEGIN DEPT_INSERT_PROC('DEPT01'); END;
+오류 보고 -
+ORA-01031: insufficient privileges
+ORA-06512: at "TEST.DEPT_INSERT_PROC", line 13
+ORA-06512: at line 1
+01031. 00000 -  "insufficient privileges"
+*Cause:    An attempt was made to perform a database operation without
+           the necessary privileges.
+*Action:   Ask your database administrator or designated security
+           administrator to grant you the necessary privileges
+
+=> 권한부여가 안되어 있을 때 나는 오류
+GRANT 부여 할 권한 TO 계정명;
+
+
+
+
+
+
+LINE/COL  ERROR
+--------- -------------------------------------------------------------
+0/0       PL/SQL: Compilation unit analysis terminated
+11/1      PLS-00370: OTHERS handler must be last among the exception handlers of a block
+오류: 컴파일러 로그를 확인하십시오.
+
+=> 예외처리를 할 때, 
+OTHERS 예외를 마지막에 기술하지 않으면 나는 오류
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
