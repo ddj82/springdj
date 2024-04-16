@@ -8,14 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-@Component("tv")
 public class LgTV implements TV{
-//	@Autowired
-//	@Autowired @Qualifier("sony")
-//	@Resource
+//	@Autowired @Qualifier("apple")
 	@Resource(name="apple")
-//	@Inject
-//	@Inject @Named("sony")
 	private Speaker speaker;
 	
 	public LgTV() {
@@ -24,7 +19,7 @@ public class LgTV implements TV{
 
 	@Override
 	public void powerOn() {
-		System.out.printf("LgTV ---전원을 켠다.");
+		System.out.println("LgTV ---전원을 켠다.");
 	}
 	
 	@Override
