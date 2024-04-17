@@ -9230,7 +9230,7 @@ factory =>
 
 
 
-AOP(Aspect Oriented Programming) : 관점지향프로그래밍 또는 관심분리프로그래밍
+◆AOP(Aspect Oriented Programming) : 관점지향프로그래밍 또는 관심분리프로그래밍
 종단관심(핵심관심), 횡단관심(공통관심) 중 횡단관심을 표현하는 방법이며, 런타임(실행시점)에 프록시 객체를 생성하여 공통기능을 삽입하는 방식임. AOP는 프록시 객체(Aspect)를 자동 생성하여 사용한다.
 
 **대상 객체 : 핵심 기능을 실행하는 객체를 말함
@@ -9241,7 +9241,8 @@ AOP(Aspect Oriented Programming) : 관점지향프로그래밍 또는 관심분�
 **Aspect : advice 와 pointcut 결합 및 적용 시점 정의. (메소드가 실행되기 전, 후/ 에러가 나는 경우/ 에러 없이 모무 완료 되는 경우 등의 시점을 말함)
 **Weaving : 공통로직이 실제로 적용(삽입)되는 과정을 말함. (적용한 시점에 해당 공통로직(공통메소드)이 실행 되는 과정을 말함.)
 
-AOP에 필요한 선수작업
+
+◆AOP에 필요한 선수작업
 **pom.xml에서 springframework-version버전과 비슷한 시기에 출시된 aspectj-version버전을 확인하여 설정할 것.
 <properties>
 	...
@@ -9299,7 +9300,7 @@ aop관련 advice, point, aspect 태그 기술할 것
 위의 경우 해당 메소드가 static이 아니어도 클래스명.메소드()로 접근가능하다.
 
 
-AOP 동작 시점
+◆AOP 동작 시점
 1. before : 포인트컷으로 지정한 메소드(비즈니스로직)가 실행되기 전에 실행됨.
 2. after종류 : 
 -> after-returning : 포인트컷으로 지정한 메소드(비즈니스로직)가 정상적으로 실행완료되면 실행됨. 
@@ -9320,7 +9321,7 @@ AOP 동작 시점
 //getArgs() : getSignature() 메소드가 가진 정보 중 매개변수 정보만 가져옴.
 
 
-AOP execution 명시적 표현식 (패턴)
+◆AOP execution 명시적 표현식 (패턴)
 
 - 형식 : 
 execution([수식어패턴] 리턴타입패턴 [경로포함클래스명패턴.]메소드패턴(파라미터패턴))
@@ -9350,6 +9351,189 @@ Long -> 리턴타입이 Long형임
 ==> execution(public * com.springbook.biz..Impl.get*(..))
 ==> execution(* com.springbook.biz..Impl.get*(..))
 ==> execution(* get*(..))
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+//
+//87
+//필기
+//
+
+
+
+five/ com.springbook.biz.common 예제
+
+container =>
+
+빈객체명 : log4j
+자료형 : Log4jAdvice
+
+빈객체명 : testDAO
+자료형 : TestDAO
+
+빈객체명 : testService
+자료형 : TestImpl
+자동주입 : td => testDAO
+
+aop설정 =>
+공통로직객체(Advice) : log4j => 메소드명 : printLogging
+포인트컷 : execution(* com.springbook.aop..*Impl.set*(*,*))
+시점 : before
+
+
+
+
+
+
+five / com.springbook.biz.board 예제
+container => 
+
+빈객체명 : boardDAO
+자료형 : BoardDAO
+
+빈객체명 : boardService
+자료형 : BoardServiceImpl, BoardService
+자동주입 : dao => boardDAO(BoardDAO)
+
+
+
+
+<<AOP의 포인트컷 around시점>>
+지정된 포인트컷메소드가 실행되면 around메소드가 실행되고
+어라운드메소드에는 오브젝트로 포인트컷메소드를 담아야함
+그리고 around메소드에서 proceed()를 호출해야 이때 포인트컷메소드가 실행된다.
+(com.springbook.biz.common/AroundAdvice 예제 참고)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

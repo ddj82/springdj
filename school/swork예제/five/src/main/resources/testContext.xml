@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+<context:component-scan base-package="com.springbook.aop"></context:component-scan>
+
+<!-- 공통로직(Advice) 객체 생성 -->
+<!-- Log4jAdvice log4j = new Log4jAdvice(); -->
+<bean id="log4j" class="com.springbook.biz.common.Log4jAdvice"></bean>
+
+<aop:config>
+<!-- 	<aop:pointcut id="setPointcut" expression="execution(* com.springbook.aop..*Impl.set*(*,*))"/> -->
+	<aop:pointcut id="setPointcut" expression="execution(* com.springbook.aop..*Impl.int*(..))"/>
+<!-- 	<aop:pointcut id="setPointcut" expression="execution(* com.springbook.aop..*Impl.*(..))"/> -->
+
+	<aop:aspect ref="log4j">
+		<aop:before pointcut-ref="setPointcut" method="printLogging"/>
+	</aop:aspect>
+</aop:config>
+
+</beans>
