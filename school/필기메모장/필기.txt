@@ -9409,71 +9409,188 @@ container =>
 
 
 
+--------------------------------------------------------------------------------------------------------------------------------------------------
+//
+//88
+//필기
+//
 
 
 
+◆AOP에 필요한 선수작업
+**pom.xml에서 springframework-version버전과 비슷한 시기에 출시된 aspectj-version버전을 확인하여 설정할 것.
 
+1. maven repository에서 aspectjweaver (1.9.7버전으로)라이브러리 다운받기
 
+2. Spring Bean Configuration File(xml) 파일의 namespace에서 aop선택 후 저장
 
+3. Spring Bean Configuration File(xml) 파일에 기술 할 내용
 
+4. 이 부분은 어노테이션 방식만 처리할 것
+- advice클래스의 클래스명 위에 @Service와 @Aspect 기술할 것
+- advice클래스의 메소드위에 시점관련 어노테이션 기술 및 포인트컷 표현범위 지정할 것
+예: @After("execution(* com.springbook.biz..*impl.*(..))")
 
+- 만약 pointcut 따로 advice 따로 지정할 경우
+--- pointcut에 해당되는 클래스 생성 후 클래스명 위에 @Aspect만 기술한 후에
+--- pointcut에 해당되는 클래스의 메소드위에 @Pointcut 어노테이션 기술 및 포인트컷 표현범위 지정할 것
+예: @Pointcut("execution(* com.springbook.biz..*impl.get*(..))")
 
+--- advice 클래스의 클래스명 위에 @Service와 @Aspect 기술할 것
+- advice 클래스의 메소드 위에 시점관련 어노테이션 기술 및 포인트컷 표현범위 지정할 것
+예: @Before("PointcutCommon.allPointcut()")
+위의 경우 해당 메소드가 static이 아니어도 클래스명.메소드()로 접근가능하다.
 
 
 
+**advice 객체 생성
+<bean id="공통로직객체명" class="패키지경로포함.공통로직클래스명"></bean>
 
+**aop 설정
+<aop:config>
+	-- pointcut 설정
+	<aop:pointcut id="포인트컷객체명" expression="execution(포인트컷 패턴 지정)"/>
 
+	-- aspect 설정 : advice와 pointcut 결합 및 적용 시점 정의
+	<aop:aspect ref="공통로직객체명">
+		<aop:시점기술 pointcut-ref="포인트컷객체명" method="공통로직클래스에 있는 메소드명" />
+	</aop:aspect>
+</aop:config>
 
 
+****************************
+포인트컷메소드 => execution으로 설정한 메소드(들)
 
 
+<<AOP의 포인트컷 around시점>>
+지정된 포인트컷메소드가 실행되면 around메소드가 실행되고
+어라운드메소드에는 오브젝트로 포인트컷메소드를 담아야함
+그리고 around메소드에서 proceed()를 호출해야 이때 포인트컷메소드가 실행된다.
+(com.springbook.biz.common/AroundAdvice 예제 참고)
 
+//JoinPoint : 포인트컷 메소드의 정보를 담는 클래스
+//getSignature() : 포인트컷 메소드의 메소드명, 매개변수들의 정보를 가져옴.
+//getName() : getSignature() 메소드가 가진 정보 중 메소드 명만 가져옴.
+//getArgs() : getSignature() 메소드가 가진 정보 중 매개변수 정보만 가져옴.
 
 
 
+어라운드 빼고 나머지 시점에서는 포인트컷메소드를 공통로직메소드의 매개변수에 JoinPoint로 받을 수 있다.
+어라운드는 포인트컷메소드를 어라운드 공통로직메소드의 매개변수에 ProceedingJoinPoint로 받을 수 있다.
 
+에프터리터닝은 aop설정에서 returning="robj" 를 설정해주고 에프터리터닝 공통로직메소드의 매개변수로 받을 수 있다.
+에프터스로잉는 aop설정에서 throwing="exceptObj" 를 설정해주고 에프터스로잉 공통로직메소드의 매개변수로 받을 수 있다.
 
 
 
 
 
+classpath: => src/main/resources
 
 
 
+JdbcTemplate클래스 객체에서 제공되는 메소드
 
+insert, delete, update 의 경우
+"sql 쿼리문 문자열", "쿼리문 안의 바인드변수에 넣어야 할 값들을 직접 나열하거나, Object[] 자료형으로 모아서 넣을 수 있다."
 
+<insert, delete, update>
+=> int update(String sql, Object... args); //직접 나열하는 방법
+=> int update(String sql, Object[] args); //배열로 담는 방법
 
+<select(count(*) 데이터 1줄)>
+=> int queryForInt(String sql);
+=> int queryForInt(String sql, Object... args);
+=> int queryForInt(String sql, Object[] args);
 
+<select(ResultSet 데이터 1줄)>
+=> Object queryForObject(String sql, RowMapper<T> rowMapper);
+=> Object queryForObject(String sql, RowMapper<T> rowMapper, Object... args);
+=> Object queryForObject(String sql, RowMapper<T> rowMapper, Object[] args);
 
+<select(ResultSet 데이터 여러줄)>
+=> List query(String sql, RowMapper<T> rowMapper);
+=> List query(String sql, RowMapper<T> rowMapper, Object... args);
+=> List query(String sql, RowMapper<T> rowMapper, Object[] args);
 
+<**select(1줄, list모두)데이터 empty값 오류 예외처리 필요>
+===========================================================
+1. EmptyResultDataAccessException 또는 IncorrectResultSizeDataAccessException으로 예외처리 해 줄 것
+2. jdbcTemplate.query(String sql, RowMapper<T> rowMapper).isEmpty()로 조건문 처리 할 것
 
 
 
 
+<<스프링 프레임워크>>
+스프링 프레임워크를 이용할 때는 정해진 규칙대로 진행해야 한다.
+(**그림판, 노트필기 참조)
 
+스프링 프레임워크에서는 artifact-id가 컨텍스트패스가 됨 (3단패키지중 마지막패키지)
 
 
 
+<<Spring프레임워크의 MVC구조>>
+- DispatcherServlet : 유일한 서블릿 클래스, 모든 클래스의 요청을 가장 먼저 처리하는 Front Controller이다.
+- HandlerMapping : 클라이언트의 요청을 처리할 Controller를 매핑한다.
+- Controller : 실질적인 클라이언트의 요청을 처리한다.
+- ViewResolver : Controller가 리턴한 View이름으로 실행될 jsp경로를 완성해준다.
+(경로가 외부에 노출되지 않도록 해주는 기능도 가지고 있다.)
 
+차후 어노테이션 기반의 @Controller처리를 이용하면 해당 Controller객체에서 HandlerMapping과 Controller, View이름 설정까지 모두 처리를 한다.
 
+DispatcherServlet로 설정할 수 있는 파일 => 스프링 빈 설정 파일(.xml)이면서 반드시 프레젠테이션레이어(presentationLayer)에 존재하는 스프링 빈 설정 파일이어야 한다.
 
 
 
+import 		org.springframework.web.servlet.DispatcherServlet;
 
 
+DispatcherServlet만들기
 
+1. 프레젠테이션레이어단에 SpringBean Configuration File을 생성한다.
+2. src/main/webapp/WEB-INF/web.xml파일에 dispatcherServlet객체를 생성하여 연결해준다.
 
+형식 : 
+<servlet>
+	<servlet-name>객체명</servlet-name>
+	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	<init-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>스프링빈설정파일경로</param-value>
+	</init-param>
+</servlet>
+<servlet-mapping>
+	<servlet-name>객체명<servlet-name>
+	<url-pattern>url패턴</url-pattern>
+</servlet-mapping>
 
 
+예 : 
+<servlet>
+	<servlet-name>action</servlet-name>
+	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	<init-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/config/presentation-layer.xml</param-value>
+	</init-param>
+</servlet>
+<servlet-mapping>
+	<servlet-name>action<servlet-name>
+	<url-pattern>*.do</url-pattern>
+</servlet-mapping>
 
 
 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+<<*****스프링 프레임워크로 웹프로젝트를 만들때 순서>>
 
-
-
-
-
-
+1. 필요한 라이브러리에 대한 dependency를 설정(추가)한다.
+2. 필요한 .java 파일들을 만든다. (src/main/java폴더 안에 들어가는 파일들)
+3. 프로퍼티스 파일, 스프링 빈 설정 파일들을 만든다. (프레젠테이션레이어, 비즈니스레이어 모두)
+(=> 객체생성관련(데이터베이스객체, ...), 자동주입관련, aop관련, 등 설정)
+4. webapp안의 view관련 파일들 생성 (jsp, css, js, html, 등등...)
+5. WEB-INF안의 web.xml파일에 설정할 내용들 기술
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 
