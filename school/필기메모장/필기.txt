@@ -8454,7 +8454,9 @@ RequestDispatcher로 설정하는 url패턴형식
 
 => /의 의미 : 앞에 contextPath까지 존재한다는 의미
 ------------------------------------------------------------
-
+-----------------------------------------------------------------------------------------------------------
+url url url url url url url url url url url url url url url url url url url url url url url url url url url url url url
+-----------------------------------------------------------------------------------------------------------
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------
@@ -9484,9 +9486,9 @@ container =>
 
 
 
-
+***************************************
 classpath: => src/main/resources
-
+***************************************
 
 
 JdbcTemplate클래스 객체에서 제공되는 메소드
@@ -9595,57 +9597,254 @@ DispatcherServlet만들기
 
 
 
+--------------------------------------------------------------------------------------------------------------------------------------------------
+//
+//89
+//필기
+//
+
+
+***************************************
+classpath: => src/main/resources
+***************************************
+
+***********************************************************************************
+web.xml 설정 순서
+1. 필터
+2. 서블릿
+3. 에러페이지
+4. 웰컴파일리스트
+
+스프링프레임워크의 기본 페이지이동 방식 => 포워딩 방식 (url이 바뀌지 않고, 데이터를 보냄)
+
+스프링에서 제공하는 model(모델)객체는 request객체라고 생각하면 된다.
+***********************************************************************************
+
+
+<<web.xml로 서블릿 설정하기>>
+
+<servlet>
+	<servlet-name>서블릿명</servlet-name>
+	<servlet-class>경로포함.클래스명</servlet-class>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>사용할 서블릿명</servlet-name>
+	<url-pattern>서블릿으로 처리할 url</url-pattern>
+</servlet-mapping>
+
+-------------------------------------------------------------------------------------------------------------------------------
++++++++++++++++예시: seven프로젝트++++++++++++++++++++++++++++++++++++++++++++++++++++
+-------------------------------------------------------------------------------------------------------------------------------
+<!-- business layer의 classpath경로에 있는 Spring Bean Configuration File연결하는 방법1 -->
+<import resource="classpath:applicationContext.xml"/>
+
+<!-- HandlerMapping 등록 -->
+<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	<property name="mappings">
+		<props>
+			<prop key="/login.do">login</prop>
+			<prop key="/getBoardList.do">getBoardList</prop>
+			<prop key="/getBoard.do">getBoard</prop>
+			<prop key="/insertBoard.do">insertBoard</prop>
+			<prop key="/updateBoard.do">updateBoard</prop>
+			<prop key="/deleteBoard.do">deleteBoard</prop>
+			<prop key="/logout.do">logout</prop>
+		</props>
+	</property>
+</bean>
+
+<!-- Controller 등록 -->
+<bean id="login" class="com.springbook.view.user.LoginController"/>
+<bean id="getBoardList" class="com.springbook.view.board.GetBoardListController"/>
+<bean id="getBoard" class="com.springbook.view.board.GetBoardController"/>
+<bean id="insertBoard" class="com.springbook.view.board.InsertBoardController"/>
+<bean id="updateBoard" class="com.springbook.view.board.UpdateBoardController"/>
+<bean id="deleteBoard" class="com.springbook.view.board.DeleteBoardController"/>
+<bean id="logout" class="com.springbook.view.user.LogoutController"/>
+
+<!-- ViewResolver 등록 -->
+<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<property name="prefix" value="/WEB-INF/"/>
+	<property name="suffix" value=".jsp"/>
+</bean>
+-------------------------------------------------------------------------------------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+DispatcherServlet만들기
+
+1. 프레젠테이션레이어단에 SpringBean Configuration File을 생성한다.
+2. src/main/webapp/WEB-INF/web.xml파일에 dispatcherServlet객체를 생성하여 연결해준다.
+
+형식 : 
+<servlet>
+	<servlet-name>객체명</servlet-name>
+	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	<init-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>스프링빈설정파일경로</param-value>
+	</init-param>
+</servlet>
+<servlet-mapping>
+	<servlet-name>객체명<servlet-name>
+	<url-pattern>url패턴</url-pattern>
+</servlet-mapping>
+
+
+예 : 
+<servlet>
+	<servlet-name>action</servlet-name>
+	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	<init-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/config/presentation-layer.xml</param-value>
+	</init-param>
+</servlet>
+<servlet-mapping>
+	<servlet-name>action<servlet-name>
+	<url-pattern>*.do</url-pattern>
+</servlet-mapping>
 
 
 
 
 
 
+**스프링프레임워크에서 제공하는 Resolver클래스로 객체를 만들 경우 정해진 객체명으로 만들어줘야 한다.
+
+viewResolver객체를 생성하는 순간 모든 url은 해당 viewResolver객체를 거치게 된다.
+
+그래서 viewResolver객체를 거치지 않게 하는 방법으로 
+내가 리턴하는 url문자열의 맨 앞에 "redirect:"을 기술 해주어야 한다. (= 컨트롤러에서 url문자열을 기술할 때 맨 앞에 "redirect:"을 기술 해주어야 한다.)
+
+
+
+********************************************
+DispatcherServlet : 
+요청과 응답의 전반적인 제어를 처리하는 스프링에서 유일한 서블릿 컨트롤러(= Front Controller, Main Controller)를 말함
+- 유일한 서블릿 클래스, 모든 클라이언트의 요청을 가장 먼저 처리하는 Front Controller이다.
+
+1. XmlWebApplicationContext 스프링컨테이너 구동
+
+
+2. Spring Bean Configuration File들을 읽어서 객체 생성 및 설정 처리
+=> Controller, DAO, HandlerMapping, ViewResolver객체, 등 생성
+=> 의존성 주입 처리, DB객체 생성, 등
+3. 요청과 응답에 대한 제어 관리
+=> 핸들러맵핑, 컨트롤러 연결, 뷰리졸버 연결처리
+----------------------------------------------------------------------------------
+
+ContextLoaderListener 클래스
+=> web.xml이 구동되면서 실행되는 서블릿컨테이너가 실행시키는 클래스
+=> 기본적으로 설정이 되어 있는 것이 없으면 /WEB-INF/applicationContext.xml 파일을 읽어들인다. (없는 경우 에러남)
+=> <context-param>태그로 설정한 Spring Bean Configuration 파일이 있으면 해당 파일을 읽어서 객체 생성 및 설정, 등을 처리한다.
+=> 해당 컨테이너를 루트 컨테이너라고 한다.
+----------------------------------------------------------------------------------
+
+HandlerMapping : 
+디스패쳐 서블릿에서 요청url을 핸들러 맵퍼에 보내면 해당 url에 맵핑이 되어 있는 Controller클래스를 찾아서 디스패쳐 서블릿으로 반환하는 기능을 담당함.
+- 클라이언트의 요청을 처리할 Controller맵핑
+
+Controller : 실질적인 클라이언트의 요청을 처리
+
+ViewResolver :
+- Controller가 리턴한 View이름으로 실행될 .jsp 경로 완성
+요청이 모두 완료 된 후에 디스패쳐 서블릿에서 클라이언트로 응답을 완료하기 전, 어떤 페이지를 보내야 하는지 해당 페이지가 들어있는 경로를 찾아서 정확한 경로를 완성하여 디스패쳐 서블릿으로 보내는 기능을 담당함.
+
+viewResolver객체를 생성하는 순간 모든 url은 해당 viewResolver객체를 거치게 된다.
+그래서 viewResolver객체를 거치지 않게 하는 방법으로 
+내가 리턴하는 url문자열의 맨 앞에 "redirect:"을 기술 해주어야 한다. (= 컨트롤러에서 url문자열을 기술할 때 맨 앞에 "redirect:"을 기술 해주어야 한다.)
+"redirect:"를 사용하게 되면 페이지 이동방식도 리다이렉팅 방식으로 처리 됨. (데이터 못보냄, url 바뀜, 스프링프레임워크는 기본 페이지 이동방식이 포워딩방식임)
+
+형식 :
+<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<property name="prefix" value="/맨 앞에 붙일 url 경로 기술/"/>
+	<property name="suffix" value="맨 뒤에 붙일 url 경로 기술"/>
+</bean>
+----------------------------------------------------------------------------------
+
+ModelAndView 클래스 : 
+Controller에서 처리한 데이터를 Model객체에 담고, 응답할 경로 및 페이지 이동방식을 지정하는 역할을 함.
+**반드시 해당 클래스로 객체 생성을 하여 사용할 수 있다.
+ModelAndView mav = new ModelAndView();
+
+=> 해당 클래스로 만든 객체는 request객체로 만들어진다.
+=> ***해당 객체를 통해 mav.addObject(key, value) 메소드를 지정하는 것은 *request.setAttribute(key, value); 로직과 동일한 기능을 한다.***
+
+=> 데이터 담기 형식 : 모델앤뷰객체명.addObject(key, value);
+=> url경로 설정 및 페이지 이동방식 설정 형식 : 모델앤뷰객체명.setViewName("[redirect:]url경로 기술");
+
+Model : 데이터를 저장하는 역할 => request객체
+View : 응답을 보낼 url의 전체경로 또는 ViewResolver로 보낼 일부 경로를 기술, 페이지 이동방식(포워딩 또는 리다이렉팅)을 지정
+----------------------------------------------------------------------------------
+
+스프링프레임워크에서 제공하는 인코딩필터 생성하기
+객체명 : characterEncoding
+클래스 : org.springframework.web.filter.CharacterEncodingFilter
+파라미터명 : encoding, 파라미터값 : UTF-8
+url-pattern : *.do
+----------------------------------------------------------------------------------
+
+
+***WEB-INF : 절대 외부에서 직접 접근할 수 없다. 페이지 이동은 포워딩으로만 접근 할 수 있다.
 
 
 
 
+스프링컨테이너 (서블릿컨테이너) : 
+1. 객체명 : boardDAODBCP		자료형 : BoardDAODBCP			자동주입 : jdbcTemplate
+2. 객체명 : boardService		자료형 : BoardServiceImpl, BoardService	자동주입 : boardDAODBCP
+3. 객체명 : userDAODBCP		자료형 : UserDAODBCP			자동주입 : jdbcTemplate
+4. 객체명 : userService		자료형 : UserServiceImpl, UserService		자동주입 : userDAODBCP
+5. 객체명 : dataSource		자료형 : BasicDataSource			
+6. 객체명 : jdbcTemplate		자료형 : JdbcTemplate			
+
+
+
+-----------------------------------------------------------------------------------------------------------
+url url url url url url url url url url url url url url url url url url url url url url url url url url url url url url 
+-----------------------------------------------------------------------------------------------------------
+
+유알엘패턴 / 컨텍스트패스가 있습니다
+
+a태그, form태그의 액션속성, 자바스크립트에 태그(location.href='')의 / 컨텍스트패스를 없애라
+
+-----------------------------------------------------------------------------------------------------------
+url url url url url url url url url url url url url url url url url url url url url url url url url url url url url url
+-----------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------
+a태그의 href속성
+form태그의 action속성
+javascript의 location.href로 설정하는 url
+response.sendRedirect로 설정하는 url
+ajax에서 설정하는 url값
+
+=> /의 의미 : contextPath를 삭제하라는 의미
+=> ./의 의미 : 나와 동일한 위치라는 의미
+------------------------------------------------------------
+
+------------------------------------------------------------
+서블릿이나 필터에 처리하는 url패턴형식
+RequestDispatcher로 설정하는 url패턴형식
+
+=> /의 의미 : 앞에 contextPath까지 존재한다는 의미
+------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
+url url url url url url url url url url url url url url url url url url url url url url url url url url url url url url
+-----------------------------------------------------------------------------------------------------------
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+1. dependency 추가
+2. java파일들 생성
+3. 프로퍼티스 파일, 스프링 빈 설정 파일 생성
+4. view (persentation-layer에 관련된 파일들 생성), html, jsp, css, js, ... 등등
+5. web.xml안에 들어갈 내용 기술
 
 
 

@@ -1,20 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.*,com.springbook.biz.board.BoardVO" %>
 <%@ include file="../../header.jsp" %>
 <style>
 #searchNav{-webkit-justify-content: flex-end; justify-content: flex-end; }
 </style>
 <body>
 <div class="jumbotron">
-   <h1>공지 사항</h1>      
+   <h1>공지 사항 ${userRole }</h1>      
 </div>
 <%@ include file="../../menu.jsp" %>
 <nav id="searchNav" class="navbar navbar-expand-sm navbar-dark">
   <form class="form-inline" action="getBoardList.do" method="post">
   	<select class="form-control" id="sel1" name="searchCondition" style="display:inline-block!important;margin-right:10px;">
-        <option value="TITLE">제목</option>
-        <option value="CONTENT">내용</option>
+<%--         <c:forEach items="${conditionMap}" var="option"> --%>
+<%-- 	        <option value="${option.value}">${option.key}</option> --%>
+<%--         </c:forEach> --%>
+		<option value="${conditionMap['제목']}">제목</option>
+		<option value="${conditionMap['내용']}">내용</option>
     </select>
     <input class="form-control mr-sm-2" type="text" name="searchKeyword" placeholder="검색어를 입력하세요.">
     <button class="btn btn-success" type="submit">검색</button>
@@ -32,13 +34,6 @@
       </tr>
     </thead>
     <tbody>
-<%
-// List<BoardVO> bl = (List<BoardVO>) request.getAttribute("boardList");
-// for(BoardVO v : bl){
-// 	out.print(v+ "<br><br>");
-// }
-// out.print("<br>=======================================<br><br>");
-%>
 <c:forEach items="${boardList}" var="board">
 	<tr onclick="selTr(${board.seq})" style="cursor:pointer;">
 	  <td class="tdCenter">${board.seq}</td>
@@ -51,7 +46,7 @@
     </tbody>
   </table><br><br>
   <div id="footer">
-  	<button type="button" id="conWrite" class="btn btn-primary">글쓰기</button>
+  	<button type="button" id="conWrite" class="btn btn-primary"<c:if test="${ userId eq NULL}">disabled</c:if>>글쓰기</button>
   </div>
 </div>
 

@@ -1,0 +1,7 @@
+1. index.jsp에서 시작
+현재 url = http://localhost:8090/biz/index.jsp
+
+2. include로 붙여진 menu.jsp에서 로그인 a태그 클릭
+현재 url = http://localhost:8090/biz/login.jsp
+
+3. 
