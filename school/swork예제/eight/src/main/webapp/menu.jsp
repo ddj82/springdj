@@ -22,6 +22,7 @@
  		<ul class="navbar-nav nav-right">    
 		   <li class="nav-item">
 		     <a class="nav-link" href="login.jsp">로그인</a>
+<!-- 		     <a class="nav-link" href="login.do">로그인</a> -->
 		   </li>
 		 </ul>
  	</c:otherwise>
@@ -54,6 +55,7 @@
 		 	<c:otherwise>
 	   	<li class="nav-item">
 	     <a class="nav-link" href="login.jsp">로그인</a>
+<!-- 	     <a class="nav-link" href="login.do">로그인</a> -->
 	   	</li>
 		 	</c:otherwise>
 		</c:choose> 

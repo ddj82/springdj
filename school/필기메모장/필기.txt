@@ -9840,11 +9840,245 @@ url url url url url url url url url url url url url url url url url url url url 
 
 
 
+스프링프레임워크 프로젝트 만드는 순서
+
 1. dependency 추가
 2. java파일들 생성
 3. 프로퍼티스 파일, 스프링 빈 설정 파일 생성
 4. view (persentation-layer에 관련된 파일들 생성), html, jsp, css, js, ... 등등
 5. web.xml안에 들어갈 내용 기술
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+//
+//90
+//필기
+//
+
+
+프레젠테이션단과 비즈니스레이어단의 스프링빈설정파일 연결 방법 
+
+1. 프레젠테이션단에서 import로 읽어들이는 방법
+2. web.xml에서 컨텍스트-파람 + 리스트너 태그를 이용하는 방법
+  	<context-param>
+  		<param-name>contextConfigLocation</param-name>
+  		<param-value>classpath:applicationContext.xml</param-value>
+  	</context-param>
+	<필터 기술>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+
+
+@RequestMapping : 핸들러맵퍼 기능
+예: @RequestMapping("url") => 해당 url로 요청이 들어오면 get방식이든, post방식이든 달린 메소드를 실행함
+정식형식 : @RequestMapping(value = [ { ] "url1" [ , "url2" ][ , method = RequestMethod.POST] )
+속성이 2개 이상이면 반드시 정식형식으로 기술 해야함
+리퀘스트객체를 자동으로 생성함
+달린 메소드의 리턴값에 url이 있으면 페이지를 이동시켜줌
+
+
+@GetMapping : 
+@GetMapping(value = "/login.do") == @RequestMapping(value = "/login.do", method = RequestMethod.GET)
+리퀘스트객체를 자동으로 생성함
+
+
+@PostMapping : 
+@PostMapping(value = "/login.do") == @RequestMapping(value = "/login.do", method = RequestMethod.POST)
+리퀘스트객체를 자동으로 생성함
+
+
+
+컨트롤러 객체 안에 있는 맵핑어노테이션 객체 안에 메소드의 매개변수 => 커맨드 객체(command object)
+
+커맨드 객체(command object) : 클라이언트에서 보내는 데이터를 자동으로 맵핑시켜 데이터를 담아오는 객체 (매개변수 vo)
+
+
+
+@RequestParam(value = "파라미터명"[ , defaultValue = "값", required = false ])
+value에 정해진 이름의 파라미터가 있으면 가져오고 없으면 생성, 
+(required = false) - 이 이름의 파라미터를 전송해도 되고 안해도 되고 
+(defaultValue = "값") - value이름의 파라미터가 없으면 해당값으로 값을 지정함
+
+
+
+// request객체에 Attribute로 담기위한 정식형식
+model.addAttribute("객체명", 값);
+// 위치 : 데이터를 담아야 하는 곳에
+
+
+@ModelAttribute("객체명") 객체선언문
+// 위치 : 매개변수의 선언문 앞에
+
+
+=> 둘다 request.setAttribute("객체명", 값); 과 같음
+
+
+
+
+
+@SessionAttributes("board") : 
+@SessionAttributes는 객체를 미리 생성할 수 없다.
+반드시 model.addAttribute("객체명", 값)으로 되어있는 정식 형식으로 만든 model객체가 실행이 되어야만 그때 객체가 생성된다.
+
+@SessionAttributes("board") => 현재 null인 상태
+
+model.addAttribute("board", 값) => 세션에 설정된 이름과 동일한 이름으로 만들어진 model정식 객체가 있으면 그때 SessionAttribute는 new를 실행하여 데이터를 담을 공간을 생성한다. (@ModelAttribute("board")는 new 발생을 시키지 못한다.)
+동일한 이름의 model.addAttribute로 생성된 객체 정보를 그대로 똑같이 복사해서 데이터를 담는다.
+
+
+=> 이후 부터는 동일한 이름의 model객체와 session객체는 상호감시가 이루어진다.
+
+
+
+
+@SessionAttributes("board") => 현재 null인 상태
+session.attribute("board", null);
+
+<<model.addAttribute("board", boardService.getBoard(vo)) 하는 일 >>
+: 동일한 이름의 세션객체를 new발생시켜 공간을 할당받고, 데이터를 전달하는 기능까지 가지고 있다.
+1. request에 attribute로 board객체를 생성하고 값으로 boardService.getBoard(vo)를 담는다.
+2. 자신과 동일한 이름을 가진 session객체를 찾아서 new를 발생시킨다.
+session.attribute("board", new ~);
+공간이 생성되면 request에 담은 board객체의 데이터를 그대로 복사해서 세션객체에 담는다.
+session.attribute("board", boardService.getBoard(vo));
+
+
+@ModelAttribute("board") BoardVO vo : 동일한 이름의 세션에 데이터를 전달하는 기능만 가지고 있다. new 발생은 시키지 못한다.
+
+
+
+
+@ModelAttribute("객체명")
+=> @Controller 클래스 안의 메소드단에 @ModelAttribute("객체명")가 있으면 @Controller 클래스 안의 메소드가 호출 될때 @ModelAttribute("객체명")가 있는 메소드가 먼저 실행된다.
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------
+url url url url url url url url url url url url url url url url url url url url url url url url url url url url url url 
+-----------------------------------------------------------------------------------------------------------
+
+유알엘패턴 / 컨텍스트패스가 있습니다
+
+a태그, form태그의 액션속성, 자바스크립트에 태그(location.href='')의 / 컨텍스트패스를 없애라
+
+-----------------------------------------------------------------------------------------------------------
+url url url url url url url url url url url url url url url url url url url url url url url url url url url url url url
+-----------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------
+a태그의 href속성
+form태그의 action속성
+javascript의 location.href로 설정하는 url
+response.sendRedirect로 설정하는 url
+ajax에서 설정하는 url값
+
+=> /의 의미 : contextPath를 삭제하라는 의미
+=> ./의 의미 : 나와 동일한 위치라는 의미
+------------------------------------------------------------
+
+------------------------------------------------------------
+서블릿이나 필터에 처리하는 url패턴형식
+RequestDispatcher로 설정하는 url패턴형식
+
+=> /의 의미 : 앞에 contextPath까지 존재한다는 의미
+------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
+url url url url url url url url url url url url url url url url url url url url url url url url url url url url url url
+-----------------------------------------------------------------------------------------------------------
+
+
+
+
+===========================================================
+
+스프링프레임워크 프로젝트 만드는 순서
+
+1. dependency 추가
+2. java파일들 생성
+3. 프로퍼티스 파일, 스프링 빈 설정 파일 생성
+4. view (persentation-layer에 관련된 파일들 생성), html, jsp, css, js, ... 등등
+5. web.xml안에 들어갈 내용 기술
+
+===========================================================
+
+
+
+내가 데이터를 담아가거나 전송하기 위해 필요한 것 => controller
+controller를 타기 위해 필요한 것 => url-pattern
+url-pattern을 설정하기 위해 필요한 것 => servlet
+servlet을 만들기 위해 필요한 것 => 스프링 빈 설정 파일
+스프링 빈 설정 파일을 만들기 위해 필요한 것 => 객체생성, 자동주입에 관련된 클래스 생성
+
+
+
+
+<<스프링프레임워크 파일업로드 방법>>
+파일업로드로직에 필요한 선수작업 : commons-fileUpload, commons-io 이용할 예정
+
+1. 형상관리파일(pom.xml)에 dependenct commons-fileUpload 관련 설정만 추가할 것
+
+<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+<dependency>
+    <groupId>commons-fileupload</groupId>
+    <artifactId>commons-fileupload</artifactId>
+    <version>1.4</version>
+</dependency>
+
+2. Spring Bean Configuration File에 파일업로드 객체 생성하기
+생성 전 BoardVO클래스에 해당 file객체에 대한 멤버필드와 filename을 받을 멤버필드를 추가해준다. (getter, setter 포함)
+=> 
+private MultipartFile uploadFile;
+private String filename;
+
+형식 : id="multipartResolver"는 반드시 이 이름으로 지정해주어야 한다. 이름을 변경하거나 다른 이름으로 지정 안됨.
+
+<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<property name="maxUploadSize" value="500000"></property>
+	// setMaxUploadSize => 업로드할 파일들의 최대 용량을 지정하는 메소드
+</bean>
+
+3. jsp파일에 input type="file" 태그 기술
+form태그의 method="post"으로 설정, enctype="multipart/form-data"으로 설정할 것
+
+4. Controller객체에 있는 insertBoard메소드 안에 파일업로드 로직을 구현한다.
+
+5. BoradRowMapper클래스에 filename이름 가져오는 로직 추가, board테이블에 filename컬럼 추가
+alter table board add filename varchar(500);
+
+6. BoardDAODBCP클래스의 insert, delete, getBoard, 등의 로직에 filename에 대한 로직 추가 구현하기
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

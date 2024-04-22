@@ -6,7 +6,7 @@
 </style>
 <body>
 <div class="jumbotron">
-   <h1>공지 사항 ${userRole }</h1>      
+   <h1>공지 사항 ${userRole }</h1>     
 </div>
 <%@ include file="../../menu.jsp" %>
 <nav id="searchNav" class="navbar navbar-expand-sm navbar-dark">

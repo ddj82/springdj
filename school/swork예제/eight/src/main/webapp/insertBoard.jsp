@@ -11,7 +11,7 @@ if(session.getAttribute("userId") == null){
 </div>
 <%@ include file="menu.jsp" %>  
 <div class="container-fluid">
-  <form action="insertBoard.do" method="post">
+  <form action="insertBoard.do" method="post" enctype="multipart/form-data">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text">제목</span>
@@ -23,6 +23,12 @@ if(session.getAttribute("userId") == null){
         <span class="input-group-text">작성자</span>
       </div>
       <input type="text" class="form-control innm" name="writer" value="<%=session.getAttribute("userName").toString() %>" readonly>      
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">파일첨부</span>
+      </div>
+      <input type="file" class="form-control" name="uploadFile">      
     </div>
     <div class="input-group mb-3">
       <div class="input-group-prepend">

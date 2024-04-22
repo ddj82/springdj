@@ -61,16 +61,21 @@ public class BoardDAODBCP {
 		if (!keyword.equals("") && !condition.equals("")) {
 			if (condition.equals("CONTENT")) {
 				BOARD_LIST += " AND CONTENT LIKE CONCAT('%', ?, '%')";
-				args[0] = vo.getContent();
+//				args[0] = vo.getContent();
+				args[0] = keyword;
 			} else {
 				BOARD_LIST += " AND TITLE LIKE CONCAT('%', ?, '%')";
-				args[0] = vo.getTitle();
+//				args[0] = vo.getTitle();
+				args[0] = keyword;
 			}
 		} else {
 			args = null;
 		}
 		
 		BOARD_LIST += " ORDER BY SEQ DESC";
+		
+		System.out.println("BOARD_LIST : " + BOARD_LIST);
+		
 		
 		if (args == null) {
 			if (jdbcTemplate.query(BOARD_LIST, new BoardRowMapper()).isEmpty()) {
@@ -79,6 +84,7 @@ public class BoardDAODBCP {
 				return jdbcTemplate.query(BOARD_LIST, new BoardRowMapper());
 			}
 		} else {
+			System.out.println("args[0] : " + args[0]);
 			if (jdbcTemplate.query(BOARD_LIST, new BoardRowMapper(), args).isEmpty()) {
 				return null;
 			} else {
