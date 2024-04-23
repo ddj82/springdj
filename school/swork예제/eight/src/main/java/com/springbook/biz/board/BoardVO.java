@@ -15,6 +15,10 @@ public class BoardVO {
 	//업로드한 파일 정보를 담는 멤버필드
 	private MultipartFile uploadFile;
 	
+	//마이바티스를 사용하기 위해 필요한 멤버필드
+	private String searchCondition;
+	private String searchKeyword;
+	
 	public int getSeq() {
 		return seq;
 	}
@@ -63,7 +67,18 @@ public class BoardVO {
 	public void setUploadFile(MultipartFile uploadFile) {
 		this.uploadFile = uploadFile;
 	}
-	
+	public String getSearchCondition() {
+		return searchCondition;
+	}
+	public void setSearchCondition(String searchCondition) {
+		this.searchCondition = searchCondition;
+	}
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
 	@Override
 	public String toString() {
 		return "BoardVO [seq=" + seq + ", title=" + title + ", writer=" + writer + ", content=" + content + ", regdate="

@@ -7,6 +7,29 @@
 	}
 	
 %>
+<style>
+#imgBox {
+	display: none; position: absolute; top: 0; left: 0; height: 100vh!important;
+	background-color: rgba(0, 0, 0, 0.5); z-index: 999999;
+}
+#imgContentBox {
+	width: 600px; max-height: 550px; overflow: auto; position: absolute; top: 30%; left: 30%;
+	border-radius: 5px; z-index: 999999;
+}
+#imgBoxTitleBar {
+	border-bottom: 1px solid #777; border-radius: 5px 5px 0 0; background-color: #ddd; 
+	width: 100%; padding: 10px; text-align: right; font-size: 20px; font-weight: bolder;
+}
+#imgBoxImg {
+	width: 100%; border-radius: 0 0 5px 5px;
+}
+#closeX {
+	padding: 5px 20px; border-radius: 5px; border: 1px solid #777; background-color: red; color: #fff;
+}
+#closeX:hover {
+	background-color: #777; cursor: pointer;
+}
+</style>
 <body>
 <div class="jumbotron">
    <h1>상세 보기</h1>      
@@ -41,6 +64,29 @@
       </div>
       <textarea class="form-control innm" rows="10" id="comment" name="content" <%=sts %>>${board.content}</textarea>      
     </div>  
+    
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">파일</span>
+        <input type="hidden" name="filename" value="${board.filename}">
+      </div>
+      <c:if test="${board.filename ne NULL }">
+      	<span style="cursor:pointer; padding:0 20px;" onclick="seeImg()">[파일보기]</span>
+      	<script>
+      		function seeImg() {
+      			$("#imgBox").show();
+      		}
+      	</script>
+		<span style="cursor:pointer;" onclick="downLoadFile('${board.filename}')">[파일다운]</span>
+      	<script>
+      		function downLoadFile(filename) {
+      			window.location = "download.do?filename=" + filename;
+      		}
+      	</script>
+		
+      </c:if>
+    </div>  
+    
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text">등록일</span>
@@ -62,6 +108,19 @@
   </form>  
 </div>
 
+<div id="imgBox" class="container-fluid">
+	<div id="imgContentBox">
+		<div id="imgBoxTitleBar">
+			<span id="closeX" onclick="closeX()">X</span>
+			<script>
+				function closeX() {
+					$("#imgBox").hide();
+				}
+			</script>
+		</div>
+		<img id="imgBoxImg" src="img/${board.filename }" title="img" alt="img">
+	</div>
+</div>
 
 </body>
 </html>

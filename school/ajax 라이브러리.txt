@@ -1,0 +1,19 @@
+<!-- 자바객체를 제이슨객체로 변환해주는 라이브러리 -->
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.12.6</version>
+</dependency>
+
+
+//jQuery스크립트태그
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.js"></script>
+
+
+//스프링프레임워크에서 파일업로드에 필요한 라이브러리
+<!-- Commons-FileUpload -->
+<dependency>
+	<groupId>commons-fileupload</groupId>
+	<artifactId>commons-fileupload</artifactId>
+	<version>1.4</version>
+</dependency>

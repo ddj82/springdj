@@ -22,14 +22,16 @@ if(session.getAttribute("userId") == null){
       <div class="input-group-prepend">
         <span class="input-group-text">작성자</span>
       </div>
-      <input type="text" class="form-control innm" name="writer" value="<%=session.getAttribute("userName").toString() %>" readonly>      
+      <input type="text" class="form-control innm" name="writer" value="${userName }" readonly>      
     </div>
+    
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text">파일첨부</span>
       </div>
       <input type="file" class="form-control" name="uploadFile">      
     </div>
+    
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text">내용</span>

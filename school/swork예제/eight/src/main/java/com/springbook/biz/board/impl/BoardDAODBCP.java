@@ -17,22 +17,24 @@ public class BoardDAODBCP {
 	private JdbcTemplate jdbcTemplate;
 	
 //	sql명령어들
-	private final String BOAED_INSERT = "insert into board(title, writer, content) values(?, ?, ?)";
-	private final String BOAED_UPDATE = "update board set title = ?, content = ? where seq = ?";
-	private final String BOAED_DELETE = "delete from board where seq = ?";
-	private final String BOAED_GET = "select * from board where seq = ?";
+	private final String BOAED_INSERT = "INSERT INTO BOARD(TITLE, WRITER, CONTENT, FILENAME) VALUES(?, ?, ?, ?)";
+	private final String BOAED_UPDATE = "UPDATE BOARD SET TITLE = ?, CONTENT = ? WHERE SEQ = ?";
+	private final String BOAED_DELETE = "DELETE FROM BOARD WHERE SEQ = ?";
+	private final String BOAED_GET = "SELECT * FROM BOARD WHERE SEQ = ?";
 	
 //	CRUD 기능의 메소드 구현
 	// 글 등록
 	public void insertBoard(BoardVO vo) {
 		System.out.println("===> Spring jdbcTemplate으로 insertBoard() 기능처리");
-		jdbcTemplate.update(BOAED_INSERT, vo.getTitle(), vo.getWriter(), vo.getContent());
+		Object[] args = {vo.getTitle(), vo.getWriter(), vo.getContent(), vo.getFilename()};
+		jdbcTemplate.update(BOAED_INSERT, args);
 	}
 	
 	// 글 수정
 	public void updateBoard(BoardVO vo) {
 		System.out.println("===> Spring jdbcTemplate으로 updateBoard() 기능처리");
-		jdbcTemplate.update(BOAED_UPDATE, vo.getTitle(), vo.getContent(), vo.getSeq());
+		Object[] args = {vo.getTitle(), vo.getContent(), vo.getSeq()};
+		jdbcTemplate.update(BOAED_UPDATE, args);
 	}
 	
 	// 글 삭제
@@ -53,20 +55,18 @@ public class BoardDAODBCP {
 	}
 	
 	// 글 목록 조회
-	public List<BoardVO> getBoardList(BoardVO vo, String keyword, String condition) {
+	public List<BoardVO> getBoardList(BoardVO vo) {
 		System.out.println("===> Spring jdbcTemplate으로 getBoardList() 기능처리");
 		Object[] args = new Object[1];
 		String BOARD_LIST = "SELECT * FROM BOARD WHERE 1 = 1";
 		
-		if (!keyword.equals("") && !condition.equals("")) {
-			if (condition.equals("CONTENT")) {
+		if (!vo.getSearchKeyword().equals("") && !vo.getSearchCondition().equals("")) {
+			if (vo.getSearchCondition().equals("CONTENT")) {
 				BOARD_LIST += " AND CONTENT LIKE CONCAT('%', ?, '%')";
-//				args[0] = vo.getContent();
-				args[0] = keyword;
+				args[0] = vo.getSearchKeyword();
 			} else {
 				BOARD_LIST += " AND TITLE LIKE CONCAT('%', ?, '%')";
-//				args[0] = vo.getTitle();
-				args[0] = keyword;
+				args[0] = vo.getSearchKeyword();
 			}
 		} else {
 			args = null;

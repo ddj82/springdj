@@ -1,0 +1,87 @@
+Mybatis 
+자바와 데이터베이스를 연결해주는 연동 프레임워크 중 하나임.
+원래 Apache에서 개발되어 iBatis라는 프레임워크였으나 Google이 인수하면서 Mybatis로 명칭 변경됨.
+
+- 간단한 자바코드로 데이터베이스 연동을 처리할 수 있다.
+- SQL명령을 자바소스코드에서 분리하여 XML파일로 관리함.
+
+
+
+1. mybatis 라이브러리 추가하기
+artifactId : mybatis / version : 3.5.7
+artifactId : mybatis-spring / version : 2.0.6
+
+<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+<dependency>
+    <groupId>org.mybatis</groupId>
+    <artifactId>mybatis</artifactId>
+    <version>3.5.7</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+<dependency>
+	<groupId>org.mybatis</groupId>
+	<artifactId>mybatis-spring</artifactId>
+	<version>2.0.6</version>
+</dependency>
+
+
+2. Business Layer단에 (src/main/resources) XML File 선택 후 Next -> 파일이름.xml입력 후 finish
+
+3. Mapper XML파일 만들기 : 파일명 board-mapping.xml
+https://blog.mybatis.org/ 접속 -> Products탭 클릭 
+-> Products 테이블의 Project컬럼의 MyBatis 3에 대응되는 Links컬럼의 값 중 docs 글씨를 클릭한다.
+-> 좌측 메뉴에서 두번째의 Getting Strated 메뉴 클릭
+-> Exploring Mapped SQL Statements 부분에 있는 소스코드만 복사해서 붙여넣기 한다.
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mybatis.example.BlogMapper">
+  <select id="selectBlog" resultType="Blog">
+    select * from Blog where id = #{id}
+  </select>
+</mapper>
+
+-> mapping파일은 Mapper XML Files메뉴 참고, configuration 파일은 Configuration XML 메뉴를 참고하면 된다.
+
+4. Config File만들기 : 파일명 sql-map-config.xml
+-> https://blog.mybatis.org/ 접속 -> Products탭 클릭 
+-> Products 테이블의 Project컬럼의 MyBatis 3에 대응되는 	Links컬럼의 값 중 docs 글씨를 클릭한다.
+-> 좌측 메뉴에서 두번째의 Getting Strated 메뉴 클릭
+-> Building SqlSessionFactory from XML 에서 소스 복사
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+    <mapper resource="org/mybatis/example/BlogMapper.xml"/>
+  </mappers>
+</configuration>
+
+
+=========================================
+다른 방법 
+
+	1. https://sourceforge.net/projects/java-orm-plugin/
+
+	2. Java ORM Plugin for Eclipse > Download > JavaORMPlugin.zip파일(69kb) 다운로드 
+
+	3. zip파일 압축 해제 > JavaORMPlugin/plugins > JavaORMPlugin_1.0.0.201411180016.jar 만 복사
+
+	4. C:/sts-bundle/sts-3.9.17.RELEASE/plugins 폴더 안에 JavaORMPlugin_1.0.0.201411180016.jar파일
+
+	   붙여넣기
+
+

@@ -20,7 +20,12 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
 		</dependency>
-
+		<!-- 자바객체를 제이슨객체로 변환해주는 라이브러리 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.12.6</version>
+		</dependency>
 		<!-- Spring-JDBC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -39,6 +44,21 @@
 			<artifactId>mariadb-java-client</artifactId>
 			<version>2.7.3</version>
 		</dependency>
+
+		<!-- MyBatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.5.7</version>
+		</dependency>
+
+		<!-- MyBatis-Spring -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>2.0.6</version>
+		</dependency>
+
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

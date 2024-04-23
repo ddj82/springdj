@@ -16,5 +16,5 @@ public interface BoardService {
 	BoardVO getBoard(BoardVO vo);
 	
 	// 글 목록 조회
-	List<BoardVO> getBoardList(BoardVO vo, String keyword, String condition);
+	List<BoardVO> getBoardList(BoardVO vo);
 }

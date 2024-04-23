@@ -1,0 +1,26 @@
+<<mariaDB>>
+
+create table USERS (
+ID VARCHAR(20) primary key, 
+PASSWORD VARCHAR(50) not null,
+NAME VARCHAR(50) not null,
+role VARCHAR(20) not null
+) default CHARSET=UTF8;
+
+INSERT INTO USERS VALUES ('admin', '1111', '관리자', 'Admin');
+INSERT INTO USERS VALUES ('user1', '1111', '홍길동', 'User');
+
+create table if not exists board (
+seq int(11) auto_increment primary key,
+title varchar(200) not null,
+writer varchar(20) not null,
+content varchar(2000) default null,
+regdate date default current_timestamp(),
+cnt int(11) default 0
+) default charset=utf8;
+
+insert into board (title, writer, content) values ('가입인사', '홍길동', '잘 부탁드립니다.');
+
+alter table board add filename varchar(500);
+
+desc board;
