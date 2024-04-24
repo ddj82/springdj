@@ -10,8 +10,11 @@ import com.springbook.biz.user.UserVO;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
+//	@Autowired
+//	private UserDAODBCP dao;
+	
 	@Autowired
-	private UserDAODBCP dao;
+	private UserDAOMybatis dao;
 
 	@Override
 	public int inserUser(UserVO vo) {
@@ -33,9 +36,14 @@ public class UserServiceImpl implements UserService {
 		return dao.getUser(vo);
 	}
 
+//	@Override
+//	public UserVO selectOne(UserVO vo) {
+//		return dao.selectOne(vo);
+//	}
+	
 	@Override
-	public UserVO selectOne(UserVO vo) {
-		return dao.selectOne(vo);
+	public UserVO selectOne(String selId) {
+		return dao.selectOne(selId);
 	}
 
 	@Override

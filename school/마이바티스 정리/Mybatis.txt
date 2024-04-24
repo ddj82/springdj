@@ -27,6 +27,7 @@ artifactId : mybatis-spring / version : 2.0.6
 
 2. Business Layer단에 (src/main/resources) XML File 선택 후 Next -> 파일이름.xml입력 후 finish
 
+Mapper파일 틀
 3. Mapper XML파일 만들기 : 파일명 board-mapping.xml
 https://blog.mybatis.org/ 접속 -> Products탭 클릭 
 -> Products 테이블의 Project컬럼의 MyBatis 3에 대응되는 Links컬럼의 값 중 docs 글씨를 클릭한다.
@@ -44,6 +45,7 @@ https://blog.mybatis.org/ 접속 -> Products탭 클릭
 
 -> mapping파일은 Mapper XML Files메뉴 참고, configuration 파일은 Configuration XML 메뉴를 참고하면 된다.
 
+Config파일 틀
 4. Config File만들기 : 파일명 sql-map-config.xml
 -> https://blog.mybatis.org/ 접속 -> Products탭 클릭 
 -> Products 테이블의 Project컬럼의 MyBatis 3에 대응되는 	Links컬럼의 값 중 docs 글씨를 클릭한다.

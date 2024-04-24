@@ -13,7 +13,7 @@ import com.springbook.biz.board.BoardVO;
 
 @Repository
 public class BoardDAODBCP {
-	@Autowired
+//	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
 //	sql명령어들

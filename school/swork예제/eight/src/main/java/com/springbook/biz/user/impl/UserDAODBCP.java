@@ -13,7 +13,7 @@ import com.springbook.biz.user.UserVO;
 
 @Repository
 public class UserDAODBCP {
-	@Autowired
+//	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
 	private final String USER_INSERT = "INSERT INTO USERS VALUES(?, ?, ?, ?)";

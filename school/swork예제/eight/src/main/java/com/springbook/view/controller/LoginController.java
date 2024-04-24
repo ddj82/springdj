@@ -26,8 +26,11 @@ public class LoginController {
 	}
 
 	@RequestMapping("/selUser.do")
-	public String selUser(UserVO vo, Model model) {
-		model.addAttribute("user", userService.selectOne(vo));
+//	public String selUser(UserVO vo, Model model) {
+	public String selUser(@RequestParam(value = "id", defaultValue = "", required = false) String selId, Model model) {
+//		model.addAttribute("user", userService.selectOne(vo));
+//		model.addAttribute("user", userService.selectOne(vo.getId()));
+		model.addAttribute("user", userService.selectOne(selId));
 		return "/WEB-INF/user/selUser.jsp";
 	}
 

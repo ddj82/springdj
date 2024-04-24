@@ -30,3 +30,11 @@ $(document).ready(function(){
 function selTr(val){
 	location.href = "getBoard.do?seq="+val;
 }
+
+//회원탈퇴 함수 만들기
+//delUser('${user.id}', 'delUser.do', '관리자는 회원탈퇴를 하실 수 없습니다.')
+function delUser(){}
+
+//한명의 정보를 가져오는 함수 만들기
+//selUser('${user.id}')
+function selUser(){}

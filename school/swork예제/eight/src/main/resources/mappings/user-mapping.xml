@@ -4,41 +4,37 @@
 
 <mapper namespace="UserDAO">
 
-<!-- 	<resultMap type="#modelname" id="YourResultSet"> -->
-<!-- 		<id property="param1" column="columnname1" /> -->
-<!-- 		<result property="param2" column="columnname2" /> -->
-<!-- 		<result property="param3" column="columnname3" /> -->
-<!-- 	</resultMap> -->
+<!-- 	<resultMap type="com.springbook.biz.user.UserVO" id="YourResultSet"> -->
+	<resultMap type="userDTO" id="users">
+		<id property="id" column="ID" />
+		<result property="password" column="PASSWORD" />
+		<result property="name" column="NAME" />
+		<result property="role" column="ROLE" />
+	</resultMap>
 
-	<select id="getSomething" resultType="#package.#modelname">
-		SELECT
-		columnname1,
-		columnname2,
-		columnname3
-		FROM tablename1
-		WHERE columnname1 = #{value}
+	<select id="getUser" resultType="userDTO">
+		SELECT * FROM USERS WHERE ID = #{id} AND PASSWORD = #{password}
+	</select>
+	
+	<select id="selectOne" parameterType="string" resultMap="users">
+		SELECT * FROM USERS WHERE ID = #{selId}
 	</select>
 
-	<select id="getAll" resultMap="YourResultSet">
-		SELECT * FROM tablename1
+	<select id="selectList" parameterType="string" resultMap="users">
+		SELECT * FROM USERS WHERE 1 = 1 
+		<if test="keyword != null"> AND ID LIKE CONCAT('%', #{keyword}, '%') OR NAME LIKE CONCAT('%', #{keyword}, '%')</if>
 	</select>
 
-	<insert id="insertSomething">
-		INSERT INTO tablename1 (columnname1, columnname2, columnname3)
-		VALUES(#{value1},#{value2},#{value3})
+	<insert id="insertUser">
+		INSERT INTO USERS VALUES(#{id}, #{password}, #{name}, #{role})
 	</insert>
 
-	<update id="updateSomething">
-		UPDATE tablename1
-		SET
-		columnname1=#{param1}
-		WHERE
-		columnname2 = #{param2}
+	<update id="updateUser">
+		UPDATE USERS SET PASSWORD = #{password}, NAME = #{name} WHERE ID = #{id}
 	</update>
 
-	<delete id="deleteSomething">
-		DELETE FROM tablename1 WHERE
-		columnname1 = #{param1}
+	<delete id="deleteUser">
+		DELETE FROM USERS WHERE ID = #{id}
 	</delete>
 
 </mapper>

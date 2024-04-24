@@ -8,6 +8,7 @@ public interface UserService {
 	public void deleteUser(UserVO vo);
 	
 	public UserVO getUser(UserVO vo);
-	public UserVO selectOne(UserVO vo);
+//	public UserVO selectOne(UserVO vo);
+	public UserVO selectOne(String selId);
 	public List<UserVO> selectList(String keyword);
 }

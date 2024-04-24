@@ -1,10 +1,7 @@
 package com.springbook.view.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -70,8 +67,7 @@ public class BoardController {
 //	파일 다운로드
 	@GetMapping(value = "/download.do")
 	public void fileDownLoad(@RequestParam(value = "filename", required = false) String filename, HttpServletResponse response) throws IOException {
-//	public void fileDownLoad(@RequestParam(value = "filename", required = false) String filename, 
-//			HttpServletRequest request, HttpServletResponse response) throws IOException {
+//	public void fileDownLoad(@RequestParam(value = "filename", required = false) String filename, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		System.out.println("파일 다운로드");
 		if (!(filename == null || filename.equals(""))) {
 //			요청파일 정보 불러오기

@@ -4,13 +4,16 @@
 
 <mapper namespace="BoardDAO">
 
-<!-- 	<resultMap type="#modelname" id="YourResultSet"> -->
-<!-- 		<id property="param1" column="columnname1" /> -->
-<!-- 		<result property="param2" column="columnname2" /> -->
-<!-- 		<result property="param3" column="columnname3" /> -->
-<!-- 	</resultMap> -->
+	<resultMap type="boardDTO" id="boardList">
+		<id property="seq" column="SEQ" />
+		<result property="title" column="TITLE" />
+		<result property="writer" column="WRITER" />
+		<result property="content" column="CONTENT" />
+		<result property="cnt" column="CNT" />
+		<result property="filename" column="FILENAME" />
+	</resultMap>
 
-	<select id="getBoardList" resultMap="boardDTO">
+	<select id="getBoardList" resultMap="boardList">
 		SELECT * FROM BOARD WHERE 1 = 1 
 		<if test="searchCondition == 'TITLE'"> AND TITLE LIKE CONCAT('%', #{searchKeyword}, '%') </if>
 		<if test="searchCondition == 'CONTENT'"> AND CONTENT LIKE CONCAT('%', #{searchKeyword}, '%') </if>

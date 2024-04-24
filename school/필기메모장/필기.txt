@@ -10365,6 +10365,148 @@ https://blog.mybatis.org/ 접속 -> Products탭 클릭
 
 
 
+--------------------------------------------------------------------------------------------------------------------------------------------------
+//
+//92
+//필기
+//
+
+
+비지니스 레이어단의 스프링빈설정파일에 기술
+
+	<!-- MyBatis -->
+	<!-- 여기서 마이바티스 mapper, config 파일 둘 다 읽음 -->
+	<bean id="sqlsession" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:sql-map-config.xml" />
+	</bean>
+
+
+
+
+<resultMap type="내가 처리할 자료형(config파일의 typeAlias)" id="객체명">
+
+	// id태그는 해당 테이블의 primary key로 지정된 컬럼 기술
+	<id property="해당 컬럼과 동일한 vo멤버필드(대소문자 가림)" column="컬럼명(대문자 권장-db는 대소문자 안가리기 때문)" />
+	// 사용할 컬럼 추가시 result태그로 기술
+	<result property="해당 컬럼과 동일한 vo멤버필드(대소문자 가림)" column="db컬럼명" />
+
+
+
+<<마이바티스 메소드구현 방법>>
+//1. 마이바티스 객체(데이터베이스(MariaDB)정보, sql정보, 마이바티스정보) 자동주입 처리
+@Autowired
+SqlSessionTemplate mybatis;
+
+//2. 컨트롤러객체로 실행될 메소드 기술 후 sql문 실행 메소드 형식
+예(insert) : mybatis.insert("맵퍼네임스페이스.sql태그id"[ , 컨트롤러에서 받은 매개변수 ]);
+
+
+
+
+
+클라이언트가 보는 view페이지(.hetml 또는 .jsp파일이 html로 컴파일 된 페이지)에서 요청(url)이 들어오면
+요청url패턴을 들고 Filter객체 먼저 들림 (*url패턴 설정)
+요청url패턴을 들고 Servlet객체 들림, 요청url패턴에 해당하는 Controller객체를 찾아줌 (*url패턴 설정)
+Controller객체에서 Service객체의 메소드를 호출(일을 시킴) (*Service객체 생성)
+Service객체에서 sql문이 연결된 DAO객체의 메소드를 호출 (*DAO객체 생성)
+DAO객체에서 데이터베이스의 sql문을 실행하기 위한 데이터베이스정보를 담고 있는 **Mybatis객체 생성, 
+Mybatis객체 생성 후 <<마이바티스 메소드구현 방법>>으로 기술
+
+
+
+***
+Mybatis객체를 이용하기 위해 비즈니스레이어단에 객체를 생성해야함
+Mybatis객체는 org.mybatis.spring.SqlSessionTemplate으로 만들어야 하는데 
+먼저 여기에 데이터베이스객체와 Mybatis설정파일을 담아야 해서 
+이 두가지를 담을 객체 생성 - 자료형은 org.mybatis.spring.SqlSessionFactoryBean이고 객체명은 sqlsession으로
+해당 객체의 프로퍼티로 dataSource(데이터베이스객체)와 configLocation(Mybatis설정파일-classpath:sql-map-config.xml)을 기술
+(*DataBase연결 객체 생성, *Mybatis Configuration 객체 생성)
+(*Mybatis Configuration안에 Mybatis Mapper객체(SQL쿼리문)를 연결해야하므로 *Mybatis Mapper 객체 생성)
+그리고
+이 객체를 담는
+<bean class="org.mybatis.spring.SqlSessionTemplate">
+	<constructor-arg ref="sqlsession" />
+</bean> 를 비즈니스레이어단에 생성.
+*************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
