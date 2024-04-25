@@ -7,15 +7,12 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-<!-- business layer의 classpath경로에 있는 Spring Bean Configuration File연결하는 방법1 -->
-<!-- <import resource="classpath:applicationContext.xml"/> -->
-<context:component-scan base-package="com.springbook.view"/>
+<context:component-scan base-package="com.drink.ko.view" />
 
-<!-- @ResponseBody, @RequestBody 객체생성 관련 태그 **반드시 Presentation Layer의 SpringBeanConfigurationFile에 기술할 것 -->
-<mvc:annotation-driven/>
+<mvc:annotation-driven />
 
-<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-	<property name="maxUploadSize" value="52428800" />
-</bean>
+<!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> -->
+<!-- 	<property name="maxUploadSize" value="52428800" /> -->
+<!-- </bean> -->
 
 </beans>

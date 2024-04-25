@@ -10405,7 +10405,7 @@ SqlSessionTemplate mybatis;
 
 
 
-클라이언트가 보는 view페이지(.hetml 또는 .jsp파일이 html로 컴파일 된 페이지)에서 요청(url)이 들어오면
+클라이언트가 보는 view페이지(.html 또는 .jsp파일이 html로 컴파일 된 페이지)에서 요청(url)이 들어오면
 요청url패턴을 들고 Filter객체 먼저 들림 (*url패턴 설정)
 요청url패턴을 들고 Servlet객체 들림, 요청url패턴에 해당하는 Controller객체를 찾아줌 (*url패턴 설정)
 Controller객체에서 Service객체의 메소드를 호출(일을 시킴) (*Service객체 생성)
