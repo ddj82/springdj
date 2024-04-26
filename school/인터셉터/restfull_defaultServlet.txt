@@ -1,0 +1,59 @@
+url패턴이  /인 경우 (tomcat의 default서블릿을 덮어쓰기 한 경우)
+무조건 내가 만든 서블릿을 타게 된다. (.html,  .js,  .css, .jpg...등등)
+
+controller를 타지 못하도록 하는 조건. tomcat의 default서블릿을 타도록 하는 조건
+1. src/main/webapp/resources폴더 안에 위의 확장자 파일들을 넣는다.
+2. 디스패처 서블릿 스프링빈 설정파일에 (servlet-context.xml) mvc:resources태그를 사용해서 경로별칭(mapping속성) 설정을 해줘야한다.
+3. 반드시 mvc:resources태그에 설정한 경로별칭(mapping속성값)으로 기술해주어야 한다.
+
+
+mvc:resources태그가 하는 일
+1. 톰캣의 default서블릿을 타도록 해준다.
+2. 경로의 별칭을 설정해 준다. (경로 숨김이 가능하다. 경로 변조)
+
+형식 : 
+<mvc:resources mapping="경로별칭" location="실제파일경로, 실제파일경로" />
+**mvc:resources태그로 경로 별칭을 설정할 수 있는 경로는 src/main/webapp/resources폴더만 가능하다. 다른 폴더는 안됨.
+
+
+
+tomcat의 web.xml
+서블릿 종류
+서블릿명: default 	, url패턴 : /   (=> .png, .jpg, .gif, .mp4 , .html,  .js, .css, ....)
+서블릿명: jsp 	, url패턴 : *.jsp 또는 *.jspx 
+
+
+thirteen의 web.xml
+서블릿 종류
+서블릿명 : appServlet   , url패턴 : /  (*.do,  *.html,  *.css........)
+
+
+Restfull 주소 방식 
+=>  url주소를 이용하여 자원을 주고 받거나 수정하거나 할 수 있는 방식
+=> 주소 재정의 방식
+
+*조건
+1. 반드시 url패턴이 / (default서블릿을 덮어쓰기 한 패턴)이어야한다.
+2. 되도록 contextPath경로를 제거해 주는 것이 좋다.
+
+왜 사용하는지
+url주소만으로 데이터를 다룰 수 있다.
+보내는 데이터를 숨길 수 있다.
+=> 보안에 용이하다.
+
+예: getBoard?abc=123
+예: getBoard/123
+
+
+
+
+
+
+
+
+
+
+
+
+
+
