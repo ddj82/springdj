@@ -1,0 +1,41 @@
+# 상품 후기
+- 결제 해야 작성가능
+- 상세페이지에서는 작성 불가?
+- 작성은 결제내역에서 후기작성
+- 상세페이지에서는 목록 로드만
+
+# 상품 문의
+- 다 작성가능 결제 안해도 가능 
+- 남들은 못봄
+- 작성자랑 관리자만 볼수 있음
+- 게시판 형식으로 작성자에 U_NAME 기본값 들어가게 하고 눌렀을때 해당 U_NAME으로 select
+
+
+create table BC_PRODNOTICE (
+PN_NO int(4) auto_increment primary key,
+U_NO int(4) not null,
+U_NAME varchar(20) not null,
+P_NO INT(5) not null,
+P_NAME VARCHAR(30) not null,
+PN_CONTENT VARCHAR(4000) not null,
+PN_DATE DATE NOT NULL default now(),
+PN_IMG VARCHAR(100),
+foreign key(U_NO) references bc_users(U_NO),
+foreign key(P_NO) references bc_prod(P_NO)
+);
+/*
+공지번호 PN_NO 
+회원번호 U_NO
+회원이름 U_NAME
+상품번호 P_NO
+상품이름 P_NAME
+게시글 PN_CONTENT
+날짜 PN_DATE
+첨부사진 PN_IMG
+*/
+
+/*후기 더미데이터*/
+insert into 
+BC_PRODNOTICE (U_NO, U_NAME, P_NO, P_NAME, PN_CONTENT, PN_IMG) 
+values ((select U_NO from bc_users where U_ID = 'user1'), (select U_NAME from bc_users where U_ID = 'user1'), 
+1, (select P_NAME from bc_prod where p_no = 1), '이미 만취 상태입니다 ㅋ', 'cute_dog.jpg');
