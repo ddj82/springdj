@@ -6810,8 +6810,8 @@ jQuery( )
         jquery 형식
         $(document).ready(function(){소스코드들; ...;});
         jQuery(document).ready(function(){소스코드들; ...;});
-        $(fuction(){소스코드들;...;});
-        jQuery(fuction(){소스코드들;...;});
+        $(function(){소스코드들;...;});
+        jQuery(function(){소스코드들;...;});
 
         콜백함수 (= 형식: 자바스크립트의 익명함수 형식)
         매개인자로 존재하면서 실행과 반환을 자동으로 해주는 함수
@@ -10623,36 +10623,80 @@ Spring Security Web » 5.2.15.RELEASE
 https://mvnrepository.com/artifact/org.springframework.security/spring-security-web/5.2.15.RELEASE
 
 
+--------------------------------------------------------------------------------------------------------------------------------------------------
+//
+//96
+//필기
+//
+
+
+httpclient 디펜던시
+
+https://github.com/ddj82/bichena.git
+
+
+
+
+<<깃>>
+
+( '~' => home directory : c:/Users/계정명)
+사용자명@사용자 장치명 MINGW64 ~ 
+$
+
+현재 디렉토리 검색 : pwd
+ls => 경로 안의 파일
+ls -l => 경로 안의 파일 상세히
+ls -a => 경로 안의 파일, 숨긴 파일까지
+ls -la => 경로 안의 파일, 숨긴 파일까지 상세히
+
+(drwxr-xr-x)
+(lrwxrwxrwx)
+(-rw-r--r--)
+d => 디렉토리
+l => 링크파일
+- => 파일
+소유주 권한
+그룹선택자 권한
+다른사용자 권한
+
+권한
+r : 읽기권한
+w : 쓰기권한
+x : 실행권한
+
+
+cd => 체인지 디렉토리
+cd .. => 상위 경로로 이동
+cd ~ => 홈 디렉토리로
+
+mkdir => 폴더 만들기
+
+vim 실행할 파일.확장자명까지
+a, i => 편집내용, 수정만 가능
+esc => 실행모드로, 저장 삭제 가능
+
+실행모드에서 
+:w => 저장
+:q => 나가기
+:wq => 저장, 나가기
+:q! => 수정한내용 저장 안하고 나가기
 
 
 
 
 
 
+작업영역 > 스테이징 > 커밋영역
 
 
 
+원격저장소 생성
+git remote add 원격저장소이름 깃허브주소
+
+원격저장소 목록보기
+git remote -v
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+wlalqjrj@gmail.com
 
 

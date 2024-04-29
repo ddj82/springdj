@@ -1,0 +1,87 @@
+1. 결제 시스템 연동에 필요한 선행작업
+===================================
+포트원 가입하기
+https://portone.io/korea/ko
+=> 중앙의 [지금 시작하기] 클릭
+=> https://admin.portone.io/auth/signup 이동하면
+회원 가입처리하기
+
+로그인하기
+https://portone.io/korea/ko
+=> 우측 상단의 [시작하기]버튼 클릭
+=> 좌측의 [결제 연동] 메뉴 클릭
+=> 중앙의 [내 식별코드 . API Keys] 클릭
+**가맹점 식별코드,  REST API Key, REST API Secret 값 기억해두기
+=> 중앙의 [테스트/실연동] 메뉴에서 [결제대행사 설정 및 추가] 설정하기
+1. [테스트] 선택
+2. 연결하고자 하는 결제대행사 선택하기 (예: 다날)
+3. [아임포트 결제 모듈]에 원하는 모듈 선택 (예: 다날)
+4. 옆의 [+ 추가]버튼 클릭하면 뜨는 우측 설정창에서 설정정보 확인 후 [저장]클릭하면 하단에 결제목록 추가 됨.
+** 채널키(Channel Key)나 PG상점아이디(MID)값 기억해두기
+**모바일 결제는 위 3번의 아임포트 결제 모듈에서 모바일 관련 모듈을 선택하여 추가해 준 상점 정보로 결제 연동해야 모바일 결제 가능함.
+**결제연동가이드 참고:  https://developers.portone.io/docs/ko/ready/2-pg/payment-gateway/readme
+
+================================================
+
+
+2. 결제 프로젝트를 위한 선행작업
+=> https://developers.portone.io/docs/ko/console/guide/connect
+=> [결제연동] 메뉴 참고하여 jsp파일 만들기
+인증결제 연동하기 > 인증결제 정의 > 
+1) 포트원 라이브러리추가 
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+2) 객체 초기화 하기(가맹점코드로 초기화) 
+<script></script> 태그 안에 기술하기
+IMP.init('가맹점 식별코드')
+3) 결제 요청하기 (JavaScript)태그 클릭
+자바스크립트 함수나 제이쿼리 이벤트 함수 안에 기술하기
+IMP.request_pay({
+      pg: "kcp.{상점ID}",
+      pay_method: "card",
+      merchant_uid: "ORD20180131-0000011",   // 주문번호
+      name: "노르웨이 회전 의자",
+      amount: 64900,                         // 숫자 타입
+      buyer_email: "gildong@gmail.com",
+      buyer_name: "홍길동",
+      buyer_tel: "010-4242-4242",
+      buyer_addr: "서울특별시 강남구 신사동",
+      buyer_postcode: "01181"
+    }, function (rsp) { // callback
+      //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+    }
+);
+
+**파라미터 정보 확인 : 
+https://developers.portone.io/docs/ko/console/guide/connect
+=> JS SDK 메뉴의 [ 결제 요청 파라미터, 결제 응답 파라미터] 등의 메뉴 참고
+**인증, 결제 정보 API참고
+https://developers.portone.io/docs/ko/console/guide/connect
+=> API 메뉴의 REST API Acess Token, 결제 관련 API등 참고
+**아래의 [포트원 개발자 센터]도 참고
+
+
+**포트원 개발자 가이드
+https://developers.portone.io/docs/ko/console/guide/readme
+
+**API&SDK관련
+https://developers.portone.io/api/rest-v1
+
+**포트원 개발자 센터
+https://developers.portone.io/docs/ko/console/guide/connect
+결제 요청 관련 설정 및 코드 참고
+=>결제 요청시 필요한 파라미터 설명 :
+https://developers.portone.io/docs/ko/sdk/javascript-sdk/payrq
+=>  REST API에서 결제 응답시 필요한 파라미터 설명 :
+https://developers.portone.io/docs/ko/sdk/javascript-sdk/payrt
+
+**포트원 REST API 가이드
+https://api.iamport.kr/
+필요한 API
+authenticate , payments, payments.validation
+**해당 API의 파라미터 required, option 여부 확인 :Response Class부분에서 [Model] 부분 클릭 
+
+
+
+
+**웹훅(Web Hook)
+: 웹에서 발생되는 특정 이벤트들을 사용자정의 CallBack으로 변환해주는 방법

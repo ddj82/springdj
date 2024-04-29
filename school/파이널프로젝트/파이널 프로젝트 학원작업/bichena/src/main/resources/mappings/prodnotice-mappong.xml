@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProdNoticeDAO">
+	<resultMap type="prodNoticeDTO" id="prodNoticeList">
+		<id property="pn_no" column="PN_NO" />
+		<result property="u_no" column="U_NO" />
+		<result property="u_name" column="U_NAME" />
+		<result property="p_no" column="P_NO" />
+		<result property="p_name" column="P_NAME" />
+		<result property="pn_content" column="PN_CONTENT" />
+		<result property="pn_date" column="PN_DATE" />
+		<result property="pn_img" column="PN_IMG" />
+	</resultMap>
+	
+	<select id="prodOneNotice" resultMap="prodNoticeList">
+		SELECT * FROM BC_PRODNOTICE WHERE P_NO = #{p_no}
+	</select>
+
+	<insert id="insertSomething">
+	</insert>
+
+	<update id="updateSomething">
+	</update>
+
+	<delete id="deleteSomething">
+	</delete>
+
+</mapper>
