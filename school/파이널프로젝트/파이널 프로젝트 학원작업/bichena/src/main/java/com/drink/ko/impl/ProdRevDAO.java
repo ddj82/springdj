@@ -1,17 +1,19 @@
 package com.drink.ko.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.drink.ko.UsersVO;
+import com.drink.ko.ProdRevVO;
 
 @Repository
-public class UsersDAO {
+public class ProdRevDAO {
 	@Autowired
 	SqlSessionTemplate mybatis;
 	
-	public UsersVO loginSelectOne(UsersVO vo) {
-		return mybatis.selectOne("userDAO.loginSelectOne", vo);
+	public List<ProdRevVO> prodOneRev(String p_no) {
+		return mybatis.selectList("ProdRevDAO.prodOneRev", p_no);
 	}
 }

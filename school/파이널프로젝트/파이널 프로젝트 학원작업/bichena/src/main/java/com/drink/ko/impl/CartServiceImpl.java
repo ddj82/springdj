@@ -2,10 +2,11 @@ package com.drink.ko.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.drink.ko.OrderService;
+
+import com.drink.ko.CartService;
 
 @Service
-public class OrderServiceImpl implements OrderService {
+public class CartServiceImpl implements CartService{
 	@Autowired
-	OrderDAO dao;
+	CartDAO dao;
 }

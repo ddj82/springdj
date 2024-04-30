@@ -75,19 +75,19 @@ $(function(){
 	let values = []; //ArrayList 값을 받을 변수를 선언
 	$.ajax({
 		method : "POST",
-		url : "prodOneNotice.do",
+		url : "prodOneRev.ko",
 		data : objParams,
 		cache : false,
 		success : function(res) {
 			if (res.code == "OK") { //controller에서 넘겨준 성공여부 코드
-				values = res.prodNotice; //java에서 정의한 ArrayList명을 적어준다.
+				values = res.prodOneRev; //java에서 정의한 ArrayList명을 적어준다.
 				console.log("배열 : ", values);
 				$.each(values, function(i, o){
-					 let date = new Date(o.pn_date);
+					 let date = new Date(o.pr_date);
 					console.log('o.pn_date : ' , date.toLocaleDateString());
-					$("#noticeTb").append("<tr><td>" + o.u_name + "</td><td>" + o.p_name + "</td><td>" + date.toLocaleDateString() + "</td></tr>"
-							+ "<tr><td>" + o.pn_content + "</td><td>"
-							+ "<tr><td>" + "<img alt='' src='img/notice/" + o.pn_img  + "' style='width:100px;'>" + "</td><td>");
+					$("#revTB").append("<tr><td>" + o.u_nick + "</td><td>" + o.p_name + "</td><td>" + date.toLocaleDateString() + "</td></tr>"
+							+ "<tr><td>" + o.pr_content + "</td><td>"
+							+ "<tr><td>" + "<img alt='' src='img/imgQna/" + o.pr_img  + "' style='width:100px;'>" + "</td><td>");
 				});
 				console.log("성공");
 			} else {
@@ -119,7 +119,7 @@ $(function(){
 				<th>도수</th><td>${prodOne.p_dgr}%</td>
 			</tr>
 			<tr>
-				<th>용량</th><td>컬럼추가해야할듯ml</td>
+				<th>용량</th><td>${prodOne.p_cap}ml</td>
 			</tr>
 		</table>
 	</div>
@@ -167,7 +167,7 @@ $(function(){
 <br>
 <br> 
 <div class="main">
-	<table id="noticeTb" style="width:70%">
+	<table id="revTB" style="width:70%">
 	</table>
 </div>
 <br>

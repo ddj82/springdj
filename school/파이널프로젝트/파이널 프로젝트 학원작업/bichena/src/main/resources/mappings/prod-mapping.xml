@@ -15,20 +15,10 @@
 		<result property="p_su" column="P_SU" />
 		<result property="p_sp" column="P_SP" />
 		<result property="p_mat" column="P_MAT" />
+		<result property="p_cap" column="P_CAP" />
 		<result property="p_stock" column="P_STOCK" />
 		<result property="p_img" column="P_IMG" />
 	</resultMap>
-	
-<!-- 	<resultMap type="prodNoticeDTO" id="prodNoticeList"> -->
-<!-- 		<id property="PN_NO" column="PN_NO" /> -->
-<!-- 		<result property="U_NO" column="U_NO" /> -->
-<!-- 		<result property="U_NAME" column="U_NAME" /> -->
-<!-- 		<result property="P_NO" column="P_NO" /> -->
-<!-- 		<result property="P_NAME" column="P_NAME" /> -->
-<!-- 		<result property="PN_CONTENT" column="PN_CONTENT" /> -->
-<!-- 		<result property="PN_DATE" column="PN_DATE" /> -->
-<!-- 		<result property="PN_IMG" column="PN_IMG" /> -->
-<!-- 	</resultMap> -->
 
 	<select id="prodList" resultMap="prodList">
 		SELECT * FROM BC_PROD
@@ -37,10 +27,6 @@
 	<select id="prodOne" resultType="prodDTO">
 		SELECT * FROM BC_PROD WHERE P_NO = #{p_no}
 	</select>
-	
-<!-- 	<select id="prodOneNotice" resultMap="prodNoticeList"> -->
-<!-- 		SELECT * FROM BC_PRODNOTICE WHERE P_NO = #{p_no} -->
-<!-- 	</select> -->
 
 	<insert id="insertSomething">
 	</insert>

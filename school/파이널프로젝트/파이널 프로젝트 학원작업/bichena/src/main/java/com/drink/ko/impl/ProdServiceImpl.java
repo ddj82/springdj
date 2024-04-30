@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.drink.ko.ProdNoticeVO;
 import com.drink.ko.ProdService;
 import com.drink.ko.ProdVO;
 
@@ -15,8 +14,8 @@ public class ProdServiceImpl implements ProdService {
 	ProdDAO dao;
 
 	@Override
-	public ProdVO prodOne(String pno) {
-		return dao.prodOne(pno);
+	public ProdVO prodOne(String p_no) {
+		return dao.prodOne(p_no);
 	}
 
 	@Override

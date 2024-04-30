@@ -5,10 +5,14 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.drink.ko.ProdVO" alias="prodDTO" />
-		<typeAlias type="com.drink.ko.ProdNoticeVO" alias="prodNoticeDTO"/>
+		<typeAlias type="com.drink.ko.ProdRevVO" alias="prodRevDTO" />
+		<typeAlias type="com.drink.ko.QnaVO" alias="qnaDTO" />
+		<typeAlias type="com.drink.ko.UsersVO" alias="userdto" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappings/prod-mapping.xml" />
-		<mapper resource="mappings/prodnotice-mappong.xml"/>
+		<mapper resource="mappings/prodrev-mapping.xml"/>
+		<mapper resource="mappings/qna-mapping.xml"/>
+		<mapper resource="mappings/login-mapping.xml" />
 	</mappers>
 </configuration>

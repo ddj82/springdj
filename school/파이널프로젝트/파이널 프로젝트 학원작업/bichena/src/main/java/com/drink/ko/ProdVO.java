@@ -12,6 +12,7 @@ public class ProdVO {
 	private String p_su;
 	private String p_sp;
 	private String p_mat;
+	private String p_cap;
 	private int p_stock;
 	private String p_img;
 	
@@ -81,6 +82,12 @@ public class ProdVO {
 	public void setP_mat(String p_mat) {
 		this.p_mat = p_mat;
 	}
+	public String getP_cap() {
+		return p_cap;
+	}
+	public void setP_cap(String p_cap) {
+		this.p_cap = p_cap;
+	}
 	public int getP_stock() {
 		return p_stock;
 	}
@@ -98,7 +105,8 @@ public class ProdVO {
 	public String toString() {
 		return "ProdVO [p_no=" + p_no + ", p_name=" + p_name + ", p_desc=" + p_desc + ", p_price=" + p_price
 				+ ", p_made=" + p_made + ", p_type=" + p_type + ", p_dgr=" + p_dgr + ", p_sw=" + p_sw + ", p_su=" + p_su
-				+ ", p_sp=" + p_sp + ", p_mat=" + p_mat + ", p_stock=" + p_stock + ", p_img=" + p_img + "]";
+				+ ", p_sp=" + p_sp + ", p_mat=" + p_mat + ", p_cap=" + p_cap + ", p_stock=" + p_stock + ", p_img="
+				+ p_img + "]";
 	}
-	
+		
 }

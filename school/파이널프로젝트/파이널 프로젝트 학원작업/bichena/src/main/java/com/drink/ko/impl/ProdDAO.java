@@ -13,8 +13,8 @@ public class ProdDAO {
 	@Autowired
 	SqlSessionTemplate mybatis;
 	
-	public ProdVO prodOne(String pno) {
-		return mybatis.selectOne("ProdDAO.prodOne", pno);
+	public ProdVO prodOne(String p_no) {
+		return mybatis.selectOne("ProdDAO.prodOne", p_no);
 	}
 	
 	public List<ProdVO> prodList() {
