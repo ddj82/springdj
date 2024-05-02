@@ -9,9 +9,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.js"></script>
 <script>
 function qnaView(uid, qno, sid) {
-// 	세션 아이디와 uid이 같은지 확인
-// 	같으면 location.href = 'qnaView.ko?q_no=' + qno;
-// 	다르면 alert('내 글만 조회 가능합니다.');
 	if (uid == sid || sid == 'admin') {
 		location.href = 'qnaView.ko?q_no=' + qno;
 	} else {
@@ -34,7 +31,7 @@ function qnaView(uid, qno, sid) {
 				<td>상태</td>
 			</tr>
 			<c:forEach items="${qnaList }" var="qna">
-				<tr onclick="qnaView('${qna.q_writer }', ${qna.q_no }, '${user.u_id }')" style="cursor: pointer">
+				<tr onclick="qnaView('${qna.q_writer }', ${qna.q_no }, '${userID }')" style="cursor: pointer">
 					<td>${qna.q_no }</td>
 					<td>${qna.q_cate }</td>
 					<td>${qna.q_title }</td>
@@ -45,7 +42,7 @@ function qnaView(uid, qno, sid) {
 			</c:forEach>
 		</table>
 	</section>
-	<c:if test="${user.u_id != null }">
+	<c:if test="${userID != null }">
 		<button type="button" class="btndel btn" onclick="location.href = 'qnaInsertbtn.ko';">문의하기</button>
 	</c:if>
 </body>

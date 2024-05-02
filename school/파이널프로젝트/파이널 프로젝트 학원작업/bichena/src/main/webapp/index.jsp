@@ -19,7 +19,7 @@ img:hover {
 </head>
 <body>
 <c:choose>
-	<c:when test="${user.u_id == null }">
+	<c:when test="${userID == null }">
 		<a href="login.jsp">로그인</a>
 	</c:when>
 	<c:otherwise>

@@ -27,10 +27,20 @@ public class QnaServiceImpl implements QnaService{
 	public int qnaAcontent(QnaVO vo) {
 		return dao.qnaAcontent(vo);
 	}
+	
+	@Override
+	public int qnaState(QnaVO vo) {
+		return dao.qnaState(vo);
+	}
 
 	@Override
 	public int qnaDelete(String q_no) {
 		return dao.qnaDelete(q_no);
+	}
+
+	@Override
+	public int qnaInsert(QnaVO vo) {
+		return dao.qnaInsert(vo);
 	}
 	
 }

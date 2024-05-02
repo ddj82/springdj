@@ -16,4 +16,8 @@ public class ProdRevDAO {
 	public List<ProdRevVO> prodOneRev(String p_no) {
 		return mybatis.selectList("ProdRevDAO.prodOneRev", p_no);
 	}
+	
+	public int prodRevInsert(ProdRevVO vo) {
+		return mybatis.insert("ProdRevDAO.prodRevInsert", vo);
+	}
 }

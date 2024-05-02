@@ -17,4 +17,9 @@ public class ProdRevServiceImpl implements ProdRevService {
 	public List<ProdRevVO> prodOneRev(String p_no) {
 		return dao.prodOneRev(p_no);
 	}
+
+	@Override
+	public int prodRevInsert(ProdRevVO vo) {
+		return dao.prodRevInsert(vo);
+	}
 }

@@ -23,6 +23,10 @@
 	<select id="qnaView" resultType="qnaDTO">
 		SELECT * FROM BC_QNA WHERE Q_NO = #{q_no}
 	</select>
+	
+	<insert id="qnaInsert">
+		INSERT INTO BC_QNA (Q_CATE, Q_TITLE, Q_CONTENT, Q_WRITER, Q_IMG) VALUES (#{q_cate}, #{q_title}, #{q_content}, #{q_writer}, #{q_img})
+	</insert>
 
 	<delete id="qnaDelete">
 		DELETE FROM BC_QNA WHERE Q_NO = #{q_no}
@@ -30,5 +34,9 @@
 
 	<update id="qnaAcontent">
 		UPDATE BC_QNA SET A_CONTENT = #{a_content} WHERE Q_NO = #{q_no}
+	</update>
+	
+	<update id="qnaState">
+		UPDATE BC_QNA SET Q_STATE = #{q_state} WHERE Q_NO = #{q_no}
 	</update>
 </mapper>

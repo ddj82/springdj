@@ -83,9 +83,7 @@ $(function(){
 				values = res.prodOneRev; //java에서 정의한 ArrayList명을 적어준다.
 				console.log("배열 : ", values);
 				$.each(values, function(i, o){
-					 let date = new Date(o.pr_date);
-					console.log('o.pn_date : ' , date.toLocaleDateString());
-					$("#revTB").append("<tr><td>" + o.u_nick + "</td><td>" + o.p_name + "</td><td>" + date.toLocaleDateString() + "</td></tr>"
+					$("#revTB").append("<tr><td>" + o.u_nick + "</td><td>" + o.p_name + "</td><td>" + o.pr_date + "</td></tr>"
 							+ "<tr><td>" + o.pr_content + "</td><td>"
 							+ "<tr><td>" + "<img alt='' src='img/imgQna/" + o.pr_img  + "' style='width:100px;'>" + "</td><td>");
 				});

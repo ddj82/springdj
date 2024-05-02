@@ -1,8 +1,6 @@
 package com.drink.ko;
 
-import java.util.*;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
+import org.springframework.web.multipart.MultipartFile;
 
 public class QnaVO {
 	private int q_no;
@@ -14,6 +12,8 @@ public class QnaVO {
 	private String q_state;
 	private String q_img;
 	private String a_content;
+	
+	private MultipartFile uploadFile;
 	
 	public int getQ_no() {
 		return q_no;
@@ -48,10 +48,8 @@ public class QnaVO {
 	public String getQ_date() {
 		return q_date;
 	}
-	public void setQ_date(Date q_date) {
-		LocalDate date = q_date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		String formattedDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		this.q_date = formattedDate;
+	public void setQ_date(String q_date) {
+		this.q_date = q_date;
 	}
 	public String getQ_state() {
 		return q_state;
@@ -70,6 +68,13 @@ public class QnaVO {
 	}
 	public void setA_content(String a_content) {
 		this.a_content = a_content;
+	}
+	
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
 	}
 	
 	@Override

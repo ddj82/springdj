@@ -8,11 +8,13 @@
 		<typeAlias type="com.drink.ko.ProdRevVO" alias="prodRevDTO" />
 		<typeAlias type="com.drink.ko.QnaVO" alias="qnaDTO" />
 		<typeAlias type="com.drink.ko.UsersVO" alias="userdto" />
+		<typeAlias type="com.drink.ko.OrderVO" alias="orderdto" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappings/prod-mapping.xml" />
 		<mapper resource="mappings/prodrev-mapping.xml"/>
 		<mapper resource="mappings/qna-mapping.xml"/>
 		<mapper resource="mappings/login-mapping.xml" />
+		<mapper resource="mappings/order-mapping.xml" />
 	</mappers>
 </configuration>

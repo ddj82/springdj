@@ -67,7 +67,7 @@ P_IMG VARCHAR(100) not null
 상품설명
 상품가격
 제조사
-주류종류
+주류종류 check (P_TYPE in ('탁주','과실주','약·청주','증류주','기타주류')
 도수
 단맛 CHECK('강','중','약')
 신맛 CHECK('강','중','약')
@@ -81,6 +81,10 @@ P_IMG VARCHAR(100) not null
 /*임시 더미데이터*/
 insert into bc_prod (P_NAME, P_DESC, P_PRICE, P_MADE, P_TYPE, P_DGR, P_SW, P_SU, P_SP, P_MAT, P_CAP, P_STOCK, P_IMG) 
 values ('소주', '아는맛이 강한 법', '12000', '진로', '증류주', 12, '강', '중', '약', '기타', 360, 50, 'cute_dog.jpg');
+insert into bc_prod (P_NAME, P_DESC, P_PRICE, P_MADE, P_TYPE, P_DGR, P_SW, P_SU, P_SP, P_MAT, P_CAP, P_STOCK, P_IMG) 
+values ('매화수', '매실맛 아주 조아', '6000', '화산파', '과실주', 8, '강', '강', '없음', '과일', 280, 30, 'cute_dog.jpg');
+insert into bc_prod (P_NAME, P_DESC, P_PRICE, P_MADE, P_TYPE, P_DGR, P_SW, P_SU, P_SP, P_MAT, P_CAP, P_STOCK, P_IMG) 
+values ('땅콩막걸리', '땅콩맛 밀키스', '8500', '장수', '증류주', 10, '강', '약', '중', '견과', 450, 50, 'cute_dog.jpg');
 -- insert into bc_prod (P_NAME, P_DESC, P_PRICE, P_MADE, P_TYPE, P_DGR, P_SW, P_SU, P_SP, P_MAT, P_STOCK) 
 -- values ('상품이름', '상품설명', '상품가격', '제조사', '주류종류', 15, '강', '중', '없음', '기타', 150);
 
@@ -94,11 +98,14 @@ O_NO VARCHAR(11) NOT NULL,
 U_NO int(4) NOT null,
 U_NAME varchar(20) not null,
 P_NO INT(4) NOT NULL,
+P_NAME VARCHAR(30) not null,
 O_STOCK INT(3) NOT NULL,
 O_TOTAL INT(7) NOT NULL,
 O_ADDR VARCHAR(300) NOT null,
+U_TEL VARCHAR(15) not null,
 O_DATE DATE NOT NULL default now(),
 O_STATE VARCHAR(20) not null default '상품 준비중' check (O_STATE in ('상품 준비중', '배송중', '배송완료', '취소')),
+O_REVSTATE INT(1) NOT NULL default 0 check (O_REVSTATE in (0, 1)),
 foreign key(U_NO) references bc_users(U_NO),
 foreign key(P_NO) references bc_prod(P_NO)
 );
@@ -118,6 +125,34 @@ insert into bc_order (O_NO, U_NO, U_NAME, P_NO, O_STOCK, O_TOTAL, O_ADDR)
 values(CONCAT(date_format(NOW(),'%Y%m%d'), LPAD(NEXTVAL(O_NO_SEQ), 3, 0)), (select U_NO from bc_users where U_ID = 'user1'), (select U_NAME from bc_users where U_ID = 'user1'),
 1, 3, (select P_PRICE * 3 from bc_prod where p_no = 1), (select CONCAT(ADDR1,' ', ADDR2, ' ', ADDR3) from bc_users where U_ID = 'user1'));
 
+INSERT INTO BC_ORDER (O_NO, U_NO, U_NAME, P_NO, P_NAME, O_STOCK, O_TOTAL, O_ADDR, U_TEL)
+SELECT 
+CONCAT(DATE_FORMAT(NOW(), '%Y%m%d'), LPAD(NEXTVAL(O_NO_SEQ), 3, '0')), u.U_NO, u.U_NAME, p.P_NO, p.P_NAME, 3, p.P_PRICE * 3, 
+CONCAT(u.ADDR1, ' ', u.ADDR2, ' ', u.ADDR3), u.U_TEL 
+from bc_users AS u
+JOIN bc_prod AS p ON p.P_NO = 1
+WHERE u.U_NO = 2;
+
+select (O_NO, U_NO, U_NAME, U_TEL, P_NO, O_STOCK, O_TOTAL, O_ADDR, U_TEL) from bc_order AS o JOIN bc_prod AS p ON p.P_NO = 1 where o.U_NO = 2;
+
+SELECT o.O_NO, o.U_NO, o.U_NAME, o.U_TEL, o.P_NO, o.O_STOCK, o.O_TOTAL, o.O_ADDR, o.U_TEL, o.O_DATE, o.P_NAME, p.P_DESC, p.P_PRICE, o.O_STATE, p.P_IMG
+FROM BC_ORDER AS o JOIN BC_PROD AS p where U_NO = 2;
+
+SELECT o.*, p.P_DESC, p.P_PRICE, p.P_IMG
+FROM BC_ORDER AS o JOIN BC_PROD AS p where U_NO = 2;
+
+SELECT o.O_NO, o.U_NO, o.U_NAME, o.U_TEL, o.P_NO, o.O_STOCK, o.O_TOTAL, o.O_ADDR, o.U_TEL, o.O_DATE, o.P_NAME, p.P_DESC, p.P_PRICE, o.O_STATE, p.P_IMG
+FROM BC_ORDER AS o JOIN BC_PROD AS p where O_NO = '20240502003';
+
+select P_NAME, P_DESC from bc_prod where P_NO = 1;
+
+update bc_order set O_REVSTATE = 0 where O_NO = '20240502003'; 
+
+SELECT o.*, p.P_DESC, p.P_PRICE, p.P_IMG
+FROM BC_ORDER AS o JOIN BC_PROD as p on o.P_NO = p.P_NO where U_NO = 2;
+
+SELECT o.*, p.P_DESC, p.P_PRICE, p.P_IMG
+FROM BC_ORDER AS o JOIN BC_PROD AS p on o.P_NO = p.P_NO where O_NO = '20240502003';
 
 /*시퀀스*/
 CREATE SEQUENCE O_NO_SEQ
@@ -171,6 +206,21 @@ values ((select U_NO from bc_users where U_ID = 'user1'), (select U_NICK from bc
 1, (select P_NAME from bc_prod where p_no = 1), '이미 만취 상태입니다 ㅋ', 5, 'cute_dog.jpg');
 
 
+INSERT INTO BC_PRODREV (U_NO, U_NICK, P_NO, P_NAME, PR_CONTENT, PR_STAR, PR_IMG) 
+SELECT u.U_NO, u.U_NICK, p.P_NO, p.P_NAME, '이미 만취 상태입니다 ㅋ', 5, 'cute_dog.jpg'
+FROM bc_users AS u
+JOIN bc_prod AS p ON p.P_NO = 1
+WHERE u.U_ID = 'user1';
+
+INSERT INTO BC_PRODREV (U_NO, U_NICK, P_NO, P_NAME, PR_CONTENT, PR_STAR, PR_IMG)
+SELECT u.U_NO, u.U_NICK, p.P_NO, p.P_NAME, '맛 좋슴다 ㅋ', '4', 'cute_dog.jpg'
+FROM bc_users AS u
+JOIN bc_prod AS p ON p.P_NO = #{p_no}
+WHERE u.U_NO = 2;
+
+select * from BC_PRODREV;
+
+
 select * from bc_prodnotice where P_NO = 1;
 SELECT * FROM BC_PRODNOTICE WHERE P_NO =1;
 
@@ -204,7 +254,7 @@ Q_IMG VARCHAR(100),
 A_CONTENT VARCHAR(4000)
 );
 
-insert into bc_qna (Q_CATE, Q_TITLE, Q_CONTENT, Q_WRITER) values ('배송', '제목', '내용', 'user1');
+insert into bc_qna (Q_CATE, Q_TITLE, Q_CONTENT, Q_WRITER) values ('배송', '문의드립니다', '배송 언제 오나요?', 'user1');
 
 select * from bc_qna;
 select * from bc_qna where q_no = 1;

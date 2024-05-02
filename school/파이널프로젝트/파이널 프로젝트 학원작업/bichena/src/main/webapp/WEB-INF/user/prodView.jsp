@@ -20,9 +20,10 @@ cursor: pointer;
 <body>
 <c:forEach items="${prodList }" var="list">
 	<span class="prod" onclick="location.href = 'prodOne.ko?p_no=${list.p_no}';">
-		<img class="float" src="img/${list.p_img }" title="img" alt="img"><br>
+		<img class="float" src="img/${list.p_img }" title="img" alt="img"> <br>
 		<span>${list.p_name }</span>
-	</span>
+	</span> 
+	<br><br>
 </c:forEach>
 </body>
 </html>

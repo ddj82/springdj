@@ -4,4 +4,5 @@ import java.util.List;
 
 public interface ProdRevService {
 	List<ProdRevVO> prodOneRev(String p_no);
+	int prodRevInsert(ProdRevVO vo);
 }

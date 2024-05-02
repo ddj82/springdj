@@ -1,6 +1,6 @@
 package com.drink.ko;
 
-import java.util.*;
+import org.springframework.web.multipart.MultipartFile;
 
 public class ProdRevVO {
 	private int pr_no;
@@ -10,8 +10,11 @@ public class ProdRevVO {
 	private String p_name;
 	private String pr_content;
 	private int pr_star;
-	private Date pr_date;
+	private String pr_date;
 	private String pr_img;
+	
+	private MultipartFile uploadFile;
+	
 	
 	public int getPr_no() {
 		return pr_no;
@@ -55,10 +58,10 @@ public class ProdRevVO {
 	public void setPr_star(int pr_star) {
 		this.pr_star = pr_star;
 	}
-	public Date getPr_date() {
+	public String getPr_date() {
 		return pr_date;
 	}
-	public void setPr_date(Date pr_date) {
+	public void setPr_date(String pr_date) {
 		this.pr_date = pr_date;
 	}
 	public String getPr_img() {
@@ -66,6 +69,13 @@ public class ProdRevVO {
 	}
 	public void setPr_img(String pr_img) {
 		this.pr_img = pr_img;
+	}
+	
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
 	}
 	
 	@Override

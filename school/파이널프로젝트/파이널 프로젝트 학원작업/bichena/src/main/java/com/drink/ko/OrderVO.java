@@ -1,17 +1,23 @@
 package com.drink.ko;
 
-import java.util.Date;
-
 public class OrderVO {
 	private String o_no;
 	private int u_no;
 	private String u_name;
 	private int p_no;
+	private String p_name;
 	private int o_stock;
 	private int o_total;
 	private String o_addr;
-	private Date o_date;
+	private String u_tel;
+	private String o_date;
 	private String o_state;
+	private String o_revstate;
+	
+	private String p_desc;
+	private String p_price;
+	private String p_img;
+	
 	
 	public String getO_no() {
 		return o_no;
@@ -55,10 +61,16 @@ public class OrderVO {
 	public void setO_addr(String o_addr) {
 		this.o_addr = o_addr;
 	}
-	public Date getO_date() {
+	public String getU_tel() {
+		return u_tel;
+	}
+	public void setU_tel(String u_tel) {
+		this.u_tel = u_tel;
+	}
+	public String getO_date() {
 		return o_date;
 	}
-	public void setO_date(Date o_date) {
+	public void setO_date(String o_date) {
 		this.o_date = o_date;
 	}
 	public String getO_state() {
@@ -66,6 +78,37 @@ public class OrderVO {
 	}
 	public void setO_state(String o_state) {
 		this.o_state = o_state;
+	}
+	public String getP_name() {
+		return p_name;
+	}
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
+	}
+	public String getP_desc() {
+		return p_desc;
+	}
+	public void setP_desc(String p_desc) {
+		this.p_desc = p_desc;
+	}
+	
+	public String getP_price() {
+		return p_price;
+	}
+	public void setP_price(String p_price) {
+		this.p_price = p_price;
+	}
+	public String getP_img() {
+		return p_img;
+	}
+	public void setP_img(String p_img) {
+		this.p_img = p_img;
+	}
+	public String getO_revstate() {
+		return o_revstate;
+	}
+	public void setO_revstate(String o_revstate) {
+		this.o_revstate = o_revstate;
 	}
 	
 	@Override

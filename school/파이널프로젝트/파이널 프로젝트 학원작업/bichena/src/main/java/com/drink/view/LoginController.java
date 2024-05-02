@@ -15,7 +15,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.drink.ko.UsersService;
 import com.drink.ko.UsersVO;
 
-@SessionAttributes("user")
+@SessionAttributes({"userID", "userNO"})
 @Controller
 public class LoginController {
 	@Autowired
@@ -30,7 +30,8 @@ public class LoginController {
 		System.out.println("여기까지 진입 성공");
 		UsersVO user = usersService.loginSelectOne(vo);
 		if (user != null) {
-			model.addAttribute("user", user);
+			model.addAttribute("userID", user.getU_id());
+			model.addAttribute("userNO", user.getU_no());
 			return "/index.jsp";
 		} else {
 			return "/login.jsp?error=1";

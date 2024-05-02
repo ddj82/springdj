@@ -14,6 +14,10 @@
 	<property name="password" value="${jdbc.password}" />
 </bean>
 
+<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<property name="maxUploadSize" value="500000"></property>
+</bean>
+
 <!-- MyBatis -->
 <!-- 여기서 마이바티스 mapper, config 파일 둘 다 읽음 -->
 <bean id="sqlsession" class="org.mybatis.spring.SqlSessionFactoryBean">

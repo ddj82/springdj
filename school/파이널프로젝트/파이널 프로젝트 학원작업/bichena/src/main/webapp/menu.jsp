@@ -2,19 +2,19 @@
 	pageEncoding="UTF-8"%>
 <div id="menuBox1">
 	<c:choose>
-		<c:when test='${user.u_id ne NULL}'>
+		<c:when test='${userID ne NULL}'>
 			<ul class="navbar-nav nav-right">
-				<li class="nav-item">${user.u_nick}님</li>
+				<li class="nav-item">${userID}님</li>
 
 				<c:choose>
-					<c:when test="${user.u_id eq 'admin'}">
+					<c:when test="${userID eq 'admin'}">
 						<li class="nav-item">
-							<a class="nav-link" href="userList.do">회원정보</a>
+							<a class="nav-link" href="">회원정보</a>
 						</li>
 					</c:when>
 					<c:otherwise>
 						<li class="nav-item">
-							<a class="nav-link" href="selUser.do?id=${user.u_nick}">나의정보</a>
+							<a class="nav-link" href="myPage.ko">나의정보</a>
 						</li>
 					</c:otherwise>
 				</c:choose>

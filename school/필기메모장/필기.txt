@@ -10035,7 +10035,7 @@ servlet을 만들기 위해 필요한 것 => 스프링 빈 설정 파일
 생성 전 BoardVO클래스에 해당 file객체에 대한 멤버필드와 filename을 받을 멤버필드를 추가해준다. (getter, setter 포함)
 => 
 private MultipartFile uploadFile;
-private String filename;
+private String filename;-
 
 형식 : id="multipartResolver"는 반드시 이 이름으로 지정해주어야 한다. 이름을 변경하거나 다른 이름으로 지정 안됨.
 

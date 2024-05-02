@@ -34,13 +34,14 @@
 			</tr>
 			<tr>
 				<td>첨부파일</td>
-				<td>${qnaView.q_img }</td>
+				<td>
+					<img src="img/imgQna/${qnaView.q_img }" title="img" alt="img" style="width: 200px;">
+				</td>
 			</tr>
 		</table>
-		<img src="img/imgQna/${qnaView.q_img }" title="img" alt="img" style="width: 200px;"> <br>
 		<br>
 		<c:choose>
-			<c:when test="${user.u_id eq 'admin' }">
+			<c:when test="${userID eq 'admin' }">
 				<c:choose>
 					<c:when test="${qnaView.a_content == null}">
 						<form action="qnaAcontent.ko" method="post">
@@ -61,6 +62,16 @@
 			</c:otherwise>
 		</c:choose>
 	</section>
-	<button type="button" class="btndel btn" onclick="location.href = 'qnaDelete.ko?q_no=${qnaView.q_no }';">삭제</button>
+	<button type="button" class="btndel btn" onclick="qnaDelbtn(${qnaView.q_no })">삭제</button>
+	
+<script>
+	function qnaDelbtn(qno) {
+		let con = confirm("정말 삭제하시겠습니까?");
+		console.log(con);
+		if (con) {
+			location.href = 'qnaDelete.ko?q_no=' + qno;
+		}
+	}
+</script>
 </body>
 </html>

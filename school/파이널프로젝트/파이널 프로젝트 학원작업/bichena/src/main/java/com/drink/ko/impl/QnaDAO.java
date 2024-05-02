@@ -25,8 +25,16 @@ public class QnaDAO {
 		return mybatis.update("QnaDAO.qnaAcontent", vo);
 	}
 	
+	public int qnaState(QnaVO vo) {
+		return mybatis.update("QnaDAO.qnaState", vo);
+	}
+	
 	public int qnaDelete(String q_no) {
 		return mybatis.update("QnaDAO.qnaDelete", q_no);
+	}
+	
+	public int qnaInsert(QnaVO vo) {
+		return mybatis.insert("QnaDAO.qnaInsert", vo);
 	}
 	
 }
