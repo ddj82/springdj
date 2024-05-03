@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,8 +30,7 @@ align-items: center;
 
 <h3>나의 정보</h3>
 <div id="">
-	<a href="userMyPassConfirm.jsp">&gt; 회원 정보 </a><br>
-	<a href="경로?id=${u_id}">&gt; 주문 내역 확인 </a><br>
+	<a href="confirm.ko">&gt; 회원 정보 </a><br>
 </div> 
 
 <section id="ListArea">

@@ -4,13 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.drink.ko.OrderService;
-import com.drink.ko.OrderVO;
+import com.drink.ko.impl.dao.OrderDAO;
+import com.drink.ko.vo.OrderVO;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 	@Autowired
-	OrderDAO dao;
+	private OrderDAO dao;
 
 	@Override
 	public List<OrderVO> myOrderList(int u_no) {
@@ -25,5 +27,10 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public int orderRevchk(OrderVO vo) {
 		return dao.orderRevchk(vo);
+	}
+
+	@Override
+	public List<OrderVO> adminOrderList() {
+		return dao.adminOrderList();
 	}
 }

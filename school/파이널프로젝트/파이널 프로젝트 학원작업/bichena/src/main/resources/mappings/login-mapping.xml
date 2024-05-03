@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="userDAO">
+<mapper namespace="UserDAO">
 
 	<resultMap type="userdto" id="user">
 		<id property="u_no" column="U_NO" />
@@ -22,7 +22,7 @@
 	</resultMap>
 	
 	<select id="loginSelectOne" resultMap="user">
-		SELECT * FROM BC_USERS WHERE U_ID = #{u_id} AND U_PW = #{u_pw}
+		SELECT * FROM BC_USERS WHERE U_ID = #{u_id} AND U_PW = #{u_pw} AND U_STATE != 0
 	</select>
 	
 	<select id="idFindEmail" resultMap="user">
@@ -45,4 +45,16 @@
 		SELECT u_pw FROM BC_USERS WHERE U_ID = #{u_id}
 	</select>
 
+	<select id="kakaoLogin" resultMap="user">
+		SELECT * FROM BC_USERS WHERE
+		U_ID = #{u_id} AND U_TEL = #{u_tel}
+	</select>
+
+	<!-- 변경하기  -->
+   <insert id="kakaoLoginFirst">
+      INSERT INTO BC_USERS
+         (U_ID,U_PW,U_NAME,U_BIRTH,U_TEL,ADDR1,ADDR2,ADDR3,U_EMAIL,U_NICK,U_GEN)
+      VALUES(#{u_id},'kakao',#{u_name},#{u_birth},#{u_tel},#{addr1},#{addr2},#{addr3},#{u_email},#{u_nick},#{u_gen})
+   </insert>
+   
 </mapper>

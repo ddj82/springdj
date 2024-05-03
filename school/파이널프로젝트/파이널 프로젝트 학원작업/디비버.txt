@@ -37,9 +37,9 @@ U_STATE INT(1) not null default 1
 insert into bc_users (U_ID, U_PW, U_NAME, U_NICK, U_GEN, U_BIRTH, U_TEL, U_EMAIL, ADDR1 , ADDR2 , ADDR3) 
 values ('admin', '1111', '관리자', '관리자', '남자', '20000101', '01011111111', 'admin@a.com', '우편번호', '주소', '상세주소');
 insert into bc_users (U_ID, U_PW, U_NAME, U_NICK, U_GEN, U_BIRTH, U_TEL, U_EMAIL, ADDR1 , ADDR2 , ADDR3) 
-values ('user1', '1111', '김동욱', '동욱', '남자', '20001111', '01011110000', 'a@a.com', '우편번호', '주소', '상세주소');
+values ('user2', '1111', '김동욱', '동욱', '남자', '20001111', '01011110000', 'a@a.com', '우편번호', '주소', '상세주소');
 
-
+ALTER TABLE bc_users auto_increment = 4;
 
 drop table bc_prod;
 
@@ -127,11 +127,19 @@ values(CONCAT(date_format(NOW(),'%Y%m%d'), LPAD(NEXTVAL(O_NO_SEQ), 3, 0)), (sele
 
 INSERT INTO BC_ORDER (O_NO, U_NO, U_NAME, P_NO, P_NAME, O_STOCK, O_TOTAL, O_ADDR, U_TEL)
 SELECT 
-CONCAT(DATE_FORMAT(NOW(), '%Y%m%d'), LPAD(NEXTVAL(O_NO_SEQ), 3, '0')), u.U_NO, u.U_NAME, p.P_NO, p.P_NAME, 3, p.P_PRICE * 3, 
+CONCAT(DATE_FORMAT(NOW(), '%Y%m%d'), LPAD(NEXTVAL(O_NO_SEQ), 3, '0')), u.U_NO, u.U_NAME, p.P_NO, p.P_NAME, 2, p.P_PRICE * 2, 
 CONCAT(u.ADDR1, ' ', u.ADDR2, ' ', u.ADDR3), u.U_TEL 
 from bc_users AS u
 JOIN bc_prod AS p ON p.P_NO = 1
 WHERE u.U_NO = 2;
+
+INSERT INTO BC_ORDER (O_NO, U_NO, U_NAME, P_NO, P_NAME, O_STOCK, O_TOTAL, O_ADDR, U_TEL)
+SELECT 
+CONCAT(DATE_FORMAT(NOW(), '%Y%m%d'), LPAD(NEXTVAL(O_NO_SEQ), 3, '0')), u.U_NO, u.U_NAME, p.P_NO, p.P_NAME, 1, p.P_PRICE * 1, 
+CONCAT(u.ADDR1, ' ', u.ADDR2, ' ', u.ADDR3), u.U_TEL 
+from bc_users AS u
+JOIN bc_prod AS p ON p.P_NO = 2
+WHERE u.U_NO = 3;
 
 select (O_NO, U_NO, U_NAME, U_TEL, P_NO, O_STOCK, O_TOTAL, O_ADDR, U_TEL) from bc_order AS o JOIN bc_prod AS p ON p.P_NO = 1 where o.U_NO = 2;
 
@@ -153,6 +161,11 @@ FROM BC_ORDER AS o JOIN BC_PROD as p on o.P_NO = p.P_NO where U_NO = 2;
 
 SELECT o.*, p.P_DESC, p.P_PRICE, p.P_IMG
 FROM BC_ORDER AS o JOIN BC_PROD AS p on o.P_NO = p.P_NO where O_NO = '20240502003';
+
+SELECT o.*, p.P_DESC, p.P_PRICE, p.P_IMG
+FROM BC_ORDER AS o JOIN BC_PROD as p on o.P_NO = p.P_NO;
+
+select * from bc_order;
 
 /*시퀀스*/
 CREATE SEQUENCE O_NO_SEQ

@@ -17,6 +17,11 @@
 		<result property="p_desc" column="P_DESC" />
 		<result property="p_price" column="P_PRICE" />
 	</resultMap>
+	
+	<select id="adminOrderList" resultMap="orderList">
+		SELECT o.*, p.P_DESC, p.P_PRICE, p.P_IMG
+		FROM BC_ORDER AS o JOIN BC_PROD as p on o.P_NO = p.P_NO
+	</select>
 
 	<select id="myOrderList" resultMap="orderList">
 		SELECT o.*, p.P_DESC, p.P_PRICE, p.P_IMG

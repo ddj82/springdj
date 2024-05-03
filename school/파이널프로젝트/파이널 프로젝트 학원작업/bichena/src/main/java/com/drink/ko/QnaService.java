@@ -2,6 +2,8 @@ package com.drink.ko;
 
 import java.util.List;
 
+import com.drink.ko.vo.QnaVO;
+
 public interface QnaService {
 	List<QnaVO> qnaList();
 	QnaVO qnaView(String q_no);
