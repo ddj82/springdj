@@ -9,62 +9,78 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style>
-tr {
-/*     border-bottom: 1px solid black; */
-/*     border-collapse: collapse; */
-}
 table th {
     text-align: center;
 }
 table {
-/* 	width: 80%; */
 	text-align: center;
-}
-.table-hover>tbody>tr:hover {
-    background-color: #fff;
-}
-.btn-info.del {
-    color: #fff;
-    background-color: #d53131;
-    border: none;
-}
-.btn-info.tail {
-    color: #fff;
-    background-color: #4385ff;
-    border: none;
 }
 .btn-group-lg>.btn, .btn-lg {
     padding: 12px 10px;
     font-size: 14px;
     line-height: 0;
 }
-.btn-info.del:active {
-	color: #fff;
-	background-color: #d53131;
-	background-image: none;
-	border-color: #bc2626;
-}
-.btn-info.del:hover, .btn-info.del:focus {
-    color: #fff;
-    background-color: #a32121;
-/*     border-color: #bc2626; */
-}
-.btn-info.tail:active {
-    color: #fff;
-    background-color: #4385ff;
-    background-image: none;
-    border-color: #2758b9;
-}
-.btn-info.tail:hover, .btn-info.tail:focus {
-    color: #fff;
-    background-color: #2758b9;
-/*     border-color: #2758b9; */
-}
 </style>
 </head>
 <body>
 <div class="container">
-	<table class="table table-hover">
+	<table class="table table-bordered">
+		<tr>
+		    <th>주문 번호</th>
+		    <td>
+		        <form action="">
+		            <div class="input-group">
+		                <input type="text" class="form-control" placeholder="" name="search1">
+		                <div class="input-group-btn">
+		                    <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+		                </div>
+		            </div>
+		        </form>
+		    </td>
+		</tr>
+		<tr>
+		    <th>주문자 이름</th>
+		    <td>
+		        <form action="">
+		            <div class="input-group">
+		                <input type="text" class="form-control" placeholder="" name="search2">
+		                <div class="input-group-btn">
+		                    <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+		                </div>
+		            </div>
+		        </form>
+		    </td>
+		</tr>
+		<tr>
+		    <th>상품명</th>
+		    <td>
+		        <form action="">
+		            <div class="input-group">
+		                <input type="text" class="form-control" placeholder="" name="search3">
+		                <div class="input-group-btn">
+		                    <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+		                </div>
+		            </div>
+		        </form>
+		    </td>
+		</tr>
+		<tr>
+			<th>상태</th>
+			<td>Jon</td>
+		</tr>
+		<tr>
+			<th>주문 날짜</th>
+			<td>Jon</td>
+		</tr>
+	</table>
+	<br>
+	<input class="form-control" id="myInput1" type="text" placeholder="주문번호">
+	<br>
+	<input class="form-control" id="myInput2" type="text" placeholder="주문자이름">
+	<br>
+	<input class="form-control" id="myInput3" type="text" placeholder="상품명">
+	<br>
+	<table class="table">
 		<thead>
 			<tr>
 				<th>주문번호</th>
@@ -77,26 +93,36 @@ table {
 				<th>상세보기</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="myList">
 		<c:forEach items="${adminOrderList }" var="order">
 			<tr>
-				<td>${order.o_no }</td>
+				<td class="o_no">${order.o_no }</td>
 	            <td>${order.o_date }</td>
-	            <td>${order.u_name }</td>
-	            <td>${order.p_name }</td>
+	            <td class="u_name">${order.u_name }</td>
+	            <td class="p_name">${order.p_name }</td>
 	            <td>${order.o_total }</td>
 	            <td>${order.o_state }</td>
 	            <td>
-	                <button type="button" class="btn btn-info btn-lg del" onclick="">주문취소</button>
+	                <button type="button" class="btn btn-danger btn-lg del" onclick="">주문취소</button>
 	            </td>
 	            <td>
-	                <button type="button" class="btn btn-info btn-lg tail" data-toggle="modal" data-target="#myModal" onclick="orderdetail('${order.o_no }')">상세보기</button>
+	                <button type="button" class="btn btn-primary btn-lg tail" data-toggle="modal" data-target="#myModal" onclick="orderdetail('${order.o_no }')">상세보기</button>
 	            </td>
 	        </tr>
 		</c:forEach>
 		</tbody>
 	</table>
 	
+<script>
+    $(document).ready(function(){
+        $("#myInput1").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+            $("#myList tr").filter(function() {
+                $(this).toggle($(this).children(".o_no").text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 	
 <script>
 function orderdetail(ono){

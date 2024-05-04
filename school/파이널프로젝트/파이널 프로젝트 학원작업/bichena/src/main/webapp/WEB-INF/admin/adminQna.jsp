@@ -21,7 +21,6 @@ table {
 </head>
 <body>
 <div class="container">
-	<section class="title">문의목록</section>
 	<table class="table table-hover">
 		<thead>
 			<tr>

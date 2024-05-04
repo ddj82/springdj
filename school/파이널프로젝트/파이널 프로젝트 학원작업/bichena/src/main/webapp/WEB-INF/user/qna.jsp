@@ -21,6 +21,8 @@ table {
 function qnaView(uid, qno, sid) {
 	if (uid == sid) {
 		location.href = 'qnaView.ko?q_no=' + qno;
+	} else if (sid == 'admin') {
+		location.href = 'adminQnaView.ko?q_no=' + qno;
 	} else {
 		alert('작성자만 조회 가능합니다.');
 	}

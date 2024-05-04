@@ -80,6 +80,7 @@ public class BichenaController {
 	@RequestMapping("/insertUser.ko")
 	public String insertUser(UsersVO vo) {
 		usersService.insertUser(vo);
+		
 		return "/WEB-INF/join/success.jsp";
 	}
 
@@ -432,11 +433,18 @@ public class BichenaController {
 	
 	@RequestMapping("/adminQnaView.ko")
 	public String adminQnaView(@RequestParam(value = "q_no") String q_no, Model model) {
-		System.out.println("ㅎㅇㅎㅇ"+q_no);
+		System.out.println("관리자가 qna상세보기 : "+q_no);
 		QnaVO qnaView = qnaService.qnaView(q_no);
 		model.addAttribute("qnaView", qnaView);
 		System.out.println(qnaView);
 		return "/WEB-INF/admin/adminQnaView.jsp";
 	}
+	
+//	@GetMapping("/qnaView.ko")
+//	public String qnaView(@RequestParam(value = "q_no") String q_no, Model model) {
+//		QnaVO qnaView = qnaService.qnaView(q_no);
+//		model.addAttribute("qnaView", qnaView);
+//		return "/WEB-INF/user/qnaView.jsp";
+//	}
 
 }
