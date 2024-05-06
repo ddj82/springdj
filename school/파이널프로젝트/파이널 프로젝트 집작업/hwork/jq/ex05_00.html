@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <style>
+        div { float: left; margin: 25px;}
+    </style>
+    <script>
+        $(function(){
+            var fruits = ["apple", "banana", "orange", "melon"];
+            var cars = ["sonata", "grandure", "genesis"];
+
+            // $("선택자 또는 해당 요소").append("요소");
+            // : 선택된 요소의 맨 막내자식으로 추가 하는데 html형식으로 추가하세요.
+
+            // fruits.forEach(function(obj[, idx]){
+            //     console.log(obj[, idx]);
+            // });
+            fruits.forEach(function(obj, idx){
+                console.log(obj, idx);
+            });
+
+            // each()함수 형식
+            // $.each(배열객체명, 콜백함수);
+            // $(배열객체명).each(콜백함수);
+            // each()함수 안의 콜백함수 형식
+            // function(idx[, obj]){
+            //     실행문;
+            //     ...
+            // }
+
+            // $.each(fruits, function(index, value){
+            //     $("#fruit_list").append($("<li>" + value + "</li>"));
+            // });
+
+            // 이건 안됨 fruits는 배열객체이기 때문에 따옴표 없이 기술해야함
+            // $("fruits").each(function(index, value){ 
+            //     $("#fruit_list").append($("<li>" + value + "</li>"));
+            // });
+
+            $("#과일").on("click", function(){
+                $(fruits).each(function(index, value){
+                    $("#fruit_list").append($("<li>" + value + "</li>"));
+                });
+            }); 
+            
+            /* 
+            $("부모선택자 또는 부모요소").append("추가할 막내자식 요소");
+            $("추가할 막내자식 요소").appendTo("부모선택자 또는 부모요소");
+            */
+           // appendTo() : 선택된 요소를 해당 요소의 마지막에 추가한다.
+
+           $("#차종").on("click", function(){
+               $.each(cars, function(index, value){
+                    $("<li>" + value + "</li>").appendTo("#car_list");
+                    // $("#car_list").append("<li>" + value + "</li>");
+                });
+           }); 
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <b> 과일 리스트 </b>
+        <ul id="fruit_list">
+            <li>grape</li>
+        </ul>
+    </div>
+    <div>
+        <b> 차종 리스트 </b>
+        <ul id="car_list">
+            <li>soul</li>
+        </ul>
+    </div>
+    <br>
+    <button type="button" id="과일">과일추가</button>
+    <button type="button" id="차종">차종추가</button>
+</body>
+</html>

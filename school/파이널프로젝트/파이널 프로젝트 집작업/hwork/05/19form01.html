@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>form 요소</title>
+    <style>
+        form {border: 1px solid #000000; padding: 5px;}
+    </style>
+</head>
+<body>
+    <h2>form요소들</h2>
+    <p>When submitting this form, the result will be opened in a new browser tab:</p>
+    <!-- action속성, label요소, input요소 -->
+    <!-- <form> ㄱ
+    action="나의페이지경로" 가 숨어있음
+    method="get" 이 숨어있음
+    target="_self"가 숨어있음
+    autocomplete="on"이 숨어있음
+    method : 내가 입력한 데이터를 전송하는 방식
+    -->
+    <!-- <form action = "19form01.html" method = "post"> -->
+    <form action="19form01.html" method = "get">
+        <!-- form특수케이스블록레벨 
+        위아래 여백이 없음-->
+        <!-- label인라인레벨 
+        type = "text" : 한줄문자열
+        type = "submit"이 있는 나를 감싸고 있는 입력요소가 있다면 그 데이터를 담아서 폼태그의 액션주소로 실행하는 기능
+        나(type = "submit")를 감싸고 있는 폼태그의 액션주소로 실행하는 기능-->
+        <!-- input특수케이스인라인레벨 -->
+        <label for="first">First name : </label>
+        <input type="text" id = "first" name = "first1" value = "홍">
+        <br><br>
+
+        <label>Last name : </label>
+        <input type="text" name = "last" valur = "길동">
+        <br><br>
+
+        <label for="job">Jod : </label>
+        <input type="text" id = "job" name = "job" value = "학생">
+        <br><br>
+
+        <input type="submit" value = "가입하기">
+        <!-- type="submit" 일때 value를 쓰지 않으면 디폴트값이 한국은 "제출"이다 -->
+        <!-- <button type = "submit">가입하기</button> 
+        43, 44 모두 submit버튼이라고 함
+        -->
+        
+    </form>
+    <br><br>
+    <form>
+        <input type="text" name = "two1" value = "고"><br>
+        <input type="text" name = "two2" value = "양이"><br>
+        <input type="text" name = "two3" value = "중간"><br>
+        <input type="text" id = "job" value = "학생"><br>
+
+        <button type = "submit">가입하기</button>
+        <!-- button특수케이스인라인레벨 -->
+    </form><br>
+</body>
+</html>

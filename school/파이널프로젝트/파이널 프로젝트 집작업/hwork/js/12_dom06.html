@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #addFruit, #removeFruit {
+            box-sizing: border-box;
+            width: 344.47px;
+            height: 57px;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        button {
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid #aaa;
+            font-size: 20px;
+        }
+
+        button:focus {
+            background-color: #333;
+            color: white;
+        }
+    </style>
+    <script>
+        function min_max() {
+            let len = document.getElementsByTagName("li").length;
+            if (len > 0) {
+                // document.getElementById("removeFruit").setAttribute("placeholder", "삭제할 목록 인덱스번호 입력");
+                document.getElementById("removeFruit").setAttribute("max", (len - 1).toString());
+                document.getElementById("removeFruit").value = len - 1;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>과일목록</h1>
+    <ul class="fruits">
+        <li>사과</li>
+        <li>바나나</li>
+    </ul>
+
+    <div style="position: fixed; top: 20px; right: 0px;">
+        <input type="search" id="addFruit" placeholder="추가할 과일 입력"><br>
+        <button onclick="addF()">[1]번 인덱스요소의 형 요소로 추가</button><br>
+        <script>
+            function addF(){
+                let newTag = document.createElement("li"); // <li></li>
+                let stdTag = document.getElementsByTagName("li")[1];
+                newTag.innerText = 
+                document.getElementById("addFruit").value != "" ? document.getElementById("addFruit").value : "오렌지";
+
+                document.getElementsByClassName("fruits")[0].insertBefore(newTag, stdTag);
+                // 객체.insertBefore(1, 2) => 해당 객체의 자식으로 2번 전에 1번을 추가
+                // 객체.insertBefore(1, 2) => 해당 객체의 자식으로 1 = 추가할요소, 2 = 기준점요소
+                min_max();
+            }
+        </script>
+        <button onclick="addLastF()">마지막 목록으로 추가</button><br>
+        <script>
+            function addLastF() {
+                let newTag = document.createElement("li");
+                newTag.innerText = 
+                document.getElementById("addFruit").value != "" ? document.getElementById("addFruit").value : "오렌지";
+                
+                document.getElementsByClassName("fruits")[0].appendChild(newTag);
+                min_max();
+            }
+        </script>
+        <button onclick="cloneF()">맨처음 목록 복제</button><br>
+        <script>
+            function cloneF() {
+                let newTag = document.getElementsByTagName("li")[0].cloneNode(true);
+                // 태그객체.cloneNode(true) => 해당태그를 복제해라, 꼭 매개변수로 트루 해줘야 함
+                document.getElementsByClassName("fruits")[0].appendChild(newTag);
+                // 객체.appendChild(1) => 해당 객체의 가장 막내 자식으로 
+                min_max();
+            }
+        </script>
+        <input type="number" id="removeFruit" placeholder="삭제할 목록 인덱스번호 입력" min="0" max="0"><br>
+        <button onclick="rmF()">선택 목록 삭제</button><br>
+        <script>
+            function rmF() {
+                let len = document.getElementsByTagName("li").length;
+                if (len > 0) {
+                    let pa = document.getElementsByClassName("fruits")[0];
+                    let selIdx = document.getElementById("removeFruit").value;
+                    let selEle = pa.getElementsByTagName("li")[selIdx];
+                    pa.removeChild(selEle);
+                } else {
+                    alert("삭제할 목록이 없습니다.");
+                    return;
+                }
+                min_max();
+            }
+            (function(){min_max();})();
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button type="button" onclick="EvntFnc()">이벤트적용</button>
+    <p id="intro"><a href="#">Hello World!</a></p>
+    <p id="demo"></p>
+    <p id="demo2"></p>
+
+    <script>
+        function EvntFnc() {
+            var pid = document.getElementById("intro");
+            document.getElementById("demo").innerHTML = pid.innerHTML;
+            // pid.innerHTML이 값자리에 있어서 => <a href="#">Hello World!</a>
+            document.getElementById("demo2").innerHTML = pid.innerText;
+            // pid.innerText이 값자리에 있어서 => Hello World!
+        }
+    </script>
+</body>
+</html>

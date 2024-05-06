@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js"></script>
+    <script>
+        $(document).ready(function(){
+            // 그룹선택자의 엘리먼트들이 html요소의 인덱스에 맞춰 오름차순으로 정렬됨.
+            var $searchEles = $("p, span, div.simpletext1");
+            console.log($searchEles);
+
+            var resultText = "";
+            resultText = resultText + "엘리먼트 개수: " + $searchEles.length + "\n";
+            // resultText += "엘리번트 개수: " + $searchEles.length + "\n";
+
+            $searchEles.each(function(){
+                console.log("this : " + this.tagName);
+                console.log("$(this) : " + $(this).prop("tagName"));
+                resultText += $(this).text() + ", ";
+            });
+            
+            // $.each(searchEles, function(){
+            //     console.log("$(this) : " + $(this).prop("tagName"));
+            //     resultText += $(this).text() + ", ";
+            // });
+            console.log($.trim(resultText));
+            
+            $searchEles.each(function(i, v){
+                console.log(i + " : " + $(this).text());
+            });
+        });
+    </script>
+</head>
+<body>
+    <span>simple</span>
+    <div class="simpletext1">jQuery</div>
+    <div>basic</div>
+    <p>example</p>
+</body>
+</html>

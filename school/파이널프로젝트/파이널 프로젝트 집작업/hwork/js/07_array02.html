@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>배열의 참조</h1>
+    <script>
+        // 배열의 길이가 자동으로 증가됨.
+        var arr = ["JavaScript"];
+        var element = arr[0];
+
+        arr[1] = 10; // arr = ["JavaScript", 10]
+        arr[2] = element; // arr = ["JavaScript", 10, "JavaScript"]
+
+        document.write("1. 배열 arr의 요소1: [" + arr + "]<br>");
+        document.write("1. 배열 arr의 길이1: " + arr.length + "<br><br>");
+        
+         // delete: 배열 요소(값)만 삭제됨. 공간은 삭제 안됨. // 원본훼손 됨
+        delete arr[2]; // arr = ["JavaScript", 10, ]
+        document.write("2. 배열 arr의 요소2: [" + arr + "]<br>");
+        document.write("2. 배열 arr의 길이2: " + arr.length + "<br><br>");
+
+         // pop(): 배열의 마지막 인덱스 공간이 삭제됨. // 원본훼손 됨
+        arr.pop(); // arr = ["JavaScript", 10]
+        document.write("3. 배열 arr의 요소3: [" + arr + "]<br>");
+        document.write("3. 배열 arr의 길이3: " + arr.length + "<br><br>");
+        
+        // push()를 통한 요소 추가 // 원본훼손됨
+        arr.push("Script"); // arr = ["JavaScript", 10, "Script"]
+        document.write("4. 배열 arr의 요소4: [" + arr + "]<br>");
+        document.write("4. 배열 arr의 길이4: " + arr.length + "<br><br>");
+
+        // slice(시작인덱스번호, (마지막인덱스번호 - 1)) // 원본훼손 안됨
+        arr = arr.slice(0, 2); // 대입한것, 원본훼손
+        // document.write(arr.slice(0, 2), "<br>"); // arr ["JavaScript", 10]
+        document.write("5. 배열 arr의 요소5: [" + arr + "]<br>");
+        document.write("5. 배열 arr의 길이5(slice): " + arr.length + "<br><br>");
+
+        // length를 통한 요소 추가 // 원본훼손 됨
+        arr[arr.length] = 100; // arr = ["JavaScript", 10, 100]
+        document.write("6. 배열 arr의 요소6: [" + arr + "]<br>");
+        document.write("6. 배열 arr의 길이6: " + arr.length + "<br><br>");
+
+        // 특정 인덱스를 지정하여 요소 추가 // 원본훼손 됨
+        arr[10] = "자바스크립트"; // arr ["JavaScript", 10, 100, , , , , , , , "자바스크립트"]
+        document.write("7. 배열 arr의 요소7: [" + arr + "]<br>");
+        document.write("7. 배열 arr의 길이7: " + arr.length + "<br>");
+        document.write("8.  배열 arr의 [7]요소: [" + arr[7] + "]<br>"); // 값 할당받은 것이 없음.
+        
+    </script>
+</body>
+</html>

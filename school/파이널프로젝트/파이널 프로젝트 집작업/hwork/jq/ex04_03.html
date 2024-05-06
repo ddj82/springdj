@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <script>
+        function btn(){
+            /* 
+            map 방식, json(=JavaScript Object Notation) 방식 :
+            - 자바스크립트의 오브젝트를 표기하기 위한 표기법으로 {}(중괄호)안에 
+            key : value 형식으로 나열하는 방법이다.
+            자바스크립트의 오브젝트를 표현하는 표기법이다.
+            형식: {key: value, key: value, ...} => 자요형-object, 표기방법-json
+            */
+            $("img").attr({width: "100px", height: "100px"});
+            $("img").attr("src", function(){
+                return "../img/" + this.alt + ".jpg";
+            });
+            // let arr = document.getElementsByTagName("img");
+            // $("img").attr("src", "../img/img_girl.jpg");
+
+            $("img").attr("title", function(index){
+                return index + "번 img 엘리먼트 타이틀은 " + this.alt;
+            });
+        }
+    </script>
+</head>
+<body>
+    <img alt="img_girl" title="img_girl">
+    <img alt="cute_dog" title="cute_dog">
+    <img alt="pic_trulli" title="pic_trulli">
+    <br><br>
+    <button type="button" onclick="btn()">클릭</button>
+</body>
+</html>

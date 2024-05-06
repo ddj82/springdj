@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>switch조건문</title>
+    <script>
+        var str = prompt("국가? 1.한국 2.미국 3.일본 4.중국", "");
+        switch (str) {
+            case "1": case "1.한국": {
+                document.write("한국");
+                break;
+            }
+            case "2": case "2.미국": {
+                document.write("미국");
+                break;
+            }
+            case '3': case '3.일본': {
+                document.write("일본");
+                break;
+            }
+            case '4': case '4.중국': {
+                document.write("중국");
+                break;
+            }
+            default: {
+                document.write("0.기타");
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

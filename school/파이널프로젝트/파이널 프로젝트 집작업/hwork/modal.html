@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>Bootstrap Example</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+table.table>tbody>tr>td, table.table>tbody>tr>th, table th {
+    text-align: center;
+    vertical-align: middle;
+}
+table {
+    text-align: center;
+}
+table#table1, table#table2, 
+table.table#form>tbody>tr>td, 
+table.table#table2>tbody>tr>td, 
+table.table#form1>tbody>tr>td {
+    text-align: justify;
+}
+table.table.table0>tbody>tr>td, 
+table.table.table0>tbody>tr>td, 
+table.table.table0>tbody>tr>th {
+    border: none;
+}
+table.table#table2>tbody>tr>td, 
+table.table#table2>tbody>tr>td, 
+table.table#table2>tbody>tr>th {
+    width: 25%;
+}
+table.table#form>tbody>tr>td>label {
+    width: 30%;
+}
+table.table#form>tbody>tr>td {
+    vertical-align: middle;
+}
+table.table#form>tbody>tr>td>input,
+table.table#form>tbody>tr>td>textarea {
+    width: 60%;
+}
+table.table#form>tbody>tr>td#td-rowspan5, 
+table.table#form>tbody>tr>td#td-rowspan2 {
+    width: 40%;
+}
+/* 파일 선택 버튼의 기본 스타일 숨기기 */
+input[type="file"]#p_img {
+    display: none;
+}
+
+/* 파일 선택 버튼을 가리키는 레이블 스타일링 */
+.custom-file-label {
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Modal Example</h2>
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Open Modal</button>
+
+  <!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <table class="table">
+                    <tr>
+                        <td rowspan="3"><img src="./img/cute_dog.jpg" alt="" style="width: 200px;"></td>
+                        <td><h4 class="modal-title"><strong>상품명el</strong></h4><h5 class="modal-title"><strong>재고el</strong></h5></td>
+                    </tr>
+                    <tr>
+                        <td>상품설명el</td>
+                    </tr>
+                    <tr>
+                        <td><h5 class="modal-title"><small>판매가격:</small></h5><h4 class="modal-title"><strong>가격el원</strong></h4></td>
+                    </tr>
+                </table>
+                <table class="table table2">
+                    <caption>
+                        <strong style="font-size: 18px;">상품설명</strong>
+                    </caption>
+                    <tr><td>주종</td><td>el</td><td>단맛</td><td>el</td></tr>
+                    <tr><td>도수</td><td>el</td><td>신맛</td><td>el</td></tr>
+                    <tr><td>용량</td><td>el</td><td>탄산</td><td>el</td></tr>
+                    <tr><td>제조사</td><td>el</td><td>원료</td><td>el</td></tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form action="" method="" enctype="multipart/form-data">
+                    <table class="table table0" id="form">
+                        <tr>
+                            <td rowspan="5" id="td-rowspan5">
+                                <img id="preview" src="img/" alt="" style="width: 200px;"></td>
+                            <td><label for="">상품 이름</label> <input type="text" id="" name="p_name"></td>
+                        </tr>
+
+                        <tr><td><label for="">상품 설명</label> <input type="text" id="" name="p_desc"></td></tr>
+
+                        <tr><td><label for="">상품 가격</label> <textarea id="" name="p_price" rows="3"></textarea></td></tr>
+
+                        <tr><td><label for="">제조사</label> <input type="text" id="" name="p_made"></td></tr>
+
+                        <tr><td><label for="">도수</label> <input type="text" id="" name="p_dgr"> %</td></tr>
+
+                        <tr>
+                            <td id="td-rowspan2">
+                                <div id="div-filename"></div>
+                            </td>
+                            <td><label for="">용량</label> <input type="text" id="" name="p_cap"> ml</td>
+                        </tr>
+
+                        <tr>
+                            <td id="td-rowspan2">
+                                <button type="button" class="btn btn-default" onclick="fileUploadBtn()">사진등록</button>
+                                <label for="p_img" class="custom-file-label"></label>
+                                <input type="file" id="p_img" name="">
+                            </td>
+                            <td><label for="">수량</label> <input type="text" id="" name="p_stock"> 개</td>
+                        </tr>
+                    </table>
+
+                    <table class="table table0" id="form1">
+                        <tr>
+                            <th>주류종류</th>
+                            <td><input type="radio" name="p_type"> <label for="">약·청주</label></td>
+                            <td><input type="radio" name="p_type"> <label for="">소주</label></td>
+                            <td><input type="radio" name="p_type"> <label for="">증류주</label></td>
+                            <td><input type="radio" name="p_type"> <label for="">과실주</label></td>
+                            <td><input type="radio" name="p_type"> <label for="">기타</label></td>
+                        </tr>
+                        <tr>
+                            <th>단맛</th>
+                            <td><input type="radio" name="p_sw"> <label for="">강</label></td>
+                            <td><input type="radio" name="p_sw"> <label for="">중</label></td>
+                            <td><input type="radio" name="p_sw"> <label for="">약</label></td>
+                        </tr>
+                        <tr>
+                            <th>신맛</th>
+                            <td><input type="radio" name="p_su"> <label for="">강</label></td>
+                            <td><input type="radio" name="p_su"> <label for="">중</label></td>
+                            <td><input type="radio" name="p_su"> <label for="">약</label></td>
+                        </tr>
+                        <tr>
+                            <th>탄산</th>
+                            <td><input type="radio" name="p_sp"> <label for="">강</label></td>
+                            <td><input type="radio" name="p_sp"> <label for="">중</label></td>
+                            <td><input type="radio" name="p_sp"> <label for="">약</label></td>
+                            <td><input type="radio" name="p_sp"> <label for="">없음</label></td>
+                        </tr>
+                        <tr>
+                            <th>원료</th>
+                            <td><input type="radio" name="p_mat"> <label for="">과일</label></td>
+                            <td><input type="radio" name="p_mat"> <label for="">꽃</label></td>
+                            <td><input type="radio" name="p_mat"> <label for="">견과</label></td>
+                            <td><input type="radio" name="p_mat"> <label for="">약재</label></td>
+                            <td><input type="radio" name="p_mat"> <label for="">기타</label></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">상품등록</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">등록취소</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function fileUploadBtn() {
+        $(".custom-file-label").click();
+    }
+    
+    $("#p_img").change(function(event){
+        var fileInput = document.getElementById('p_img');
+        // 파일이 선택되었는지 확인합니다.
+        if (fileInput.files.length > 0) {
+            // 파일이 선택된 경우, 파일 이름을 가져와서 표시합니다.
+            console.log(fileInput.files[0]);
+            var fileName = fileInput.files[0].name;
+            console.log(fileName);
+            document.getElementById("div-filename").innerText = fileName;
+
+            // 파일 입력 요소에서 선택된 파일 가져오기
+            var file = event.target.files[0];
+    
+            // FileReader 객체 생성
+            var reader = new FileReader();
+    
+            // 파일을 읽은 후 실행될 함수 정의
+            reader.onload = function(event) {
+                // 이미지를 표시할 img 요소 가져오기
+                var imgElement = document.getElementById('preview');
+    
+                // FileReader가 읽은 데이터를 img 요소의 src 속성에 설정하여 이미지 표시
+                imgElement.src = event.target.result;
+            };
+    
+            // 파일을 읽기
+            reader.readAsDataURL(file);
+        }
+    })
+</script>
+</body>
+</html>

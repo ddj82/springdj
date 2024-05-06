@@ -1,0 +1,28 @@
+div {
+    width: 500px;
+    height: 200px;
+    margin: 20px;
+    border: 1px solid #ccc;
+}
+
+/* x축값 | y축값 | color */
+#div1 {box-shadow: 60px -16px teal;}
+
+/* x축값 | y축값 | blur-radius 번짐 | color */
+#div2 {box-shadow: 10px 5px 5px black;}
+
+/* x축값 | y축값 | blur-radius 번짐 | spread-radius 퍼짐 | color */
+#div3 {box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);}
+/* #div3 {box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);} */
+
+/* inset (내용안으로 그림자 넣기) | x축값 | y축값 | blur-radius 번짐 | color */
+#div4 {box-shadow: inset 50px 10px 3px gold;}
+
+/* 여러개의 그림자를 주고 싶은 경우, 쉼표로 나열 */
+#div5 {
+    box-shadow: 3px 3px red, -1em 0 0.4em olive;
+
+    /* 나눠서 기술하면 마지막꺼만 적용됨 */
+    /* box-shadow: 3px 3px red; */
+    /* box-shadow: -1em 0 0.4em olive; */
+}

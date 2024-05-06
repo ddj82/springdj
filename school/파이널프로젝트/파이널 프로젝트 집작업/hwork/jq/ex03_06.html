@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js"></script>
+    <style>
+        /* #zone2 :checked {width: 30px; height: 30px;} */
+    </style>
+    <script>
+        function ent() {
+            // :hidden 탐색선택자 : 엘리먼트의 속성이 display: none인 태그만 인지함.
+            // $("#wrap p:hidden").css({"display": "block", "background": "#ff0"});
+    
+            var z1 = $("#course :selected").val();
+            // var z1 = $("#zone1 :selected").val();
+            console.log("z1: " + z1);
+
+            var z1 = $("#course :selected");
+            console.log("z1: ", z1);
+            // console.log(z1[0].attributes[0].value);
+            
+            var z2 = $("#zone2 :checked").val(); //value값이 여러개면 첫번째 값만 가져옴
+            // var z2 = $("#zone2 :checked");
+            console.log("z2: ", z2);
+            // console.log(z2[0].attributes[0].value); //수정
+    
+            var z3 = $("#zone3 :checked").val();
+            // var z3 = $("#zone3 :checked");
+            console.log("z3: ", z3);
+        }
+    </script>
+</head>
+<body>
+    <button onclick="ent()">클릭</button>    
+    <div id="wrap">
+        <p>내용1</p>
+        <p style="display: none;">내용2-1</p> <!-- 안보이는데 영역도 없음 -->
+        <p style="visibility: hidden;">내용2-2</p> <!-- 안보이는데 영역은 있음 -->
+        <p>내용3</p>
+    </div>
+    <form action="#zone3">
+        <p id="zone1">
+            <select name="course" id="course">
+                <option value="opt1">옵션1</option>
+                <option value="opt2" selected>옵션2</option>
+                <option value="opt3">옵션3</option>
+            </select>
+        </p>
+        <p id="zone2">
+            <input type="checkbox" name="hobby1" value="독서"> 독서
+            <input type="checkbox" name="hobby2" value="자전거"> 자전거
+            <input type="checkbox" name="hobby3" value="등산" checked> 등산
+        </p>
+        <p id="zone3">
+            <input type="radio" name="gender" value="male"> 남성
+            <input type="radio" name="gender" value="female" checked> 여성
+        </p>
+        <input type="submit" value="전송하기">
+    </form>
+</body>
+</html>

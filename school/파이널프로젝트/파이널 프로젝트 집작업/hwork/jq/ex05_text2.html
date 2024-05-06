@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 객체</title>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <style>
+        img {width: 280px;}
+    </style>
+    <script>
+        $(function(){
+            $(document).on("mousedown wheel", function(e){
+                let mWhich = e.which;
+                let wheel = e.originalEvent.wheelDelta;
+                    
+                if (mWhich == 2) {
+                    $("img").removeAttr("style").css({"width": "280px"});
+                    mWhich = 0;
+                } else if (wheel < 0) {
+                    if ($("img").width() == 140) {
+                        return;
+                    } else {
+                        $("img").css({"width": $("img").width() - 20 + "px"});
+                    }
+                } else if (wheel > 0) {
+                    if ($("img").width() == 1120) {
+                        return;
+                    } else {
+                        $("img").css({"width": $("img").width() + 20 + "px"});
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>마우스 휠 조작</h2>
+    <span class="pSpan">휠 위로: <mark>확대,</mark> 휠 클릭: <mark>100%</mark> 휠 아래로: <mark>축소</mark></span>
+    <br><br>
+    <img src="../img/cute_dog.jpg">
+</body>
+</html>

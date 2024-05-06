@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input[type=text], select, button {
+            box-sizing: border-box;
+            width: 600px;
+            height: 50px;
+            margin-bottom: 10px;
+            max-width: 100%;
+        }
+
+        input[type=checkbox] {
+            width: 20px;
+            height: 20px;
+            margin: 0 5px 0 0;
+            vertical-align: bottom;
+        }
+
+        .labelClass {margin-right: 20px;}
+    </style>
+
+    <script>
+        // form태그 모두 배열로 가져오기
+        var Frm = document.forms;
+
+        // 체크박스 전체선택, 전체해제
+        function allCheckBox() {
+            let chkArr = document.forms[0].season;
+            let cnt = 0;
+            chkArr.forEach(function (obj, idx) {
+                // if (chkArr[idx].checked == true) {}
+                if (obj.checked == true) {cnt++;}
+            });
+            
+            if (cnt == chkArr.length) {
+                chkArr.forEach(function (obj, idx) {
+                    chkArr[idx].checked = false;
+                });
+            } else {
+                chkArr.forEach(function (obj, idx) {
+                    chkArr[idx].checked = true;
+                });
+            }
+        }
+
+        // 과목선택 버튼 클릭시 select 옵션, 텍스트박스 변경
+        function selSubject () {
+            Frm[1].selSub.options[2].selected = true;
+            Frm[1].subnm.value = Frm[1].selSub.options[2].innerText + "(" + Frm[1].selSub.options[2].value + ")";
+        }
+
+        // 전체 폼 태그 리셋하기
+        function resetForms() {
+            for (let i = 0; i < Frm.length; i++) {
+                Frm[i].reset();
+            }
+        }
+
+        // 즉시 실행 함수
+        window.onload = function() {
+            // select option값 변경 시 텍스트박스 변경
+            Frm[1].selSub.onchange = function(e) {
+                console.log(e);
+                let idx = e.srcElement.selectedIndex;
+                Frm[1].subnm.value = Frm[1].selSub.options[idx].innerText + "(" + this.value + ")";
+            }
+
+            // 체크박스 중 하나라도 해제된 경우 전체선택 해제하기
+            let chk = document.getElementsByName("season");
+            chk.forEach(function (o, i) {
+                chk[i].onclick = function () {
+                    let cntchk = 0;
+                    chk.forEacf(function(o1, i1) {
+                        if (o1.checked == true) {
+                            cntchk++;
+                        }
+                    });
+                    if (cntchk == chk.length) {
+                        Frm[0].allChk.checked = true;
+                    } else {
+                        Frm[0].allChk.checked = false;
+                    }
+                };
+            });
+        };
+    </script>
+</head>
+<body>
+    <form action="">
+        <h2>계절선택(다중)</h2>
+        <input type="checkbox" id="allChk" onclick="allCheckBox()">
+        <label for="allChk" class="labelClass">전체선택</label><br><br>
+        <label class="labelClass"><input type="checkbox" name="season" value="spring">봄</label>
+        <label class="labelClass"><input type="checkbox" name="season" value="summer">여름</label>
+        <label class="labelClass"><input type="checkbox" name="season" value="fall">가을</label>
+        <label class="labelClass"><input type="checkbox" name="season" value="winter">겨울</label>
+        <br><br>
+        <button>전송</button>
+    </form><hr>
+
+    <form action="" onsubmit="return FormChk(this)">
+        <h2>과목선택</h2>
+        <button type="button" onclick="selSubject()">과목선택</button><br>
+        <input type="text" name="subnm" placeholder="선택한 과목명이 나타납니다."><br>
+        <select name="selSub">
+            <option value="">과목선택</option>
+            <option value="mat">수학</option>
+            <option value="kor">국어</option>
+            <option value="eng">영어</option>
+            <option value="soc">사회</option>
+            <option value="sci">과학</option>
+        </select><br><br>
+        <button>전송</button>
+    </form><hr>
+
+    <script>
+        // 텍스트박스에 포커스처리
+        function FormChk(val) {
+            if (val.subnm.value == "") {
+                alert("과목을 선택해주세요.");
+                val.subnm.focus();
+                return false;
+            }
+        }
+    </script>
+    <button onclick="resetForms()">리셋</button>
+</body>
+</html>

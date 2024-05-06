@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>break 문</h1>
+    <script>
+        gugudan:
+        for (var i = 2; i <= 9; i++) {
+            document.write(i + "단<br>");
+
+            for (var j = 1; j <= 9; j++) {
+                if (i > 3) { // 3단까지 풀출력하고 4단부턴 못함
+                    break;
+                }
+                document.write(i + " * " + j + " = " + (i * j) + "<br>");
+                if (j == 9) {
+                    document.write("<hr>");
+                }
+            }
+        }
+    </script>
+</body>
+</html>

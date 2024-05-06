@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>form 요소</title>
+</head>
+<body>
+<h2>The datalist Element</h2>
+<p>datalist 엘리먼트는 입력양식 옵션을 미리 정의하여 보여주는 태그입니다.</p>
+<form>
+    <input list = "browsers" name = "browsers">
+    <datalist id = "browsers">
+        <option>Internet Explorer</option>
+        <option value="Firefox">
+        <option value="Chrome">
+        <option value="Opera">
+        <option value="Safari">
+    </datalist>
+    <input type="submit">
+</form>
+<p>
+<b>참고:</b>
+datalist 태그는 Safari 12.1. 전 버전에서는 지원이 되지 않습니다.
+</p>
+</body>
+</html>

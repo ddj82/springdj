@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js"></script>
+</head>
+<body>
+    <form action="" name="frm">
+        <input type="search" name="searchText" placeholder="검색어를 입력해주세요.">
+        <input type="button" value="검색">
+    </form>
+    <ul>
+        <li>하늘이 파랗다</li>
+        <li>하늘이 파랗다</li>
+        <li>강물은 푸르다</li>
+        <li>강물은 푸르다</li>
+        <li>하늘이 파랗다</li>
+        <li>강물은 푸르다</li>
+        <li>강물은 푸르다</li>
+        <li>강물은 푸르다</li>
+        <li>하늘이 파랗다</li>
+        <li>하늘이 파랗다</li>
+        <li>하늘이 파랗다</li>
+        <li>하늘이 파랗다</li>
+        <li>김동준</li>
+        <li>변유림</li>
+        <li>정하경</li>
+        <li>김성준</li>
+        <li>김동욱</li>
+    </ul>
+
+    <script>
+        let searchInput = frm.searchText;
+        let str;
+        let tempStr = "";
+
+        $(searchInput).on("keydown", function(e){
+            if (e.keyCode == 13) {
+                $("input[type=button]").click();
+                // input type="search"에서 엔터하는 경우 form의 action실행이 안되도록 막기
+                e.preventDefault();
+                // return false;
+            }
+        });
+
+        $("input[type=button]").click(function(){
+            str = searchInput.value;
+            if (tempStr == "") {
+                tempStr = str;
+            }
+            if (tempStr != str) {
+                $("ul > li").show();
+            }
+            if (str == "") {
+                $("ul > li").show();
+                $(searchInput).focus();
+            } else {
+                $("ul > li").filter(function(i, o){
+                    if (o.innerText.indexOf(str) < 0) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }).css("display", "none");
+            }
+        });
+    </script>
+</body>
+</html>

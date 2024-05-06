@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <style>
+        select#rel_site {padding: 10px;}
+        button {height: 30px;}
+        input[type=text] {height: 26px;}
+    </style>
+    <script>
+        $(function(){
+            // on("이벤트속성자", 콜백함수) 정적함수
+            $("#rel_site").on("change", function(){
+                $(".txt").text($(this).val());
+            });
+            // 자바스크립트식
+            // document.getElementById("rel_site").onchange = function(e){
+            //     document.getElementsByClassName("txt")[0].innerText = e.target.value;
+            // };
+
+            // $("#rel_site").change(function(){
+            //     $(".txt").text($(this).val());
+            // });
+            // $("#rel_site").on("click", function(){
+            //     $(".txt").text($(this).val());
+            // });
+
+            $("button").click(function(){
+                $("input").change(); // 강제로 onchange이벤트를 발생 시킴
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>해당 요소의 값이 변경되면 change이벤트가 발생</h2>
+    <select id="rel_site">
+        <option value="">사이트 선택</option>
+        <option value="www.google.com">구글</option>
+        <option value="www.naver.com">네이버</option>
+        <option value="www.daum.net">다음</option>
+    </select>
+    <p class="txt"></p><br><br>
+
+    <h2>버튼을 클릭하면 input의 change이벤트를 강제로 발생 시킴</h2>
+    <button type="button">클릭</button>
+    <!-- onchange : 해당 값이 변경된 후 blur상태(포커스 아웃)일 때 값 변경이 인지된다. -->
+    <input type="text" onchange="alert(this.value)" size="60" value="버튼클릭 시 input엘리먼트의 onchange이벤트 발생">
+</body>
+</html>

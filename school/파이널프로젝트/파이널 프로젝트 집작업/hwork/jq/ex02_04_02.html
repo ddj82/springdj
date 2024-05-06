@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <style>
+        /* 속성값에 !important를 붙이게 되면 css, script 모두 적용하고 맨 마지막에 적용되게 함 */
+        /* html, body {padding: 0!important; margin: 0!important; border: none!important;} */
+        /* html, body {padding: 0; margin: 0;} */
+    </style>
+    <script>
+        $(function(){
+            $(".txt1").parents().css({"border": "5px solid red", "padding":"10px"});
+            // $(".txt2").parents("section").css({"border": "5px solid red", "padding":"10px"});
+            // $(".txt2").parents().css({"border": "5px solid red", "padding":"10px"});
+        });
+    </script>
+</head>
+<body>
+    <h1 class="title">선택자</h1>
+    <section><div><p class="txt1">내용</p></div></section>
+    <section><div><p class="txt2">내용</p></div></section>
+</body>
+</html>

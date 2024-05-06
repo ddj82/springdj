@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <style>
+        body {font: 12pt "Malgun Gothic", "맑은 고딕", sans-serif; }
+        /* .btn {font-size: 12px;} */
+    </style>
+    <script>
+        $(function(){
+            var fSize = 14;
+            $(".zBtn .btn").on("click", zInOut);
+
+            function zInOut(){
+                if ($(this).hasClass("zOut")) { //hasClass("클래스명") => 해당클래스명이 있으면 true, 없으면 false
+                    if (fSize <= 8) {
+                        return false;
+                    }
+                    fSize--;
+                } else if ($(this).hasClass("zIn")) {
+                    if (fSize >= 50) {
+                        return false;
+                    }
+                    fSize++;
+                } else {
+                    fSize = 12;
+                }
+                $(".fontSize").text(fSize + "pt");
+
+                /* 속성명:
+                객체로 사용시 -(대시)제거 카멜기법으로 표기.
+                css속성명 그대로 사용하는 경우는 따옴표로 묶어줌.
+                */
+                $(".fontSize, #wrap").css({"font-size": fSize + "pt"});
+                $("#rel_site, #rel_site option").css({"font-size": fSize + "pt"});
+                // $(".btn").css({"font-size": fSize + "pt"});
+                $("#zBtn, #zBtn .btn").css({"font-size": "12pt!important"});
+            }
+        });
+    </script>
+</head>
+<body>
+    <p class="zBtn">
+        <button class="btn zOut">-</button>
+        <button class="btn originBtn">100%</button>
+        <button class="btn zIn">+</button>
+    </p>
+    <p class="fontSize">12pt</p>
+
+    <div id="wrap">
+        asdfjksadhfakjlshfjskdlfh sdkjfh kjsdhf skdjjfh sdkjfh hsdkj fhksdjahflksd 
+        sdali lyhsjdklf skd ajhf askl psdafuldisoa lakshdkjh  asdio awisusaasdfjsd lasfghsda
+        asd gyuusa kaskyg kasdr laosiyfdsalk iusaeilurg aolisafglksd iusdaifusad lsdkjgfsdalkg sdalisadisug
+        asdihug sadi fgsdiufgks jdag lgflksadfgsjhk ag sdlfgslakdfgsdal sdalfgasdlkfjg soluids fhksdjahflksdsd fsd
+        sdaif sagaiskd sajdkfgfsd ili asdf gsdajfgsda sadfisdag lsk gksadgfk  gsakhgasdjhf gksadgfkasdkajksdg 
+        asudy yuatsd hgujfasjsad saeiyr gtukasfkuyusda asdiuyisad kasdfyu asjhsd askjgfsad askjfaiug weuew tiweyui  
+        weweuqy oq w wqeyugweq qwiweq qwoiasf asdjsadfg usayweiory ioyasdiyu weiyasf sgweiup sadiliugw 
+        asd yasdig sddaiugweou ew uoewwuo wef iugefiug f fiugfug gusfdagivkbef sdfugsdfg
+    </div>
+
+    <select id="rel_site">
+        <option value="">사이트 선택</option>
+        <option value="www.google.com">구글</option>
+        <option value="www.naver.com">네이버</option>
+        <option value="www.daum.net">다음</option>
+    </select><br>
+</body>
+</html>

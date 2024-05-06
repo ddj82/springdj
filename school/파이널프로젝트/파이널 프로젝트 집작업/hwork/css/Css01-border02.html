@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CSS</title>
+    <style>
+        table {
+        /*요소선택자 - 태그명*/
+            width: 100%;
+            font-family: Georgia;
+            font-style: italic;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        table td {
+        /*자손선택자 - 선택자 사이에 콤마가 아닌 공백 한칸을 쓰는 경우
+        (ㄴtable안에 존재하는 태그들 중에 자식이나 자손으로 존재하는 td들)이라는 뜻*/
+            border: 10px solid red;
+            padding: 10px 20px;
+        }
+        table.none {border-style: none;}
+        /*(ㄴtable태그에서 class속성 값이 none인 table)이라는 뜻*/
+
+        table.hidden {border-style: hidden;}
+        /*(ㄴtable태그에서 class속성 값이 hidden인 table)이라는 뜻*/
+
+        td {border: 1px solid red;}
+        td {border: 1px solid black;}
+    </style>
+</head>
+<body>
+    <h1 id="none">border-style: none;</h1>
+    <table class="none">
+        <tr><td>Lorem</td><td>Ipsum</td></tr>
+        <tr><td>Dolor</td><td>Amet</td></tr>
+        <tr><td>Phasellus</td><td>Mauris</td></tr>
+    </table>
+
+    <h1>border-style: hidden;</h1>
+    <table class="hidden">
+        <tr><td>Lorem</td><td>Ipsum</td></tr>
+        <tr><td>Dolor</td><td>Amet</td></tr>
+        <tr><td>Phasellus</td><td>Mauris</td></tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var condition = true;
+        while(condition) {
+            // abc@co.kr
+            var userEmail = prompt("당신의 이메일 주소는?", "");
+            var arrUrl = [".co.kr", ".com", ".net", ".or.kr", ".go.kr"];
+
+            var check1 = false;
+            var check2 = false;
+
+            // abc@co.kr
+            if (userEmail == null || userEmail == "") {
+                alert("이메일을 입력하세요.");
+                continue;
+            }
+
+            // abc@.co.kr
+            if (userEmail.indexOf("@") > 0) {
+                check1 = true;
+            }
+            if (userEmail.indexOf("@", userEmail.indexOf("@") + 1) > 0) {
+                alert("@기호는 1번만 기술해주세요.");
+                continue;
+            }
+
+            // abc@.co.kr
+            // "abc@.co.kr".indexOf(".co.kr")
+            // arrUrl = [".co.kr", ".com", ".net", ".or.kr", ".go.kr"];
+            for (var i = 0; i < arrUrl.length; i++) {
+                if (userEmail.indexOf("@") < userEmail.indexOf(arrUrl[i]) && userEmail.indexOf(arrUrl[i]) > 1) {
+                    check2 = true;
+                }
+            }
+
+            if (check1 && check2) {
+                document.write(userEmail);
+                condition = false;
+            } else {
+                alert("이메일 형식이 잘못되었습니다.");
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

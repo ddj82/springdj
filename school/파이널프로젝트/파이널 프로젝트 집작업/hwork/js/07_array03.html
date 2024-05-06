@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>배열관련 함수들</h1>
+    <script>
+        // charAt(인덱스) : 문자열의 한 글자만 추출
+        var str = "안녕하세요!";
+        var str1 = new String("안녕하세요");
+        document.write(str.charAt(2) + "<br>");
+        document.write(str[5] + "<br>");
+        document.write(str.length + "<br>");
+
+        // Array.isArray() : 배열객체 여부 판별
+        var arr = [1, true, "JavaScript"];
+        document.write(Array.isArray(arr) + "<br>"); //t
+        document.write(Array.isArray(str) + "<br>"); //f
+
+        // 객체 | 변수 | 데이터 instanceof Array : 배열객체 여부 판별
+        // 객체는 type이 object이다.
+        document.write((arr instanceof Array) + "<br>"); //t
+        document.write((str instanceof Array) + "<br>"); //f
+        document.write((str instanceof String) + "<br>"); //f
+        // var str = "안녕하세요!"; => type: string
+        document.write((str1 instanceof String) + "<br>"); //t
+        // var str1 = new String("안녕하세요"); => type: object
+
+        document.write(typeof str, "<br>"); //string
+        document.write(typeof str1, "<br>"); //object
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Form Validation</h2>
+        <p>다음 예제에서는 <code>.needs-validation</code>을 사용하여 양식을 제출한 후 (누락된 내용이 있는 경우) 유효성 검사 효과를 추가합니다.</p>
+        <p>입력 필드를 작성하기 전에 확인을 눌러 효과를 확인하십시오.</p>
+
+        <!-- form태그에 novalidate키워드가 있으면 form태그의 입력요소에 required가 있어도 무시하고 submit해줌 -->
+        <!-- form태그에 novalidate를 쓰는 이유는 입력요소에 required의 디폴트 알림창을 방지하기 위함 -->
+        <form action="#" class="needs-validation" novalidate>
+        <!-- <form action="#" class="needs-validation"> -->
+            <div class="form-group">
+                <label for="uname">이름:</label>
+                <input type="text" class="form-control" id="uname" placeholder="이름을 입력해주세요." name="uname">
+                <div class="valid-feedback">유효성검사</div> 
+                <div class="invalid-feedback">이 필드를 작성해 주세요.</div>
+                <!-- 
+                    부트스트랩에서
+                    form태그에 was-validated클래스가 있을때 
+                    valid-feedback클래스가 있는 요소는 show()
+                    invalid-feedback클래스가 있는 요소는 hide()
+                 -->
+            </div>
+            
+            <div class="form-group">
+                <label for="pwd">비밀번호:</label>
+                <input type="password" class="form-control" id="pwd" placeholder="비밀번호을 입력해주세요." name="pswd" required>
+                <div class="valid-feedback">유효성검사</div>
+                <div class="invalid-feedback">이 필드를 작성해 주세요.</div>
+            </div>
+            
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" id="pwd" name="remember" required>
+                    양식 제출에 동의합니다.
+                    <div class="valid-feedback">유효성검사</div>
+                    <div class="invalid-feedback">계속하려면 이 확인란을 체크해주세요.</div>
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">확인</button>
+        </form>
+    </div>
+    <script>
+        // 잘못된 필드가 있는 경우 양식 제출 사용 안함
+        // 자바스크립트식
+        (function(){
+            window.addEventListener("load", function(){
+                // 유효성 검사 스타일을 추가할 양식 가져오기
+                var forms = document.getElementsByClassName("needs-validation");
+
+                // 반복하여 제출 방지
+                // Array.prototype.filter.call(forms, function(form){
+                var validation = Array.prototype.filter.call(forms, function(form){
+
+                    // Array.prototype.filter.call(매개변수, 콜백함수) : 
+                    // 콜함수(call())를 쓰는데 매개변수를 Array객체로 바꾸고(prototype) 필터링(filter) 하는 식
+                    form.addEventListener("submit", function(e){
+
+                        // if (form.checkValidity() === false) {
+                        if (!form.checkValidity()) {
+                            // checkValidity() : 폼태그안에 required, (min, max, url, email,)등 유효성 속성이 있니?
+                            // form태그 안에 유효성체크 값이 잘 처리되면 true, 안됐으면 false
+                            
+                            e.preventDefault(); // 액션이벤트 방지
+                        }
+                        // jquery의 addClass()와 동일
+                        form.classList.add("was-validated");
+
+                        // 캡쳐링-true(자식에서 조상까지 이벤트 전파), 버블링-false-(디폴트)(조상에서 자식까지 이벤트 전파)
+                    }, false); // form.addEventListener("submit", function(){}, false) 종료
+
+                }); // call() 함수호출문 종료
+            }, false); // window.addEventListener("load", function(){}) 종료
+        })();
+
+        // 제이쿼리식
+        // $(function(){
+        //     var forms = $(".needs-validation");
+
+        //     forms.filter(function(i, o){
+        //         $(o).on("submit", function(e){
+        //             if (!o.checkVisibility()) {
+        //                 e.preventDefault();
+        //             }
+        //             $(o).addClass("was-validated");
+        //         });
+        //     });
+        // });
+    </script>
+</body>
+</html>

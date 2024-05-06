@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>네이버 : 회원가입</title>
+    <style>
+        * {box-sizing: border-box;}
+        
+        textarea {
+            resize: none;
+            background-color: white;
+            width: 100%;
+            height: 70px;
+        }
+
+        /* 전체 중앙배치 */
+        div#maindiv, form[name=rogo] {
+            width: 450px;
+            margin: 0 auto;
+        }
+
+        /* 네이버 로고 */
+        input.rogo {border: none; width: 100px; height: 20px;}
+        form[name=rogo] {padding: 15px 0;}
+
+        /* 버튼 */
+        button {
+            border: none;
+            border-radius: 5px;
+            background-color: #7d7d7d;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            position: sticky;
+            bottom: 20px;
+            height: 50px;
+            width: 450px;
+        }
+
+        small.very {
+            color: #24a724;
+        }
+        label {
+            font-weight: bold;
+        }
+        small {
+            color: #7d7d7d;
+        }
+        p#benefitsagree {
+            color: red;
+            font-size: small;
+        }
+        label#eLabel {
+            padding-left: 20px;
+        }
+        input[type=checkbox] {
+            /* display: none; */
+        }
+        div.textBox {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            color: #777;
+            font-size: 13px;
+            overflow: auto;
+            overflow-x: hidden;
+            height: 100px;
+        }
+        div.textBox.smallBox {height: 70px;}
+        div.textBox > div.btext {
+            color: black;
+            font-size: 16px;
+            padding: 0 0 5px 0;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+
+<body>
+    <form name="rogo" action="https://www.naver.com/" method="get" autocomplete="off">
+        <input class="rogo" type="image" src="../img/naverLogo.png" title="네이버 홈페이지로">
+    </form>
+    
+    <div id="maindiv">
+        <form action="naver2_ing.html" method="get" autocomplete="off" name="formAgree" onsubmit="return CheckForm()">
+            <p>
+                <input type="checkbox" name="checkall" id="checkall" onclick="allAgree();">
+                <label for="checkall">전체 동의하기</label><br>
+                <small>실명 인증된 아이디로 가입, 위치기반서비스 이용약관(선택), 이벤트・혜택 정보 수신(선택) 동의를 포함합니다.</small>
+            </p>
+    
+            <input type="checkbox" name="check" id="check1" onclick="checkAgree();">
+            <small class="very">[필수]</small>
+            <label for="check1">네이버 이용약관</label><br><br>
+            <div class="textBox">
+                <div class="btext">여러분을 환영합니다.</div>
+                네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다. <br><br>
+                <div class="btext">다양한 네이버 서비스를 즐겨보세요.</div>
+                네이버는 www.naver.com을 비롯한 네이버 도메인의 웹사이트 및 응용프로그램(어플리케이션, 앱)을 통해 정보 검색, 다른 이용자와의 커뮤니케이션, 콘텐츠 제공, 상품 쇼핑 등 여러분의 생활에 편리함을 더할 수 있는 다양한 서비스를 제공하고 있습니다.
+                여러분은 PC, 휴대폰 등 인터넷 이용이 가능한 각종 단말기를 통해 각양각색의 네이버 서비스를 자유롭게 이용하실 수 있으며, 개별 서비스들의 구체적인 내용은 각 서비스 상의 안내, 공지사항, 네이버 웹고객센터(이하 ‘고객센터’) 도움말 등에서 쉽게 확인하실 수 있습니다.
+                
+                네이버는 기본적으로 여러분 모두에게 동일한 내용의 서비스를 제공합니다. 다만, '청소년보호법' 등 관련 법령이나 기타 개별 서비스 제공에서의 특별한 필요에 의해서 연령 또는 일정한 등급을 기준으로 이용자를 구분하여 제공하는 서비스의 내용, 이용 시간, 이용 횟수 등을 다르게 하는 등 일부 이용을 제한하는 경우가 있습니다. 자세한 내용은 역시 각 서비스 상의 안내, 공지사항, 고객센터 도움말 등에서 확인하실 수 있습니다.
+            </div>
+            <br><br>
+    
+            <input type="checkbox" name="check" id="check2" onclick="checkAgree();">
+            <small class="very">[필수]</small>
+            <label for="check2">개인정보 수집 및 이용</label><br><br>
+            <div class="textBox">
+                개인정보보호법에 따라 네이버에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
+            </div>
+            <br><br>
+    
+            <input type="checkbox" name="check" id="check3" onclick="allAgree2();">
+            <small>[선택]</small>
+            <label for="check3">실명 인증된 아이디로 가입</label><br><br>
+            <div class="textBox smallBox">
+                실명 인증된 아이디로 가입하시면 본인인증이 필요한 서비스(네이버 페이, 쇼핑, 멤버십 등)를 가입 후 바로 이용하실 수 있어요.
+            </div>
+            <br><br>
+    
+            <input type="checkbox" name="check" id="check4" onclick="allAgree2();">
+            <small>[선택]</small>
+            <label for="check4">위치기반서비스 이용약관</label><br><br>
+            <div class="textBox">
+                위치기반서비스 이용약관에 동의하시면, 위치를 활용한 광고 정보 수신 등을 포함하는 네이버 위치기반 서비스를 이용할 수 있습니다.
+            </div>
+            <br><br>
+    
+            <input type="checkbox" name="check" id="check5" onclick="infoAgree();">
+            <small>[선택]</small>
+            <label for="check5">개인정보 수집 및 이용</label><br>
+            <input type="checkbox" name="check" id="check6" onclick="bfAgree();">
+            <small>
+                <label for="check6" id="eLabel">이벤트・혜택 정보 수신</label>
+            </small>
+            <p id="benefitsagree"></p>
+            <button type="submit" id="nextStep">다음</button>
+        </form>
+
+    </div>
+
+
+    <script>
+        function allAgree() {
+            let checkAll = document.formAgree.checkall.checked;
+            let chk = document.getElementsByName("check");
+            if (checkAll) {
+                for (let i = 0; i < chk.length; i++) {chk[i].checked = true;}
+                document.getElementById("nextStep").style.background = "#24a724";
+            } else {
+                for (let i = 0; i < chk.length; i++) {chk[i].checked = false;}
+                document.getElementById("nextStep").style.background = "#7d7d7d";
+            }
+        }
+
+        function checkAgree() {
+            var checkVery1 = document.formAgree.check1.checked;
+            var checkVery2 = document.formAgree.check2.checked;
+            if (checkVery1 == true && checkVery2 == true) {
+                changeButtonC();
+            } else if (checkVery1 == true || checkVery2 == true) {
+                returnButton();
+            }
+            function changeButtonC() {document.getElementById("nextStep").style.background = "#24a724";}
+            function returnButton() {document.getElementById("nextStep").style.background = "#7d7d7d";}
+            allAgree2();
+        }
+
+        
+        function infoAgree() {
+            var checkInfo = document.formAgree.check5.checked;
+            if (checkInfo) {
+                document.formAgree.check6.checked = true;
+            } else if (!checkInfo) {
+                document.getElementById("benefitsagree").innerHTML = "";
+                document.formAgree.check6.checked = false;
+            } else {
+                document.formAgree.check6.checked = false;
+            }
+            allAgree2()
+        }
+
+        function bfAgree() {
+            var checkInfo = document.formAgree.check5.checked;
+            var checkBf = document.formAgree.check6.checked;
+            if (!checkInfo) {
+                document.formAgree.check5.checked =true;
+            } else {
+                document.getElementById("benefitsagree").innerHTML = "네이버 혜택 정보를 받으시려면 ‘개인정보 수집 및 이용’에 동의해 주세요.";
+            }
+            
+            if (checkInfo && checkBf) {
+                document.getElementById("benefitsagree").innerHTML = "";
+            } 
+            allAgree2()
+        }
+
+        function allAgree2() {
+            let chk = document.getElementsByName("check");
+            for (let i = 0; i < chk.length; i++) {
+                if (chk[i].checked) {
+                    document.formAgree.checkall.checked = true;
+                } else {
+                    document.formAgree.checkall.checked = false;
+                    break;
+                }
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

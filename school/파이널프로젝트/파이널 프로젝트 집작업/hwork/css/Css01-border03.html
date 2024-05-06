@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div.gallery {
+            margin: 5px;
+            border: 1px solid #ccc;
+            float: left;
+            width: 180px;
+            /* float속성 : 블록레벨요소를 해당 방향에 붙히고 
+            브라우저의 해당 공간을 없는 공간이라 침, 인라인레벨요소가 된 것 처럼 보이게 함 
+            float속성을 받게 되면 width가 100%에서 컨텐츠너비만큼으로 바뀜
+            
+            clear속성이 나오면 float속성을 끊어버림 */
+        }
+        .gallery {
+            margin: 5px;
+            border: 1px solid red;
+            float: right;
+            width: 300px;
+            /* height: 300px; << 우선순위에 없는 속성이 있으면
+            우선순위가 딸리는 선택자 것도 적용 됨 */
+        }
+        /* 동일한 타겟의 선택자가 존재할 땐 선택자의 우선순위로 정해지는데 
+        우선순위 선택자 안에 없는 속성이 있으면 적용 됨*/
+
+        div.gallery:hover {border: 3px solid #f00;}
+        div.gallery img {width: 100%; height: auto;}
+        div.desc {padding: 15px; text-align: center;}
+    </style>
+</head>
+<body>
+    <div class = "gallery">
+        <a href="../img/img_5terre.jpg" target="_blank">
+            <img src="../img/img_5terre.jpg" alt="Cinque Terre" width="600" height="400">
+        </a>
+        <div class="desc">Add a description of the image here</div>
+    </div>
+
+    <div class = "gallery">
+        <a href="../img/img_forest.jpg" target="_blank">
+            <img src="../img/img_forest.jpg" alt="Forest" width="600" height="400">
+        </a>
+        <div class="desc">Add a description of the image here</div>
+    </div>
+
+    <div class = "gallery">
+        <a href="../img/img_lights.jpg" target="_blank">
+            <img src="../img/img_lights.jpg" alt="Northern Ligths" width="600" height="400">
+        </a>
+        <div class="desc">Add a description of the image here</div>
+    </div>
+
+    <div class = "gallery">
+        <a href="../img/img_mountains.jpg" target="_blank">
+            <img src="../img/img_mountains.jpg" alt="Mountains" width="600" height="400">
+        </a>
+        <div class="desc">Add a description of the image here</div>
+    </div>
+
+    <div style="clear: left;"></div>
+    <div style="clear: right;"></div>
+    <div style="clear: both;"></div>
+    
+    <div>테스트div태그입니다.</div>
+    <div>테스트div태그입니다.</div>
+    <div>테스트div태그입니다.</div>
+    <div>테스트div태그입니다.</div>
+    <div>테스트div태그입니다.</div>
+    <div>테스트div태그입니다.</div>
+    <div>테스트div태그입니다.</div>
+    <div>테스트div태그입니다.</div>
+    <div>테스트div태그입니다.</div>
+    <div>테스트div태그입니다.</div>
+    <div>테스트div태그입니다.</div>
+    <div>테스트div태그입니다.</div>
+    <div>테스트div태그입니다.</div>
+    <div>테스트div태그입니다.</div>
+    <div>테스트div태그입니다.</div>
+    <div>테스트div태그입니다.</div>
+    <div>테스트div태그입니다.</div>
+    <div>테스트div태그입니다.</div>
+</body>
+</html>

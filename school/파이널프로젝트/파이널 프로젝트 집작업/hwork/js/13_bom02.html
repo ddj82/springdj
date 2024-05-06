@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="demo"></p>
+    <button onclick="clearInterval(myVar)">Stop time</button>
+    <!-- clearInterval(setInterval()의 객체명) => setInterval함수를 멈춰라 -->
+
+    <script>
+        // 1초마다 myTimer 함수 실행
+        var myVar = setInterval(myTimer, 1000);
+        // window에서 제공하는 무한반복 함수 => setInterval(함수명, 밀리세컨드초);
+        function myTimer() {
+            var d = new Date();
+            document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+            // toLocaleTimeString() : 현재 시간을 가져오는 함수. 시스템 내장(한국식) 시간을 가져옴
+        }
+    </script>
+</body>
+</html>

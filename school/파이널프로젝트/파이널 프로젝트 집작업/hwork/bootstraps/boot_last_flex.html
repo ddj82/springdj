@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex 정리</title>
+    <style>
+        * {box-sizing: border-box;}
+        body {margin: 0;}
+        ul {
+            display: flex;
+            padding: 0;
+            list-style: none;
+            height: 300px;
+            border: 5px solid red;
+        }
+        li {background: beige;}
+        li:nth-child(2n){background-color: aquamarine;}
+        /* li {flex-grow: 1;} */
+        /* li:nth-child(3) {flex-grow: 1;} */
+        /* li:nth-child(3) {flex-shrink: 30;} */
+        /* li:nth-child(3) {flex-basis: 300px;} */
+        /* li:nth-child(3) {flex-shrink: 0;} */
+        /* li {flex-shrink: 0;} */
+        /* 
+        flex-basis : 지정하지 않을때 = 컨텐츠 크기
+
+        flex-grow : 0 [기본값]
+        : 아이템을 어떻게 채울지의 여부, flex-grow: 1; => 아이템들을 남는 공간 없이 채워서 배치
+
+        flex-shrink : 1 [기본값]
+        : 너비에 관한 것. 아이템들이 갖고 있던 크기가 줄어들 수 있는가에 대한 속성
+        : 공간이 줄어들때 여백이 사라짐 => 각 아이템들의 크기가 조율됨
+        : flex-shrink: 0; 일때 => 정해진 크기 고수 => 영역 밖으로 벗어나 잘리는 아이템이 생김
+        : flex-shrink: 1; 일때 [기본값] => 박스가 작아지면 아이템 기본 크기가 줄어듬
+        : 2이상의 값일 땐 크기를 줄이는 빠르기로 인식
+        */
+    </style>
+</head>
+<body>
+    <div class="listContainer">
+        <ul>
+            <li>거북이</li>
+            <li>호랑이</li>
+            <li>두루미</li>
+            <li>말미잘</li>
+            <li>고릴라</li>
+            <li>원숭이</li>
+        </ul>
+    </div>
+</body>
+</html>

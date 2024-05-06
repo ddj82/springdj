@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // // **알림창 : alert("메세지");
+        // alert("알림창입니다,");
+
+        // // 입력창 : prompt(); || prompt("메세지"); || prompt("메세지", 초기값);
+        // var pin = prompt("입력창입니다.");
+        // document.write("입력창 값: " + pin + "<br>");
+
+        // // **확인창 : confirm("메세지");
+        // var con = confirm("확인창입니다.");
+        // // if(con) {// 페이지이동코드 작성} else {return false;}
+        // document.write("확인창 값: " + con);
+    </script>
+</head>
+<body>
+    <form action="" onsubmit="return con()">
+        <input type="text" name="aaa">
+        <button>전송</button>
+    </form>
+    <button id="btn">회원탈퇴</button>
+
+    <script>
+        function con() {
+            var co = confirm("회원탈퇴를 하시겠습니까?");
+            return co;
+        }
+
+        document.getElementById("btn").onclick = function () {
+            if (confirm("회원탈퇴를 하시겠습니까?")) {
+                alert("회원탈퇴가 되었습니다.");
+            } else {
+                alert("회원탈퇴가 되지 않았습니다.");
+            }
+        }
+    </script>
+
+</body>
+</html>

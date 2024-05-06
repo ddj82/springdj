@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var a = 7, b =3;
+        document.write("7 + 3 = " + a + b + '<br>'); //7 + 3 = 73
+        document.write("7 + 3 = " , a + b , '<br>'); //'7' + 3 = 10
+        document.write("(7 + 3) = " + (a + b) + '<br>'); //(7 + 3) = 10
+        document.write("(7 + 3) = " , (a + b) , '<br>'); //(7 + 3) = 10
+
+        document.write("(7 == 3) : " + (a == b) + '<br>');
+        document.write("(7 != 3) : " + (a != b) + '<br><hr>');
+
+        document.write("(!false) : " + (!false) + "<br>");
+
+        // 자바스크립트에서 "!부정자료형" 형식은 숫자 0 또는 "", null, undefined 값을 제외한 모든 것을 true로 인식한다.
+        // Boolean() 생성자 함수로 인식
+        // Boolean() 생성자 함수는 매개인자값으로 0, null, undefined, '', "" 값을 넣을 경우는 false 반환 존재하는 값을 넣을 경우는 true 반환
+        document.write("(!0) : " + (!0) + "<br>");
+        document.write("(!b) : " + (!b) + "<br>");
+        document.write('(!"wow") : ' + (!"wow") + "<br>");
+        document.write('(!"") : ' + (!"") + "<br>");
+        document.write("(!null) : " + (!null) + "<br>");
+        document.write("(!undefined) : " + (!undefined) + "<br>");
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <script>
+        /* 
+        $("선택한 요소").replaceWith("새요소") : 선택한 요소를 새요소로 변경함.
+        $("새요소").replaceAll("선택한 요소") : 선택한 요소를 새요소로 변경함.
+        */
+        function gbb(){
+            // $("h2").replaceWith("<h3>replace method</h3>");
+            $("<p>Change</p>").replaceAll("div");
+        }
+    </script>
+</head>
+<body>
+    <section class="box1">
+        <h2>제목1</h2>
+        <div>내용1</div>
+        <div>내용2</div>
+    </section>
+    <section class="box2">
+        <h2>제목2</h2>
+        <div>내용3</div>
+        <div>내용4</div>
+    </section>
+    <button onclick="gbb()">클릭</button>
+</body>
+</html>

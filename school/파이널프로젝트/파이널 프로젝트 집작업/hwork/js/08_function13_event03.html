@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>check박스 체크 여부 확인하기</title>
+    <script>
+        function CheckForm() {
+            // 체크박스 체크여부 확인 [하나]
+            // 체이닝방식 : .(접근연산자)를 이용하여 여러개의 속성을 나열하는 방법
+            // - checked
+            // 공간자리에 있는 경우: 체크여부를 설정 (true => 체크, false => 해제)
+            // 값자리에 있는 경우: 체크된 여부를 판별 (true: 체크된 상태, false: 해제된 상태)
+            var chk1 = document.frmJoin.U_checkAgreement1.checked;
+            var chk2 = document.frmJoin.U_checkAgreement2.checked;
+            if (!chk1) {
+                alert("약관1에 동의해 주세요");
+                // document.frmJoin.U_checkAgreement1.checked = true;
+                document.getElementById("arr1").innerHTML = "<span style='color: red;'>약관1에 동의해주세요.</span>";
+                return false;
+            }
+            if (!chk2) {
+                alert("약관2에 동의해 주세요");
+                // document.frmJoin.U_checkAgreement2.checked = true;
+                return false;
+            }
+            
+            // 체크박스 체크여부 확인 [동일 이름을 가진 체크박스 여러개일 경우]
+            /* 
+            arr_Season[0] <input type="checkbox" id="spring" name="SEASON" value="1">
+            arr_Season[1] <input type="checkbox" id="summer" name="SEASON" value="2">
+            arr_Season[2] <input type="checkbox" id="fall" name="SEASON" value="3">
+            arr_Season[3] <input type="checkbox" id="winter" name="SEASON" value="4">
+            frmJoin.fall.checked = true;
+            */
+            var isSeasonChk = false;
+            var arr_Season = document.getElementsByName("SEASON");
+            for (var i = 0; i < arr_Season.length; i++) {
+                if (arr_Season[i].checked == true) {
+                    isSeasonChk = true;
+                    break;
+                }
+            }
+            if (!isSeasonChk) {
+                alert("계절의 종류를 한 개 이상 선택해주세요.");
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <form action="" name="frmJoin" onsubmit="return CheckForm()">
+        <input type="checkbox" name="U_checkAgreement1" id="U_checkAgreement1"> 약관동의1 
+        <input type="checkbox" name="U_checkAgreement2" id="U_checkAgreement2"> 약관동의2
+        <p id="arr1"></p>
+        <br><br>
+        
+        <input type="checkbox" id="spring" name="SEASON" value="1">봄
+        <input type="checkbox" id="summer" name="SEASON" value="2">여름
+        <input type="checkbox" id="fall" name="SEASON" value="3">가을
+        <input type="checkbox" id="winter" name="SEASON" value="4">겨울
+        <br><br>
+        <input type="submit" value="전송">
+    </form>
+</body>
+</html>

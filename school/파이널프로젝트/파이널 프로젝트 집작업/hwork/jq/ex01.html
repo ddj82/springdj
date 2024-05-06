@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <script>
+        /* 
+        제이쿼리는 선택자를 사용하기 위해서는 실행 할 수 있는 환경이 미리 조성되어 있어야만 한다.
+
+        즉시실행 방법
+        javascript 즉시실행 함수 형식
+        window.onload = function () {소스코드들; ...;}; (중괄호 뒤 세미콜론 생략가능.)
+        (function(매개변수들...){실행코드들;...;})(매개변수값들...);
+
+        jquery 형식
+        $(document).ready(function(){소스코드들; ...;});
+        jQuery(document).ready(function(){소스코드들; ...;});
+        $(fuction(){소스코드들;...;});
+        jQuery(fuction(){소스코드들;...;});
+
+        콜백함수 (= 형식: 자바스크립트의 익명함수 형식)
+        매개인자로 존재하면서 실행과 반환을 자동으로 해주는 함수
+
+        실행 순서: 자바스크립트식 즉시실행 함수 > 제이쿼리식 즉시실행 함수
+        */
+
+        // 제이쿼리식 즉시실행 함수
+        // jQuery(document) => document의 제이쿼리식 객체
+        // jQuery(document).ready(익명함수) => ready가 익명함수를 실행하라는 의미
+        jQuery(document).ready(function(){
+            alert("3. $(document).ready ALERT 경고창");
+            document.write("3. $(document).ready ALERT 경고창");
+        });
+
+        // 익명함수가 들어가면 익명함수를 즉시실행해라.
+        $(function(){
+            alert("4. $(function()) ALERT 경고창");
+            document.write("4.$(function()) ALERT 경고창");
+        });
+
+
+        // 자바스크립트식 즉시실행 함수
+        (function(){
+            alert("1. (function)의 ALERT 경고창");
+            document.write("1. (function)의 ALERT 경고창");
+        })();
+
+        window.onload = function(){
+            alert("2. window.onload ALERT 경고창");
+            document.write("2. window.onload ALERT 경고창");
+        };
+        
+    </script>
+</head>
+<body>
+    본문내 알림 글자를 띄웁니다.
+</body>
+</html>

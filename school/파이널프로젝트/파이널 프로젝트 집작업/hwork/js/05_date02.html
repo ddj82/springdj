@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #demo, #demo2 {color: red;}
+    </style>
+    <script>
+        function spDate() {
+            /* 
+            Date(): 현재시간의 정보를 영문표기법 문자열값으로 반환
+            new Date(): 현재시간의 정보에 대한 전반적인 데이터를 담고 있는 객체 생성
+            Date.now(): 현재시간의 정보를 긴숫자형값으로 반환
+            */
+           let a = Date.now(); //현재시간의 정보를 긴숫자형값으로 반환
+           alert("a: " + a);
+           var d = new Date();
+           console.log("d: ", d);
+           d.setFullYear(2020);
+           d.setMonth(4); //4 + 1 => 5월
+           d.setDate(1);
+           console.log("d: ", d);
+
+           //삼항식: 조건 ? true값 : false값;
+           alert(d.getMonth()); //4
+           var mon = d.getMonth() + 1 > 9 ? d.getMonth() + 1 : "0" + (d.getMonth() + 1);
+           var dd = d.getDate()> 9 ? d.getDate() : "0" + d.getDate();
+           var t = d.getHours()> 9 ? d.getHours() : "0" + d.getHours(); //24시간제
+           var min = d.getMinutes()> 9 ? d.getMinutes() : "0" + d.getMinutes();
+
+           var w = d.getDay();
+           var week = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+           var n = d.getFullYear() + "년 " + mon + "월 " + dd + "일 " + t + ":" + min + " " + week[w];
+           document.getElementById("demo").innerHTML = n;
+           let b = Date.now();
+           alert("b: " + b);
+        //    document.getElementById("demo2").innerHTML = "걸린시간: " + (b - a); 
+           document.getElementById("demo2").innerHTML = "걸린시간: " + ((b - a) / 1000) + "초";
+           //코드와 코드 사이의 시간 => 코드가 실행되기까지 걸린시간
+        }
+    </script>
+</head>
+<body>
+    <h2>Date의 set()함수</h2>
+    <span onclick="spDate()" style="color: blue; cursor: pointer;">설정한 시간은?</span>
+    <span id="demo"></span><br>
+    <span id="demo2"></span><br>
+</body>
+</html>

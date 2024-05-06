@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <style>
+        img {width: 140px; height: 120px;}
+    </style>
+    <script>
+        $(function(){
+            $("img").eq(1).width(190).height(170);
+
+            // "mousewheel" 또는 "wheel"로 가능. 현재 "wheel"로 사용하라 권장
+            $(document).on("wheel", function(e){
+                // event.originalEvent.wheelDelta : 마우스의 위, 아래 스크롤 값을 가져온다.
+                // 음수인 경우 : 마우스 스크롤 내림
+                // 양수인 경우 : 마우스 스크롤 올림
+                // **브라우저 종류에 따라 휠을 올릴때 스크롤이 올라가는 값의 범위가 다를 수 있다.
+                var wheel = e.originalEvent.wheelDelta;
+                console.log(wheel);
+                $("#ptxt").empty();
+
+                if (wheel > 0) {
+                    $("#ptxt").append("원본 가로사이즈: " + $(".origin").width() + "px<br>");
+                    $("#ptxt").append("원본 세로사이즈: " + $(".origin").height() + "px");
+                } else {
+                    $("#ptxt").append("확대 가로사이즈: " + $(".large").width() + "px<br>");
+                    $("#ptxt").append("확대 세로사이즈: " + $(".large").height() + "px");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <img src="../img/cellphone.jpg" class="origin"><br><br>
+    <img src="../img/cellphone.jpg" class="large">
+    <p id="ptxt"></p>
+</body>
+</html>

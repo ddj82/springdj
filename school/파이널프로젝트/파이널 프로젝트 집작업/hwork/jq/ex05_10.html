@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <script>
+        $(function(){
+            // bind() : on()함수와 유사한 기능을 처리. 2개 이상의 이벤트를 연결할 때 사용함.
+            // $("#button1").bind({
+            //     "click": button1_clicked ,
+            //     "mousedown": button1_down , 
+            //     "mouseup": button1_up
+            // });
+
+            $("#button1").on({
+                "click": button1_clicked ,
+                "mousedown": button1_down , 
+                "mouseup": button1_up
+            });
+
+            $("#button2").click(button2_clicked);
+        });
+
+        function button1_clicked() {
+            $("body").append("<br>버튼1 클릭됨");
+        }
+
+        function button1_down() {
+            $("body").append("<br>버튼1 눌됨");
+        }
+
+        function button1_up() {
+            $("body").append("<br>버튼1 떼어짐");
+        }
+
+        function button2_clicked() {
+            $("body").append("<br>버튼2 클릭됨");
+        }
+    </script>
+</head>
+<body>
+    <button id="button1">버튼1</button>
+    <button id="button2">버튼2</button>
+</body>
+</html>

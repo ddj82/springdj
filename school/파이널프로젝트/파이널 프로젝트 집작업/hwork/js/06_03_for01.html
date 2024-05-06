@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반복문</title>
+    <style>
+        * {font-family: "굴림체";}
+    </style>
+    <script>
+        var su = 9, dan = 5, res = 0;
+        document.write("dan: " + dan + "단<br>");
+
+        for (var i = 1; i <= 9; i++) {
+            res = dan * i;
+            if (res < 10) { //한 자리 숫자면 앞에 공백한칸을 넣기 위한 식
+                document.write(dan + " * " + i + " = &nbsp;" + res + "<br>");
+            } else {
+                document.write(dan + " * " + i + " = " + res + "<br>");
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

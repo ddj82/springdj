@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <style>
+        label, input {display: block;}
+        input.text {margin-bottom: 12px; width: 95%; padding: .4em;}
+        fieldset {padding: 0; border: 0; margin-top: 25px;}
+        h1 {font-size: 1.2em; margin: .6em 0;}
+        div#users-contain {width: 550px; margin: 20px 0;}
+        div#users-contain table {margin: 1em 0; border-collapse: collapse; width: 100%;}
+        div#users-contain table td, div#users-contain table th {
+            border: 1px solid #eee; padding: .6em 10px; text-align: left;
+        }
+        .ui-dialog .ui-state-error {padding: .3em;}
+        .validateTips {border: 1px solid transparent; padding: 0.3em;}
+        </style>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $(function(){
+            var dialog, dialogDelete, form, 
+            emailRegex = /^[0-9A-Z_\-.a-z]+@[A-Za-z]+.[A-Za-z]+$/, 
+            name = $("#name"), 
+            email = $("#email"), 
+            password = $("#password"),
+            allFields = $([]).add(name).add(email).add(password),
+            tips = $(".validateTips");
+
+            function updateTips(t){
+                tips.text(t).addClass("ui-state-highlight");
+                setTimeout(function(){
+                    tips.removeClass("ui-state-highlight", 1500);
+                }, 500);
+            }
+
+            function checkLength(o, n, min, max){
+                // checkLength(name, "사용자이름", 3, 16);
+                if (o.val().length > max || o.val().length < min) {
+                    o.addClass("ui-state-error");
+                    updateTips(n + "은 " + min + "자 ~ " + max + "자 이내로 가능합니다.");
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            function checkRegexp(o, regexp, n){
+                // checkRegexp(name, /^[0-9A-Z\s가-힣]+$/g, "이름은 영문자, 한글만 가능합니다.");
+                if (!(regexp.test(o.val()))) {
+                    o.addClass("ui-state-error");
+                    updateTips(n);
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            function addUser() {
+                var valid = true;
+                allFields.removeClass("ui-state-error");
+
+                valid = valid && checkLength(name, "사용자이름", 3, 16);
+                valid = valid && checkLength(email, "이메일", 6, 80);
+                valid = valid && checkLength(password, "비밀번호", 5, 16);
+
+                // 정규식 참고 사이트 : 
+                // 정규식 참고 사이트 : 
+                // valid = valid && checkRegexp(name, /^[0-9A-Z\s가-힣]+$/g, "이름은 영소문자, 숫자만 가능합니다.");
+                // i: 대소문자 구분안하고 처리, g: 대소문자 엄격히 구분. 완전일치
+                valid = valid && checkRegexp(name, /^[A-Za-z\s가-힣]+$/g, "이름은 영문자, 한글만 가능합니다.");
+                valid = valid && checkRegexp(email, emailRegex, "이메일 입력이 제대로 되지 않았습니다.\n예시: eg_ui@jquery.com");
+                valid = valid && checkRegexp(password, /^[\-!#$%&'*+.=/?0-9A-Z^_a-z']+$/, "비밀번호는 영문자, 숫자, 특수문자만 가능합니다.");
+
+                if (valid) {
+                    var num = Number($("tr").last().children().eq(1).text()) + 1;
+                    $("#users tbody").append(
+                        "<tr>" + 
+                        "<td><input type=\"checkbox\" name='userSel'></td>" + 
+                        "<td>" + num + "</td>" +
+                        "<td>" + name.val() + "</td>" + 
+                        "<td>" + email.val() + "</td>" + 
+                        "<td>" + password.val() + "</td>" + 
+                        "</tr>"
+                    );
+                    dialog.dialog("close");
+                }
+                return valid;
+            }
+
+            dialog = $("#dialog-form").dialog({
+                autoOpen: false, height: 400, width: 350, modal: true, 
+                buttons: {
+                    "회원가입": addUser, 
+                    "취소": function(){
+                        dialog.dialog("close");
+                    }
+                }, 
+                close: function(){
+                    form[0].reset();
+                    allFields.removeClass("ui-state-error");
+                }
+            });
+
+            dialogDelete = $("#dialog-confirm").dialog({
+                autoOpen: false, resizable: false, height: "auto", width: 400, modal: true, 
+                buttons: {
+                    "확인": function(){
+                        var result_2 = $("input[name=userSel]:checked");
+                        if (result_2.length <= 0) {
+                            alert("선택된 것이 없습니다.");
+                            dialogDelete.dialog("close");
+                            return;
+                        }
+                        $.each(result_2, function(i){
+                            $(this).closest("tr").remove();
+                        });
+                        dialogDelete.dialog("close");
+                    }, 
+                    "취소": function(){
+                        dialogDelete.dialog("close");
+                    }
+                }
+            });
+
+            form = dialog.find("form").on("submit", function(event){
+                event.preventDefault();
+                addUser();
+            });
+
+            $("#create-user").button().on("click", function(){
+                dialog.dialog("open");
+            });
+
+            $("#delete-user").on("click", function(){
+                dialogDelete.dialog("open");
+            });
+
+            $("input[name=allSel]").on("click", function(){
+                if ($("input[name=allSel]").is(":checked")) {
+                    $("input[name=userSel]").prop("checked", true);
+                } else {
+                    $("input[name=userSel]").prop("checked", false);
+                }
+            });
+
+            $(document).on("click", "#users tbody td:not(#users tbody td:nth-of-type(1))", 
+            function(){
+                console.log(this);
+                let chk = $(this).parent().children("td:eq(0)").children("input[type=checkbox]");
+                if (chk.prop("checked") == true) {
+                    chk.prop("checked", false);
+                    chkClick();
+                } else {
+                    chk.prop("checked", true);
+                    chkClick();
+                }
+            });
+            $(document).on("click", "input[name=userSel]", chkClick);
+        });
+        
+        function chkClick(){
+            let cnt = 0;
+            $("input[name=userSel]").each(function(){
+                if ($(this).is(":checked") == true) {
+                    cnt++;
+                }
+            });
+
+            if (cnt == $("input[name=userSel]").length) {
+                $("input[name=allSel]").prop("checked", true);
+            } else {
+                $("input[name=allSel]").prop("checked", false);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="dialog-form" title="회원가입">
+        <p class="validateTips">모든 항복을 입력해주세요.</p>
+
+        <form action="">
+            <label for="name">이름</label>
+            <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
+            <label for="email">이메일</label>
+            <input type="text" name="email" id="email" class="text ui-widget-content ui-corner-all">
+            <label for="password">비밀번호</label>
+            <input type="password" name="password" id="password" class="text ui-widget-content ui-corner-all">
+
+            <input type="submit" style="display: none;">
+        </form>
+    </div>
+    <div id="dialog-confirm" title="회원삭제">
+        <p>
+            <span class="ui-icon ui-icon-alert" style="float: left; margin: 12px 12px 20px 0;"></span>
+            정말로 삭제하시겠습니까?
+        </p>
+    </div>
+    
+    <div id="users-contain" class="ui-widget">
+        <h1>회원관리</h1>
+        <table id="users" class="ui-widget ui-widget-content">
+            <thead>
+                <tr class="ui-widget-header">
+                    <th>선택 <input type="checkbox" name="allSel"></th>
+                    <th>번호</th><th>이름</th><th>이메일</th><th>비밀번호</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <!-- $("tr").last().children().eq(1).text() -->
+                    <td><input type="checkbox" name="userSel"></td>
+                    <td>1</td>
+                    <td>홍길동</td>
+                    <td>gdhong@example.com</td>
+                    <td>hong1234</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button id="create-user">회원가입</button>
+    <button id="delete-user" class="ui-button ui-corner-all ui-widget">회원삭제</button>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자료형 - 숫자, 논리형</title>
+    <script>
+        // 숫자형
+        var box;
+        box = 100;
+        box = 30;
+        document.write(box, "<br>");
+        document.write(typeof(box), "<br>");
+
+        // 문자형
+        box = "50원";
+        document.write(typeof box, "<br>");
+
+        // Number() 생성자 함수
+        // 매개변수를 Number자료형을 바꿔줌 
+        // 매개변수가 Number자료형으로 바꿀 수 없는 값일 경우는 NaN(Not A Number)반환
+        document.write(Number(box), "<br>");
+        document.write(typeof(Number(box)), "<br>");
+
+        //논리형
+        var a = true;
+        var b = false;
+        var c = 10 > 5;
+
+        // Boolean() 생성자 함수
+        // 매개인자값으로 0, null, undefined, '', "" 값을 넣을 경우는 false 반환
+        // 존재하는 값을 넣을 경우는 true 반환
+        var d = Boolean(2);
+
+        document.write(a, "<br>"); //true
+        document.write(b, "<br>"); //false
+        document.write(c, "<br>"); //true
+        document.write(d, "<br>"); //true
+
+        var t;
+        document.write("값을 할당받지 못한 상태: " + t, "<br>"); //undefined
+        t = "hello"; 
+        document.write("값이 초기화 된 상태: " + t, "<br>"); //hello
+        
+        t = null;
+        document.write("값이 비워진 상태: " + t, "<br>"); //null
+        
+        t = "";
+        document.write("값이 빈문자열인 상태: " + t, "<br>"); //""
+
+        // 배열자료형: 요소값의 자료형이 달라도 상관없다. [대괄호]로 묶음
+        let fruits = ["Banana", 50, false, "Mango"]; //객체
+        document.write(
+            fruits[0] + ", " + fruits[1] + ", " + fruits[2] + ", " + fruits[3] + "<br>"
+        );
+        
+        // Object자료형: java의 HashMap자료형과 유사함. {중괄호}로 묶음
+        // java의 Object자료형과는 다른 개념
+        // Object.keys(Object객체명)[인덱스] => 해당 Object객체명의 키값들을 모은 후 해당 인덱스번호의 키를 문자열로 가져옴
+        const car = {type:"Fiat", model:"500", color:"white"};
+        document.write(Object.keys(car)[0] + ":" + car.type + "<br>") //car. 으로 부를땐 ""없이 기술
+        document.write(Object.keys(car)[1] + ":" + car["model"] + "<br>") //car[] 로 키를 부를땐 "키"로 기술
+        document.write(Object.keys(car)[2] + ":" + car.color + "<br>")
+
+        // 자바스크립트에서 "", ''로 묶지 않아도 되는 값: 
+        // Boolean값, Number값, 객체
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

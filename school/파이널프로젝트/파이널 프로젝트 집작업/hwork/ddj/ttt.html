@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"/>
+    <script src="./jq/jquery/jquery-3.6.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <style>
+        .tabDiv {
+            width: 400px;
+            height: 200px;
+            border: 1px solid black;
+            position: absolute;
+        }
+        .tabDiv:not(.tabDiv:nth-of-type(1)) {display: none;}
+    </style>
+    <script>
+        $(function(){
+            $(".btn").click(function(){
+                let btnId = $(this).attr("id");
+                switch(btnId){
+                    case "tab1": {
+                        $("#div1").show();
+                        $("#div1").siblings().hide();
+                        break;
+                    }
+                    case "tab2": {
+                        $("#div2").show();
+                        $("#div2").siblings().hide();
+                        break;
+                    }
+                    default: {
+                        $("#div3").show();
+                        $("#div3").siblings().hide();
+                    }
+                }
+            });
+        });
+        // (if ($("div1").is(":visible")) {
+        //         $("#tab1").css({"background-color": "#87ceeb"});
+        //     } else if ($("div2").is(":visible")) {
+        //         $("#tab2").css({"background-color": "#87ceeb"});
+        //     } else if ($("div3").is(":visible")) {
+        //         $("#tab3").css({"background-color": "#87ceeb"});
+        //     })();
+    </script>
+</head>
+<body>
+    <button id="tab1" class="btn">tab1</button>
+    <button id="tab2" class="btn">tab2</button>
+    <button id="tab3" class="btn">tab3</button>
+    <br><br>
+    <div style="position: relative;">
+        <div id="div1" class="tabDiv">tab1 내용</div>
+        <div id="div2" class="tabDiv">tab2 내용</div>
+        <div id="div3" class="tabDiv">tab3 내용</div>
+    </div>
+</body>
+</html>

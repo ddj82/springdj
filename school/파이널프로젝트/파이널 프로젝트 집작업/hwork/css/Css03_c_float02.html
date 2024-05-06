@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>float 속성</title>
+    <style>
+        /* overflow | overflow-x | overflow-y 속성값 */
+        /* 
+        visible : 오버플로가 잘리지 않고 모두 표현. 기본값(디폴트)
+        hidden : 오버플로가 잘리고 나머지 내용은 보이지 않음.
+        scroll : 오버플로가 잘리지만 나머지 내용을 보려면 스크롤 막대가 추가됨.
+        auto : 오버플로에 대해 자동으로 설정 처리.
+        만약 오버플로가 잘린 경우는 스크롤을 추가해야만 한다. 자동추가 안됨.
+        */
+
+        div {border: 3px solid #4CAF50; padding: 5px;}
+        .img1, .img2 {float: right;}
+        .clearfix {overflow: scroll; height: 100px;}
+        .img {width: 170px; height: 170px;}
+    </style>
+</head>
+<body>
+    <h2>clearfix</h2>
+    <p>In this example, the image is taller than the element containing it, and it is floated, so it overflows outside of its container:</p>
+
+    <div>
+        <img class="img1" src="../img/pineapple.jpg" alt="Pineapple">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum...
+    </div>
+
+    <!-- <div class="clearfix" style="clear: right;">
+        <img class="img2" src="img/pineapple.jpg" alt="Pineapple" title="Pineapple 이미지">
+        텍스트의 수가 적어서 이미지의 높이를 벗어나지 못하면,
+        그 부분을 감싸고 있는 div박스의 영역이 이미지를 감싸지 못하고, 
+        그 안으로 들어가게 되는 현상이 발생된다.
+        이 부분을 해결하기 위해서 넘치는 부분(overflow)의 값을
+        어떻게 처리할 지 설정해 주면 된다.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum...
+    </div> -->
+    <div class="clearfix" style="clear: right;">
+        <img class="img2" src="../img/pineapple.jpg" alt="Pineapple" title="Pineapple 이미지">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum...
+    </div>
+</body>
+</html>

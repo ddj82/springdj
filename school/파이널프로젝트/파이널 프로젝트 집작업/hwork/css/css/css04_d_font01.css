@@ -1,0 +1,17 @@
+/* Css04_d_font01.html 관련 CSS */
+
+/* h1#a {font-family: "Audiowide", sans-serif;}
+h1#b {font-family: "Sofia" sans-serif;}
+h1#c {font-family: "Trirong" serif;} */
+.ft {font-family: Copperplate, Papyrus, fantasy;}
+
+@font-face {
+    /* 폰트명 선언하기 */
+    font-family: makeFont; 
+    src: url(../font/CENTURY.TTF);
+}
+
+div#ff {font-family: makeFont; font-weight: bolder;}
+div#ff {font-family: "Anta";}
+div#ff {font-family: "Kode Mono";}
+div#ff {font-family: "Fredoka";}

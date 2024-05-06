@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <script>
+        $(function(){
+            /* 
+            is("탐색선택자") : 선택자의 상태에 따라 boolean값을 반환함
+            탐색선택자로 올 수 있는 값
+            :checked - 체크된 상태인지
+            :selected - 선택된 상태인지
+
+            :visible - 보이는 요소인지
+            :hidden - 숨겨진 요소인지
+
+            :visible, :hidden 탐색자 - (display: none;) 속성만 감춰진 속성으로 인지함
+            */
+
+
+            /* 
+            <p>내용1</p>
+            <p style="visibility: hidden;">내용2</p>
+            */
+            
+            // var result_1 = $("#inner_1 p").eq(0).is(":visible");
+            // console.log(result_1);
+            // var result_2 = $("#inner_1 p").eq(1).is(":visible");
+            // console.log(result_2);
+
+            // var result_1 = $("#inner_1 p").eq(0).is(":hidden");
+            // console.log(result_1);
+            // var result_2 = $("#inner_1 p").eq(1).is(":hidden");
+            // console.log(result_2);
+
+            // var result_3 = $("#chk1").is(":checked");
+            // console.log(result_3);
+            // var result_4 = $("#chk4").is(":checked");
+            // console.log(result_4);
+
+            // <input type="checkbox" name="chk" id="chk1">
+            // <input type="checkbox" name="chk" id="chk2">
+            // <input type="checkbox" name="chk" id="chk3">
+            // <input type="checkbox" name="chk" id="chk4" checked>
+            // <input type="checkbox" name="chk" id="chk5">
+            $("input[name=chk]").click(function(){
+                // if ($(this).is(":checked") == true) {
+                //     console.log($(this).attr("id") + "요소는 체크된 상태입니다.");
+                // } else {
+                //     console.log($(this).attr("id") + "요소는 해제된 상태입니다.");
+                // }
+
+                let cnt = 0;
+                
+                $.each($("input[name=chk]"), function(){
+                    // console.log($(this).prop("checked"));
+                    // console.log($(this).is(":checked"));
+                    if ($(this).is(":checked")) {
+                        cnt++;
+                    }
+                });
+
+                if (cnt == $("input[name=chk]").length) {
+                    $("#allchk").prop("checked", true);
+                } else {
+                    $("#allchk").prop("checked", false);
+                }
+            });
+
+            $("input[name=allchk], label[for=allchk]").click(function(){
+                var allchk;
+                if (this.tagName == "INPUT") {
+                    allchk = $(this).is(":checked");
+                } else {
+                    allchk = $(this).prev().is(":checked");
+                }
+
+                $.each($("input[name=chk]"), function(){
+                    $(this).prop("checked", allchk);
+                });
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div id="outer_wrap">
+        <h1> iS() </h1>
+        <section id="inner_1">
+            <h2>문단 태그 영역</h2>
+            <p>내용1</p>
+            <!-- <p style="display: none;">내용2</p> -->
+            <p style="visibility: hidden;">내용2</p>
+        </section>
+
+        <section id="inner_2">
+            <h2>폼 태그 영역</h2>
+            <p>
+                <input type="checkbox" name="allchk" id="allchk">
+                <label for="allchk">모두체크</label><br>
+
+                <input type="checkbox" name="chk" id="chk1">
+                <label for="chk1">체크1</label>
+                <input type="checkbox" name="chk" id="chk2">
+                <label for="chk2">체크2</label>
+                <input type="checkbox" name="chk" id="chk3">
+                <label for="chk3">체크3</label>
+                <input type="checkbox" name="chk" id="chk4" checked>
+                <label for="chk4">체크4</label>
+                <input type="checkbox" name="chk" id="chk5">
+                <label for="chk5">체크5</label>
+                <!-- 라벨의 for속성과 체크박스의 id속성 값이 같을때
+                     click()이 실행 됨
+                     라벨을 눌러도 체크박스가 체크된다 -->
+            </p>
+        </section>
+    </div>
+</body>
+</html>

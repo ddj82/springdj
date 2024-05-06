@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>속성선택자</title>
+    <style>
+        /* 
+        title속성 중에서 flower라는 단독 문자열이 있는(공백으로 구분) 요소만 선택
+        flowers, my-flower, flower-tree 같이 무언가 연결된 문자열은 해당 안됨.
+        [title~="flower"] or [title~=flower]
+        */
+        [title~="flower"] {border: 5px solid red;}
+
+        /* top라는 문자열이 맨 앞에 있으면서 단독으로 있거나 -(하이픈, 대시)로 나뉘어져 있는 요소만 선택.
+        topcontent, content-top과 같은 문자열은 해당 안됨. */
+        [class|=top] {background: lavender;}
+
+        /* top라는 문자열로 시작되는 모든 요소 */
+        [id^="top"] {background: skyblue;}
+
+        /* class명이 test라는 문자열로 끝나는 모든 요소 */
+        [class$="test"] {background: red;}
+
+        /* class명의 일부에 te라는 문자열이 포함된 모든 요소 */
+        [class*="te"] {color: green;}
+    </style>
+</head>
+<body>
+    <h1>CSS [attribute~="value"] Selector</h1>
+    <img src="../img/klematis.jpg" title="klematis flowers" width="150" height="113">
+    <img src="../img/img_flwr.gif" title="my flower" width="224" height="162">
+    <img src="../img/img_tree.png" title="flower-tree" width="200" height="358">
+
+    <h2>CSS [attribute|="value"] Selector</h2>
+    <h1 class="top-header">h1태그: class="top-header"</h1>
+    <p class="top-text">p태그: class="top-text"</p>
+    <p class="topcontent">p태그: class="topcontent"</p>
+
+    <h2>CSS [attribute^="value"] Selector</h2>
+    <h1 id="top-header">h1태그: class="top-header"</h1>
+    <p id="top-text">p태그: class="top-text"</p>
+    <p id="topcontent">p태그: class="topcontent"</p>
+
+    <h2>CSS [attribute$="value"] Selector</h2>
+    <div class="first-test">div태그: class="first-test"</div>
+    <div class="second">div태그: class="second"</div>
+    <div class="my-test">div태그: class="my-test"</div>
+    <p class="mytest">p태그: class="mytest"</p>
+
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js"></script>
+    <script>
+        $(function(){
+            var style_1 = {"background-color": "aqua", "border": "2px solid #f00"};
+            var style_2 = {"background-color": "yellow", "border": "2px dashed #f00"};
+            // prev() : 바로 이전 요소(형) 선택자. 바로 앞 요소(형) 선택자.
+            $(".txt").prev().css(style_1); // <p>내용1</p>
+            // $(".txt + p").css(style_2); // <p>내용3</p>
+            // $(".txt + p").prev().css(style_2); // <p class="txt">내용2</p>
+            // "선택자 + 다음선택자" => 만약 기술한 다음선택자와 실제 다음선택자의 태그가 다르다면 적용하지 못한다.
+
+            // next() or $("선택자 + 다음 선택자") : 선택한 요소의 바로 다음 요소(동생)를 선택함
+            // $(".txt").next().next().css(style_1); // <p>내용4</p>
+        });
+    </script>
+</head>
+<body>
+    <div id="wrap">
+        <h1>인접 관계 선택자</h1>
+        <p>내용1</p>
+        <p class="txt">내용2</p>
+        <p>내용3</p>
+        <p>내용4</p>
+    </div>
+</body>
+</html>

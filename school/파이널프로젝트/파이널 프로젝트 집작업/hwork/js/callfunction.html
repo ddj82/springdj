@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var koGreeting = {
+            greeting : "안녕", 
+            name : "홍길동", 
+            sayHello : function () {
+                return this.greeting + ", " + this.name;
+            }
+        };
+
+        var enGreeting = {
+            greeting : "Hello", 
+            name : "HongKilDong"
+            /* 
+            , sayHello : function () {
+                return this.greeting + ", " + this.name;
+            }
+            */
+        };
+
+        console.log(koGreeting.sayHello());
+        console.log(koGreeting.sayHello.call(enGreeting));
+        /* 
+        함수명.call(재정의 할 함수) => 해당 함수를 재정의 할 함수로 주체를 바꿔주는 함수
+        */
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

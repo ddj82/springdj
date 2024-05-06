@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset = "utf-8">
+<title>Table Element</title>
+<style>
+table {width: 80%; border-collapse: collapse; margin: 0 auto;}
+td, th {border: 1px solid black;}
+body {text-align: center;}
+</style>
+</head>
+<body>
+<h2>컬럼 두 개 합치기</h2>
+<p>한 개 이상의 컬럼을 합치는 속성은 colspan이다.</p>
+<p style = "width: 30%; margin: 0 auto;">테스트 텍스트</p>
+<table>
+<tr><th>Name</th><th colspan = "2">Telephone</th></tr>
+<tr><td>Bill Gates</td><td>55577854</td><td>55577854</td></tr>
+</table>
+<br><br>
+<table>
+<tr><th>제목1</th><th colspan = "2">제목2</th><th>제목3</th>	</tr>
+<tr><td rowspan="2">내용1</td><td>내용2</td><td>내용3</td>	<td>내용4</td></tr>
+<tr><td>내용2</td><td>내용3</td><td>내용4</td></tr>
+</table>
+</body>
+</html>

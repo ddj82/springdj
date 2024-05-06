@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동치연산자 ==와 ===의 차이</title>
+    <script>
+        // 자바스크립트의 == 연산자는 다른 언어와는 다르게 강제 형변환을 실행한다.
+        document.write(254 == "254", "<br>") //true
+        document.write(false == null, "<br>") //false
+        document.write(false == undefined, "<br>") //false
+        document.write(false == 0, "<br>") //false == 0 => true
+        document.write(true == 1, "<br>") //true == 1 => true
+        document.write(true != 2, "<br>") //true
+        // document.write(true == 2, "<br>") //false
+        document.write(undefined == null, "<br><hr>") //true
+        
+        // === 연산자: 형변환 처리를 하지 않고 비교함.
+        document.write(254 === "254", "<br>") //false
+        document.write(false === null, "<br>") //false
+        document.write(false === undefined, "<br>") //false
+        document.write(false === 0, "<br>") //false
+        document.write(true === 1, "<br>") //false
+        document.write(true !== 2, "<br>") //true
+        document.write(undefined === null, "<br>") //false
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

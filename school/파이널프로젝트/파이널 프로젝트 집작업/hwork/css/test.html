@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        /* * {box-sizing: border-box;} */
+        div {
+            border: 1px solid black;
+            border-radius: 5px;
+            width: 400px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        input, select, button {
+            width: 100%;
+            height: 40px;
+            box-sizing: border-box;
+            border: none;
+            border-bottom: 1px solid black;
+        }
+
+        option {font-size: 15px;}
+
+        .btop {
+            border-top: 1px solid black;
+        }
+
+        form[name=rogo] {
+            padding: 15px 20px;
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        div.end {
+            border: none;
+        }
+
+        button:active, button:hover {
+            background-color: aquamarine;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+
+        #gen {
+            border: none;
+            text-align: center;
+        }
+
+        #ingen1, #ingen2, #ingen3 {
+            width: 15%;
+            height: 40px;
+            /* appearance: none; */
+            /* opacity: 0; */
+            border: 2px solid black;
+            position: relative;
+            margin-right: 40px;
+        }
+
+        #ingen:active, #ingen:hover {
+            /* visibility: hidden; */
+            border: 2px solid gold;
+        }
+    </style>
+</head>
+
+<body>
+    <form name="rogo" action="https://www.naver.com/" method="get" autocomplete="off">
+        <input style="border: none; width: 100px; height: 20px;" type="image" src="../img/naverLogo.png" title="네이버 홈페이지로">
+    </form>
+    <div class="main">
+        <form action="">
+            <!-- <input type="text" name="id" pattern="[a-zA-Z0-9_]+" placeholder="아이디"><br> -->
+            <!-- <div id="naver">
+            </div> -->
+            <input id="id" style="border: none; width: 75%;" type="text" name="id" pattern="[a-zA-Z0-9_\-]+" minlength="5" maxlength="20" placeholder="아이디" required>@naver.com
+            <input class="btop" type="password" name="paw" pattern="[a-zA-Z0-9~!@#$%^&\*_]+" minlength="8" maxlength="16" placeholder="비밀번호" required>
+            <input type="email" name="email" pattern="[a-zA-Z0-9_]+[@]+[a-zA-Z]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" placeholder="[선택] 이메일주소 (비밀번호 찾기 등 본인 확인용)">
+            <br>
+            <br>
+            <input class="btop" type="text" name="uname" pattern="[가-힣a-zA-Z\s]+" placeholder="이름" required>
+            <input style="border-bottom: 1px solid #7d7d7d;" type="text" name="uage" pattern="[0-9]+" minlength="8" maxlength="8" placeholder="생년월일 8자리" required>
+            
+            <div id="gen">
+                <label class="gen">
+                    <input id="ingen1" type="radio" name = "gender" required>
+                    <span>남자</span></label>
+
+                <label class="gen">
+                    <input id="ingen2" type="radio" name = "gender" required>
+                    <span>여자</span></label>
+
+                <label class="gen">
+                    <input id="ingen3" type="radio" name = "gender" required>
+                    <span>선택안함</span></label>
+            </div>
+
+            <select class="btop" name="국적">
+                <option selected>대한민국 +82</option>
+                <option>네팔 +977</option>
+                <option>브라질 +55</option>
+                <option>콩고 +242</option>
+            </select><br>
+            <input style="border: none;" type="tel" name="phone" placeholder="휴대전화번호" pattern="(010)[0-9]{4}[0-9]{4}" required>
+        </form>
+    </div>
+    <br><br><br><br><br><br><br><br>
+    <form action="">
+
+        <div class="end">
+            <button type="submit">전송</button>
+        </div>
+    </form>
+</body>
+
+</html>

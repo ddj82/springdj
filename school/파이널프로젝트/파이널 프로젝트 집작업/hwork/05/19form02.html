@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form 요소</title>
+    <style>
+        form {border : 1px solid #000; padding : 5px;}
+    </style>
+</head>
+<body>
+    <form>
+        <!-- <label>
+            한 줄 텍스트 입력 요소 : <input type="text" name = "test">
+        </label> -->
+        <!-- selected, size속성 -->
+        <label for="fruits">과일 선택: </label>
+        <select id="fruits" name="fruits">
+            <option value="">선택안함</option>
+            <option>Apple</option>
+            <!-- 옵션안에 벨류가 없으면 컨텐츠가 벨류가 됨 -->
+            <option value = "Apple">사과</option>
+            <option value = "Water Melon">수박</option>
+            <option value = "Orange">오렌지</option>
+            <option value = "lemon" selected>레몬</option>
+            <!-- 아무것도 선택을 안하고 보내면 첫번째 옵션이 자동으로 보내짐
+                (첫번째 옵션이 선택되어 있기 때문) -->
+            <!-- selected속성을 넣어주면 해당 옵션이 자동으로 선택 됨 -->
+        </select>
+        <br><br>
+
+        <label for="colors">색상 선택: </label>
+        <select id="colors" name="colors" size="2" multiple>
+            <option value="red">빨강</option>
+            <option value="green">초록</option>
+            <option value="blue">파랑</option>
+            <option value="yellow">노랑</option>
+            <!-- multiple -> 다중선택이 가능하게 해줌 -->
+            <!-- size -> 보여질 옵션리스트 수 지정 -->
+            <!-- 아무것도 선택을 안하고 보내면 아무것도 안보내짐 -->
+        </select>
+        <br><br>
+
+
+        <label for="cars">차종 선택: </label>
+        <select id="cars" name="cars">
+            <optgroup label = "Swedish Cars">
+                <option value="volvo">볼보</option>
+                <option value="saab">사브</option>
+            </optgroup>
+            <optgroup label = "German Cars">
+                <option value="mercedes">메르세데스</option>
+                <option value="audi">아우디</option>
+            </optgroup>
+        </select>
+        <br><br>
+        <input type="submit" value="전송">
+        <!-- <button>전송</button> -->
+    </form>
+</body>
+</html>

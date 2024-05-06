@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>box-sizing속성</title>
+    <style>
+        /* 
+        box-sizing 속성: padding과 테두리, 고유의 여백등으로 인해 늘어나는 
+        width, height를 설정한 width, height영역으로 고정시키는 역할을 함. 
+        */
+        div {width: 300px; height: 100px; border: 1px solid blue;}
+        .div1 {box-sizing: border-box;}
+        .div2 {padding: 50px 0 0 50px; box-sizing: border-box;}
+        /* .div2 {padding: 150px; border: 1px solid red; box-sizing: border-box;} */
+
+    </style>
+</head>
+<body>
+    <div>일반 div박스</div><br>
+    <div class="div1">첫 번째 div박스</div><br>
+    <div class="div2">두 번째 div박스</div>
+</body>
+</html>

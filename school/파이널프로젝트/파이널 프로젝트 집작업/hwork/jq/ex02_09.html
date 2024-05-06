@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <script>
+        $(function(){
+            // $("선택자").closest("선택자")
+            // ($)해당 요소의 조상(부모 포함) 요소들 중 가장 가까운 (closest)해당 요소를 선택.
+            // $(".txt1").closest("div").css({"background-color": "yellow", "border": "2px solid #f00", "padding": "10px"});
+            /* 
+            <div>
+                <section>
+                    <p class="txt1">내용</p>
+                </section>
+            </div>
+            */
+
+            // $(".txt1").parents("div").css({"background-color": "yellow", "border": "2px solid #f00", "padding": "10px"});
+            /* 
+            <div>
+                <div>
+                    <section>
+                        <p class="txt1">내용</p>
+                    </section>
+                </div>
+            </div>
+            */
+
+            $(".txt1").closest("section").css({"background-color": "yellow", "border": "2px solid #f00", "padding": "10px"});
+            /* 
+            <section>
+                <p class="txt1">내용</p>
+            </section>
+            */
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <h1 class="title">선택자</h1>
+        <div>
+            <div style="background-color: green;">상위 DIV</div>
+            <section>
+                <p class="txt1">내용</p>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

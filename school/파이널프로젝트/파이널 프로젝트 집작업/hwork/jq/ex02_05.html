@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js"></script>
+    <script>
+        $(function(){
+            // children() : 선택한 요소의 모든 자식 요소들을 선택함.
+            // children("매개변수로 들어가는 선택자들") : 
+            // 선택한 요소의 모든 자식 요소 중 매개변수에 설정한 태그 요소들만 선택함.
+            $("#wrap h1").css({"background-color":"yellow"});
+            // $("#wrap > section").children("h1").css({"color": "green", "font-weight": "bolder", "border": "2px dashed #f00"});
+            $("#wrap > section").children().css({"color": "green", "font-weight": "bolder", "border": "2px dashed #f00"});
+        });
+    </script>
+</head>
+<body>
+    <div id="wrap">
+        <h1>인접 관계 선택자</h1>
+        <p>내용1</p>
+        <section>
+            <h1>하위 요소 선택자1</h1>
+            <p>내용2</p>
+            <h1>하위 요소 선택자2</h1>
+            <p>내용3</p>
+            <h1>하위 요소 선택자3</h1>
+            <p>내용4</p>
+        </section>
+    </div>
+</body>
+</html>

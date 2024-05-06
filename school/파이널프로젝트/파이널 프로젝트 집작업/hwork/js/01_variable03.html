@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변수 선언 및 사용</title>
+    <script>
+        let x = 10;
+        document.write("전역x1: " + x + "<br>");
+        { //지역
+            let x = 2;
+            document.write("지역x: " + x + "<br>");
+        }
+        // document.getElementById("demo").innerHTML = x;
+        // 코드의 순서상 아직 id가 없음, 에러
+        document.write("전역x2: " + x + "<br>");
+        </script>
+</head>
+<body>
+    <h2>변수 선언 및 사용</h2>
+    <p>let키워드는 지역의 의미가 있다.</p>
+    <p id="demo" style="border: 1px solid black;"></p>
+    <script>
+        document.getElementById("demo").innerHTML = x;
+        //html안에 아이디가 demo인 엘리먼트안에 있는 자식태그, 텍스트 모두 지우고 x를 대입
+    </script>
+</body>
+</html>

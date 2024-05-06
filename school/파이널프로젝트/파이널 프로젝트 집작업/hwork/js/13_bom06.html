@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /* 
+        window.history : 브라우저의 방문기록을 쌓아놓는 객체
+        */
+        function goBack() {
+            if (arguments.length > 0) {
+                // 2번째 전으로 웹페이지 이동
+                window.history.go(Nunber(arguments[0]));
+            } else {
+                // 바로 전으로 웹페이지 이동
+                window.history.back();
+            }
+        }
+        function goForward() {
+            if (arguments.length > 0) {
+                window.history.go(Nunber(arguments[0]));
+                // 2번째 앞으로 웹페이지 이동
+            } else {
+                // 바로 앞으로 웹페이지 이동
+                window.history.forward();
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>BOM</h2>
+    <h3>window.history object</h3>
+    <input type="button" value="1번 뒤로" onclick="goBack()">
+    <input type="button" value="2번 뒤로" onclick="goBack(-2)">
+    <input type="button" value="1번 앞으로" onclick="goForward()">
+    <input type="button" value="2번 앞으로" onclick="goForward(2)">
+</body>
+</html>

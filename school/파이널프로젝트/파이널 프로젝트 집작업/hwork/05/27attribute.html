@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>웹 폼</title>
+    <style>
+        legend {
+            font-size : 16px; font-weight : 900;
+            /* font-weight - 단위가 없음 */
+        }
+        label {
+            font-size : 14px;
+            width : 200px;
+            color : #339900; /*#390*/
+            font-weight : bold;
+            /* text-align : rigth; */
+            margin-right : 10px;
+        }
+        li {
+            list-style : none; margin : 15px 0; font-size : 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>여름방학 특강 신청</h1>
+    <form>
+        <fieldset>
+            <legend>수강신청</legend>
+            <ul>
+            <li>
+                <label for="subj">영어회화(초급)</label>
+                <input type="text" id = "subj" name="subj" value="오전 9:00~11:00" readonly>
+                <!-- readonly 읽기전용 -->
+            </li>
+            </ul>
+        </fieldset>
+        <fieldset>
+            <legend> 신청자</legend>
+            <ul>
+                <li>
+                    <label for="uname">이름</label>
+                    <input type="text" id="uname" name="uname" autofocus required>
+                    <!-- autofocus - 자동으로 해당 요소가 선택되게 하는 기능, 첫 실행 후 새로고침을 한번 해야 활성화 -->
+                </li>
+                <li>
+                    <label for="uid">학번</label>
+                    <input type="text" id="uid" name="uid" placeholder="하이픈없이 입력" minlength="2" maxlength="8" required>
+                    <!-- placeholder - 도움말 기능, 값을 입력하면 사라짐 -->
+                    <!-- required이 붙은 입력요소에는 반드시 값을 입력해야함 -->
+                </li>
+                <li>
+                    <label for="uclass">학과</label>
+                    <select name="uclass" id="uclass">
+                        <option value="archi">건축공학과</option>
+                        <option value="mechanic">기계공학과</option>
+                        <option value="indust">산업공학과</option>
+                        <option value="elec">전기전자공학과</option>
+                        <option value="computer" selected>컴퓨터공학과</option>
+                        <option value="chemical">화학공학과</option>
+                    </select>
+                </li>
+            </ul>
+        </fieldset>
+        <fieldset>
+            <legend>교재 주문</legend>
+            <ul>
+                <li>
+                    <label for="book">교재</label>
+                    <input type="number" id="book" value="1" min="1" max="3">
+                    <!-- number - 정수값을 입력 할 수 있는 타입 -->
+                </li>
+                <li>
+                    <label for="wsheet">워크시트</label>
+                    <input type="number" id="wsheet" value="1" min="1" max="3">
+                </li>
+                <li>
+                    <label for="group">단체주문</label>
+                    <input type="number" id="group" value="10" min="10" max="100" step="10">
+                </li>
+            </ul>
+        </fieldset>
+        <fieldset>
+            <legend>버튼 선택</legend>
+            <button type="submit">신청하기</button>
+            <button type="reset">다시쓰기</button>
+            <!-- reset - 처음상태로 되돌려라, 초기값으로 되돌려라 -->
+        </fieldset>
+    </form>
+</body>
+</html>

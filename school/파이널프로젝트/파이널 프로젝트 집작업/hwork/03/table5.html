@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset = "utf-8">
+<title>Table Element</title>
+<style>
+table {border-collapse: collapse;}
+table {width: 100%; margin: 20px 0;}
+p, table {border: 1px solid black;}
+th, td {border: 1px solid red;}
+th {width: 20%; text-align: right; color: white; background-color: gray;}
+/* color: 글자색;  */
+</style>
+</head>
+<body>
+<h2>두 줄 병합하기</h2>
+<p>한 줄 이상을 병합 할 때는 rowspan속성을 사용한다.</p>
+<p style = "width: 30%;">테스트 텍스트</p>
+<table>
+<tr><th>Name:</th><td>Bill Gates</td></tr>
+<tr><th rowspan="2">Telephone:</th><td>55577854</td></tr>
+<tr><td>010-5557-7855</td></tr>
+</table>
+<table>
+    <tr><th>Name:</th><th>Telephone:</th><td>55577854</td></tr>
+    <tr><td>55577854</td><td>55577854</td><td>55577854</td></tr>
+    <tr><td>010-5557-7855</td><td>55577854</td><td>55577854</td></tr>
+    </table>
+</body>
+</html>

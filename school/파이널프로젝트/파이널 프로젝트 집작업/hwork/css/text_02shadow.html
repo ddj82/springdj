@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 참고사이트 : https://jos50275266.medium.com/css-background-926811f0da6d */
+        /* body {background: linear-gradient(to left, red, white);} */
+        
+        body {
+            background: linear-gradient(45deg, red, white);
+        }
+
+        @font-face {
+            font-family: djfont;
+            src: url(font/KodeMono-Regular.ttf);
+        }
+
+        #div01 h1 {
+            font-size: 100px;
+            font-family: "Arial Rounded MT";
+            font-family: djfont;
+        }
+
+        .shadow1 {
+            color: orange;
+            text-shadow: 10px 10px #777;
+        }
+
+        .shadow2 {
+            text-shadow: 5px 5px 3px #f00;
+        }
+
+        .shadow3 {
+            color: white;
+            text-shadow: 7px -7px 5px #000;
+        }
+
+        #div02 {
+            background: #222;
+            width: 300px;
+            height: 100px;
+            text-align: center;
+            background: linear-gradient(to left, black, white);
+        }
+
+        .shadow4 {
+            font-size: 80px;
+            font-family: "Arial Rounded MT";
+            font-family: djfont;
+            letter-spacing: 6px;
+            color: #000;
+            color: white;
+            text-shadow: 0 0 4px #ccc, 0 -4px 5px #ff8, 2px -9px 6px #fd3, -3px -14px 10px #f80, 4px -20px 18px #f20;
+        }
+
+        /* 
+        text-shadow: 값1 값2 값3 값4;
+        값1: 텍스트부터 그림자까지의 x축 방향(양수-글자 오른쪽 그림자, 음수: 글자 왼쪽 그림자)
+        값2: 텍스트부터 그림자까지의 y축 방향(양수-글자 아래쪽 그림자, 음수: 글자 위쪽 그림자)
+        값3: blur효과(= 글자 번짐효과, 양수-모든 방향으로 그림자 번짐효과, 음수-모든 방향으로 그림자 축소, 기본값-0)
+        값4: 그림자 색상 지정(한가지 색)
+
+        여러 색상값 지정 형식
+        text-shadow: 값1 값2 값3 값4, 값1 값2 값3 값4, 값1 값2 값3 값4, ...;
+        */
+    </style>
+</head>
+
+<body>
+    <div id="div01">
+        <h1 class="shadow1">HTML5</h1>
+        <h1 class="shadow2">HTML5</h1>
+        <h1 class="shadow3">HTML5</h1>
+    </div>
+    <div id="div02">
+        <h1 class="shadow4">HTML5</h1>
+    </div><br><br>
+</body>
+
+</html>

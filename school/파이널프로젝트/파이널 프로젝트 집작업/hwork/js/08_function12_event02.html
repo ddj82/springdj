@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        select {padding: 2px;}
+    </style>
+    <script>
+        window.onload = function() {
+            alert("즉시실행");
+            // HTML 엘리먼트에 이벤트 핸들러 지정
+            // onclick : 해당 input버튼 요소에 onclick속성 및 
+            // 연결될 test()함수 지정하기
+            document.getElementById("btn").onclick = test;
+
+            // onchange : 해당 select요소에 onchange속성 및 
+            // 연결될 test2()함수 지정하기
+            document.getElementById("sel").onchange = function() {
+                console.log("this: ", this);
+                test2(this.value);
+            };
+        };
+        function test() {alert("사용자 정의 함수");}
+
+        function test2(email) {
+            // HTML의 특정 엘리먼트를 객체로 접근
+            var text = document.getElementById("email2");
+            // 특정 객체의 value속성에 값을 지정
+            text.value = email;
+        }
+    </script>
+</head>
+<body>
+    <p><input type="button" value="테스트" id="btn"></p>
+    <form>
+        이메일: <input type="text" id="email1" name="email1">
+        @ <input type="text" id="email2" name="email2">
+        <select id="sel" name="sel">
+            <option value="" selected>직접입력</option>
+            <option value="naver.com">네이버</option>
+            <option value="gmail.com">구글</option>
+            <option value="daum.net">다음</option>
+        </select>
+        <button>전송</button>
+    </form>
+</body>
+</html>

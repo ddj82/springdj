@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div {border: 1px solid black; padding: 10px;}
+
+        /* 인접 형제 선택자 */
+        div + h1 {background-color: green; color: white;}
+
+        /* 일반 형제 선택자 */
+        p~h2 {background-color: rgb(255, 0, 0); color: white;}
+    </style>
+</head>
+<body>
+    <h1>h1의 1</h1>
+
+    <div><h1>h1의 2</h1><h1>h1의 3</h1></div>
+    <h1>h1의 4</h1>
+    <h1>h1의 5</h1>
+
+    <div><h1>h1의 6</h1><h1>h1의 7</h1></div>
+    <p>p태그 추가</p>
+    <h1>h1의 8</h1>
+    <h1>h1의 9</h1>
+    <hr>
+
+    <h2>h2의 1</h2>
+    <p>p의 1</p>
+    
+    <h2>h2의 2</h2>
+    <h2>h2의 3</h2>
+
+    <h1>h1의 10</h1>
+    
+    <h2>h2의 4</h2>
+    <h2>h2의 5</h2>
+    <br><br>
+</body>
+</html>

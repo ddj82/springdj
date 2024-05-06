@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>while문</title>
+    <style>
+        * {margin: 0;}
+        .blue {color: blue;}
+        .red {color: red;}
+    </style>
+</head>
+<body>
+    <script>
+        var i = 20;
+        while (i >= 10) {
+            if (i % 2 == 0) { //짝수만
+                document.write("<span class='blue'>" + i + " </span>");
+            } else { //홀수만
+                document.write("<span class='red'>" + i + " </span>");
+            }
+            i--;
+        }
+    </script>
+</body>
+</html>

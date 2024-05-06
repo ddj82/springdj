@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 270px;
+            margin-left: 50px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>전구 on/off</p>
+        <img src="../img/pic_bulboff.gif" alt="" id="myImage" style="width: 100px;"><br>
+        <button onclick="document.getElementById('myImage').src = '../img/pic_bulbon.gif'">전원on</button>
+        <button onclick="document.getElementById('myImage').src = '../img/pic_bulboff.gif'">전원off</button>
+    </div><br><hr>
+
+    <p>Hello World</p>
+    <p id="p1">Hello World</p>
+    <button onclick="styleChange()">스타일변경</button><hr>
+
+    <script>
+        function styleChange() {
+            let pTag = document.getElementById("p1");
+            pTag.style.color = "blue";
+            pTag.style.fontFamily = "Broadway";
+            pTag.style.fontSize = "25pt";
+
+            document.getElementsByTagName("p")[1].style.fontWeight = "bolder";
+            document.getElementsByTagName("p")[1].style.fontSize = "32px";
+        }
+    </script>
+
+    <a href="https://www.naver.com"><h2>네이버</h2></a> <!-- h2태그만큼 -->
+    <!-- <h2><a href="https://www.naver.com">네이버</a></h2> 텍스트만큼 -->
+    <button onclick="linkChange()">링크변경</button>
+    <button onclick="linkReturn()">링크되돌리기</button>
+    <hr><br><br>
+
+    <script>
+        function linkChange() {
+            let linkTag = document.getElementsByTagName("a")[0];
+            linkTag.href = "https://www.daum.net";
+            linkTag.innerHTML ="<h2>다음</h2>";
+        }
+        
+        function linkReturn() {
+            let linkTag = document.getElementsByTagName("a")[0];
+            linkTag.href = "https://www.naver.com";
+            linkTag.innerHTML ="<h2>네이버</h2>";
+        }
+    </script>
+</body>
+</html>

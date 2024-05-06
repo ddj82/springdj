@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // window.onload = function() {
+        //     document.write("window.onload: body태그가 로드된 후 body태그 내용을 지우고 새롭게 갱신함");
+        // };
+        (function() {
+            document.write("function() : 해당 코드가 존재하는 위치에서 바로 실행됨. body태그가 로드된 후 body태그 내용 유지");
+        })();
+    </script>
+</head>
+<body>
+    <h1>즉시실행함수</h1>
+    <script>
+        (function() {
+            document.write("function() : 해당 코드가 존재하는 위치에서 바로 실행됨. body태그가 로드된 후 body태그 내용 유지");
+        })();
+    </script>
+</body>
+</html>

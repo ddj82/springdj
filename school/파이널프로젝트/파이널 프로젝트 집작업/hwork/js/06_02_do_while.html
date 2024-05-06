@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반복문</title>
+</head>
+<body>
+    <h2>do~while문</h2>
+    <script>
+        var i = 10;
+        do {
+            document.write("hello!! ");
+        } while (i < 3);
+
+        var i = 1, j = 1;
+        while (i < 3) {
+            document.write("i: " + (i++) + "<br>"); // 1(2) -> 2(3)
+        }
+
+        do {
+            document.write("j: " + (j++) + "<br>"); // 1(2)
+        } while (j > 3);
+    </script>
+</body>
+</html>

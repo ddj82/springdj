@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <script>
+        $(function(){
+            $("p:first").css({"color": "green"}).next().css({"color": "red"}).next().css({"color": "aqua", "font-weight": "bolder"}).end().children("span").css({"color": "yellow", "font-weight": "bolder"});
+            /* 
+            $("p:first").css({"color": "green"})
+            => <p>p태그1 : <span>p태그1 안의 span태그</span></p>
+
+            next().css({"color": "red"})
+            => <p>p태그1의 동생 p태그2 : <span>p태그2 안의 span태그</span></p>
+
+            next().css({"color": "aqua", "font-weight": "bolder"})
+            => <p>p태그3</p>
+
+            end()
+            => <p>p태그1의 동생 p태그2 : <span>p태그2 안의 span태그</span></p>
+            
+            children("span").css({"color": "yellow", "font-weight": "bolder"});
+            => <span>p태그2 안의 span태그</span>
+            */
+        });
+    </script>
+</head>
+<body>
+    <p>p태그1 : <span>p태그1 안의 span태그</span></p>
+    <p>p태그1의 동생 p태그2 : <span>p태그2 안의 span태그</span></p>
+    <p>p태그3</p>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>가상클래스(:) 선택자, 가상엘리먼트(::) 선택자</title>
+    <style>
+        /* 브라우저에 보여지는 첫 번째 줄 선택, 블록 요소에만 사용 가능 */
+        p::first-line {background-color: yellow;}
+        /* p {background-color: yellow;} */
+
+        /* 
+        optional selector는 form 컨트롤 요소(엘리먼트) 중
+        required(필수입력) 속성이 없는 요소를 의미한다.
+        :optional 선택자는 익스플로러9버전 이하는 지원하지 않는다. */
+        input:optional {background-color: red;}
+
+    </style>
+</head>
+<body>
+    <h1>WWF의 임무 성명</h1>
+    <p>법관은 헌법과 법률에 의하여 그 양심에 따라 독립하여 심판한다. 제1항의 지시를 받은 당해 행정기관은 이에 응하여야 한다. 
+        모든 국민은 자기의 행위가 아닌 친족의 행위로 인하여 불이익한 처우를 받지 아니한다.</p>
+    <h1>optional selector</h1>
+    <form>
+        이름: <input type="text" name="username" value="홍길동"><br>
+        비밀번호: <input type="password" name="userpwd" value="12345" required>
+        <button>전송</button>
+    </form>
+</body>
+</html>

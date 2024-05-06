@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {color: blue;}
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js"></script>
+    <script>
+        $(function(){
+            // 이벤트핸들러 함수는 이벤트 객체(e)와 이벤트를 발생시킨 요소(this)를 가지고 있다.
+            /* 
+            이벤트 객체 사용하는 방법
+            1. function의 매개인자로 객체를 생성하여 사용하는 방법
+            예시 : 
+            function(e){
+                let t = e.target;
+            }
+
+            2. 자바스크립트의 event 내장객체를 사용하는 방법
+            예시 : 
+            function(){
+                let t = event.target;
+            }
+            */
+            $(".tt").click(function(e){
+                let i = e.target;
+                let id = $(i).attr("id");
+                // let id = $(this).attr("id");
+                $("#" + id).css({"width": "30px", "height": "30px"});
+            });
+
+            $("button").click(function(e){
+                // console.log("e: ", e);
+                let t = e.target;
+                // e.target과 this는 자바스크립트 객체이므로
+                // jquery힘수를 적용하려면 jquery형식으로 변경해주어야 한다.
+                // 예: $(e.target), $(this)
+                console.log("t: ", t); // <button type="button" id="btn">엘리먼트에 스타일 입히기</button>
+                console.log("this: ", this); // <button type="button" id="btn">엘리먼트에 스타일 입히기</button>
+                console.log($(this).attr("id")); // btn
+
+                $(t).parent().css({"background-color": "black"}); // <body>
+
+                // // 해당 엘리먼트의 자식 엘리먼트들 찾기
+                $("div").children().css({"border-bottom": "3px double red"});
+                $("div").children(".selected").css({"color": "red"});
+            });
+        });
+    </script>
+</head>
+<body>
+    <button type="button" id="btn">엘리먼트에 스타일 입히기</button>
+    <p>이곳은 문단</p>
+
+    <input type="checkbox" class="tt" name="t1" id="t1" value="t1">t1
+    <input type="checkbox" class="tt" name="t2" id="t2" value="t2">t2
+    <input type="checkbox" class="tt" name="t3" id="t3" value="t3">t3
+    <input type="checkbox" class="tt" name="t4" id="t4" value="t4">t4
+    <input type="checkbox" class="tt" name="t5" id="t5" value="t5">t5
+
+    <div><span class="selected">이곳은 div의 차일드 span</span></div>
+    <p>그리고 <span>여기는 또 다른</span> 문단</p>
+    <div>마지막으로 <span>이곳은 div의 차일드 span,</span> 이곳은 div</div>
+</body>
+</html>

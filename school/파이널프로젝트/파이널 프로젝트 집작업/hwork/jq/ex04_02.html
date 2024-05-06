@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <script>
+        function bFnc(){
+            var $goLink = $("#link");
+            // console.log($goLink.attr("href"));
+            // console.log($goLink.prop("href"));
+
+            var $goLink = $(".link");
+            // console.log($goLink.attr("href"));
+            // console.log($goLink.prop("href"));
+
+            // var $goLink = $("#amove");
+            // $goLink.attr("href", "https://www.google.com/");
+
+            var $goLink = $(".amove");
+            $goLink.prop("href", "#none");
+        }
+    </script>
+</head>
+<body>
+    <p>
+        <a href="#none" id="link">버튼1</a>
+        <a href="https://www.naver.com" class="link">버튼2</a>
+
+        <a href="#none" id="amove">이동1</a>
+        <a href="https://www.naver.com" class="amove">이동2</a>
+        <br><br>
+        <button type="button" onclick="bFnc()">적용하기</button>
+    </p>
+    <br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+
+    <p id="none">id가 none인 태그위치</p>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

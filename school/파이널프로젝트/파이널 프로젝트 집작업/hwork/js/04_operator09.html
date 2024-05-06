@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 형변환에 따른 예약값
+        document.write('Number(null): ', Number(null), "<br>"); //0
+        document.write('Number(""): ', Number(""), "<br>"); //0
+        document.write('Number(false): ', Number(false), "<br>"); //0
+        document.write('Number(true): ', Number(true), "<hr>"); //1
+        
+        // 형변환에 의한 예약값이 없는 경우
+        document.write('Number(NaN): ', Number(NaN), "<br>"); //NaN
+        document.write('Number(undefined): ', Number(undefined), "<hr>"); //NaN
+
+        // 동등연산자(일반동치연산자)에 따른 자동 형변환 값
+        // 비교 연산의 대상이 다른 자요형인 경우 숫자형으로 변환하여 비교한다.
+        document.write('"" == 0: ', "" == 0, "<br>"); //t
+        document.write('"" == false: ', "" == false, "<br>"); //t
+        document.write('0 == false: ', 0 == false, "<br>"); //t
+        document.write('1 == true: ', 1 == true, "<hr>"); //t
+
+        // 동등연산자(일반동치연산자)로 인한 형변환 불가 경우
+        // null, undefined, NaN => 형변환 불가 예약값
+        document.write('undefined == null: ', undefined == null, "<br>"); //t
+        document.write('null == "": ', null == "", "<br>"); //f
+        document.write('null == false: ', null == false, "<br>"); //f
+        document.write('undefined == false: ', undefined == false, "<hr>"); //f
+        
+        document.write('NaN == null: ', NaN == null, "<br>"); //f
+        document.write('NaN == "": ', NaN == "", "<br>"); //f
+        document.write('NaN == undefined: ', NaN == undefined, "<br>"); //f
+        // NaN는 에러메세지로 생각, NaN모르는값과 NaN모르는값(나와 나)을 비교하니 false
+        document.write('NaN == NaN: ', NaN == NaN, "<hr>"); //f 
+        
+        // 완전동치연산자(일치 연산자)
+        document.write('null === null: ', null === null, "<br>"); //t
+        document.write('undefined === undefined: ', undefined === undefined, "<br>"); //t
+        document.write('undefined === null: ', undefined === null, "<br>"); //f
+        document.write('NaN === NaN: ', NaN === NaN, "<hr>"); //f
+
+        document.write("<br><hr>");
+        if (Number("50원") == "NaN") {document.write("NaN값 입니다.")}
+        else {document.write("NaN값이 아닙니다.")}
+
+        document.write("<br>");
+        if (isNaN(Number("50원")) === true) {document.write("NaN값 입니다.")}
+        else {document.write("NaN값이 아닙니다.")}
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

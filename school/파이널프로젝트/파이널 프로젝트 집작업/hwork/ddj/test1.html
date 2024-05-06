@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input[type="radio"] {
+            display: none
+        }
+        label {
+            border: 1px solid black;
+        }
+        input:checked + label{
+            border: 1px solid red;
+        }
+        .hi::placeholder {
+            color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="radio" id="m" name="gen" required><label for="m">남자</label><input type="radio" id="w" name="gen" required><label for="w">여자</label><input type="radio" id="n" name="gen" required><label for="n">선택안함</label>
+    </div>
+    <ul>
+        <li>아이디: 필수 정보입니다.</li>
+        <li>비밀번호: 필수 정보입니다.</li>
+    </ul>
+
+    <input class="hi" type="text" id="id1" placeholder="글자색을 바꿔보자">
+    <input type="text" id="paw2" placeholder="글자색을 바꿔보자">
+    <script>
+        // document.getElementById("id1").addEventListener("focus", (e) => {
+        //     console.log(e.target);
+        //     let inputph = document.getElementById("id1");
+        //     inputph.setAttribute("class", "hi");
+        // });
+
+        // document.getElementById("id1").addEventListener("blur", (e) => {
+        //     console.log(e.target);
+        //     let inputph = document.getElementById("id1");
+        //     inputph.removeAttribute("class");
+        // });
+
+    </script>
+</body>
+</html>

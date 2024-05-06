@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>switch조건문</title>
+    <script>
+        var day;
+        var d = new Date().getDay();
+        switch (d) {
+            case 0: day = "Sunday"; break;
+            case 1: day = "Monday"; break;
+            case 2: day = "Tuesday"; break;
+            case 3: day = "Wednesday"; break;
+            case 4: day = "Thursday"; break;
+            case 5: day = "Friday"; break;
+            defualt: day = "Saturday"; break;
+        }
+        document.write("오늘은 " + day + "입니다.");
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

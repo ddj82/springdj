@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h2>The border-style Property</h2>
+    <p>이 속성은 표시 할 테두리 종류를 지정합니다.</p>
+
+    <!-- border 종류 표현 -->
+    <p style="border-style: dotted;">점선</p>
+    <p style="border-style: dashed;">끊기는 실선</p>
+    <p style="border-style: solid;">실선</p>
+    <p style="border-style: double;">이중선(겹선)</p>
+
+    <!-- 입체 표현 -->
+    <p style="border-style: groove;">좌측상단 바깥쪽, 우측하단 안쪽 그림자 표현</p>
+    <p style="border-style: ridge;">좌측상단 안쪽, 우측하단 바깥쪽 그림자 표현</p>
+    <p style="border-style: inset;">좌측상단 그림자표현</p>
+    <p style="border-style: outset;">우측상단 그림자표현</p>
+    
+    <p style="border-style: none; border-width: 3px">선 없음</p>
+    <p style="border-style: hidden; border-width: 3px">선 숨김</p>
+    <p style="border-style: dotted dashed solid double; border-color: red; border-width: 5px">
+    다중선 사용- top right bottom left순으로 적용됨.(시계방향)</p>
+    <br><br>
+
+    <!-- border shorthand 표현 -->
+    <p style="border: 1px dotted #444; border-radius: 5px 20px 5px 10px;">점선</p>
+    <p style="border: 5px dashed hsla(120, 100%, 50%, 1);">끊기는 실선</p>
+    <p style="border: solid; border-radius: 10px 20px">실선1111</p>
+    <p style="border: 5px solid; border-radius: 10px 20px">실선</p>
+    <p style="border: 5px double;">이중선(겹선)</p>
+
+    <p style="border: 5px groove;">좌측상단 바깥쪽, 우측하단 안쪽 그림자 표현</p>
+    <p style="border: 5px ridge rgba(255, 0, 255, 1);">좌측상단 안쪽, 우측하단 바깥쪽 그림자 표현</p>
+    <p style="border: 5px inset hsla(180, 100%, 50%, 1);">좌측상단 그림자 표현</p>
+    <p style="border: 5px outset hsla(120, 100%, 50%, 1);">우측상단 그림자 표현</p>
+    
+    <p style="border: none; border-width: 3px;">선 없음</p>
+    <p style="border: 10px hidden #f00;">선 숨김</p>
+    <p style="border-style: dotted dashed solid double;">다중선 사용</p>
+
+</body>
+</html>

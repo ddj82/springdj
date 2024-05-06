@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변수 선언 및 사용</title>
+    <script>
+        /* 
+        자바스크립트의 함수 형식
+        접근제어자 없음, 리턴타입 없음, 이름만, 매개변수도 이름만
+        [선언적 함수] 선언 형식
+        function 함수명(매개변수명1, 매개변수명2, ...){
+            실행문;
+            ...
+            [return 값;]
+        }
+
+        함수 호출 형식
+        함수명(매개인자값1, 매개인자값2, ...);
+        // 매개인자값은 매개변수의 개수에 맞춰주지 않아도 된다. 알아서 순서대로 주고 못받은 친구는 null을 받음
+        */
+
+       function pClick(){
+        // innerText(값자리에 있는 경우);
+        // inner는 설정한 타겟이 있어야함
+        // 해당 엘리먼트의 자식 요소 중 텍스트를 가져온다.
+        var y = document.getElementsByClassName("pclass")[0].innerText; 
+        //[0] => getElementsByClassName("pclass")를 다 가져와서 0번째 하나만
+        // <p id="demo" name="pname" class="pclass" onclick="pClick()" style="cursor: pointer;">클릭하세요.</p>
+        // y = 클릭하세요.
+        
+        // innerText(공간 자리에 있는 경우):
+        // => document.getElementsByClassName("pclass")[0].innerText = 555;
+        // <p id="demo" name="pname" class="pclass" onclick="pClick()" style="cursor: pointer;">클릭하세요.</p>
+        // 해당 엘리먼트의 자식 요소(클릭하세요.)를 싹 다 지우고
+        // 해당 값(555)에 텍스트를 넣는다.
+
+        // var y = document.getElementById("demo").innerText;
+        // var y = document.getElementsByName("pname")[0].innerText;
+        alert("y값: " + y);
+        document.write("다시 쓰기<br>"); 
+        // document.write() => 함수 안에 존재할땐 innerHTML
+        // innerHTML : 
+        // inner => pClick()이 호출 되면 body내용을 싹 다 지우고
+        // HTML => html형식으로
+        // => write => 쓰세요
+        document.write("답: " + y);
+       }
+    </script>
+</head>
+<body>
+    <h2>변수 선언 및 사용</h2>
+    <p>var키워드는 지역의 의미가 없다.</p>
+    <p id="demo" name="pname" class="pclass" onclick="pClick()" style="cursor: pointer;">클릭하세요.</p>
+
+    <script>
+        var x = 10; //전역
+        document.write("전역var1: " + x + "<br>");
+        { //지역
+            var x = 2222; //var는 전역키워드라서 재선언이 됨
+            document.write("지역var: " + x + "<br>");
+        }
+        // innerHTML: 해당 요소안에 html내용으로 넣는다.
+        // 요소제거 안되고 안의 데이터만 변경됨.
+        // <p id="demo" name="pname" class="pclass" onclick="pClick()" style="cursor: pointer;">클릭하세요.</p>
+        document.getElementById("demo").innerHTML = x;
+        // <p id="demo" name="pname" class="pclass" onclick="pClick()" style="cursor: pointer;">2222</p>
+        document.write("전역var2: " + x + "<br>");
+    </script>
+</body>
+</html>

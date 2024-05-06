@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="demo">2분 타이머</p>
+    <button onclick="clearTimeout(myVar)">Stop time</button>
+    <script>
+        // 1/1000초 단위값 (밀리세턴드초)
+        // 1초마다 myTimer1 함수 실행
+        let m = 2;
+        let s = 0;
+        let r_s = 0;
+        let d = "0" + m + " : 0" + r_s;
+        // document.getElementById("demo").innerHTML = d;
+        var myVar1 = setInterval(myTimer1, 1000);
+        function myTimer1() {
+            // var d = new Date(year, month, day, hours, minutes, seconds, milliseconds);
+            // var min = d.getMinutes() > 9 ? d.getMinutes() : "0" + d.getMinutes();
+            // var scd = d.getSeconds() > 9 ? d.getSeconds() : "0" + d.getSeconds();
+            // document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+            // document.getElementById("demo").innerHTML = min + ":" + scd;
+            // toLocaleTimeString() : 현재 시간을 가져오는 함수. 시스템 내장(한국식) 시간을 가져옴
+            // document.getElementById("demo").innerHTML = minutes + ":" + seconds;
+            // let start = document.getElementById("demo").innerText;
+            // var cd = sd - d;
+            // document.getElementById("demo").innerHTML = sd.toLocaleTimeString();
+            if (s == 60) {
+                s = 0;
+            }
+            d = "0" + m + " : " + (r_s > 9 ? r_s : "0" + r_s);
+
+            if (r_s == 0) {
+                m--;
+                s++;
+            } else if (r_s >= 1) {
+                s++;
+            }
+            document.getElementById("demo").innerHTML = d;
+            r_s = 60 - parseInt(s);
+        }
+
+        // 5초에 myTimer 함수 1번만 실행 후 종료함
+        // 알아서 종료되므로 솔직히 clearTimeout을 사용 할 필요가 없다.
+        var myVar = setTimeout(myTimer, 121000);
+        function myTimer() {
+            clearInterval(myVar1);
+        }
+    </script>
+</body>
+</html>

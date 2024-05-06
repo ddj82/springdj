@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>querySelector() 함수</h2>
+    <pre style="border: 1px solid black;">
+        형식 : document.querySelector("셀렉터명");
+    </pre>
+    <p>
+        제공한 선택자 또는 선택자 그룹과 일치하는 문서 내 첫 번째 Element를 반환한다.
+        <br>
+        일치하는 요소가 없으면 null을 반환한다.
+    </p>
+    <div id="firstDiv">첫째 DIV</div>
+    <div id="secDiv">둘째 DIV</div>
+
+    <div class="divClass">DIV 클래스1</div>
+    <div class="divClass">DIV 클래스2</div>
+    <div class="divClass">DIV 클래스3</div>
+    
+    <div id="threeDiv">
+        <div class="divClass">DIV 클래스4</div>
+        <div class="divClass">DIV 클래스5</div>
+        <div class="divClass">DIV 클래스6</div>
+    </div>
+
+    <script>
+        /* 
+        querySelector가 여러개를 가져올때는 0번째 인덱스만 반환한다.
+        일치하는 요소가 없으면 null을 반환한다.
+        */
+        let a = document.querySelector("#firstDiv");
+        console.log(a); // <div id="firstDiv">첫째 DIV</div>
+        let b = document.querySelector("#fDiv");
+        console.log(b); // null
+        let c = document.querySelector("#secDiv");
+        console.log(c); // <div id="secDiv">둘째 DIV</div>
+        let d = document.querySelector(".divClass");
+        console.log(d); // <div class="divClass">DIV 클래스1</div>
+        let e = document.getElementById("threeDiv").querySelector(".divClass");
+        console.log(e); // <div class="divClass">DIV 클래스4</div>
+    </script>
+</body>
+</html>

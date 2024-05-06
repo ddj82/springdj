@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <script>
+        function btn(){
+            // clone() : 해당 선택요소 복사
+            // var copyObj = $(".box1").children().clone(); //제이쿼리식 
+            // console.log(copyObj);
+            // var copyObj1 = document.getElementsByClassName("box1")[0].children; //자바스크립트식
+            // console.log(copyObj1);
+
+            // remove() : 해당 요소 제거 (자식, 자손까지 모두 다)
+            // $(".box2").remove(); //제이쿼리식
+            // document.body.removeChild(document.getElementsByClassName("box2")[0]); //자바스크립트식
+
+            // empty() : 해당 요소의 하위 요소를 모두 제거
+            // $(".box3").empty(); //제이쿼리식
+            // document.getElementsByClassName("box3")[0].innerHTML = ""; //자바스크립트식
+            //자바스크립트식
+            // document.getElementsByClassName("box3")[0].removeChild(document.getElementsByClassName("box3")[0].getElementsByTagName("p")[0]);
+            // document.getElementsByClassName("box3")[0].removeChild(document.getElementsByClassName("box3")[0].getElementsByTagName("p")[0]);
+
+            // append(요소) : 해당요소를 기준요소의 막내자식으로 추가
+            // $(".box3").append(copyObj); //제이쿼리식
+            // for (let i = 0; i < copyObj1.length; i++) { //자바스크립트식
+                // document.getElementsByClassName("box3")[0].appendChild(copyObj1[i].cloneNode(true));
+            // }
+
+            // $("button").hide(); //제이쿼리식
+            // document.getElementsByTagName("button")[0].style.display = "none"; //자바스크립트식
+        }
+    </script>
+</head>
+<body>
+    <div class="box1">
+        <p>내용1</p><p>내용2</p>
+    </div>
+    <div class="box2">
+        <p>내용3</p><p>내용4</p>
+    </div>
+    <div class="box3">
+        <p>내용5</p><p>내용6</p>
+    </div>
+    <button onclick="btn()">클릭</button>
+</body>
+</html>

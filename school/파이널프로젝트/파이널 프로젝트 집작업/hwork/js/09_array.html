@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="getFruitsList">과일목록 가져오기</button>
+    <button id="delApple">사과(0번 인덱스)삭제</button>
+    <button id="delKiwi">키위(마지막 인덱스)삭제</button>
+    <button id="delIdx3">4번째 요소(3번 인덱스) 삭제</button>
+    <button id="delAll">모든 요소 삭제</button>
+    <ul id="fList"></ul>
+    <script>
+        function flist() {
+            let arr = ["사과", "배", "감", "귤", "오렌지", "바나나", "딸기", "키위"];
+            return arr;
+        }
+
+        function getList(flist) {
+            document.getElementById("fList").innerText = "";
+            flist.forEach(function(ele, idx){
+            // .forEach 앞에는 배열객체만가능.
+            // 매개변수로 함수를 넣어야함. function(요소값변수, 인덱스변수)
+                document.getElementById("fList").innerHTML += "<li>" + (idx + 1) + "번 " + ele + "</li>";
+            });
+        }
+
+        document.getElementById("getFruitsList").onclick = function () {
+            getList(flist());
+        }
+
+        // 배열 첫번째 값 삭제
+        document.getElementById("delApple").onclick = function(){
+            let f = flist();
+            f.shift(); // 배열객체.shift() => 해당 배열객체의 0번인덱스 삭제, 원본훼손
+            getList(f);
+        }
+
+        // 배열 마지막 값 삭제
+        document.getElementById("delKiwi").onclick = function(){
+            let f = flist();
+            f.pop(); // 배열객체.pop() => 해당 배열객체의 마지막 인덱스 삭제, 원본훼손
+            getList(f);
+        }
+        
+        // 배열 네번째(3번 인덱스) 값 삭제
+        document.getElementById("delIdx3").onclick = function(){
+            let f = flist();
+            f.splice(3, 1); // 배열객체.splic(시작인덱스번호, 해당번호부터 가져올 개수)
+            getList(f);
+        }
+
+        // 배열 모든 값 삭제
+        document.getElementById("delAll").onclick = function(){
+            let f = flist();
+            f.splice(0, f.length); // 배열객체.splic(시작인덱스번호, 해당번호부터 가져올 개수)
+            getList(f);
+        }
+
+    </script>
+</body>
+</html>

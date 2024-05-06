@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <script>
+        $(function(){
+            /* 
+            $("선택자").find("요소 또는 선택자") : 선택한 요소의 하위(자식, 자손) 요소를 필터링(검색)할 때 사용.
+            $("선택자").filter("callback 또는 요소 또는 선택자") : 자기 자신의 레벨에서 형제 요소를 필터링(검색) 할 때 사용
+            */
+            $("#inner_1").find(".txt1").css({"background-color": "yellow"});
+            $("#inner_1 p").find(".txt2").css({"background-color": "aqua"});
+            $("#inner_2 p").filter(function(i, o){
+                console.log(i, o);
+                // 단 아이템매개변수는 생략 가능하지만 인덱스 매개변수는 생략불가
+                // 첫번째 매개변수 => 인덱스값, 두번째 매개변수 => 아이템(요소)
+                // 자바스크립트의 forEach()와 매개변수 순서 반대임
+                return i % 2 == 0; // 반드시 true값이 되어야 한다.
+            }).css({"background-color": "yellowgreen"});
+            
+        });
+    </script>
+</head>
+<body>
+    <div id="outer_wrap">
+        <h1>컨텐츠 탐색 선택자</h1>
+        <section id="inner_1">
+            <h2>find(), filter()</h2>
+            <p class="txt1">내용1</p>
+            <p class="txt2">내용2</p>
+        </section>
+        <section id="inner_2">
+            <h2>filter(function)</h2>
+            <p>index 0</p>
+            <p>index 1</p>
+            <p>index 2</p>
+            <p>index 3</p>
+        </section>
+    </div>
+</body>
+</html>

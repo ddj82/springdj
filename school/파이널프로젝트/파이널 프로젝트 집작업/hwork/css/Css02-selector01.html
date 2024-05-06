@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        p {
+            text-align: center;
+            color: gray;
+            font-size: 16pt;
+            font-weight: bolder;
+        }
+
+        /* 아이디 선택자 */
+        p#para1 {text-align: left; color: yellow;}
+        #para1 {text-align: center; color: green;}
+        #para1 {text-align: right; color: red;}
+
+        /* 클래스명 선택자 */
+        .para1 {text-align: center; color: blue;}
+
+        /* 선택자 우선순위 */
+        p#pid {color: lightgreen;}
+        #pid {color: hotpink;}
+        .pclass {color: yellow;}
+
+        .hclass {color: rgb(255, 0, 157);}
+        h1 {color: rgb(217, 255, 0); text-align: center;}
+    </style>
+</head>
+<body style="background-color: black;">
+    <p>p : 아무것도 없는 p태그</p>
+    <p id="para1">p : id="para1"</p>
+    <p>p : 아무것도 없는 p태그</p>
+
+    <p class="para1">p : class="para1"</p>
+    <p class="para1">p : class="para1"</p>
+    <p class="para1">p : class="para1"</p>
+
+    <!-- 선택자의 우선순위 -->
+    <p class="pclass">p : id="pid" class="pclass"</p>
+    <p id="pid" class="pclass" style="color: red;">p : id="pid" class="pclass" 인라인color:red</p>
+    <h1 class="hclass">h1 : class="hclass"</h1>
+
+</body>
+</html>

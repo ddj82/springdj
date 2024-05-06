@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {box-sizing: border-box;}
+        /* body :not(.) */
+
+        /* 전체 중앙배치 */
+        div, form[name=rogo] {
+            width: 450px;
+            margin: 0 auto;
+        }
+
+        /* 항목 테두리, 크기 */
+        input, select, button, div[name=did], div#dgen{
+            width: 100%;
+            height: 50px;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            font-size: 15px;
+        }
+        
+        /* 아이디입력창만 크기가 다름 */
+        div[name=did] input[name=uid] {width: 80%; display: inline-block; border: none;}
+        div[name=did] div.com {width: 20%; margin: 0; display: inline-block;}
+
+        /* 버튼 */
+        button {
+            border: none;
+            border-radius: 5px;
+            background-color: #24a724;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            position: fixed;
+            bottom: 20px;
+            width: 450px;
+        }
+
+        /* 셀렉트 옵션 크기(글자크기로 조정해야함) */
+        option {font-size: 15px;}
+
+        /* 네이버 로고 */
+        input.rogo {border: none; width: 100px; height: 20px;}
+        form[name=rogo] {padding: 15px 0;}
+        
+        /* 테두리 디테일(하단테두리)*/
+        .tel, .email {
+            border: 1px solid #ccc;;
+            border-radius: 0 0 5px 5px;
+        }
+
+        /* 테두리 디테일(상단테두리)*/
+        div[name=did], input[name=uid], input[name=uname] {
+            border-radius: 5px 5px 0 0;
+            color: gray;
+        }
+
+        /* 라디오타입 체크박스 없애기 */
+        input[type="radio"] {display: none;}
+        /* input[type="radio"] {
+            display: none;
+        } */
+
+        /* 라벨 디테일 */
+        label {
+            border: 1px solid #ccc;
+            vertical-align: middle;
+            display: inline-block;
+            padding: 7px 53px;
+            color: #a1a1a1;
+            font-size: 13px;
+            margin: 8px 0;
+        }
+        div#dgen {text-align: center;}
+        label.le {border-radius: 5px 0 0 5px;}
+        label.ri {border-radius: 0 5px 5px 0;}
+        input:checked + label {border: 1px solid rgb(0, 220, 0); color: rgb(0, 220, 0);}
+
+        /* 입력시 테두리 */
+        /* input:focus {border: 2px solid #00dc00;} */
+        input:focus {outline: none;}
+        select[name=nation] {outline: none;}
+
+        /* li(안내문구) 설정 */
+        ul {
+            margin: 0;
+            padding-left: 25px;
+            color: red;
+        }
+        div#divMain input {
+            height: 100%;
+        }
+        div {height: 50px;}
+
+    </style>
+</head>
+
+<body>
+    <form name="rogo" action="https://www.naver.com/" method="get" autocomplete="off">
+        <input class="rogo" type="image" src="img/naverLogo.png" title="네이버 홈페이지로">
+    </form>
+    <br><br>
+    <div id="divMain">
+        <form action="" onsubmit="return CheckForm()" name="formJoin">
+            <div name="did"><input onclick="CheckInput1()" id="uid" type="text" name="uid" pattern="[a-zA-Z0-9_\-]+" minlength="5" maxlength="20" placeholder=" 아이디" ><div class="com">@naver.com</div></div>
+            <div><input onclick="CheckInput2()" type="password" id="upaw" name="upaw" pattern="[a-zA-Z0-9~!@#$%^&\*_]+" minlength="8" maxlength="16" placeholder=" 비밀번호" ></div>
+            <div><input onclick="CheckInput3()" class="email" type="email" id="uemail" name="3" pattern="[a-zA-Z0-9_]+[@]+[a-zA-Z]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" placeholder=" [선택] 이메일주소 (비밀번호 찾기 등 본인 확인용)"></div>
+            <p id="requiredinput"></p>
+            <div><input onclick="CheckInput4()" type="text" id="uname" name="uname" pattern="[가-힣a-zA-Z\s]+" placeholder=" 이름" ></div>
+            <div><input onclick="CheckInput6()" type="text" id="uage" name="uage" pattern="[0-9]+" minlength="8" maxlength="8" placeholder=" 생년월일 8자리" ></div>
+        
+            <div id="dgen"><input type="radio" id="m" name="ugen" ><label class="le" for="m">남자</label><input type="radio" id="w" name="ugen" ><label class="cen" for="w">여자</label><input type="radio" id="n" name="ugen" ><label class="ri" for="n">선택안함</label></div>
+            <div>
+                <select id="nation" name="nation">
+                    <option selected>대한민국 +82</option>
+                    <option>네팔 +977</option>
+                    <option>브라질 +55</option>
+                    <option>콩고 +242</option>
+                </select>
+            </div>
+            <div><input onclick="CheckInput9()" class="tel" type="tel" id="utel" name="utel" placeholder=" 휴대전화번호" pattern="(010)[0-9]{4}[0-9]{4}" ></div>
+            
+            <button type="submit">인증요청</button>
+        </form>
+    </div>
+    <script>
+        // var inpa = document.getElementsByTagName("input")[1];
+        // var diva = document.getElementsByTagName("div")[1];
+        // inpa.onclick = function() {
+        //     diva.style.border = "2px solid #00dc00";
+        // };
+        
+        function CheckForm() {
+            var check = false;
+            var formValue = document.formJoin.uid.value;
+            console.log(formValue);
+            if (formValue != "") {
+                check = ture;
+            } else {
+                document.getElementById("requiredinput").innerHTML = 
+                "<ul><small><li>아이디: 필수 정보입니다.</li><li>비밀번호: 필수 정보입니다.</li></small></ul>";
+            }
+            // if () {}
+            var ugenvalue = document.formJoin.ugen.value;
+            if (ugenvalue != "on") {
+                var divColor = document.getElementsByTagName("div")[7];
+                console.log(divColor);
+                divColor.style.border = "2px solid red";
+                var labelColor = document.getElementsByTagName("label");
+                for (let i = 0; i < labelColor.length; i++) {
+                    labelColor[i].style.border = "2px solid red";
+                    console.log(labelColor[i]);
+                    labelColor[i].style.color = "red";
+                }
+                
+            }
+            
+
+            return check;
+        }
+
+        function CheckInput1() {
+            var divColor = document.getElementsByTagName("div")[1];
+            console.log(divColor);
+            divColor.style.border = "2px solid rgb(0, 220, 0)";
+        }
+        function CheckInput2() {
+            var divColor = document.getElementsByTagName("div")[3];
+            console.log(divColor);
+            divColor.style.border = "2px solid rgb(0, 220, 0)";
+        }
+        function CheckInput3() {
+            var divColor = document.getElementsByTagName("div")[4];
+            console.log(divColor);
+            divColor.style.border = "2px solid rgb(0, 220, 0)";
+        }
+        function CheckInput4() {
+            var divColor = document.getElementsByTagName("div")[5];
+            console.log(divColor);
+            divColor.style.border = "2px solid rgb(0, 220, 0)";
+        }
+        function CheckInput6() {
+            var divColor = document.getElementsByTagName("div")[6];
+            console.log(divColor);
+            divColor.style.border = "2px solid rgb(0, 220, 0)";
+        }
+        function CheckInput9() {
+            var divColor = document.getElementsByTagName("div")[9];
+            console.log(divColor);
+            divColor.style.border = "2px solid rgb(0, 220, 0)";
+        }
+    </script>
+</body>
+
+</html>

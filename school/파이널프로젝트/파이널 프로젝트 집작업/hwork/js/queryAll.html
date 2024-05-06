@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>querySelectorAll() 함수</h2>
+    <pre style="border: 1px solid black;">
+        형식 : document.querySelectorAll("셀렉터명");
+    </pre>
+    <p>
+        제공한 선택자 또는 선택자 그룹과 일치하는 문서의 Element 배열을 반환한다.
+        <br>
+        일치하는 요소가 없으면 빈 배열객체를 반환한다.
+    </p>
+    <div class="outer">
+        <div class="select"><div class="inner">innerDiv1</div></div>
+        <div class="select"><div class="inner">innerDiv2</div></div>
+        <div class="select"><div class="inner">innerDiv3</div></div>
+    </div>
+    
+    <div class="outer1">
+        <div class="select"><div class="inner">innerDiv4</div></div>
+        <div class="select"><div class="inner">innerDiv5</div></div>
+        <div class="select"><div class="inner">innerDiv6</div></div>
+    </div>
+
+    <script>
+        let a = document.querySelector(".select");
+        console.log("a: ", a);
+        // <div class="select"><div class="inner">innerDiv1</div></div>
+
+        let b = document.querySelector(".select > .inner");
+        console.log("b: ", b);
+        // <div class="inner">innerDiv1</div>
+
+        /* document.querySelectorAll() => new Array(); => [] */
+        let c = document.querySelectorAll("body .inner");
+        console.log("c: ", c);
+        // [0]<div class="inner">innerDiv1</div>
+        // [1]<div class="inner">innerDiv2</div>
+        // [2]<div class="inner">innerDiv3</div>
+        // [3]<div class="inner">innerDiv4</div>
+        // [4]<div class="inner">innerDiv5</div>
+        // [5]<div class="inner">innerDiv6</div>
+        
+        let c1 = a.querySelectorAll("body .inner");
+        console.log("c1: ", c1);
+        // [0]<div class="inner">innerDiv1</div>
+        
+        let d = document.querySelectorAll(".select");
+        console.log("d: ", d);
+        // [0]<div class="select"><div class="inner">innerDiv1</div></div>
+        // [1]<div class="select"><div class="inner">innerDiv2</div></div>
+        // [2]<div class="select"><div class="inner">innerDiv3</div></div>
+        // [3]<div class="select"><div class="inner">innerDiv4</div></div>
+        // [4]<div class="select"><div class="inner">innerDiv5</div></div>
+        // [5]<div class="select"><div class="inner">innerDiv6</div></div>
+
+        /* e객체: let e = new Array(); => [] */
+        let e = document.querySelectorAll("#select");
+        console.log(e);
+        // 일치하는 요소가 없으면 빈 배열객체를 반환한다.
+        console.log("e: ", e);
+        // 일치하는 요소가 없으면 빈 배열객체를 반환한다.
+
+    </script>
+</body>
+</html>

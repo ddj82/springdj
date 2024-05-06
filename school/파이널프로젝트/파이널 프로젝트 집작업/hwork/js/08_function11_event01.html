@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /* 
+        이벤트 핸들러 함수 란 : 
+        웹문서 내에서 어떠한 행위가 일어날 떄 발생되는 기능을 제어하는 함수를 말함.
+        - 해당 이벤트가 발생이 될 때 함수를 실행시킨다.
+        - onload : 페이지가 로딩될 때
+        - onchange : 값이 변경되었을 때
+        - onclick : 마우스를 클릭했을 때
+
+        [window].onload = function() {
+            실행코드들;
+        };
+        값이 변경되는 대상 태그나 객체.onchange = function() {
+            실행코드들;
+        };
+        */
+
+        // window.onload = function() {자바스크립트코드들; ...;}
+        // 웹 페이지가 로딩되자마자 실행
+        // 즉시실행함수
+        window.onload = function() { // 이벤트 핸들러 함수 선언(정의)
+        // onload = function() { // window. << 생략가능
+            var i = 3;
+            document.write(i + "의 제곱은 " + (i * i));
+        };
+        // 이벤트(load)에 의해 호출(실행)
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

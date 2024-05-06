@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <style>
+        body {color: white;}
+        .boxDiv {
+            width: 100%;
+            height: 100vh;
+            background-color: skyblue;
+        }
+        /* .scroll_wrap {overflow: hidden;} */
+        .scroll_on {
+            padding: 50px 0;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            opacity: 0; /* opacity(투명도): 0=투명, 1=불투명 */
+            transition: all 1s; /* all => 모든 애니메이션, 1s => 모든 애니메이션을 1초실행 */
+            /* 해당 요소에 애니메이션이 적용된다면 해당 애니메이션을 제어하는 속성 */
+        }
+        .scroll_on.active {
+            opacity: 1 !important;
+            transform: translate(0, 0) !important; /* translate(x축좌표값, y축좌표값) */
+        }
+        .scroll_on.type_top {transform: translate(0, -50px);}
+        .scroll_on.type_bottom {transform: translate(0, 50px);}
+        .scroll_on.type_left {transform: translate(-50px, 0);}
+        .scroll_on.type_right {transform: translate(50px, 0);}
+    </style>
+    <script>
+        $(document).ready(function(){
+            // 클래스가 "scroll_on"인 모든 요소를 선택합니다.
+            const $counters = $(".scroll_on");
+
+            const loop = true; // 애니메이션 반복여부를 설정합니다, (true로 설정 할 경우, 요소가 화면에서 사라질 때 다시 숨겨집니다.)
+
+            // 윈도우의 스크롤 이벤트를 모니터링합니다.
+            $(window).on("scroll", function(e){
+                $counters.each(function(){
+                    const $el = $(this);
+
+                    // 요소의 위치 정보를 가져옵니다.
+                    const rect = $el[0].getBoundingClientRect(); /* getBoundingClientRect() => 자바스크립트함수, 해당 객체의 위치정보를 가지고 있는 함수 */
+                    $el[0].setAttribute("style", "border: 1px solid white; background-color: pink;");
+
+                    // 현재 브라우저 창의 높이
+                    const winHeight = window.innerHeight;
+
+                    // 요소의 높이
+                    const contentHeight = rect.height;
+                    // const contentHeight = rect.bottom - rect.top;
+
+                    // 요소가 화면에 특정 비율만큼 노출될 떄 처리합니다.
+                    if (rect.top <= winHeight - contentHeight && rect.bottom >= contentHeight) {
+                        $el.addClass("active");
+                    }
+                    // 요소가 화면에서 완전히 사라졌을 때 처리합니다.
+                    if (loop && (rect.bottom <= 0 || rect.top >= window.innerHeight)) {
+                        $el.removeClass("active");
+                    }
+                });
+            }).scroll();
+        });
+    </script>
+</head>
+<body>
+    <div class="boxDiv"></div>
+    <div class="scroll_wrap">
+        <div class="scroll_on">ㅋ제자리에서 나타납니다.ㅋ</div>
+        <div class="scroll_on type_top">ㅋ위에서 나타납니다.ㅋ</div>
+        <div class="scroll_on type_left">ㅋ왼쪽에서 나타납니다.ㅋ</div>
+        <div class="scroll_on type_right">ㅋ오른쪽에서 나타납니다.ㅋ</div>
+        <div class="scroll_on type_bottom">ㅋ밑에서 나타납니다.ㅋ</div>
+    </div>
+    <div class="boxDiv"></div>
+</body>
+</html>

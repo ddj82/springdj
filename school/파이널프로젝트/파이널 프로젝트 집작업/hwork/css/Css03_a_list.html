@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>css list속성 및 외부 스타일시트 참조</title>
+    <link rel="stylesheet" type="text/css" href="css/css03_a_list.css">
+    <!-- 
+    <link>태그
+    - href 속성 : 참조 할 파일 위치(필수)
+    - rel 속성 : 문서와의 관계를 명시하는 속성(필수)
+    - type 속성 : 링크된 문서의 MIME타입을 정의하는 속성(type 생략가능)
+    **MIME(Multipurpose Internet Mail Extensions : 다목적의 인터넷 메일 확장자) : 
+    웹을 통해 여러 형태의 파일을 전달하는데 사용하는 속성.
+
+    이메일과 함께 동봉할 파일을 텍스트 문자로 전환해서
+    이메일 시스템을 통해 전달하기 위해 개발되어 
+    Internet Mail Extensions라 불리기 시작함.
+     -->
+    <!-- @import 시스템코드는 일부 브라우저에서 적용이 안 될 수 있다. -->
+    <style>
+        /* @import url(css/css03_a_list.css); */
+        /* 특수한 기능의 주석(메타코드, 시스템코드) */
+    </style>
+</head>
+
+<body>
+    <h2>list-style property</h2>
+
+    <ul>
+        <li>Coffee</li>
+        <li>Tea</li>
+        <li>Coca Cola</li>
+    </ul>
+
+    <ul class="a">
+        <li>Coffee</li>
+        <li>Tea</li>
+        <li>Coca Cola</li>
+    </ul>
+
+    <ul class="b">
+        <li>Apple</li>
+        <li>Lemon</li>
+        <li>Orange</li>
+    </ul>
+
+    <ul class="c">
+        <li>Red</li>
+        <li>Green</li>
+        <li>Blue</li>
+    </ul>
+    <br><br><br><br>
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #pid {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <button type="button" id="styleBtn">라벨1 스타일 변경</button>
+    <button type="button" id="firstChildBtn">폼 태그의 첫 번째 자식요소 확인</button>
+    <button type="button" id="lastChildBtn">폼 태그의 마지막 자식요소 확인</button>
+    <button type="button" id="findPaBtn">부모 태그 확인</button><br>
+    <br><br>
+
+    <p id="pid"></p>
+    <form action="">
+        <label for="">라벨1</label>
+        <input type="checkbox" name="chk" class="chk" id="chkid" value="테스트">
+        <input type="submit" value="전송">
+    </form><br><br>
+    
+    <form action="">
+        <label for="">라벨2</label>
+        <input type="checkbox" name="chk" class="chk" id="chkid" value="테스트">
+    </form><br><br>
+
+    <script>
+        window.onload = function () {
+            let btnArr = document.getElementsByTagName("button");
+            for (let i = 0; i < btnArr.length; i++) {
+                btnArr[i].addEventListener("blur", (e) => {
+                    console.log("e: ", e);
+                    if (e.target.id == "styleBtn") {
+                        // document.getElementById("chkid").perviousElementSibling => <label for="">라벨1</label>
+                        let chk = document.getElementById("chkid").previousElementSibling.style;
+                        chk.border = "none";
+                        chk.display = "inline";
+                    } else {
+                        document.getElementById("pid").style.display = "none";
+                    }
+                });
+            }
+        };
+
+        // 라벨1 스타일 변경
+        document.getElementById("styleBtn").onclick = function () {
+            let chk = document.getElementById("chkid").previousElementSibling.style;
+            console.log(chk);
+
+            chk.border = "1px solid red";
+            chk.display = "inline-block";
+            chk.width = "100px";
+            chk.height = "30px";
+        };
+
+        // 폼 태그의 첫 번째 자식요소 확인
+        document.getElementById("firstChildBtn").onclick = function () {
+            document.getElementById("pid").style.display = "block";
+
+            let chk = document.forms[0].firstElementChild; //<label for="">라벨1</label>
+            // let chk = document.forms[0].children[0].nextElementSibling;
+            
+            // 두번째 요소 확인
+            // let chk = document.forms[0].children[0].nextElementSibling.nextElementSibling;
+            console.log("forms[0]: ", chk);
+            document.getElementById("pid").innerHTML = "폼태그[0] 첫번째 자식태그명 : " + chk.tagName;
+            
+            // chk = document.forms[1].childNodes[0]; //공백텍스트 노드로 제대로 인식이 안됨
+            // chk = document.forms[1].firstElementChild;
+            chk = document.forms[1].children[0]; //<label for="">라벨2</label>
+            console.log("forms[1]: ", chk);
+            document.getElementById("pid").innerHTML += "<br>폼태그[1] 첫번째 자식태그명 : " + chk.tagName;
+        };
+        
+        // 폼 태그의 마지막 자식요소 확인
+        document.getElementById("lastChildBtn").onclick = function () {
+            document.getElementById("pid").style.display = "block";
+
+            let chk = document.forms[0].lastElementChild;
+            console.log("forms[0]: ", chk);
+            document.getElementById("pid").innerHTML = "폼태그[0] 마지막 자식태그명 : " + chk.tagName;
+            chk = document.forms[0].lastElementChild.type;
+            console.log("forms[0]: ", chk);
+            document.getElementById("pid").innerHTML += "<br>폼태그[0] 마지막 자식의 type속성명 : " + chk;
+
+            chk = document.forms[1].lastElementChild.type;
+            console.log("forms[1]: ", chk);
+            document.getElementById("pid").innerHTML += "<br>폼태그[1] 마지막 자식의 type속성명 : " + chk;
+        };
+        
+        // 부모 태그 확인
+        document.getElementById("findPaBtn").onclick = function () {
+            document.getElementById("pid").style.display = "block";
+
+            let chk = document.getElementById("chkid").parentElement.tagName;
+            console.log(chk);
+            document.getElementById("pid").innerHTML = "부모태그명 : " + chk;
+            
+            chk = document.getElementById("chkid").parentNode.tagName;
+            console.log(chk);
+            document.getElementById("pid").innerHTML += "<br>부모태그명 : " + chk;
+        };
+        
+    </script>
+</body>
+</html>

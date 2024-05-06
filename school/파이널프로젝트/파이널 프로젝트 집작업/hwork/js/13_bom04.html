@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="cfn()">클릭</button>
+    <button onclick="vfn()">클릭</button><br>
+    <script>
+        // 내 모니터 해상도 :  1920 * 1080
+        console.log(screen);
+        document.write("화면의 너비(width)는: " + screen.width);
+        document.write("<br>화면의 폭(height)은: " + screen.height);
+
+        document.write("<br>작업표시줄을 제외한 화면의 너비(width)는: " + screen.availWidth);
+        document.write("<br>작업표시줄을 제외한 화면의 폭(height)는: " + screen.availHeight);
+        
+        // document.write("<br>브라우저의 너비(width: 100vw)은: " + window.outerWidth);
+        // document.write("<br>브라우저의 폭(height: 100vh)은: " + window.outerHeight);
+        
+        document.write("<br>브라우저의 너비(width: 100vw)은: " + window.innerWidth);
+        document.write("<br>브라우저의 폭(height: 100vh)은: " + window.innerHeight);
+
+        function cfn() {
+            var pic = document.getElementById("demo");
+
+            pic.style.width = screen.availWidth + "px";
+            pic.style.height = screen.availHeight + "px";
+            pic.style.backgroundColor = "green";
+        }
+        
+        function vfn() {
+            var pic = document.getElementById("demo");
+    
+            pic.style.width = "100vw";
+            pic.style.height = "100vh";
+            pic.style.backgroundColor = "red";
+
+        }
+    </script>
+    <div id="demo">div박스</div>
+</body>
+</html>

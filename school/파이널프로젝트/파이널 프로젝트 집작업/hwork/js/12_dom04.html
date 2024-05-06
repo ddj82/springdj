@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .divBox {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        // window.onload = function () {
+        //     // createElement(태그명) : 웹문서 내에 해당 엘리먼트(태그)를 만들어 준다.
+        //     // 객체명.setAttribute("속성명", "속성값") : 해당 객체의 속성을 설정해 준다. 속성이 없으면 속성 생성
+        //     // appendChild(객체명) : 웹문서 내의 지정 요소안의 맨 마지막에 자식요소로 해당 객체를 추가해 준다.
+        //     // 이전의 객체들(텍스트를 포함한 모든 엘리먼트 요소들)은 유지됨.
+        //     var pic = document.createElement("img"); //<img>
+        //     pic.setAttribute("src", "../img/history.png"); //<img src="../img/history.png">
+        //     document.body.getElementsByTagName("p")[0].appendChild(pic);
+        //     // 가장 마지막 자식으로 추가 (지우는거 없음)
+        //     // <p>Hello DOM<br><br></p> => <p>Hello DOM<br><br><img src="../img/history.png"></p>
+        //     // document.body.appendChild(pic)
+        // }
+        function hiDOM() {
+            var pic = document.createElement("img"); //<img>
+            pic.setAttribute("src", "../img/history.png"); //<img src="../img/history.png">
+            document.body.getElementsByTagName("p")[0].appendChild(pic);
+        }
+        function byeDOM() {
+            document.getElementsByTagName("img")[0].removeAttribute("src");
+        }
+
+        function rmAttr() {
+            document.getElementsByTagName("DIV")[0].removeAttribute("class");
+        }
+        function addAttr() {
+            document.getElementsByTagName("DIV")[0].setAttribute("class", "divBox");
+            // <div></div> => <div class="divBox"></div>
+        }
+    </script>
+</head>
+<body>
+    <p>Hello DOM<br><br></p>
+    <p>Document Object Model</p>
+    <button onclick="hiDOM()">하이DOM</button>
+    <button onclick="byeDOM()">바이DOM</button><br>
+    <button onclick="addAttr()">박스생성</button>
+    <button onclick="rmAttr()">박스삭제</button>
+    <div></div>
+</body>
+</html>

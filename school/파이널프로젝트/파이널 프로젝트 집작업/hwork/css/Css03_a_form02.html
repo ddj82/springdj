@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>form 속성</title>
+    <style>
+        input[type=search] {
+            width: 80%;
+            /* box-sizing: border-box; */
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            background-image: url('../img/searchicon.png');
+            /* background-position: left top | 10px 10px | 25% 75%; 등으로 기술 가능 */
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            padding: 12px 20px 12px 40px;
+        }
+
+        input[type=submit] {
+            border: none;
+            width: 100px;
+            padding: 14px 20px;
+            background-color: rgb(3, 154, 255);
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <p>Input요소에 아이콘넣기:</p>
+    <div>box-sizing: 테스트</div>
+    <form action="">
+        <!-- <input type="text" name="search" placeholder="검색 단어를 입력해주세요."><br> -->
+        <input type="search" name="search" placeholder="검색 단어를 입력해주세요."><br>
+        <input type="submit" value="검색">
+        <input type="button" value="input일반버튼">
+        <button type="button">일반버튼</button>
+        <button type="submit">검색</button>
+        <button>검색</button>
+    </form>
+</body>
+</html>

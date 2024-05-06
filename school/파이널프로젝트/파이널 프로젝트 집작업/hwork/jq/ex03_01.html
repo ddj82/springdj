@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <style>
+        /* CSS는 순서를 1부터 셈 */
+        /* #menu li:nth-of-type(even) {background-color: yellow;} */
+    </style>
+    <script>
+        $(function(){
+            // $("선택자:~~") => 해당 선택자까지는 css선택자이고 :(콜론)부터는 jq선택자이다.
+
+            // $("#menu li:nth-of-type(even)").css({"background-color": "blue"}); //css는 1부터 셈([1],[3])
+            $("#menu li:even").css({"background-color": "red"}); //jd는 0부터 셈([0],[2])
+            $("#menu li:odd").css({"background-color": "green"});
+            // $("#menu li:odd") == $("#menu li:nth-of-type(even)")
+
+            // eq(인덱스번호(0부터)) : 인덱스번호에 해당되는 요소 선택
+            // $("#menu1 li").eq(2).css({"background-color": "yellow"});
+            // $("#menu1 li:eq(2)").css({"background-color": "yellow"});
+            
+            // lt(인덱스번호(0부터)) : 인덱스번호보다 작은, 이전 요소 모두 선택(자신 제외)
+            // $("#menu1 li:lt(2)").css({"background-color": "aqua"});
+            
+            // gt(인덱스번호(0부터)) : 인덱스번호보다 큰, 이후 요소 모두 선택(자신 제외)
+            // $("#menu1 li:gt(2)").css({"background-color": "hotpink"});
+        });
+    </script>
+</head>
+<body>
+    <div id="wrap">
+        <h1>탐색 선택자</h1>
+        <ul id="menu">
+            <li>내용1[0]</li>
+            <li>내용2[1]</li>
+            <li>내용3[2]</li>
+            <li>내용4[3]</li>
+        </ul>
+    </div>
+    <div id="wrap1">
+        <h1>탐색 선택자</h1>
+        <ul id="menu1">
+            <li>내용5[0]</li>
+            <li>내용6[1]</li>
+            <li>내용7[2]</li>
+            <li>내용8[3]</li>
+            <li>내용9[4]</li>
+        </ul>
+    </div>
+</body>
+</html>

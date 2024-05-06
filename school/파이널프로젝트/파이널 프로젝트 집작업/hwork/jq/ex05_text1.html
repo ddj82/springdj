@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 객체</title>
+    <script src="./jquery/jquery-3.6.4.js"></script>
+    <style>
+        img {width: 280px;}
+    </style>
+    <script>
+        $(function(){
+            $("button").click(function(e){
+                let btnClass = e.target.className;
+                if (btnClass == "down") {
+                    if ($("img").width() == 140) {
+                        return;
+                    } else {
+                        $("img").css({"width": $("img").width() - 20 + "px"});
+                    }
+                } else if (btnClass == "up") {
+                    if ($("img").width() == 1120) {
+                        return;
+                    } else {
+                        $("img").css({"width": $("img").width() + 20 + "px"});
+                    }
+                } else {
+                    $("img").removeAttr("style").css({"width": "280px"});
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <button type="button" class="down">-</button>
+    <button type="button" class="return">100%</button>
+    <button type="button" class="up">+</button><br><br>
+    <img src="../img/cute_dog.jpg">
+</body>
+</html>

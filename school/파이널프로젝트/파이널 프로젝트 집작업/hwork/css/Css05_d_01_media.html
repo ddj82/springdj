@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- 반응형 설정 중 하나 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* .wrapper {
+            overflow: auto;
+        }
+        #main {margin-left: 4px;}
+        #manulist {margin: 0; padding: 0;} */
+
+        /* .menulist {
+            background: #cdf0f6;
+            border: 1px solid #d4d4d4;
+            border-radius: 4px;
+            list-style-type: none;
+            margin: 4px;
+            padding: 2px;
+        }333 */
+
+        /* 
+        참고사이트:
+        https://naradesign.github.io/media-query.html
+        https://coding-factory.tistory.com/938
+        
+        @media 형식
+        @media [only | not] [device종류] and (조건문) {
+            #ids {color: white;}    ==> 실행문 예시
+        }
+
+        device종류: all(기본값) | screen | tv ...등등
+        */
+
+        /* width가 600px이상인 화면에 적용 */
+        /* @media screen and (min-width: 600px) {
+            #leftsidebar {width: 200px; float: left;}
+            #main {margin-left: 216px;}
+        } */
+
+        /* @media all and (min-width: 600px) {
+            #leftsidebar {width: 200px; float: left;}
+            #main {margin-left: 216px;}
+        } */
+
+        /* @media (min-width: 600px) {
+            #leftsidebar {width: 200px; float: left;}
+            #main {margin-left: 216px;}
+        } */
+
+        /* 화면의 width가 600px이상 900px미만인 경우 적용 */
+        @media screen and (min-width: 600px) and (max-width: 900px) {
+            #leftsidebar {width: 200px; float: left;}
+            #main {margin-left: 216px;}
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- div.wrapper 시작 -->
+    <div class="wrapper">
+        <div id="leftsidebar">
+            <ul id="menulist">
+                <li class="menulist">Menu-item 1</li>
+                <li class="menulist">Menu-item 2</li>
+                <li class="menulist">Menu-item 3</li>
+                <li class="menulist">Menu-item 4</li>
+                <li class="menulist">Menu-item 5</li>
+            </ul>
+        </div>
+        <div id="main">
+            <h1>브라우저 창 크기를 조정하여 효과를 확인하세요.</h1>
+            <p>
+                이 예제는 뷰포트의 너비가 600픽셀인 경우를 기준으로
+                메뉴의 위치가 이동하는 것을 보여줍니다. <br>
+                뷰포트가 600픽셀을 기준으로 어떻게 이동이 되는지 확인해보세요.
+            </p>
+        </div>
+    </div>
+    <!-- div.wrapper 종료 -->
+</body>
+</html>
