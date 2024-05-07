@@ -1,5 +1,6 @@
 package com.drink.view;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,33 +21,41 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.drink.ko.UsersService;
 import com.drink.ko.impl.CertificationService;
 import com.drink.ko.impl.MailSendService;
+import com.drink.ko.impl.NaverLoginService;
 import com.drink.ko.vo.KaKaoVO;
 import com.drink.ko.vo.UsersVO;
+import com.google.gson.Gson;
 
 @SessionAttributes({ "userID", "userNO" })
 @Controller
 public class LoginController {
+
 	@Autowired
-	private UsersService usersService;
+	UsersService usersService;
 	@Autowired
 	private MailSendService mailService;
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 
-	private KaKaoVO kakao;
+//	naver
+	private NaverLoginService naverService = new NaverLoginService();
+	String naver = ""; // naver 토큰
 
+	private KaKaoVO kakao = null;
 	String accessToken;
+
+	@RequestMapping("/loginErr.ko")
+	public String loginErr() {
+		return "/WEB-INF/login/login.jsp?error=1";
+	}
 
 	@RequestMapping("/login.ko")
 	@ResponseBody
 	public String login(UsersVO vo, Model model) {
 
-		System.out.println("/login.ko 여기까지 진입 성공");
-
 		String pw = vo.getU_pw();
 		System.out.println("getU_pw 암호화 전 비밀번호: " + vo.getU_pw());
 		UsersVO user = usersService.loginSelectOne(vo);
-		System.out.println(user);
 
 		if (user != null) {
 			System.out.println("getU_pw 암호화한 비밀번호: " + vo.getU_pw());
@@ -53,117 +63,70 @@ public class LoginController {
 			if (result == true) {
 				model.addAttribute("userID", user.getU_id());
 				model.addAttribute("userNO", user.getU_no());
-				return "main.jsp";
+				return "main.ko";
 			} else {
-				return "loginFail.ko?error=1";
+				return "loginErr.ko";
 			}
 		}
-		return "loginFail.ko?error=1";
+		return "loginErr.ko";
 	}
 
-	@RequestMapping("/loginFail.ko")
-	public String loginFail(@RequestParam(value = "error") String error, Model model) {
-		model.addAttribute("error", error);
-		return "/WEB-INF/login/login.jsp";
-	}
-
-	@RequestMapping("/idFind.ko")
-	@ResponseBody
-	public UsersVO idFind(UsersVO vo, @RequestParam(value = "menu", defaultValue = "", required = false) String menu,
-			Model model) {
-		System.out.println("@RequestParam으로 받은 menu : " + menu);
-		System.out.println("vo.getPhon : " + vo.getU_tel());
-		System.out.println("idFind 컨트롤러를 탔습니다.");
-		System.out.println("UsersVO vo.getEmail : " + vo.getU_email());
-		if (menu != null && menu.equals("email")) {
-			return usersService.idFindEmail(vo);
-		} else if (menu != null && menu.equals("phon")) {
-			return usersService.idFindPhon(vo);
+	// 05-07 수정
+	@PostMapping("/idFind.ko")
+	public String idFind(UsersVO vo, Model model) {
+		List<UsersVO> userList = usersService.idFindPhone(vo);
+		if (userList == null) {
+			return "redirect:/WEB-INF/login/idFind.jsp?error=1";
 		} else {
-			return null;
+			model.addAttribute("userList", userList);
+			return "/WEB-INF/login/idFindSearch.jsp";
 		}
-
 	}
 
-	// 로그아웃
+//	@RequestMapping("/pwFindSearch.ko")
+//	public String pwFindSearch(@RequestParam(value = "userList", defaultValue = "", required = false) String userList, Model model) {
+//		System.out.println("userList : " + userList);
+//		Gson gson = new Gson();
+//		String userIdList = gson.fromJson(userList, String.class);
+//		System.out.println("userIdList : " + userIdList);
+//		model.addAttribute("userList",vo);
+//		return "/WEB-INF/login/pwFindSearch.jsp";
+//	}
+
 	@RequestMapping("/logout.ko")
 	public String logout(HttpSession session, SessionStatus sessionStatus) {
-		System.out.println("logout.ko 메서드를 탔습니다.");
+		System.out.println("logout.do 메서드를 탔습니다.");
+		if (kakao != null) {
+			kakao.kakaoLogout(accessToken, session.getAttribute("userID").toString());
+		} else if (naver != null) {
+			naverService.naverLogout(naver);
+		}
 		sessionStatus.setComplete();
 		session.invalidate();
-		return "redirect:/main.jsp";
+
+		return "redirect:main.ko";
 	}
 
-	// 비밀번호 찾기
-	@RequestMapping("/pwFind.ko")
+	// 05-05수정
+	@RequestMapping("/pwFindId.ko")
 	@ResponseBody
 	public String pwFind(UsersVO vo) {
 		System.out.println("pwFind 메서드를 탔습니다. : " + vo.getU_id());
-		int i = usersService.pwFind(vo);
-		System.out.println("i : " + i);
-		if (i == 0) {
-			System.out.println("해당 id가 없습니다..");
-		} else if (i > 0) {
-			System.out.println("해당 id가 있습니다..");
-			String vovo = usersService.pwFindStart(vo);
-			System.out.println("UsersVO vovo : " + vovo);
-			return usersService.pwFindStart(vo);
-		}
-		return null;
-	}
-
-	// 변경했음.
-	@RequestMapping("/kakao.ko")
-	public String kakaoLogin(@RequestParam String code, Model model) {
-		kakao = new KaKaoVO();
-//		1. 인가 코드 받기 (@RequestParam String code)
-		System.out.println("code : " + code);
-//	    2. 토큰 받기
-		accessToken = kakao.getAccessToken(code);
-		System.out.println("accessToken : " + accessToken);
-//	    3. 사용자 정보 받기
-		Map<String, Object> userInfo = kakao.getUserInfo(accessToken);
-		UsersVO vo = new UsersVO();
-		vo.setU_id((String) userInfo.get("kakaoID"));
-		vo.setU_email((String) userInfo.get("email"));
-		vo.setU_name((String) userInfo.get("name"));
-		vo.setU_tel((String) userInfo.get("phone_number1"));
-		vo.setAddr1((String) userInfo.get("baseAddress"));
-		vo.setAddr2((String) userInfo.get("detail_address"));
-		vo.setAddr3((String) userInfo.get("zone_number"));
-		System.out.println("vo.getAddr3 : " + vo.getAddr3());
-		vo.setU_birth((String) userInfo.get("birthday"));
-		vo.setU_gen((String) userInfo.get("gen"));
-		String gender = (String) userInfo.get("gen");
-		if (gender.equals("male")) {
-			vo.setU_gen("남자");
-		} else if (gender.equals("female")) {
-			vo.setU_gen("여자");
-		}
-		vo.setU_nick((String) userInfo.get("nickName"));
-		System.out.println("gen : " + vo.getU_gen());
-		UsersVO user = usersService.kakaoLogin(vo);
-		if (user == null) {
-			int i = usersService.kakaoLoginFirst(vo);
-			if (i > 0) {
-				System.out.println("카카오 데이터 업데이트 완료");
-				user = usersService.kakaoLogin(vo);
-				System.out.println("user.getU_id : " + user.getU_id());
-				model.addAttribute("userID", user.getU_id());
-				model.addAttribute("userNO", user.getU_no());
-				return "/main.jsp";
-			} else if (i <= 0) {
-				System.out.println("카카오 데이터 업데이트 실패");
-				return "/login.jsp?error=1";
-			}
+		String email = usersService.pwFindId(vo);
+		if (email == null || email == "") {
+			return "error";
 		} else {
-			model.addAttribute("userID", user.getU_id());
-			model.addAttribute("userNO", user.getU_no());
-			return "/main.jsp";
+			return email;
 		}
-		return "/login.jsp?error=1";
 	}
 
+	@RequestMapping("/pwFindStart.ko")
+	@ResponseBody
+	public String pwFindStart(UsersVO vo) {
+		return usersService.pwFindStart(vo);
+	}
+
+	// 05-05수정 끝
 	@RequestMapping("/mailCheck.ko")
 	@ResponseBody
 	public String mailCheck(@RequestParam(value = "email", defaultValue = "", required = false) String email) {
@@ -215,4 +178,91 @@ public class LoginController {
 		return "/WEB-INF/login/myInfoModi.jsp";
 	}
 
+	@RequestMapping("/kakao.ko")
+	public String kakaoLogin(@RequestParam String code, HttpSession session, Model model) {
+		kakao = new KaKaoVO();
+		// 1. 인가 코드 받기 (@RequestParam String code)
+		System.out.println("code : " + code);
+//		        // 2. 토큰 받기
+		accessToken = kakao.getAccessToken(code, session);
+		System.out.println("accessToken : " + accessToken);
+		// 5-5 수정
+		if (accessToken == null || accessToken == "") {
+			return "main.ko";
+		}
+		// 5-5 수정 끝
+
+		// 3. 사용자 정보 받기
+		Map<String, Object> userInfo = kakao.getUserInfo(accessToken, session);
+		UsersVO vo = new UsersVO();
+		vo.setU_id((String) userInfo.get("kakaoID"));
+		vo.setU_email((String) userInfo.get("email"));
+		vo.setU_name((String) userInfo.get("name"));
+		vo.setU_tel((String) userInfo.get("phone_number1"));
+		vo.setAddr1((String) userInfo.get("baseAddress"));
+		vo.setAddr2((String) userInfo.get("detail_address"));
+		vo.setAddr3((String) userInfo.get("zone_number"));
+		System.out.println("vo.getAddr3 : " + vo.getAddr3());
+		vo.setU_birth((String) userInfo.get("birthday"));
+		vo.setU_gen((String) userInfo.get("gen"));
+		String gender = (String) userInfo.get("gen");
+		if (gender.equals("male")) {
+			vo.setU_gen("남자");
+		} else if (gender.equals("female")) {
+			vo.setU_gen("여자");
+		}
+		vo.setU_nick((String) userInfo.get("nickName"));
+		System.out.println("gen : " + vo.getU_gen());
+		UsersVO user = usersService.kakaoLogin(vo);
+		if (user == null) {
+			int i = usersService.kakaoLoginFirst(vo);
+			if (i > 0) {
+				System.out.println("카카오 데이터 업데이트 완료");
+				user = usersService.kakaoLogin(vo);
+				System.out.println("user.getU_id : " + user.getU_id());
+				model.addAttribute("userID", user.getU_id());
+				model.addAttribute("userNO", user.getU_no());
+				return "main.ko";
+			} else if (i <= 0) {
+				System.out.println("카카오 데이터 업데이트 실패");
+				return "loginErr.ko";
+			}
+		} else {
+			model.addAttribute("userID", user.getU_id());
+			model.addAttribute("userNO", user.getU_no());
+			return "main.ko";
+		}
+		return "loginErr.ko";
+	}
+
+	// naver 추가하기.
+	@RequestMapping("/NaverLoginCallback.ko")
+	public String naverLoginCallback(@RequestParam Map<String, String> resValue, Model model, HttpSession session) {
+		System.out.println("NaverLoginCallback.ko 진입");
+		// code 를 받아오면 code 를 사용하여 access_token를 발급받는다.
+		naver = naverService.requestNaverLoginAcceccToken(resValue, "authorization_code", session);
+		if (naver == null || naver == "") {
+			return "main.ko";
+		}
+		UsersVO vo = naverService.apiExamMemberProfile(naver);
+
+		UsersVO user = usersService.naverLogin(vo);
+		if (user != null) {
+			System.out.println("이미 가입한 사용자입니다.");
+			model.addAttribute("userID", user.getU_id());
+			model.addAttribute("userNO", user.getU_no());
+			return "main.ko";
+		} else if (user == null) {
+			int i = usersService.naverLoginFirst(vo);
+			if (i <= 0) {
+				return "/login.jsp?error=1";
+			} else if (i > 0) {
+				user = usersService.naverLogin(vo);
+				model.addAttribute("userID", user.getU_id());
+				model.addAttribute("userNO", user.getU_no());
+				return "main.ko";
+			}
+		}
+		return "loginErr.ko";
+	}
 }

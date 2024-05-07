@@ -45,7 +45,7 @@
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 주문목록
 						</a> 
-						<a class="nav-link collapsed" href="" target="contentFrame">
+						<a class="nav-link collapsed" href="adminProdList.ko" target="contentFrame">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 상품관리
@@ -63,6 +63,11 @@
 						<a class="nav-link" href="" target="contentFrame">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-table"></i>
+							</div> 상품후기 게시판
+						</a>
+						<a class="nav-link" href="" target="contentFrame">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-table"></i>
 							</div> FAQ 게시판
 						</a> 
 						<a class="nav-link" href="adminQnaList.ko" target="contentFrame">
@@ -70,6 +75,7 @@
 								<i class="fas fa-table"></i>
 							</div> QNA 게시판
 						</a>
+						
 					</div>
 				</div>
 			</nav>

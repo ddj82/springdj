@@ -76,6 +76,28 @@ public class BichenaController {
 	public final String SECRET = "xGMw5WNK4QaCvoXJtVwSp7VWp2HtteV0RPzVrRvMfNGe6GfLsRyaBM3GlRLdF93YHnAHea1XgPZu4Yj1";
 	// 아임포트 가맹점 식별코드 값
 	public final String IMPORT_ID = "imp70405420";
+	
+	@RequestMapping("/main.ko")
+	public String main() {
+		return "/main.jsp";
+	}
+	
+	@RequestMapping("/terms.ko")
+	public String terms(UsersVO vo) {
+		return "/WEB-INF/join/terms.jsp";
+	}
+	@RequestMapping("/insertPage.ko")
+	public String insertPage(UsersVO vo) {
+		return "/WEB-INF/join/insert.jsp";
+	}
+	@RequestMapping("/serviceTerms.ko")
+	public String serviceTerms(UsersVO vo) {
+		return "/WEB-INF/join/serviceTerms.jsp";
+	}	
+	@RequestMapping("/personalTerms.ko")
+	public String personalTerms(UsersVO vo) {
+		return "/WEB-INF/join/personalTerms.jsp";
+	}
 
 	@RequestMapping("/insertUser.ko")
 	public String insertUser(UsersVO vo) {
@@ -94,21 +116,6 @@ public class BichenaController {
 			count = 1;
 		}
 		return count;
-	}
-
-	@RequestMapping("/terms.ko")
-	public String terms(UsersVO vo) {
-		return "/WEB-INF/join/terms.jsp";
-	}
-
-	@RequestMapping("/requestCertPage.ko")
-	public String certPage(UsersVO vo) {
-		return "/WEB-INF/join/requestCert.jsp";
-	}
-	
-	@RequestMapping("/insertPage.ko")
-	public String insertPage(UsersVO vo) {
-		return "/WEB-INF/join/insert.jsp";
 	}
 
 	// 아임포트 인증(토큰)을 받아주는 함수
@@ -231,11 +238,6 @@ public class BichenaController {
 		return count;
 	}
 
-	@RequestMapping("main.ko")
-	public String main() {
-		return "/main.jsp";
-	}
-
 	@RequestMapping("/myPage.ko")
 	public String myPage(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
@@ -246,7 +248,7 @@ public class BichenaController {
 		return "/WEB-INF/user/myPageMain.jsp";
 	}
 
-	@GetMapping("myOrderDetail.ko")
+	@GetMapping("/myOrderDetail.ko")
 	public String myOrderDetail(@RequestParam(value = "o_no") String o_no, Model model) {
 		OrderVO myOrderDetail = orderService.myOrderDetail(o_no);
 		model.addAttribute("myOrderDetail", myOrderDetail);
@@ -260,7 +262,7 @@ public class BichenaController {
 		return "/WEB-INF/user/prodView.jsp";
 	}
 
-	@GetMapping("/prodOne.ko")
+	@RequestMapping("/prodOne.ko")
 	public String prodOne(@RequestParam(value = "p_no") String p_no, Model model) {
 		ProdVO prodOne = prodService.prodOne(p_no);
 		model.addAttribute("prodOne", prodOne);
@@ -400,7 +402,7 @@ public class BichenaController {
 			return "qnaList.ko";
 		} else {
 			System.out.println("등록실패");
-			return "redirect:/index.jsp";
+			return "redirect:main.ko";
 		}
 	}
 
@@ -439,12 +441,45 @@ public class BichenaController {
 		System.out.println(qnaView);
 		return "/WEB-INF/admin/adminQnaView.jsp";
 	}
-	
-//	@GetMapping("/qnaView.ko")
-//	public String qnaView(@RequestParam(value = "q_no") String q_no, Model model) {
-//		QnaVO qnaView = qnaService.qnaView(q_no);
-//		model.addAttribute("qnaView", qnaView);
-//		return "/WEB-INF/user/qnaView.jsp";
-//	}
 
+	@RequestMapping("/adminProdList.ko")
+	public String adminProdList(Model model) {
+		List<ProdVO> adminProdList = prodService.prodList();
+		model.addAttribute("adminProdList", adminProdList);
+		return "/WEB-INF/admin/adminProdView.jsp";
+	}
+	
+	@GetMapping("/adminProdDetail.ko")
+	@ResponseBody
+	public Object adminProdDetail(@RequestParam(value = "p_no") String p_no, Model model) {
+		ProdVO adminProdDetail = prodService.prodOne(p_no);
+		model.addAttribute("adminProdDetail", adminProdDetail);
+		return adminProdDetail;
+	}
+	
+	@PostMapping("/adminProdInsert.ko")
+	public String adminProdInsert(ProdVO vo) throws IllegalStateException, IOException {
+		MultipartFile uploadFile = vo.getUploadFile();
+		File f = new File(realPath);
+		if (!f.exists()) {
+			f.mkdirs();
+		}
+
+		if (!uploadFile.isEmpty()) {
+			vo.setP_img(uploadFile.getOriginalFilename());
+			// 실질적으로 파일이 설정한 경로에 업로드 되는 지점
+			uploadFile.transferTo(new File(realPath + vo.getP_img()));
+		}
+		
+		System.out.println(vo);
+		int cnt = prodService.adminProdInsert(vo);
+
+		if (cnt > 0) {
+			System.out.println("등록완료");
+			return "adminProdList.ko";
+		} else {
+			System.out.println("등록실패");
+			return "redirect:adminProdList.ko";
+		}
+	}
 }

@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
@@ -14,11 +15,6 @@ table th {
 }
 table {
 	text-align: center;
-}
-.btn-group-lg>.btn, .btn-lg {
-    padding: 12px 10px;
-    font-size: 14px;
-    line-height: 0;
 }
 </style>
 </head>
@@ -103,17 +99,17 @@ table {
 	            <td>${order.o_total }</td>
 	            <td>${order.o_state }</td>
 	            <td>
-	                <button type="button" class="btn btn-danger btn-lg del" onclick="">주문취소</button>
+	                <button type="button" class="btn btn-danger btn-sm del" onclick="">주문취소</button>
 	            </td>
 	            <td>
-	                <button type="button" class="btn btn-primary btn-lg tail" data-toggle="modal" data-target="#myModal" onclick="orderdetail('${order.o_no }')">상세보기</button>
+	                <button type="button" class="btn btn-primary btn-sm tail" data-toggle="modal" data-target="#myModal" onclick="orderDetail('${order.o_no }')">상세보기</button>
 	            </td>
 	        </tr>
 		</c:forEach>
 		</tbody>
 	</table>
 	
-<script>
+	<script>
     $(document).ready(function(){
         $("#myInput1").on("keyup", function() {
         var value = $(this).val().toLowerCase();
@@ -122,34 +118,52 @@ table {
             });
         });
     });
-</script>
-	
-<script>
-function orderdetail(ono){
-	let objParams = {o_no : ono};
-	$.ajax({
-		type : "GET",
-		url : "adminOrderDetail.ko",
-		data : objParams,
-		cache : false,
-		success : function(val) {
-			$("#tail-date").text("");
-			$("#tail-no-name-tel").text("");
-			$("#tail-state").text("");
-			$("#tail-prod").text("");
-			$("#tail-user").text("");
-			$("#tail-pay").text("");
-			
-			$("#tail-date").append(val.o_date);
-			$("#tail-no-name-tel").append("<p>주문번호 : " + val.o_no + "</p>" + "<div>" + val.u_name + " | " + val.u_tel + "</div>");
-			$("#tail-state").append(val.o_state);
-			$("#tail-prod").append("상품사진,상품명,상품설명,개당가격,수량");
-			$("#tail-user").append("<tr><td>받는분</td><td>" + val.u_name + " | " + val.u_tel + "</td></tr><tr><td>주소</td><td>" + val.o_addr + "</td></tr>");
-			$("#tail-pay").append("<tr><th>총 주문 금액</th><th>" + val.o_total + "원</th></tr>");
-		}
-	});	
-}
-</script>
+    
+    $(document).ready(function(){
+        $("#myInput2").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+            $("#myList tr").filter(function() {
+                $(this).toggle($(this).children(".u_name").text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+    
+    $(document).ready(function(){
+        $("#myInput3").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+            $("#myList tr").filter(function() {
+                $(this).toggle($(this).children(".p_name").text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+	</script>
+		
+	<script>
+	function orderDetail(ono){
+		let objParams = {o_no : ono};
+		$.ajax({
+			type : "GET",
+			url : "adminOrderDetail.ko",
+			data : objParams,
+			cache : false,
+			success : function(val) {
+				$("#tail-date").text("");
+				$("#tail-no-name-tel").text("");
+				$("#tail-state").text("");
+				$("#tail-prod").text("");
+				$("#tail-user").text("");
+				$("#tail-pay").text("");
+				
+				$("#tail-date").append(val.o_date);
+				$("#tail-no-name-tel").append("<p>주문번호 : " + val.o_no + "</p>" + "<div>" + val.u_name + " | " + val.u_tel + "</div>");
+				$("#tail-state").append(val.o_state);
+				$("#tail-prod").append("상품사진,상품명,상품설명,개당가격,수량");
+				$("#tail-user").append("<tr><td>받는분</td><td>" + val.u_name + " | " + val.u_tel + "</td></tr><tr><td>주소</td><td>" + val.o_addr + "</td></tr>");
+				$("#tail-pay").append("<tr><th>총 주문 금액</th><th>" + val.o_total + "원</th></tr>");
+			}
+		});	
+	}
+	</script>
 	<div class="modal fade" id="myModal" role="dialog">
 	    <div class="modal-dialog">
 	        <!-- Modal content-->
@@ -190,6 +204,7 @@ function orderdetail(ono){
 	        </div>
 	    </div>
 	</div>
+	
 </div>
 </body>
 </html>
