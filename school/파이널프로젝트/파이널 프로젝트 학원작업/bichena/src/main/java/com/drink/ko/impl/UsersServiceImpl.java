@@ -121,5 +121,10 @@ public class UsersServiceImpl implements UsersService {
 	public UsersVO naverLogin(UsersVO vo) {
 		return usersDAO.naverLogin(vo);
 	}
+
+	@Override
+	public List<UsersVO> getUserList(UsersVO vo) {
+		return usersDAO.getUserList(vo);
+	}
 }
 

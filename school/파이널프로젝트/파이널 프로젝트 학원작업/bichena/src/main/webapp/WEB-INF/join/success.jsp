@@ -28,11 +28,26 @@
 </head>
 <body>
 	<div class="success">
-		<h1>회원가입이 완료되었습니다.</h1>
-		<p>로그인 후 이용해주세요.</p>
-		<form action="loginPage.ko">
-			<input class="do" type="submit" value="로그인하기">
-		</form>
+		<c:set var="result" value='<%=request.getParameter("result")%>'/>
+		<c:choose>
+			<c:when test="${result eq '1'}">
+				<h1>이미 가입된 정보가 있습니다.</h1>
+				<form action="loginPage.ko">
+					<input class="do" type="submit" value="로그인하기">
+				</form>
+				<p>아이디를 잊어버리셨나요?</p>
+				<form action="idf.ko">
+					<input class="do" type="submit" value="아이디 찾기">
+				</form>
+			</c:when>
+			<c:otherwise>
+				<h1>회원가입이 완료되었습니다.</h1>
+				<p>로그인 후 이용해주세요.</p>
+				<form action="loginPage.ko">
+					<input class="do" type="submit" value="로그인하기">
+				</form>			
+			</c:otherwise>
+		</c:choose>
 	</div>
 </body>
 </html>

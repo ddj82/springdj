@@ -23,5 +23,6 @@ public interface UsersService {
 	UsersVO kakaoLogin(UsersVO vo);
 	int naverLoginFirst(UsersVO vo);
 	UsersVO naverLogin(UsersVO vo);
+	List<UsersVO> getUserList(UsersVO vo);
 }
 

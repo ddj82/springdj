@@ -5,8 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.js"></script>
 <script src="resources/js/check.js"></script>
 <script>
 	var cnt = 0;

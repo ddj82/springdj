@@ -155,4 +155,9 @@ public class UsersDAO {
 	public UsersVO naverLogin(UsersVO vo) {
 		return mybatis.selectOne("UserDAO.naverLogin", vo);
 	}
+
+	public List<UsersVO> getUserList(UsersVO vo) {
+		System.out.println("DAO  : " + vo.getSearchVoca() + vo.getSearchWord());
+		return mybatis.selectList("UserDAO.getUserList", vo);
+	}
 }

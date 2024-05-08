@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <meta charset="UTF-8">
 <title>약관동의</title>
@@ -131,22 +130,32 @@ span.all {
 	<div class="wrapSign">
 		<div class="a">
 			<form class="form1" name="form1">
-
-				<span class="all"><img src="" class="termsB"><input
-					type="checkbox" name="clause" id="clauseAll" value="clauseAll"><label>전체
-						동의하기</label></span><br> <br> <span class="must"><label><input
-						type="checkbox" name="clause" id="clause1" value="agree"><a
-						href="serviceTerms.ko"><small style="font-weight: bold;">[필수]
-						</small>서비스 이용약관 </label><img src="img/arrow-right.png" alt="약관 페이지" width="10px"
-					height="10px"></a></span><br> <br> <span class="must"><img
-					src="" class="termsB"><label><input type="checkbox"
-						name="clause" id="clause2" value="agree"><a
-						href="personalTerms.ko"><small style="font-weight: bold;">[필수]
-						</small>개인정보 수집 및 이용 </label><img src="img/arrow-right.png" alt="약관 페이지"
-					width="10px" height="10px"></a></span><br> <br>
+				<span class="all">
+					<input type="checkbox" name="clause" id="clauseAll" value="clauseAll"><label>전체 동의하기</label>
+				</span>
+				<br><br> 
+				<span class="must">
+					<label>
+						<input type="checkbox" name="clause" id="clause1" value="agree">
+						<a href="serviceTerms.ko">
+							<small style="font-weight: bold;">[필수]</small>서비스 이용약관 
+							<img src="img/arrow-right.png" alt="약관 페이지" width="10px" height="10px">
+						</a>
+					</label>
+				</span><br><br> 
+				
+				<span class="must">
+					<label>
+						<input type="checkbox" name="clause" id="clause2" value="agree">
+						<a href="personalTerms.ko">
+							<small style="font-weight: bold;">[필수]</small>개인정보 수집 및 이용 
+							<img src="img/arrow-right.png" alt="약관 페이지" width="10px" height="10px">
+						</a>
+					</label>
+				</span><br><br>
+				
 				<div id="div1" class="div1">
-					<input type="button" value="성인 인증하기" id="submit" class="submit"
-						onclick="requestCert()" disabled>
+					<input type="button" value="성인 인증하기" id="submit" class="submit" onclick="requestCert()" disabled>
 				</div>
 			</form>
 		</div>
@@ -190,40 +199,42 @@ span.all {
 		
 		IMP.init("imp70405420");
 
-		function requestCert(){
+	function requestCert(){
 			
-			IMP.certification(
-					  {
-					    pg: "inicis_unified.MIIiasTest",
-					    m_redirect_url: "http://localhost:8090"
-					  },
-					  function (rsp) {
-						  console.log(rsp);
-					    if (rsp.success) {
-					    	jQuery.ajax({
-					            url: "cer.ko",
-					            method: "POST",
-					            async : false,
-					            data: { "imp_uid" : rsp.imp_uid }
-					          }).done(function(res){
-					        	  if(new Date(res.birth).getFullYear() <= 2005) {
-					        		  alert('인증이 완료 되었습니다!');
-					        		  location.href = "insertPage.ko?name="+res.name+"&tel="+res.phone+"&birth="+res.birth;
-					        	  } else if(new Date(res.birth).getFullYear() > 2005) {
-					        		  alert('미성년자는 가입이 불가합니다.');
-					        	  } else {
-					        		  alert('인증에 실패하였습니다. 에러 내용 : ' + res.msg);
-					        	  }
-					          });
-					        
-					    } else {
-					    	alert("인증에 실패하였습니다. 에러 내용: " + rsp.error_msg);
-					    }
-					  },
-					  
-					);
-			
-			
+		IMP.certification(
+				  {
+				    pg: "inicis_unified.MIIiasTest"
+// 				    ,
+// 				    m_redirect_url: "http://localhost:8090"
+				  },
+				  function (rsp) {
+					  console.log(rsp);
+				    if (rsp.success) {
+				    	jQuery.ajax({
+				            url: "cer.ko",
+				            method: "POST",
+				            async : false,
+				            data: { "imp_uid" : rsp.imp_uid }
+				          }).done(function(res){
+				        	  console.log(res);
+				        	  if(res == '') {
+				        		  location.href = "success.ko?result=1";
+// 				        	  } else if(2006 > 2005) {
+				        	  } else if(new Date(res.birth).getFullYear() > 2005) {
+				        		  location.href = "main.ko?result=2";
+				        	  } else if(new Date(res.birth).getFullYear() <= 2005){
+				        		  location.href = "insertPage.ko?name="+res.name+"&tel="+res.phone+"&birth="+res.birth;
+				        	  } else {
+				        		  alert('인증에 실패하였습니다. 에러 내용 : ' + res.msg);
+				        	  }
+				          });
+				        
+				    } else {
+				    	alert("인증에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+				    }
+				  },
+				  
+				);
 		}
 	</script>
 </body>
