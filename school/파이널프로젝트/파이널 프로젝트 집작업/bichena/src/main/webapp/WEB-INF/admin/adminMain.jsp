@@ -14,6 +14,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/admin.js"></script>
+<script>
+window.onload = function() {
+    document.getElementById('contentFrame').src='adminOrderList.ko';
+    // contentFrame이라는 ID를 가진 iframe의 내부 document에 접근
+    var iframeDocument = document.getElementById('contentFrame').contentDocument;
+};
+</script>
 </head>
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -50,17 +57,27 @@
 								<i class="fas fa-columns"></i>
 							</div> 상품관리
 						</a> 
-						<a class="nav-link collapsed" href="" target="contentFrame">
+						<a class="nav-link collapsed" href="prodInsertEditer.ko" target="contentFrame">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-columns"></i>
+							</div> 상품추가
+						</a> 
+						<a class="nav-link collapsed" href="getUserList.ko" target="contentFrame">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-book-open"></i>
 							</div> 회원관리
 						</a> 
-						<a class="nav-link" href="" target="contentFrame">
+						<a class="nav-link" href="getNoticeList.ko" target="contentFrame">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 공지사항
 						</a> 
 						<a class="nav-link" href="" target="contentFrame">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-table"></i>
+							</div> 상품후기 게시판
+						</a>
+						<a class="nav-link" href="getFaqList.ko" target="contentFrame">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-table"></i>
 							</div> FAQ 게시판
@@ -70,6 +87,7 @@
 								<i class="fas fa-table"></i>
 							</div> QNA 게시판
 						</a>
+						
 					</div>
 				</div>
 			</nav>

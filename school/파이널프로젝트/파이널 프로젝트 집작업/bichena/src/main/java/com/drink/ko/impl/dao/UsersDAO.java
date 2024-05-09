@@ -70,6 +70,10 @@ public class UsersDAO {
 		return mybatis.selectOne("UserDAO.checkId", id);
 	}
 
+	public UsersVO checkEmail(String email) {
+		return mybatis.selectOne("UserDAO.checkEmail", email);
+	}
+	
 	// 로그인
 	public UsersVO loginSelectOne(UsersVO vo) {
 		System.out.println("UserDAOMybatis를 탔습니다.");
@@ -96,14 +100,18 @@ public class UsersDAO {
 		return mybatis.selectOne("UserDAO.idFindEmail", vo);
 	}
 
-	public UsersVO idFindPhon(UsersVO vo) {
+	public List<UsersVO> idFindPhone(UsersVO vo) {
 		System.out.println("idFindPhon의 UserDAOMybatis를 탔습니다.");
 		System.out.println("idFind의 Username : " + vo.getU_email());
-		return mybatis.selectOne("UserDAO.idFindPhon", vo);
+		return mybatis.selectList("UserDAO.idFindPhone", vo);
 	}
 
 	public int pwFind(UsersVO vo) {
 		return mybatis.selectOne("UserDAO.pwFind", vo);
+	}
+
+	public String pwFindId(UsersVO vo) {
+		return mybatis.selectOne("UserDAO.pwFindId", vo);
 	}
 
 	public String pwFindStart(UsersVO vo) {
@@ -131,7 +139,6 @@ public class UsersDAO {
 		if (i == 0) {
 			System.out.println("pwFindStart : 에러에러에러");
 		} else if (i > 0) {
-			System.out.println("random : "+random);
 			return random;
 		}
 		return null;
@@ -143,5 +150,23 @@ public class UsersDAO {
 
 	public UsersVO kakaoLogin(UsersVO vo) {
 		return mybatis.selectOne("UserDAO.kakaoLogin", vo);
+	}
+
+	public int naverLoginFirst(UsersVO vo) {
+		return mybatis.insert("UserDAO.naverLoginFirst", vo);
+	}
+
+	public UsersVO naverLogin(UsersVO vo) {
+		return mybatis.selectOne("UserDAO.naverLogin", vo);
+	}
+
+	public List<UsersVO> getUserList(UsersVO vo) {
+		System.out.println("DAO  : " + vo.getSearchVoca() + vo.getSearchWord());
+		return mybatis.selectList("UserDAO.getUserList", vo);
+	}
+	
+	//동준, 관리자로그인
+	public UsersVO loginAdmin(UsersVO vo) {
+		return mybatis.selectOne("UserDAO.loginAdmin", vo);
 	}
 }

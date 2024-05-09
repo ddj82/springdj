@@ -6,7 +6,7 @@ function insertchk() {
 		var pw = document.getElementById('pw');
 		var pw1 = document.getElementById('pw1');
 		var name = document.getElementById('name');
-		var gender = document.getElementById('gender');
+		var nick = document.getElementById('nick');
 		var birth = document.getElementById('birth');
 		var tel = document.getElementById('tel');
 		var email = document.getElementById('email');
@@ -14,30 +14,44 @@ function insertchk() {
 		var address = document.getElementById('address');
 		var detail = document.getElementById('detailAddress');
 		
-		var idPattern = /^[a-z0-9_\-]+$/;
-		var pwPattern = /^[a-zA-Z0-9_\-~!@#$%^&*()]+$/;
-		var birthPattern = /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
-		var telPattern = /^[0-9]{11}$/;
+		var idPattern = /^[A-Za-z]{1}[A-Za-z0-9]{8,}$/;
+		var pwPattern = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
 		var emailPattern = /^[a-zA-Z0-9_\-~!#$%^&*()]+@[a-zA-Z0-9_\-]+(\.[a-zA-Z0-9_\-]+)*$/;
+		var namePattern = /^[가-힣a-zA-Z]+$/;
+		var nickPattern = /^[가-힣a-zA-Z]+$/;
 		
-		if(id.value == '' || id.value == null) {
-			id.focus();
-			istrue = false;
-		}
+		var idErrorMessage = document.getElementById('idErrorMessage');
+		var pwErrorMessage = document.getElementById('pwErrorMessage');
+		var pw1ErrorMessage = document.getElementById('pw1ErrorMessage');
+		var emailNoneMessage = document.getElementById('emailNoneMessage');
+		var postcodeErrorMessage = document.getElementById('postcodeErrorMessage');
+		var addressErrorMessage = document.getElementById('addressErrorMessage');
+		var detailErrorMessage = document.getElementById('detailErrorMessage');
+		var nickErrorMessage = document.getElementById('nickErrorMessage');
+		
+		
+		if (id.value.trim() === '' || !idPattern.test(id.value)) {
+        	id.focus();
+        	idErrorMessage.style.display = 'block';
+        	istrue = false;
+    	}
 		if(pw.value == '' || pw.value == null) {
 			pw.focus();
+			pwErrorMessage.style.display = 'block';
 			istrue = false;
 		}
 		if(pw1.value != pw.value) {
 			pw1.focus();
+			pw1ErrorMessage.style.display = 'block';
 			istrue = false;
 		}
-		if(name.value == '' || name.value == null) {
+		if(name.value == '' || !namePattern.test(name.value)) {
 			name.focus();
 			istrue = false;
 		}
-		if(gender.value == '' || gender.value == null) {
-			id.focus();
+		if(!nickPattern.test(nick.value)) {
+			nick.focus();
+			nickErrorMessage.style.display = 'block';
 			istrue = false;
 		}
 		if(birth.value == '' || birth.value == null) {
@@ -46,18 +60,22 @@ function insertchk() {
 		}
 		if(email.value == '' || email.value == null || !emailPattern.test(email.value)) {
 			email.focus();
+			emailErrorMessage.style.display = 'block'
 			istrue = false;
 		}
 		if(postcode.value == '' || postcode.value == null) {
 			postcode.focus();
+			postcodeErrorMessage.style.display = 'block';
 			istrue = false;
 		}
 		if(address.value == '' || address.value == null) {
 			address.focus();
+			addressErrorMessage.style.display = 'block';
 			istrue = false;
 		}
 		if(detail.value == '' || detail.value == null) {
 			detail.focus();
+			detailErrorMessage.style.display = 'block';
 			istrue = false;
 		}
 		
@@ -73,21 +91,27 @@ function insertchk() {
 	function idInput() {
 		var id = document.getElementById('id');
 		var idErrorMessage = document.getElementById('idErrorMessage');
+		var idNoneMessage = document.getElementById('idNoneMessage');
+		var idCheckMessage = document.getElementById('idCheckMessage');
 
-		id.focus(); // Focus on the input field
+		id.focus();
 
-		id.addEventListener('blur', function() {
-			var pattern = /^[a-z0-9_\-]+$/; // 정규 표현식 패턴
-			var idvalue = id.value.trim();
-			if(!pattern.test(idvalue)) {
+		id.addEventListener('input', function() {
+			var pattern = /^[A-Za-z]{1}[A-Za-z0-9]{8,}$/; // 정규 표현식 패턴
+			var idvalue = id.value;
+			if(idvalue == '') {
+				idNoneMessage.style.display = 'block';
+				idErrorMessage.style.display = 'none'; // Display error message				
+				idCheckMessage.style.display = 'none'; // Display error message				
+			} else if(!pattern.test(idvalue)) {
 				idErrorMessage.style.display = 'block'; // Display error message				
+				idCheckMessage.style.display = 'none'; // Display error message				
+				idNoneMessage.style.display = 'none'; // Display error message				
 			} else {
 				idErrorMessage.style.display = 'none'; // Hide error message
+				idNoneMessage.style.display = 'none';
 			}
 		});
-		
-		
-		
 	}
 	function pwInput() {
 		var pw = document.getElementById('pw');
@@ -95,7 +119,7 @@ function insertchk() {
 
 		pw.focus(); // Focus on the input field
 
-		pw.addEventListener('blur', function() {
+		pw.addEventListener('input', function() {
 			var pattern = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/; // 정규 표현식 패턴
 			var pwvalue = pw.value.trim();
 			if(!pattern.test(pwvalue)) {
@@ -105,6 +129,24 @@ function insertchk() {
 			}
 		});
 	}
+	
+	function nickInput() {
+		var nick = document.getElementById('nick');
+		var nickErrorMessage = document.getElementById('nickErrorMessage');
+
+		nick.focus(); // Focus on the input field
+
+		nick.addEventListener('input', function() {
+			var pattern = /^[가-힣a-zA-Z]+$/; // 정규 표현식 패턴
+			var nickvalue = nick.value.trim();
+			if(!pattern.test(nickvalue)) {
+				nickErrorMessage.style.display = 'block'; // Display error message				
+			} else {
+				nickErrorMessage.style.display = 'none'; // Hide error message
+			}
+		});
+	}
+	
 	function pw1Input() {
 		var pw1 = document.getElementById('pw1');
 		var pw1ErrorMessage = document.getElementById('pw1ErrorMessage');
@@ -112,7 +154,7 @@ function insertchk() {
 		
 		pw1.focus(); // Focus on the input field
 
-		pw1.addEventListener('blur', function() {
+		pw1.addEventListener('input', function() {
 			var pw1value = pw1.value.trim();
 			if (pw1value == '' || pw1value != pw.value.trim()) {
 				pw1ErrorMessage.style.display = 'block'; // Display error message
@@ -127,37 +169,24 @@ function insertchk() {
 
 		name.focus(); // Focus on the input field
 
-		name.addEventListener('blur', function() {
+		name.addEventListener('input', function() {
 			var namevalue = name.value.trim();
-			if (namevalue == "") {
+			var pattern = /^[가-힣a-zA-Z]+$/;
+			if (!pattern.test(namevalue)) {
 				nameErrorMessage.style.display = 'block'; // Display error message
 			} else {
 				nameErrorMessage.style.display = 'none'; // Hide error message
 			}
 		});
 	}
-	function genderInput() {
-		var gender = document.getElementById('name');
-		var genderErrorMessage = document.getElementById('genderErrorMessage');
-
-		gender.focus(); // Focus on the input field
-
-		gender.addEventListener('blur', function() {
-			var gendervalue = gender.value.trim();
-			if (gendervalue == "") {
-				genderErrorMessage.style.display = 'block'; // Display error message
-			} else {
-				genderErrorMessage.style.display = 'none'; // Hide error message
-			}
-		});
-	}
+	
 	function birthInput() {
 		var birth = document.getElementById('birth');
 		var birthErrorMessage = document.getElementById('birthErrorMessage');
 
 		birth.focus(); // Focus on the input field
 
-		birth.addEventListener('blur', function() {
+		birth.addEventListener('input', function() {
 			var birthvalue = birth.value.trim();
 			if (birthvalue == "") {
 				birthErrorMessage.style.display = 'block'; // Display error message
@@ -172,7 +201,7 @@ function insertchk() {
 
 		tel.focus(); // Focus on the input field
 
-		tel.addEventListener('blur', function() {
+		tel.addEventListener('input', function() {
 			var telvalue = tel.value.trim();
 			if (telvalue == "") {
 				telErrorMessage.style.display = 'block'; // Display error message
@@ -188,13 +217,15 @@ function insertchk() {
 
 		email.focus(); // Focus on the input field
 
-		email.addEventListener('blur', function() {
+		email.addEventListener('input', function() {
 			var emailPattern = /^[a-zA-Z0-9_\-~!#$%^&*()]+@[a-zA-Z0-9_\-]+(\.[a-zA-Z0-9_\-]+)*$/;
 			var emailvalue = email.value.trim();
 			if (emailvalue == "") {
 				emailNoneMessage.style.display = 'block';
+				emailErrorMessage.style.display = 'none';						
 			} else if (!emailPattern.test(emailvalue)){
 				emailErrorMessage.style.display = 'block';						
+				emailNoneMessage.style.display = 'none';
 			} else {
 				emailErrorMessage.style.display = 'none';
 				emailNoneMessage.style.display = 'none';
@@ -207,7 +238,7 @@ function insertchk() {
 
 		postcode.focus(); // Focus on the input field
 
-		postcode.addEventListener('blur', function() {
+		postcode.addEventListener('input', function() {
 			var postcodevalue = postcode.value.trim();
 			if (postcodevalue == "") {
 				postcodeErrorMessage.style.display = 'block'; // Display error message
@@ -222,7 +253,7 @@ function insertchk() {
 
 		address.focus(); // Focus on the input field
 
-		address.addEventListener('blur', function() {
+		address.addEventListener('input', function() {
 			var addressvalue = address.value.trim();
 			if (addressvalue == "") {
 				addressErrorMessage.style.display = 'block'; // Display error message
@@ -232,12 +263,12 @@ function insertchk() {
 		});
 	}
 	function detailInput() {
-		var detail = document.getElementById('detail');
+		var detail = document.getElementById('detailAddress');
 		var detailErrorMessage = document.getElementById('detailErrorMessage');
 
 		detail.focus(); // Focus on the input field
 
-		detail.addEventListener('blur', function() {
+		detail.addEventListener('input', function() {
 			var detailvalue = detail.value.trim();
 			if (detailvalue == "") {
 				detailErrorMessage.style.display = 'block'; // Display error message

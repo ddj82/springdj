@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+if (session.getAttribute("userID") == null) {
+	response.sendRedirect("main.ko");
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +12,7 @@
 <title>문의보기</title>
 </head>
 <body>
+<%@ include file="/WEB-INF/admin/adminMain2.jsp" %>
 	<section class="title">문의목록</section>
 
 	<table>

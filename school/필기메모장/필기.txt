@@ -10700,3 +10700,23 @@ git remote -v
 wlalqjrj@gmail.com
 
 
+http://localhost:8090/ko/prodInsertEditer.jsp
+
+
+-0510 수정-
+main.jsp
+
+로그인컨트롤러 
+loginAD.ko
+
+비채나컨트롤러 
+admin2.ko, adminLoginPage.ko, adminProdDetail.ko, productDetailpage.ko, prodInsertEditer.ko
+adminProdList.ko
+
+어드민폴더
+adminLogin.jsp
+adminMain2.jsp
+adminProdInsert.jsp
+adminProdOneView.jsp
+
+adminProdView.jsp

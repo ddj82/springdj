@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.drink.ko.vo.ProdVO;
 
+
 @Repository
 public class ProdDAO {
 	@Autowired
@@ -19,6 +20,23 @@ public class ProdDAO {
 	
 	public List<ProdVO> prodList() {
 		return mybatis.selectList("ProdDAO.prodList");
+	}
+	
+	public int adminProdInsert(ProdVO vo) {
+		return mybatis.insert("ProdDAO.adminProdInsert", vo);
+	}
+	
+	
+	
+	
+	
+	
+	public int getPnoMaxNum() {
+		return mybatis.selectOne("ProdDAO.getPnoMaxNum");
+	}
+	
+	public int insertProduct(ProdVO vo) {
+		return mybatis.insert("ProdDAO.insertProduct", vo);
 	}
 	
 }
