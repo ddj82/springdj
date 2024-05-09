@@ -7,6 +7,7 @@ import com.drink.ko.vo.UsersVO;
 public interface UsersService {
 	int insertUser(UsersVO vo);
 	UsersVO checkId(String id);
+	UsersVO checkEmail(String email);
 	int pwFind(UsersVO vo);
 	void updateUser(UsersVO vo); //정보 수정
 	void deleteUser(UsersVO vo); //회원 삭제

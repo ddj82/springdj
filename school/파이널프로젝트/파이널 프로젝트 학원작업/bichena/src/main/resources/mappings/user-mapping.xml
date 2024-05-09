@@ -25,6 +25,10 @@
 		U_ID = #{u_id}
 	</select>
 
+	<select id="checkEmail" resultType="userdto">
+		SELECT * FROM bc_users WHERE U_EMAIL = #{u_email}
+	</select>
+
 	<insert id="insertUser">
 		INSERT INTO
 		bc_users(U_ID,U_PW,U_NAME,U_NICK,U_GEN,U_BIRTH,U_TEL,U_EMAIL,ADDR1,ADDR2,ADDR3)

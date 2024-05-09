@@ -6,6 +6,11 @@ import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -17,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.drink.ko.UsersService;
 import com.drink.ko.impl.CertificationService;
@@ -26,7 +32,7 @@ import com.drink.ko.vo.KaKaoVO;
 import com.drink.ko.vo.UsersVO;
 import com.google.gson.Gson;
 
-@SessionAttributes({ "userID", "userNO" })
+@SessionAttributes({ "userID", "userNO", "howLogin" })
 @Controller
 public class LoginController {
 
@@ -49,6 +55,36 @@ public class LoginController {
 		return "/WEB-INF/login/login.jsp?error=1";
 	}
 
+	@RequestMapping("/loginPage.ko")
+	public String loginPage(UsersVO vo) {
+		return "/WEB-INF/login/login.jsp";
+	}
+
+	@RequestMapping("/idf.ko")
+	public String idf(UsersVO vo) {
+		return "/WEB-INF/login/idFind.jsp";
+	}
+
+	@RequestMapping("/pwf.ko")
+	public String pwf(UsersVO vo) {
+		return "/WEB-INF/login/pwFind.jsp";
+	}
+
+	@RequestMapping("/confirm.ko")
+	public String confirm(UsersVO vo) {
+		return "/WEB-INF/login/userMyPassConfirm.jsp";
+	}
+
+	@RequestMapping("/modify.ko")
+	public String modify(UsersVO vo) {
+		return "/WEB-INF/login/myInfoModi.jsp";
+	}
+
+	@RequestMapping("/pwFindShow.ko")
+	public String pwFindShow(@RequestParam(value = "email", defaultValue = "", required = false) String email) {
+		return "/WEB-INF/login/pwFindShow.jsp?email=" + email;
+	}
+
 	@RequestMapping("/login.ko")
 	@ResponseBody
 	public String login(UsersVO vo, Model model) {
@@ -63,6 +99,7 @@ public class LoginController {
 			if (result == true) {
 				model.addAttribute("userID", user.getU_id());
 				model.addAttribute("userNO", user.getU_no());
+				model.addAttribute("howLogin", user.getU_state());
 				return "main.ko";
 			} else {
 				return "loginErr.ko";
@@ -83,35 +120,36 @@ public class LoginController {
 		}
 	}
 
-//	@RequestMapping("/pwFindSearch.ko")
-//	public String pwFindSearch(@RequestParam(value = "userList", defaultValue = "", required = false) String userList, Model model) {
-//		System.out.println("userList : " + userList);
-//		Gson gson = new Gson();
-//		String userIdList = gson.fromJson(userList, String.class);
-//		System.out.println("userIdList : " + userIdList);
-//		model.addAttribute("userList",vo);
-//		return "/WEB-INF/login/pwFindSearch.jsp";
-//	}
-
 	@RequestMapping("/logout.ko")
-	public String logout(HttpSession session, SessionStatus sessionStatus) {
+	public String logout(HttpSession session, SessionStatus sessionStatus, RedirectAttributes ra) throws Exception {
 		System.out.println("logout.do 메서드를 탔습니다.");
 		if (kakao != null) {
 			kakao.kakaoLogout(accessToken, session.getAttribute("userID").toString());
-		} else if (naver != null) {
-			naverService.naverLogout(naver);
+			HttpClient client = HttpClientBuilder.create().build();
+			HttpGet httpGet = new HttpGet("https://accounts.kakao.com/logout?continue=https://accounts.kakao.com/weblogin/account");
+			HttpResponse res = client.execute(httpGet);
+			String body = EntityUtils.toString(res.getEntity());
+			System.out.println("로그아웃 후: " + body);
 		}
 		sessionStatus.setComplete();
 		session.invalidate();
+		return "redirect:/main.ko";
+	}
 
-		return "redirect:main.ko";
+	@RequestMapping("/logoutNaver.ko")
+	@ResponseBody
+	public String logoutNaver(HttpSession session, SessionStatus sessionStatus, RedirectAttributes ra) throws Exception {
+		naverService.naverLogout(naver);
+		sessionStatus.setComplete();
+		session.invalidate();
+		return "success";
 	}
 
 	// 05-05수정
 	@RequestMapping("/pwFindId.ko")
 	@ResponseBody
 	public String pwFind(UsersVO vo) {
-		System.out.println("pwFind 메서드를 탔습니다. : " + vo.getU_id());
+		System.out.println("pwFindId 메서드를 탔습니다. : " + vo.getU_email());
 		String email = usersService.pwFindId(vo);
 		if (email == null || email == "") {
 			return "error";
@@ -151,31 +189,6 @@ public class LoginController {
 		System.out.println("인증번호 : " + numStr);
 		CertificationService.certifiedPhoneNumber(phoneNumber, numStr);
 		return numStr;
-	}
-
-	@RequestMapping("/loginPage.ko")
-	public String loginPage(UsersVO vo) {
-		return "/WEB-INF/login/login.jsp";
-	}
-
-	@RequestMapping("/idf.ko")
-	public String idf(UsersVO vo) {
-		return "/WEB-INF/login/idFind.jsp";
-	}
-
-	@RequestMapping("/pwf.ko")
-	public String pwf(UsersVO vo) {
-		return "/WEB-INF/login/pwFind.jsp";
-	}
-
-	@RequestMapping("/confirm.ko")
-	public String confirm(UsersVO vo) {
-		return "/WEB-INF/login/userMyPassConfirm.jsp";
-	}
-
-	@RequestMapping("/modify.ko")
-	public String modify(UsersVO vo) {
-		return "/WEB-INF/login/myInfoModi.jsp";
 	}
 
 	@RequestMapping("/kakao.ko")
@@ -222,6 +235,7 @@ public class LoginController {
 				System.out.println("user.getU_id : " + user.getU_id());
 				model.addAttribute("userID", user.getU_id());
 				model.addAttribute("userNO", user.getU_no());
+				model.addAttribute("howLogin", user.getU_state());
 				return "main.ko";
 			} else if (i <= 0) {
 				System.out.println("카카오 데이터 업데이트 실패");
@@ -230,6 +244,9 @@ public class LoginController {
 		} else {
 			model.addAttribute("userID", user.getU_id());
 			model.addAttribute("userNO", user.getU_no());
+			// 수정1
+			System.out.println("howLogin : " + user.getU_state());
+			model.addAttribute("howLogin", user.getU_state());
 			return "main.ko";
 		}
 		return "loginErr.ko";
@@ -251,18 +268,21 @@ public class LoginController {
 			System.out.println("이미 가입한 사용자입니다.");
 			model.addAttribute("userID", user.getU_id());
 			model.addAttribute("userNO", user.getU_no());
-			return "main.ko";
+			model.addAttribute("howLogin", user.getU_state());
+			return "/main.jsp";
 		} else if (user == null) {
 			int i = usersService.naverLoginFirst(vo);
 			if (i <= 0) {
-				return "/login.jsp?error=1";
+				return "loginErr.ko";
 			} else if (i > 0) {
 				user = usersService.naverLogin(vo);
 				model.addAttribute("userID", user.getU_id());
 				model.addAttribute("userNO", user.getU_no());
+				model.addAttribute("howLogin", user.getU_state());
 				return "main.ko";
 			}
 		}
+		
 		return "loginErr.ko";
 	}
 }

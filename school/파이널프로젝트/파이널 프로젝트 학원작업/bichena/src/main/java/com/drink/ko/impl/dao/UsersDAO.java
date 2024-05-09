@@ -70,6 +70,10 @@ public class UsersDAO {
 		return mybatis.selectOne("UserDAO.checkId", id);
 	}
 
+	public UsersVO checkEmail(String email) {
+		return mybatis.selectOne("UserDAO.checkEmail", email);
+	}
+	
 	// 로그인
 	public UsersVO loginSelectOne(UsersVO vo) {
 		System.out.println("UserDAOMybatis를 탔습니다.");

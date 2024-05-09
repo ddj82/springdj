@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductMapper">
+	<insert id="insertProduct">
+		INSERT INTO PRODUCT
+		(P_NAME, P_PRICE, PFILENAME, P_IMG, PDETAIL, P_DESC, P_MADE, P_TYPE, P_DGR, P_SW, P_SU, P_SP, P_MAT, P_CAP, P_STOCK)
+		VALUES 
+		(#{p_name}, #{p_price}, #{pfilename}, #{p_img}, #{pdetail}, #{p_desc}, #{p_made}, #{p_type}, #{p_dgr}, #{p_sw}, #{p_su}, #{p_sp}, #{p_mat}, #{p_cap}, #{p_stock});
+	</insert>
+
+<!-- 	<update id=""> -->
+<!-- 	</update> -->
+
+<!-- 	<delete id=""> -->
+<!-- 	</delete> -->
+
+	<select id="getProductOne" resultType="product">
+		SELECT * FROM PRODUCT WHERE P_NO = #{p_no}
+	</select>
+	
+	<select id="getProductList" resultType="product">
+		SELECT ROW_NUMBER() OVER() as RNUM, P.* FROM PRODUCT P WHERE 1=1
+		ORDER BY RNUM DESC
+	</select>
+	
+	<select id="getPnoMaxNum" resultType="_int">
+		SELECT IFNULL(MAX(P_NO), 0)+1 AS MAX FROM PRODUCT
+	</select>
+
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+ 		<!-- mybatis의 캐시사용여부를 끄는 방법 -->
+		<setting name="cacheEnabled" value="false" />
+ 		<!-- mybatis의 parameter null 값 오류 해결방법 -->
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+
+	<!-- Alias(객체명) 설정 -->
+	<typeAliases>
+		<typeAlias type="kr.co.editor.product.ProductVO" alias="product" />
+	</typeAliases>
+
+
+	<!-- Sql Mapper 설정 -->
+	<mappers>
+		<mapper resource="mappings/product-mapping.xml" />
+	</mappers>
+</configuration>

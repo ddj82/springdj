@@ -31,7 +31,6 @@ public class UsersServiceImpl implements UsersService {
 	// 비밀번호 재확인 후 내 정보 진입
 	@Override
 	public UsersVO checkPw(String pw, String id) {
-		System.out.println("비번 재확인 Impl");
 		return usersDAO.checkPw(pw, id);
 	}
 
@@ -49,7 +48,6 @@ public class UsersServiceImpl implements UsersService {
 	// 닉 중복체크
 	@Override
 	public UsersVO checkNick(String nick) {
-		System.out.println("checkNick : " + nick);
 		return usersDAO.checkNick(nick);
 	}
 
@@ -63,10 +61,14 @@ public class UsersServiceImpl implements UsersService {
 		return usersDAO.checkId(id);
 	}
 
+	@Override
+	public UsersVO checkEmail(String email) {
+		return usersDAO.checkEmail(email);
+	}
+	
 	// 로그인
 	@Override
 	public UsersVO loginSelectOne(UsersVO vo) {
-		System.out.println("UserServeImpl까지는 탔습니다.");
 		return usersDAO.loginSelectOne(vo);
 	}
 
@@ -86,19 +88,16 @@ public class UsersServiceImpl implements UsersService {
 
 	@Override
 	public int pwFind(UsersVO vo) {
-		System.out.println("UsersServeImpl vo.id : " + vo.getU_id());
 		return usersDAO.pwFind(vo);
 	}
 
 	@Override
 	public String pwFindId(UsersVO vo) {
-		System.out.println("UsersServeImpl vo.id : "+vo.getU_id());
 		return usersDAO.pwFindId(vo);
 	}
 
 	@Override
 	public String pwFindStart(UsersVO vo) {
-		System.out.println("pwFindStart vo.id : "+vo.getU_id());
 		return usersDAO.pwFindStart(vo);
 	}
 

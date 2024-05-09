@@ -3,25 +3,124 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style>
+
+h4{
+	margin-bottom:20px;
+}
+
+label.control-label.col-sm-2 {
+	width: 100px;
+	font-weight: bold;
+}
+
+label.control-label.col-sm-2.email {
+	display: flex;
+	padding: 0px;
+	margin-bottom: 15px;
+	margin-top: 10px;
+}
+
+label.control-label.col-sm-2.number {
+	display: flex;
+	padding: 0px;
+	margin-bottom: 15px;
+}
+
+.pwFindSubBox {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 354.91px;
+}
+
+.col-sm-10 {
+	width: 100%;
+	padding: 0;
+}
+
+.form-group {
+	margin-bottom: 15px;
+	width: 100%;
+}
+
+.col-sm-offset-2.col-sm-10 {
+	text-align: center;
+	margin: 0;
+}
+
+button.pwFindMybutton {
+	width: 100%;
+	height: 55px;
+	color: white;
+	background-color: #d5d5d5;
+	font-size: 18px;
+	border: 0px;
+	border-radius: 5px;
+	margin-top: 20px;
+}
+
+input#u_email {
+	height: 55px;
+	margin-bottom: 15px;
+}
+
+input#number {
+	height: 55px;
+	margin-bottom: 15px;
+}
+
+.alert.alert-danger {
+	width: 100%;
+}
+
+.pwFindMainBox {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+</style>
 </head>
 
 <body>
-	<input type="text" class="form-control" placeholder="email" name="u_email" id="u_email" required>
-	<button onclick="pwFind(event)">버튼</button>
-	<div id="pwFindBox"></div>
-	<div class="mailClass" style="display: none;">
-		<input type="text" class="userMail" readonly>
-		<button type="button" class="btn btn-primary" id="mail-Check-Btn">본인인증</button>
-		<input type="text" style="display: none;" class="mail-check-input">
-		<button type="button" id="mail-check-button" style="display: none;">인증번호확인</button>
-		<div class="time"></div>
-		<div id="mail-check-warn"></div>
-		<div id="finallyPW"></div>
+
+	<div class="container">
+		<div class="pwFindMainBox">
+			<div class="pwFindSubBox">
+			<h4>비밀번호 찾기</h4>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2 email" for="u_email">이메일</label>
+				<div class="col-sm-10">
+					<input type="email" class="form-control" id="u_email" placeholder="이메일을 입력해 주세요" name="u_email">
+				</div>
+			</div>
+			<div class="form-group" style="display: none;">
+				<label class="control-label col-sm-2 number" for="number">인증번호</label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" id="number" placeholder="인증번호를 입력해 주세요" name="number">
+				</div>
+				<div class="time"></div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="button" class="pwFindMybutton" onclick="test()">본인 인증하기</button>
+				</div>
+			</div>
+			<div class='alert alert-danger' style="display: none;"></div>
+			</div>
+		</div>
 	</div>
 	<script>
 		var code;
@@ -35,9 +134,10 @@
 			const emailPattern = /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/i;
 			let email = $("#u_email").val();
 			if (emailPattern.test(email)) {
-				search();
+				pwFind();
 			} else {
-				$("#box1").html("이메일 형식을 확인해 주세요");
+				$(".alert-danger").css("display", "block");
+				$(".alert-danger").html("이메일 형식을 확인해 주세요");
 			}
 		}
 
@@ -61,10 +161,7 @@
 			}, 1000);
 		}
 
-		function pwFind(event) {
-
-			console.log("event : ", $("#u_email").val());
-
+		function pwFind() {
 			var formData = {
 				u_email : $("#u_email").val()
 			};
@@ -77,19 +174,18 @@
 				success : function(res) {
 					console.log("res : ", res)
 					if (res === "error") {
-						let str = "존재하지 않는 이메일입니다.";
-						$("#pwFindBox").html(str);
-
+						$(".alert-danger").css("display", "block");
+						$(".alert-danger").html("존재하지 않는 이메일입니다.");
 					} else {
-						$("#u_email").attr("readonly", "true");
+						$(".alert-danger").css("display","none");
+						number();
 					}
 				}
 			});
 		}
 
-		$('#mail-Check-Btn').click(function() {
-
-			const email = $('.userMail').val(); // 이메일 주소값 얻어오기!
+		function number() {
+			const email = $("#u_email").val() // 이메일 주소값 얻어오기!
 
 			var formData = {
 				email : email
@@ -100,48 +196,54 @@
 				data : formData,
 				url : 'mailCheck.ko',
 				success : function(data) {
-					console.log("data : " + data);
+					console.log("data(인증번호ㅋ) : " + data);
 					code = data;
-					alert('인증번호가 전송되었습니다.');
-					$('.mail-check-input').css('display', 'block');
-					$('#mail-check-button').css('display', 'block');
+					$('.form-group').css('display', 'block');
+					$('.pwFindMybutton').text("인증번호 확인");
+					$('.pwFindMybutton').attr("onclick", "check()");
 					startTimer(leftSec, display);
 				}
 			});
-		});
+		}
 
-		$('#mail-check-button').click(function() {
-
-			const inputCode = $('.mail-check-input').val();
+		function check() {
+			const inputCode = $('#number').val();
 			const $resultMsg = $('#mail-check-warn');
 
 			if (inputCode === code) {
-				$resultMsg.html('인증번호가 일치합니다.');
+				$(".alert-danger").css("display", "none");
 				clearInterval(timer);
-				count = 1;
-
-				const email = $('.userMail').val(); // 이메일 주소값 얻어오기!
-				const id = $('.form-control').val(); // 아이디 얻어오기!
-				var formData = {
-					u_email : email,
-					u_id : id
-				};
-
-				$.ajax({
-					type : 'POST',
-					data : formData,
-					url : 'pwFindStart.ko',
-					success : function(data) {
-						console.log("data : " + data);
-						code = data;
-						$('#finallyPW').html(data);
-					}
-				});
+				let email = $('#u_email').val();
+// 				경로 바꾸기
+				location.href="pwFindShow.ko?email="+email;
 			} else {
-				$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
-				$resultMsg.css('color', 'red');
-				count = 0;
+				$(".alert-danger").css("display", "block");
+				$(".alert-danger").html('인증번호가 불일치 합니다. 다시 확인해주세요.');
 			}
+		}
+		
+		//엔터 키가 눌렸을 때 기본 이벤트(폼 제출)막고 대신 test()함수 호출
+		document.addEventListener('DOMContentLoaded', function() {
+			// 특정 입력 필드 가져오기
+			var inputField1 = document.getElementById("u_email");
+			var inputField2 = document.getElementById("number");
+
+			// 입력 필드에 포커스될 때 엔터 키 이벤트 처리
+			inputField1.addEventListener("keydown", function(event) {
+				// 엔터 키가 눌렸을 때 기본 이벤트(폼 제출) 막기
+				if (event.key === "Enter") {
+					event.preventDefault();
+					test()
+				}
+			});
+			
+			inputField2.addEventListener("keydown", function(event) {
+				// 엔터 키가 눌렸을 때 기본 이벤트(폼 제출) 막기
+				if (event.key === "Enter") {
+					event.preventDefault();
+					check()
+				}
+			});
 		});
 	</script>
 </body>

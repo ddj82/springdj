@@ -1,6 +1,7 @@
 package com.drink.view;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -371,6 +372,18 @@ public class BichenaController {
 		}
 		return count;
 	}
+	
+	@RequestMapping("/checkEmail.ko")
+	@ResponseBody
+	public int checkEmail(UsersVO vo) {
+		int count = 0;
+		if (usersService.checkEmail(vo.getU_email()) == null) {
+			count = 0;
+		} else {
+			count = 1;
+		}
+		return count;
+	}
 
 	// 아임포트 인증(토큰)을 받아주는 함수
 	public String getImportToken() {
@@ -703,31 +716,92 @@ public class BichenaController {
 		return "/WEB-INF/admin/adminProdView.jsp";
 	}
 
-	@GetMapping("/adminProdDetail.ko")
-	@ResponseBody
-	public Object adminProdDetail(@RequestParam(value = "p_no") String p_no, Model model) {
+//	@GetMapping("/adminProdDetail.ko")
+//	@ResponseBody
+//	public Object adminProdDetail(@RequestParam(value = "p_no") String p_no, Model model) {
+//		ProdVO adminProdDetail = prodService.prodOne(p_no);
+//		model.addAttribute("adminProdDetail", adminProdDetail);
+//		return adminProdDetail;
+//	}
+	@GetMapping("/EXProdDetail.ko")
+	public String adminProdDetail(@RequestParam(value = "p_no") String p_no, Model model) {
 		ProdVO adminProdDetail = prodService.prodOne(p_no);
-		model.addAttribute("adminProdDetail", adminProdDetail);
-		return adminProdDetail;
+		model.addAttribute("prodOne", adminProdDetail);
+		return "prodOneView.jsp";
+	}
+	@RequestMapping("/productDetailpage.ko")
+	public String productDetailpage(@RequestParam int p_no) {
+		return "/WEB-INF/product/pno" + p_no + ".jsp";
 	}
 
-	@PostMapping("/adminProdInsert.ko")
+	@RequestMapping("/prodInsertEditer.ko")
+	public String prodInsertEditer() {
+		return "redirect:prodInsertEditer.jsp";
+	}
+	
+	@RequestMapping("/adminProdInsert.ko")
 	public String adminProdInsert(ProdVO vo) throws IllegalStateException, IOException {
-		MultipartFile uploadFile = vo.getUploadFile();
+//		MultipartFile uploadFile = vo.getUploadFile();
+//		File f = new File(realPath);
+//		if (!f.exists()) {
+//			f.mkdirs();
+//		}
+//
+//		if (!uploadFile.isEmpty()) {
+//			vo.setP_img(uploadFile.getOriginalFilename());
+//			// 실질적으로 파일이 설정한 경로에 업로드 되는 지점
+//			uploadFile.transferTo(new File(realPath + vo.getP_img()));
+//		}
+//
+//		System.out.println(vo);
+//		int cnt = prodService.adminProdInsert(vo);
+//
+//		if (cnt > 0) {
+//			System.out.println("등록완료");
+//			return "adminProdList.ko";
+//		} else {
+//			System.out.println("등록실패");
+//			return "redirect:adminProdList.ko";
+//		}
+		
+		
+		MultipartFile uplodFile = vo.getUploadFile();
 		File f = new File(realPath);
 		if (!f.exists()) {
 			f.mkdirs();
 		}
-
-		if (!uploadFile.isEmpty()) {
-			vo.setP_img(uploadFile.getOriginalFilename());
-			// 실질적으로 파일이 설정한 경로에 업로드 되는 지점
-			uploadFile.transferTo(new File(realPath + vo.getP_img()));
+		
+		if (!(uplodFile == null || uplodFile.isEmpty())) {
+			vo.setP_img(uplodFile.getOriginalFilename());
+			uplodFile.transferTo(new File(realPath + vo.getP_img()));
 		}
 
-		System.out.println(vo);
-		int cnt = prodService.adminProdInsert(vo);
+		int pno = prodService.getPnoMaxNum();
+		String editFilename = "pno" + pno + ".jsp";
+		vo.setEditfile(editFilename);
 
+		File file = new File("C:/swork/bichena/src/main/webapp/WEB-INF/product");
+		if (!file.exists()) {
+			file.mkdirs();
+		}
+
+		FileWriter fw = null;
+		try {
+			fw = new FileWriter(file + "/" + editFilename);
+			fw.write("<%@ page language=\"java\" contentType=\"text/html; charset=UTF-8\" pageEncoding=\"UTF-8\" %>");
+			fw.write(vo.getEdithtml());
+			fw.flush();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				fw.close();
+			} catch (IOException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		int cnt = prodService.insertProduct(vo);
+		
 		if (cnt > 0) {
 			System.out.println("등록완료");
 			return "adminProdList.ko";
@@ -735,6 +809,7 @@ public class BichenaController {
 			System.out.println("등록실패");
 			return "redirect:adminProdList.ko";
 		}
+
 	}
 
 	@RequestMapping("/getUserList.ko")

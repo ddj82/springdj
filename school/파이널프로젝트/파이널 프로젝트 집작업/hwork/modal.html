@@ -128,7 +128,7 @@ input[type="file"]#p_img {
                         <tr>
                             <td id="td-rowspan2">
                                 <button type="button" class="btn btn-default" onclick="fileUploadBtn()">사진등록</button>
-                                <label for="p_img" class="custom-file-label"></label>
+                                <label for="p_img" id="custom-file-label"></label>
                                 <input type="file" id="p_img" name="">
                             </td>
                             <td><label for="">수량</label> <input type="text" id="" name="p_stock"> 개</td>
@@ -185,10 +185,11 @@ input[type="file"]#p_img {
 
 <script>
     function fileUploadBtn() {
-        $(".custom-file-label").click();
+        document.getElementById("p_img").click();
     }
     
-    $("#p_img").change(function(event){
+
+    document.getElementById("p_img").addEventListener('change', function(event){
         var fileInput = document.getElementById('p_img');
         // 파일이 선택되었는지 확인합니다.
         if (fileInput.files.length > 0) {
@@ -216,7 +217,38 @@ input[type="file"]#p_img {
             // 파일을 읽기
             reader.readAsDataURL(file);
         }
-    })
+    });
+
+
+    // function(event){
+    //     var fileInput = document.getElementById('p_img');
+    //     // 파일이 선택되었는지 확인합니다.
+    //     if (fileInput.files.length > 0) {
+    //         // 파일이 선택된 경우, 파일 이름을 가져와서 표시합니다.
+    //         console.log(fileInput.files[0]);
+    //         var fileName = fileInput.files[0].name;
+    //         console.log(fileName);
+    //         document.getElementById("div-filename").innerText = fileName;
+
+    //         // 파일 입력 요소에서 선택된 파일 가져오기
+    //         var file = event.target.files[0];
+    
+    //         // FileReader 객체 생성
+    //         var reader = new FileReader();
+    
+    //         // 파일을 읽은 후 실행될 함수 정의
+    //         reader.onload = function(event) {
+    //             // 이미지를 표시할 img 요소 가져오기
+    //             var imgElement = document.getElementById('preview');
+    
+    //             // FileReader가 읽은 데이터를 img 요소의 src 속성에 설정하여 이미지 표시
+    //             imgElement.src = event.target.result;
+    //         };
+    
+    //         // 파일을 읽기
+    //         reader.readAsDataURL(file);
+    //     }
+    // }
 </script>
 </body>
 </html>
