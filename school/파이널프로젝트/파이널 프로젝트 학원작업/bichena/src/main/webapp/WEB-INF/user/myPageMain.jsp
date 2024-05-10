@@ -27,13 +27,10 @@ align-items: center;
 </style>
 </head>
 <body>
-
-<h3>나의 정보</h3>
-<div id="">
-	<a href="confirm.ko">&gt; 회원 정보 </a><br>
-</div> 
-
-<section id="ListArea">
+<%@ include file="../../common/navbar.jsp" %>
+<%@ include file="myPageHeader.jsp" %>
+<div class="container">
+	<h3>나의 정보</h3>
 	<c:forEach items="${myOrderList }" var="myorder">
 		<table>
 			<tr>
@@ -66,8 +63,7 @@ align-items: center;
 			</tr>
 		</table>
 	</c:forEach>
-</section>
-
+</div> 
 
 <div class="modal" id="myModal">
 	<div class="modal-content">

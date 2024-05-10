@@ -1,11 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+if (session.getAttribute("userID") == null) {%>
+<script>
+location.href="main.ko";
+</script>
+<%}
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style>
@@ -51,22 +58,16 @@ input[type="file"]#p_img {
 .custom-file-label {
     cursor: pointer;
 }
-p {
-margin: 50px 10px;
-text-align: right;
-}
 </style>
 <script>
 </script>
 </head>
 <body>
+<%@ include file="/WEB-INF/admin/adminMain2.jsp" %>
 <div class="container">
 	<p>
-		<button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal2" onclick="">상품등록</button>
+		<button type="button" class="btn btn-warning" onclick="location.href='prodInsertEditer.ko';">주류등록</button>
 	</p>
-<!-- 	<p> -->
-<!-- 		<button type="button" class="btn btn-warning btn-lg" onclick="location.href='prodInsertEditer.ko';">상품등록</button> -->
-<!-- 	</p> -->
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -91,7 +92,6 @@ text-align: right;
 	            <td>${prodlist.p_price }</td>
 	            <td>${prodlist.p_stock }</td>
 	            <td>
-<%-- 	                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" onclick="prodDetail('${prodlist.p_no }')">상세보기</button> --%>
 	                <button type="button" class="btn btn-primary btn-sm" onclick="prodDetail('${prodlist.p_no }')">상세보기</button>
 	            </td>
 	        </tr>
@@ -101,35 +101,7 @@ text-align: right;
 
 	<script>
 	function prodDetail(pno){
-		location.href = 'EXProdDetail.ko?p_no=' + pno;
-// 		let objParams = {p_no : pno};
-// 		$.ajax({
-// 			type : "GET",
-// 			url : "adminProdDetail.ko",
-// 			data : objParams,
-// 			cache : false,
-// 			success : function(val) {
-// 				$("#table1").text("");
-// 				$("#table2").text("");
-				
-// 				$("#table1").append(
-// 						"<tr><td rowspan='3'><img src='img/" + val.p_img + "' alt='' style='width: 200px;'></td><td>" + 
-// 						"<h4 class='modal-title'><strong>" + val.p_name + "</strong></h4>" + 
-// 						"<h5 class='modal-title'><strong>" + val.p_stock + "개</strong></h5></td></tr>" + 
-// 						"<tr><td>" + val.p_desc + "</td></tr>" +
-// 						"<tr><td><h5 class='modal-title'><small>판매가격:</small></h5>" + 
-// 						"<h4 class='modal-title'><strong>" + val.p_price + "원</strong></h4></td></tr>");
-				
-				
-				
-				
-// 				$("#table2").append("<caption><strong style='font-size: 18px;'>상품설명</strong></caption>" + 
-// 			            "<tr><td>주종</td><td>" + val.p_type + "</td><td>단맛</td><td>" + val.p_sw + "</td></tr>" + 
-// 			            "<tr><td>도수</td><td>" + val.p_dgr + "%</td><td>신맛</td><td>" + val.p_su + "</td></tr>" + 
-// 			            "<tr><td>용량</td><td>" + val.p_cap + "ml</td><td>탄산</td><td>" + val.p_sp + "</td></tr>" + 
-// 			            "<tr><td>제조사</td><td>" + val.p_made + "</td><td>원료</td><td>" + val.p_mat + "</td></tr>");
-// 			}
-// 		});	
+		location.href = 'adminProdDetail.ko?p_no=' + pno;
 	}
 	</script>
 	<div class="modal fade" id="myModal" role="dialog">

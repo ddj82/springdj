@@ -164,4 +164,16 @@ public class UsersDAO {
 		System.out.println("DAO  : " + vo.getSearchVoca() + vo.getSearchWord());
 		return mybatis.selectList("UserDAO.getUserList", vo);
 	}
+	
+	public void updatePw(UsersVO vo) {
+		String encodingStr = encoder.encode(vo.getU_pw());
+		vo.setU_pw(encodingStr);
+		mybatis.update("UserDAO.updatePw", vo);
+	}
+	
+	
+	//동준, 관리자로그인
+	public UsersVO loginAdmin(UsersVO vo) {
+		return mybatis.selectOne("UserDAO.loginAdmin", vo);
+	}
 }

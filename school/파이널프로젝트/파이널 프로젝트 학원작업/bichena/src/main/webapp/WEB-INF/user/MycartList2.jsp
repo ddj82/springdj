@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>나의 장바구니</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/MyCart.css" type="text/css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.js"></script>
 </head>
 <body>

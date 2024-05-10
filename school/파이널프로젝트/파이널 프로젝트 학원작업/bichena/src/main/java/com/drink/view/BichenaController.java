@@ -210,6 +210,7 @@ public class BichenaController {
 		model.addAttribute("notice", noticeService.getNotice(vo));
 		return "WEB-INF/user/getNotice.jsp";
 	}
+
 	// 공지 상세 조회 (관리자)
 	@RequestMapping("/adminGetNotice.ko")
 	public String adminGetNotice(NoticeVO vo, Model model) {
@@ -225,8 +226,7 @@ public class BichenaController {
 			@RequestParam(value = "searchKeyword", defaultValue = "", required = false) String keyword,
 			ModelAndView mav,
 			@RequestParam(value = "currPageNo", required = false, defaultValue = "1") String NotcurrPageNo,
-			@RequestParam(value = "range", required = false, defaultValue = "1") String Notrange,
-			HttpSession session) {
+			@RequestParam(value = "range", required = false, defaultValue = "1") String Notrange, HttpSession session) {
 
 		int currPageNo = 0;
 		int range = 0;
@@ -252,11 +252,11 @@ public class BichenaController {
 			} else {
 				mav.setViewName("WEB-INF/user/getNoticeList.jsp");
 			}
-			
+
 		} else {
 			mav.setViewName("WEB-INF/user/getNoticeList.jsp");
 		}
-		
+
 		return mav;
 	}
 
@@ -310,6 +310,7 @@ public class BichenaController {
 		model.addAttribute("faq", faqService.getFaq(vo));
 		return "WEB-INF/user/getFaq.jsp";
 	}
+
 	// Faq 상세 조회 (관리자)
 	@RequestMapping("/adminGetFaq.ko")
 	public String adminGetFaq(FaqVO vo, Model model) {
@@ -325,8 +326,7 @@ public class BichenaController {
 			@RequestParam(value = "searchKeyword", defaultValue = "", required = false) String keyword,
 			ModelAndView mav,
 			@RequestParam(value = "currPageNo", required = false, defaultValue = "1") String NotcurrPageNo,
-			@RequestParam(value = "range", required = false, defaultValue = "1") String Notrange,
-			HttpSession session) {
+			@RequestParam(value = "range", required = false, defaultValue = "1") String Notrange, HttpSession session) {
 
 		int currPageNo = 0;
 		int range = 0;
@@ -346,18 +346,18 @@ public class BichenaController {
 
 		mav.addObject("pagination", vo);
 		mav.addObject("faqList", faqService.faqListPaging(vo)); // parameter로 때온 값들을 보내준다.
-		
+
 		if (session.getAttribute("userID") != null) {
 			if (session.getAttribute("userID").equals("admin")) {
 				mav.setViewName("WEB-INF/admin/adminGetFaqList.jsp");
 			} else {
 				mav.setViewName("WEB-INF/user/getFaqList.jsp");
 			}
-			
+
 		} else {
 			mav.setViewName("WEB-INF/user/getFaqList.jsp");
 		}
-		
+
 		return mav;
 	}
 
@@ -372,7 +372,7 @@ public class BichenaController {
 		}
 		return count;
 	}
-	
+
 	@RequestMapping("/checkEmail.ko")
 	@ResponseBody
 	public int checkEmail(UsersVO vo) {
@@ -470,13 +470,40 @@ public class BichenaController {
 		return count;
 	}
 
-	// 회원 정보 수정
+	@RequestMapping("/infoForm.ko")
+	public String infoForm(HttpSession session, Model model) {
+		String selId = (String) session.getAttribute("userID");
+		System.out.println("userID: " + selId);
+		model.addAttribute("users", usersService.selectOne(selId));
+		System.out.println("정보->수정폼 탔냐. 네~");
+		return "WEB-INF/login/myInfoModi.jsp";
+	}
+
+	// 회원 정보 업데이트
 	@RequestMapping("/upInfo.ko")
-	public String updateUser(UsersVO vo, Model model) {
-		System.out.println("정보수정: " + vo);
+	public String updateUser(Model model, @RequestParam("u_id") String userId, UsersVO vo) {
 		usersService.updateUser(vo);
-		model.addAttribute("user", vo);
-		return "userMyInfo.jsp";
+		UsersVO updateUser = usersService.selectOne(vo.getU_id());
+		model.addAttribute("users", updateUser);
+		System.out.println("정보수정: " + vo);
+		return "WEB-INF/login/userMyInfo.jsp";
+	}
+
+	@RequestMapping("/changePwForm.ko")
+	public String changePwForm(UsersVO vo) {
+		return "WEB-INF/login/pwChange.jsp";
+	}
+
+	// 비번 수정
+	@RequestMapping("/updatePw.ko")
+	public String updatePw(@RequestParam("u_pw") String userPw, UsersVO vo, Model model, HttpSession session) {
+		String id = (String) session.getAttribute("userID");
+		vo.setU_id(id);
+		usersService.updatePw(vo);
+		UsersVO updateUser = usersService.selectOne(id);
+		model.addAttribute("users", updateUser);
+		System.out.println("비번수정: " + vo);
+		return "userInfo.ko";
 	}
 
 	// 회원계정 삭제
@@ -678,6 +705,16 @@ public class BichenaController {
 		return "/WEB-INF/admin/adminMain.jsp";
 	}
 
+	@RequestMapping("/admin2.ko")
+	public String admin2() {
+		return "/WEB-INF/admin/adminMain2.jsp";
+	}
+
+	@RequestMapping("/adminLoginPage.ko")
+	public String adminLoginPage() {
+		return "/WEB-INF/admin/adminLogin.jsp";
+	}
+
 	@RequestMapping("/adminQnaList.ko")
 	public String adminqnaList(Model model) {
 		List<QnaVO> qnaList = qnaService.qnaList();
@@ -713,7 +750,8 @@ public class BichenaController {
 	public String adminProdList(Model model) {
 		List<ProdVO> adminProdList = prodService.prodList();
 		model.addAttribute("adminProdList", adminProdList);
-		return "/WEB-INF/admin/adminProdView.jsp";
+//		return "/WEB-INF/admin/adminProdView.jsp";
+		return "/WEB-INF/admin/adminProdView2.jsp";
 	}
 
 //	@GetMapping("/adminProdDetail.ko")
@@ -723,12 +761,19 @@ public class BichenaController {
 //		model.addAttribute("adminProdDetail", adminProdDetail);
 //		return adminProdDetail;
 //	}
-	@GetMapping("/EXProdDetail.ko")
+	@GetMapping("/adminProdDetail.ko")
 	public String adminProdDetail(@RequestParam(value = "p_no") String p_no, Model model) {
 		ProdVO adminProdDetail = prodService.prodOne(p_no);
 		model.addAttribute("prodOne", adminProdDetail);
-		return "prodOneView.jsp";
+		return "/WEB-INF/admin/adminProdOneView.jsp";
 	}
+
+//	@GetMapping("/EXProdDetail.ko")
+//	public String adminProdDetail(@RequestParam(value = "p_no") String p_no, Model model) {
+//		ProdVO adminProdDetail = prodService.prodOne(p_no);
+//		model.addAttribute("prodOne", adminProdDetail);
+//		return "prodOneView.jsp";
+//	}
 	@RequestMapping("/productDetailpage.ko")
 	public String productDetailpage(@RequestParam int p_no) {
 		return "/WEB-INF/product/pno" + p_no + ".jsp";
@@ -736,9 +781,10 @@ public class BichenaController {
 
 	@RequestMapping("/prodInsertEditer.ko")
 	public String prodInsertEditer() {
-		return "redirect:prodInsertEditer.jsp";
+//		return "redirect:prodInsertEditer.jsp";
+		return "/WEB-INF/admin/adminProdInsert.jsp";
 	}
-	
+
 	@RequestMapping("/adminProdInsert.ko")
 	public String adminProdInsert(ProdVO vo) throws IllegalStateException, IOException {
 //		MultipartFile uploadFile = vo.getUploadFile();
@@ -763,14 +809,13 @@ public class BichenaController {
 //			System.out.println("등록실패");
 //			return "redirect:adminProdList.ko";
 //		}
-		
-		
+
 		MultipartFile uplodFile = vo.getUploadFile();
 		File f = new File(realPath);
 		if (!f.exists()) {
 			f.mkdirs();
 		}
-		
+
 		if (!(uplodFile == null || uplodFile.isEmpty())) {
 			vo.setP_img(uplodFile.getOriginalFilename());
 			uplodFile.transferTo(new File(realPath + vo.getP_img()));
@@ -801,7 +846,7 @@ public class BichenaController {
 			}
 		}
 		int cnt = prodService.insertProduct(vo);
-		
+
 		if (cnt > 0) {
 			System.out.println("등록완료");
 			return "adminProdList.ko";

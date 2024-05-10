@@ -25,5 +25,8 @@ public interface UsersService {
 	int naverLoginFirst(UsersVO vo);
 	UsersVO naverLogin(UsersVO vo);
 	List<UsersVO> getUserList(UsersVO vo);
+	void updatePw(UsersVO vo);
+	
+	UsersVO loginAdmin(UsersVO vo); //관리자로그인
 }
 

@@ -1,11 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+if (session.getAttribute("userID") == null) {%>
+<script>
+location.href="main.ko";
+</script>
+<%}
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style>
@@ -15,66 +22,59 @@ table th {
 table {
 	text-align: center;
 }
+.table.table-hover>thead>tr>td {
+	vertical-align: middle;
+}
+.table.table-bordered>thead>tr>td {
+	border-bottom: none;
+}
+.table.table-bordered>thead>tr>td#td-title {
+	vertical-align: middle;
+	width: 15%;
+	font-size: 1.4rem;
+	background-color: #f5f5f5;
+}
 </style>
 </head>
 <body>
+<%@ include file="/WEB-INF/admin/adminMain2.jsp" %>
 <div class="container">
 	<table class="table table-bordered">
-		<tr>
-		    <th>주문 번호</th>
-		    <td>
-		        <form action="">
-		            <div class="input-group">
-		                <input type="text" class="form-control" placeholder="" name="search1">
-		                <div class="input-group-btn">
-		                    <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-		                </div>
-		            </div>
-		        </form>
-		    </td>
-		</tr>
-		<tr>
-		    <th>주문자 이름</th>
-		    <td>
-		        <form action="">
-		            <div class="input-group">
-		                <input type="text" class="form-control" placeholder="" name="search2">
-		                <div class="input-group-btn">
-		                    <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-		                </div>
-		            </div>
-		        </form>
-		    </td>
-		</tr>
-		<tr>
-		    <th>상품명</th>
-		    <td>
-		        <form action="">
-		            <div class="input-group">
-		                <input type="text" class="form-control" placeholder="" name="search3">
-		                <div class="input-group-btn">
-		                    <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-		                </div>
-		            </div>
-		        </form>
-		    </td>
-		</tr>
-		<tr>
-			<th>상태</th>
-			<td>Jon</td>
-		</tr>
-		<tr>
-			<th>주문 날짜</th>
-			<td>Jon</td>
-		</tr>
+		<thead>
+			<tr>
+			    <td id="td-title">주문 번호</td>
+			    <td>
+			    	<div class="col-xs-4">
+						<input class="form-control" id="myInput1" type="text" placeholder="주문번호">
+			    	</div>
+			    </td>
+			</tr>
+			<tr>
+			    <td id="td-title">주문자 이름</td>
+			    <td>
+			    	<div class="col-xs-4">
+						<input class="form-control" id="myInput2" type="text" placeholder="주문자이름">
+			    	</div>
+			    </td>
+			</tr>
+			<tr>
+			    <td id="td-title">상품명</td>
+			    <td>
+			    	<div class="col-xs-4">
+		                <input class="form-control" id="myInput3" type="text" placeholder="상품명">
+			    	</div>
+			    </td>
+			</tr>
+			<tr>
+				<td id="td-title">상태</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td id="td-title">주문 날짜</td>
+				<td></td>
+			</tr>
+		</thead>
 	</table>
-	<br>
-	<input class="form-control" id="myInput1" type="text" placeholder="주문번호">
-	<br>
-	<input class="form-control" id="myInput2" type="text" placeholder="주문자이름">
-	<br>
-	<input class="form-control" id="myInput3" type="text" placeholder="상품명">
-	<br>
 	<table class="table">
 		<thead>
 			<tr>

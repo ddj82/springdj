@@ -125,5 +125,17 @@ public class UsersServiceImpl implements UsersService {
 	public List<UsersVO> getUserList(UsersVO vo) {
 		return usersDAO.getUserList(vo);
 	}
+
+	//동준, 관리자로그인
+	@Override
+	public UsersVO loginAdmin(UsersVO vo) {
+		return usersDAO.loginAdmin(vo);
+	}
+
+	@Override
+	public void updatePw(UsersVO vo) {
+		System.out.println("비번 수정 간다.");
+		usersDAO.updatePw(vo);
+	}
 }
 

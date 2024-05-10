@@ -1,13 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+if (session.getAttribute("userID") == null) {%>
+<script>
+location.href="main.ko";
+</script>
+<%} else if (session.getAttribute("userID") != null && !(session.getAttribute("userID").equals("admin"))) {%>
+<script>
+location.href="main.ko";
+</script>
+<%}
+%>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
     <title>Bootstrap Example</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
@@ -29,7 +39,7 @@
         color: black;
       }
 
-      button {
+      button#side-btn {
         background-color: white;
         border: none;
         display: none;
@@ -53,12 +63,13 @@
         height: 50px;
         display: flex;
         justify-content: space-between;
-        margin: 0 auto;
+        margin: 10px auto;
       }
       .bottom-line {
         display: block;
         width: 100%;
         border-bottom: 1px solid #e0e0e0;
+/*         margin-bottom: 20px; */
       }
       .navbar-nav,
       .navbar-title {
@@ -94,7 +105,7 @@
       }
 
       @media (max-width: 980px) {
-        button {
+        button#side-btn {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -211,36 +222,31 @@
       }
     </style>
     <script>
-      $(document).ready(function () {
-        $(".navbar-toggler").click(function () {
-          $(".side-menu").toggleClass("show-side-menu");
-          $("body").toggleClass("show-side-menu"); // body에도 클래스를 추가하여 함께 동작하도록 함
-        });
-      });
-      $(document).mouseup(function (e) {
-        var sideMenu = $(".side-menu");
-        // 만약 사이드 메뉴가 열려있고 클릭한 부분이 사이드 메뉴 바깥이면 사이드 메뉴를 닫음
-        if (
-          sideMenu.hasClass("show-side-menu") &&
-          !sideMenu.is(e.target) &&
-          sideMenu.has(e.target).length === 0
-        ) {
-          sideMenu.removeClass("show-side-menu");
-          $("body").removeClass("show-side-menu");
-        }
-      });
+    document.addEventListener("DOMContentLoaded", function() {
+		var navbarToggler = document.querySelector(".navbar-toggler");
+		var sideMenu = document.querySelector(".side-menu");
+		
+		navbarToggler.addEventListener("click", function() {
+		    sideMenu.classList.toggle("show-side-menu");
+		    document.body.classList.toggle("show-side-menu");
+		});
+		
+	document.addEventListener("mouseup", function(e) {
+	    // 사이드 메뉴가 열려있고 클릭한 부분이 사이드 메뉴 바깥이면 사이드 메뉴를 닫음
+	    if (sideMenu.classList.contains("show-side-menu") && !sideMenu.contains(e.target)) {
+			    sideMenu.classList.remove("show-side-menu");
+			    document.body.classList.remove("show-side-menu");
+		    }
+		});
+	});
+    
+    window.onpageshow = function(event){
+    	if(event.persisted || (window.performance && window.performance.navigation.type == 2)){
+    		console.log("뒤로가기");
+    		location.reload();
+    	}
+    }
 
-      $(document).ready(function () {
-        // 각 card의 collapse 요소가 표시될 때 애니메이션 효과를 추가합니다.
-        $(".card").on("show.bs.collapse", function () {
-          $(this).find(".collapse").slideDown(400); // 400ms의 애니메이션 속도로 슬라이드 다운합니다.
-        });
-
-        // 각 card의 collapse 요소가 숨겨질 때 애니메이션 효과를 추가합니다.
-        $(".card").on("hide.bs.collapse", function () {
-          $(this).find(".collapse").slideUp(400); // 400ms의 애니메이션 속도로 슬라이드 업합니다.
-        });
-      });
     </script>
   </head>
   <body>
@@ -251,28 +257,28 @@
       <div>
         <ul class="navbar-nav navbar-nav-main">
           <li class="nav-item">
-            <a class="nav-link" href="#">주문목록</a>
+            <a class="nav-link" href="adminOrderList.ko">주문목록</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">상품관리</a>
+            <a class="nav-link" href="adminProdList.ko">상품관리</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">회원관리</a>
+            <a class="nav-link" href="getUserList.ko">회원관리</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">공지사항</a>
+            <a class="nav-link" href="getNoticeList.ko">공지사항</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">상품후기</a>
+            <a class="nav-link" href="">상품후기</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">FAQ</a>
+            <a class="nav-link" href="getFaqList.ko">FAQ</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">QNA</a>
+            <a class="nav-link" href="adminQnaList.ko">QNA</a>
           </li>
           <li>
-            <a class="to-main" href="#">
+            <a class="to-main" href="logout.ko">
               <svg
                 width="24"
                 height="24"
@@ -288,7 +294,7 @@
           </li>
         </ul>
       </div>
-      <button class="navbar-toggler" type="button">
+      <button class="navbar-toggler" type="button" id="side-btn">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -303,7 +309,7 @@
 
     <div class="side-menu" id="sideMenu">
       <div class="profile">
-        <a href="#">
+        <a href="logout.ko">
           <svg
             width="24"
             height="24"
@@ -318,31 +324,31 @@
       <div class="side-bottom-line"></div>
       <div class="navbar-nav navbar-nav-side">
         <div class="nav-item">
-          <a class="nav-link" href="#">주문목록</a>
+          <a class="nav-link" href="adminOrderList.ko">주문목록</a>
         </div>
         <div class="bottom-line"></div>
         <div class="nav-item">
-          <a class="nav-link" href="#">상품관리</a>
+          <a class="nav-link" href="adminProdList.ko">상품관리</a>
         </div>
         <div class="bottom-line"></div>
         <div class="nav-item">
-          <a class="nav-link" href="#">회원관리</a>
+          <a class="nav-link" href="getUserList.ko">회원관리</a>
         </div>
         <div class="bottom-line"></div>
         <div class="nav-item">
-          <a class="nav-link" href="#">공지사항</a>
+          <a class="nav-link" href="getNoticeList.ko">공지사항</a>
         </div>
         <div class="bottom-line"></div>
         <div class="nav-item">
-          <a class="nav-link" href="#">상품후기</a>
+          <a class="nav-link" href="">상품후기</a>
         </div>
         <div class="bottom-line"></div>
         <div class="nav-item">
-          <a class="nav-link" href="#">FAQ</a>
+          <a class="nav-link" href="getFaqList.ko">FAQ</a>
         </div>
         <div class="bottom-line"></div>
         <div class="nav-item">
-          <a class="nav-link" href="#">QNA</a>
+          <a class="nav-link" href="adminQnaList.ko">QNA</a>
         </div>
         <div class="bottom-line"></div>
       </div>

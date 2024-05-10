@@ -130,7 +130,6 @@
 	position: relative;
 	box-sizing: border-box;
 	max-width: 100%;
-	/* 	min-height: 50px; */
 	padding: 0 10px 0 0px;
 }
 

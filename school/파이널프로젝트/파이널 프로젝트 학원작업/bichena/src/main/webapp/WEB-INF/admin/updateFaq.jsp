@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <%
-if(session.getAttribute("userID") == null){
-	response.sendRedirect("loginPage.ko");	
-}else{
+if (session.getAttribute("userID") == null) {
+	response.sendRedirect("main.ko");
+}
 %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <body>
+<%@ include file="/WEB-INF/admin/adminMain2.jsp" %>
 <div class="jumbotron">
    <h1>글쓰기</h1>      
 </div>
@@ -41,5 +43,4 @@ if(session.getAttribute("userID") == null){
 	});
 </script>
 </body>
-<%} %>
 </html>

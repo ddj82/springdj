@@ -63,25 +63,31 @@ a.a_class:visited {
 <body>
 	<div id='boxFlex' class="all">
 		<div id='name' class="all">
-			<p style="font-weight: bold;">제하사</p><p>님</p>
+			<p style="font-weight: bold; vertical-align: middle; margin:1rem 0;">${userID }</p>
+			<p style="vertical-align: middle; margin:1rem 0.5rem;">님</p>
 		</div>
 	
 		<div id='box' class="all">
-			<a href='' class="a_class">
-				<div id="boxP1" class="all">주문 내역</div>
-				<img class="borrowImg b" id="order" src='img/imguser/order.png'>
+			<a href='myPage.ko' class="a_class">
+				<div id="boxP1" class="all">주문 내역</div> 
+				<!-- myPageMain,myOrderDetail -->
+				<img class="borrowImg b" id="order" src='img/imgUser/order.png'>
 			</a>
 			<a href='' class="a_class">
-				<div id="boxP2" class="all">취소 / 환불내역</div>
-				<img class="borrowImg b" id="recall" src='img/imguser/recall.png'>
+				<div id="boxP2" class="all">취소 / 환불내역</div> 
+				<!-- 아직 -->
+				<img class="borrowImg b" id="recall" src='img/imgUser/recall.png'>
 			</a>
 			<a href='' class="a_class">
-				<div id="boxP3" class="all">리뷰</div>
-				<img class="borrowImg b" id="review" src='img/imguser/review.png'>
+				<div id="boxP3" class="all">리뷰</div> 
+				<!-- prodRevInsert.jsp -->
+				<img class="borrowImg b" id="review" src='img/imgUser/review.png'>
 			</a>
-			<a href='' class="a_class">
-				<div id="boxP4" class="all">회원정보</div>
-				<img class="borrowImg b" id="card" src='img/imguser/card.png'>
+			<a href='userInfo.ko' class="a_class">
+				<div id="boxP4" class="all">회원정보</div> 
+				<!-- userMyPassConfirm.jsp 비번확인, userMyInfo.jsp 회원정보 -->
+				<!-- myInfoModi.jsp 포함인데 아롬 수정중 -->
+				<img class="borrowImg b" id="card" src='img/imgUser/card.png'>
 			</a>
 		</div>
 	</div>
