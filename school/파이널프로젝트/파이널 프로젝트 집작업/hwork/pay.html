@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Page Title</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <form action="adminProdUpdate.ko" method="post" id="dataTransferForm" enctype="multipart/form-data">
+        <input class="btn btn-primary" type="button" onclick="submitContents();" value="수정" />
+		<input class="btn btn-primary" type="button" onclick="resetContents()" value="되돌리기" />
+		<div style="width:60%;">
+			<table class="table table0" id="form">
+			    <tr>
+			        <td rowspan="5" id="td-rowspan5">
+			            <img id="preview" src="img/cute_dog.jpg" alt="" style="width: 200px;"></td>
+			    	<td><label for="name">상품 이름</label> <input type="text" id="name" name="p_name" value="소주"></td>
+				</tr>
+				
+				<tr><td><label for="desc">상품 설명</label> <textarea id="desc" name="p_desc" rows="3">아는맛이 강한 법</textarea></td></tr>
+				
+				<tr><td><label for="price">상품 가격</label> <input type="text" id="price" name="p_price" value="12000"> 원</td></tr>
+				
+				<tr><td><label for="made">제조사</label> <input type="text" id="made" name="p_made" value="진로"></td></tr>
+				
+				<tr><td><label for="dgr">도수</label> <input type="text" id="dgr" name="p_dgr" value="12"> %</td></tr>
+				
+				<tr>
+				    <td rowspan="2" id="td-rowspan2">
+				        <button type="button" class="btn btn-default" onclick="" style="vertical-align: middle;">사진등록</button>
+						<input type="file" id="p_img" name="uploadFile" class="custom-file-label" style="display: none;">
+			        </td>
+				    <td><label for="cap">용량</label> <input type="text" id="cap" name="p_cap" value="360"> ml</td>
+				</tr>
+				<tr><td><label for="stock">수량</label> <input type="text" id="stock" name="p_stock" value="50"> 개</td></tr>
+			</table>
+			
+			<table class="table table0" id="form1">
+			    <tr>
+			        <th>주류종류</th>
+			        <td><input type="radio" name="p_type" id="p_type1" value="탁주"> <label for="p_type1">탁주</label></td>
+			        <td><input type="radio" name="p_type" id="p_type2" value="약·청주"> <label for="p_type2">약·청주</label></td>
+			        <td><input type="radio" name="p_type" id="p_type3" value="증류주"> <label for="p_type3">증류주</label></td>
+			        <td><input type="radio" name="p_type" id="p_type4" value="과실주"> <label for="p_type4">과실주</label></td>
+			        <td><input type="radio" name="p_type" id="p_type5" value="기타"> <label for="p_type5">기타</label></td>
+			    </tr>
+			    <tr>
+			        <th>단맛</th>
+			        <td><input type="radio" name="p_sw" id="p_sw1" value="강"> <label for="p_sw1">강</label></td>
+			        <td><input type="radio" name="p_sw" id="p_sw2" value="중"> <label for="p_sw2">중</label></td>
+			        <td><input type="radio" name="p_sw" id="p_sw3" value="약"> <label for="p_sw3">약</label></td>
+			    </tr>
+			    <tr>
+			        <th>신맛</th>
+			        <td><input type="radio" name="p_su" id="p_su1" value="강"> <label for="p_su1">강</label></td>
+			        <td><input type="radio" name="p_su" id="p_su2" value="중"> <label for="p_su2">중</label></td>
+			        <td><input type="radio" name="p_su" id="p_su3" value="약"> <label for="p_su3">약</label></td>
+			    </tr>
+			    <tr>
+			        <th>탄산</th>
+			        <td><input type="radio" name="p_sp" id="p_sp1" value="강"> <label for="p_sp1">강</label></td>
+			        <td><input type="radio" name="p_sp" id="p_sp2" value="중"> <label for="p_sp2">중</label></td>
+			        <td><input type="radio" name="p_sp" id="p_sp3" value="약"> <label for="p_sp3">약</label></td>
+			        <td><input type="radio" name="p_sp" id="p_sp4" value="없음"> <label for="p_sp4">없음</label></td>
+			    </tr>
+			    <tr>
+			        <th>원료</th>
+			        <td><input type="radio" name="p_mat" id="p_mat1" value="과일"> <label for="p_mat1">과일</label></td>
+			        <td><input type="radio" name="p_mat" id="p_mat2" value="꽃"> <label for="p_mat2">꽃</label></td>
+			        <td><input type="radio" name="p_mat" id="p_mat3" value="견과"> <label for="p_mat3">견과</label></td>
+			        <td><input type="radio" name="p_mat" id="p_mat4" value="약재"> <label for="p_mat4">약재</label></td>
+			        <td><input type="radio" name="p_mat" id="p_mat5" value="기타"> <label for="p_mat5">기타</label></td>
+			    </tr>
+			</table>
+		</div>
+	</form>
+
+    <script>
+        function resetContents() {
+            document.getElementById("dataTransferForm").reset
+        }
+        window.onload = function(){
+            if ('${prodOne.p_name}' != '') {
+                document.getElementById("dataTransferForm")
+                console.log(document.getElementsByName("p_type"));
+                let val = "증류주";
+                let radio = document.querySelectorAll('input[type="radio"][name="p_type"]');
+                radio.forEach(function(radioBtn) {
+                    if (radioBtn.value === val) {
+                        radioBtn.checked = true;
+                    }
+                });
+                val = "약";
+                radio = document.querySelectorAll('input[type="radio"][name="p_sw"]');
+                radio.forEach(function(radioBtn) {
+                    if (radioBtn.value === val) {
+                        radioBtn.checked = true;
+                    }
+                });
+                val = "강";
+                radio = document.querySelectorAll('input[type="radio"][name="p_su"]');
+                radio.forEach(function(radioBtn) {
+                    if (radioBtn.value === val) {
+                        radioBtn.checked = true;
+                    }
+                });
+                val = "없음";
+                radio = document.querySelectorAll('input[type="radio"][name="p_sp"]');
+                radio.forEach(function(radioBtn) {
+                    if (radioBtn.value === val) {
+                        radioBtn.checked = true;
+                    }
+                });
+                val = "꽃";
+                radio = document.querySelectorAll('input[type="radio"][name="p_mat"]');
+                radio.forEach(function(radioBtn) {
+                    if (radioBtn.value === val) {
+                        radioBtn.checked = true;
+                    }
+                });
+            }
+        };
+    </script>
+</body>
+</html>
