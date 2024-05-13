@@ -9,3 +9,10 @@ wabapp/prodUpdateEditer.jsp
 user/myRevList.jsp
 user/myPageMain.jsp
 admin/adminRevList.jsp
+
+
+별색상 O
+유저 마이페이지 리뷰작성 주문내역에서 하던거 살리기 O
+상품번호 지우기 O
+관리자단 모든 취소로직 
+
