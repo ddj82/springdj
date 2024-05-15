@@ -8,8 +8,8 @@ admin/adminProdUpdate.jsp
 wabapp/prodUpdateEditer.jsp
 user/myRevList.jsp
 user/myPageMain.jsp
+관리자네브에 url
 admin/adminRevList.jsp
-
 
 별색상 O
 유저 마이페이지 리뷰작성 주문내역에서 하던거 살리기 O
