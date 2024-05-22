@@ -1,0 +1,9 @@
+어드민 페이지 : 
+orderList.jsp
+검색후, value 남아있게 하기
+prodView.jsp
+검색후, value 남아있게 하기
+검색목록 페이징 처리
+userList
+검색조건 초기화 (검색어를 입력해주세요 빼기)
+검색목록 페이징처리(mapping에서, 페이징 목록 수(count)검색할때에도 if문 넣기)
