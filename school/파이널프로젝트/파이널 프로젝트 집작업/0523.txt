@@ -1,0 +1,19 @@
+main.jsp 에서
+리뷰 a태그를 div태그로, onclick제거
+.swiper-link {
+	color: #1890ff;
+	text-decoration: none;
+	background-color: transparent;
+	outline: none;
+	transition: color 0.3s;
+}
+
+pay.jsp 금액 변경
+prodOneView.jsp 금액 변경 반응형
+navbar.jsp 비회원 카트이미지삭제
+myRevList.jsp 반응형
+adminQnaView.jsp 상민 textarea-css약간
+QNA테이블 img삭제해야함
+qnaList.jsp 반응형
+qnaView.jsp 반응형
+qnaInsert.jsp 반응형
