@@ -1,0 +1,43 @@
+sql파일 업로드 >> 
+cmd에서 cd로 sql파일이 있는 경로로 >>
+mysql -uroot -p >>
+비번 >>
+source 파일명.sql
+
+
+war파일 업로드 >>
+아파치폴더 >> 
+웹앱스 안에 war파일 >> 
+스타트업.뱃 >> 
+셧다운.뱃 >>
+압축풀렸는지 확인 후 >>
+war파일 제거 >>
+스타트업.뱃 >> 
+
+
+
+
+컨텍스트패스 설정 >>
+아파치폴더 >>
+conf 폴더 >>
+server.xml >>
+맨 밑에 <Context>태그 변경
+<Context docBase="bichena" path="/" reloadable="true">
+<Context docBase="bichena" path="/ko" reloadable="true">
+
+톰캣 안에 
+웹앱 안에 
+루트 안에
+스크립트태그 기술 => location.href = 'http:/bichena.kro.kr';
+
+
+
+아이피 설정 >>
+퍼블릭 아이피 복사 >>
+구글에 >>
+내도메인한국 검색 >>
+회원가입 >>
+수정 >>
+고급아이피설정 >>
+IP설정(A) >> 
+퍼플릭 아이피 입력
