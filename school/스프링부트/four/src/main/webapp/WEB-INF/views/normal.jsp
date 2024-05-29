@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Normal페이지</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body class='container'>
+	<h2>Normal페이지 입니다.</h2>
+	<form action="logout" method="post" class='card'>
+		<a href='/super'>super 유저 페이지로 이동 합니다.</a>
+		<a href='/normal'>normal 유저 페이지로 이동 합니다.</a>
+		<a href='/member'>member 유저 페이지로 이동 합니다.</a>
+		<div>normal 권한의 페이지 입니다. super유저도 들어올 수 있습니다.</div>
+		<input type='submit' value='로그아웃' />
+	</form>
+</body>
+</html>
